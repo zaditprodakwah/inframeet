@@ -66,23 +66,19 @@ export default function InsightsPage() {
   async function loadArticles() {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from("rss_items")
-        .select("*, rss_feeds(feed_name, source_category)")
-        .order("published_at", { ascending: false });
-
-      if (error) {
-        console.error("Gagal memuat feed:", error);
-        setArticles(DEFAULT_ARTICLES);
-        setFilteredArticles(DEFAULT_ARTICLES);
-      } else {
-        const curated = data ? data.filter((art: any) => art.relevance_score >= 0.9) : [];
-        const merged = curated.length > 0 ? curated : DEFAULT_ARTICLES;
-        setArticles(merged);
-        setFilteredArticles(merged);
+      const res = await fetch("/api/insights");
+      if (!res.ok) {
+        throw new Error(`HTTP error: ${res.status}`);
       }
+      const json = await res.json();
+      const data = json.data;
+
+      const curated = data ? data.filter((art: any) => art.relevance_score >= 0.9) : [];
+      const merged = curated.length > 0 ? curated : DEFAULT_ARTICLES;
+      setArticles(merged);
+      setFilteredArticles(merged);
     } catch (err) {
-      console.error(err);
+      console.error("Gagal memuat feed:", err);
       setArticles(DEFAULT_ARTICLES);
       setFilteredArticles(DEFAULT_ARTICLES);
     } finally {
