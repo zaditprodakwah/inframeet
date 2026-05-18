@@ -1,104 +1,140 @@
+"use client";
+
 import MegaMenu from "../../components/MegaMenu";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Link from "next/link";
-import { Sparkles, ArrowRight, BarChart3, FileText, FileCheck, ShieldAlert } from "lucide-react";
-
-export const metadata = {
-  title: "Asistensi Riset & Olah Data Akademik | INFRAMEET",
-  description: "Dapatkan asistensi pengolahan data statistik kuantitatif SPSS/SEM dan format layouting naskah ilmiah tepercaya dengan komitmen anti-joki."
-};
+import { Sparkles, ArrowRight, BarChart3, FileText, FileCheck, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export default function AkademikPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-black font-sans transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans transition-colors duration-300">
       <MegaMenu />
       
       {/* Dynamic Breadcrumbs */}
       <Breadcrumbs />
 
-      <main className="flex-1 py-12 space-y-16">
-        <section className="max-w-4xl mx-auto px-6 text-center space-y-4">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-100/50 dark:border-emerald-900/30">
-            Academic & Research Assistance
+      <main className="flex-grow py-12 space-y-16">
+        
+        {/* Banner Section */}
+        <section className="max-w-4xl mx-auto px-6 text-center space-y-5">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <Sparkles className="w-3.5 h-3.5" /> Asistensi Riset &amp; Pengolahan Data
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-zinc-50 tracking-tight leading-tight">
-            Asistensi Teknis Ilmiah dengan <span className="text-emerald-600">Komitmen Integritas</span>
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Asistensi Teknis Ilmiah dengan <br className="hidden md:inline" />
+            <span className="text-emerald-500">Komitmen Integritas Mutlak</span>
           </h1>
-          <p className="text-sm md:text-base text-slate-500 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            INFRAMEET mendampingi penelitian Anda dengan pendekatan transparan dan patuh hukum akademik. Kami menolak perjokian naskah, melainkan memfokuskan pengerjaan pada regulasi regresi statistik, visualisasi data, format layouting, and bimbingan Turnitin.
+          <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Kami mendampingi penyusunan teknis penelitian Anda melalui metodologi tepercaya, transparan, and legal secara hukum akademik. Nikmati ketenangan riset tanpa risiko plagiarisme atau pelanggaran etika naskah.
           </p>
         </section>
 
-        {/* Academic Compliance Disclosure */}
-        <section className="max-w-3xl mx-auto px-6">
-          <div className="bg-amber-50 dark:bg-amber-950/15 border border-amber-200 dark:border-amber-900/40 rounded-3xl p-6 flex gap-4 text-sm text-amber-800 dark:text-amber-300">
-            <ShieldAlert className="w-6 h-6 flex-shrink-0 text-amber-500" />
-            <div className="space-y-1">
-              <h4 className="font-bold">Pernyataan Integritas Akademik INFRAMEET</h4>
-              <p className="text-xs text-amber-950/80 dark:text-amber-300/80 leading-relaxed">
-                Kami secara ketat menolak segala bentuk plagiarisme dan pembuatan karya ilmiah secara ilegal (jasa joki skripsi/tesis/disertasi). Seluruh layanan pendampingan kami bersifat edukatif, memandu mahasiswa dan peneliti memahami metodologi statistik and teknis penulisan terakreditasi.
-              </p>
+        {/* Visual integrity shield row (Differentiator) */}
+        <section className="max-w-7xl mx-auto px-6">
+          <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-bold text-white flex items-center gap-2">
+                  100% Anti-Ghostwriting &amp; Anti-Joki Guarantee
+                </h4>
+                <p className="text-xs text-slate-300 leading-relaxed max-w-4xl">
+                  Berdasarkan Syarat Ketentuan Layanan INFRAMEET, seluruh substansi ide riset, data mentah, dan hak kekayaan intelektual (HKI) adalah milik Anda sepenuhnya secara absolut. Kami tidak menyediakan jasa joki pembuatan naskah dari nol. Layanan kami murni bersifat perbantuan teknis layouting, olah data statistik kuantitatif, parafrase sitasi, and bimbingan Turnitin agar riset Anda steril dari tuduhan pelanggaran akademik.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Services Showcase */}
+        {/* Academic Services Showcase */}
         <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 shadow-sm space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
               <BarChart3 className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-zinc-50">Statistik & Olah Data</h3>
-            <p className="text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-              Pemrosesan regresi kuantitatif, analisis validitas and reliabilitas, serta pengolahan structural equation modeling menggunakan software SPSS, SmartPLS, and SEM.
+            <h3 className="text-lg font-bold text-white">Validasi Statistik &amp; Olah Data</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Membantu komputasi data statistik yang rumit agar riset kuantitatif Anda teruji keabsahannya. Kami menyusun estimasi regresi, uji asumsi klasik, and pemodelan SEM secara metodologis untuk sidang Anda.
             </p>
+            <div className="space-y-2 pt-2 border-t border-slate-800/60">
+              <div className="flex items-center gap-2 text-[10px] text-slate-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>Olah Data SPSS, SmartPLS, &amp; Python</span>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] text-slate-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>Interpretasi Output Ilmiah Terbimbing</span>
+              </div>
+            </div>
           </div>
 
-          <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 shadow-sm space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
               <FileText className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-zinc-50">Kepatuhan Turnitin</h3>
-            <p className="text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-              Asistensi parafrase, review sitasi ilmiah, and optimasi indeks kemiripan Turnitin untuk memastikan naskah riset steril and bebas dari plagiarisme tidak disengaja.
+            <h3 className="text-lg font-bold text-white">Pencegahan Plagiasi &amp; Turnitin Check</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Asistensi pengecekan uji kemiripan naskah menggunakan sistem Turnitin Premium No-Repository. Memastikan draf riset berharga Anda tidak tersimpan di database global demi melindungi hak cipta mutlak.
             </p>
+            <div className="space-y-2 pt-2 border-t border-slate-800/60">
+              <div className="flex items-center gap-2 text-[10px] text-slate-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>Turnitin Premium Tanpa Simpan Database</span>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] text-slate-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>Asistensi Parafrase &amp; Mendeley Rujukan</span>
+              </div>
+            </div>
           </div>
 
-          <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 shadow-sm space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
               <FileCheck className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-zinc-50">Layouting Jurnal & Deck</h3>
-            <p className="text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-              Penyesuaian format template naskah jurnal terindeks nasional/internasional, merapikan daftar pustaka, and mendesain slide presentasi sidang deck premium.
+            <h3 className="text-lg font-bold text-white">Standardisasi Layout &amp; Slide Sidang</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Penyelarasan tata letak margins, fonts, and bab rujukan riset sesuai pedoman resmi institusi penerbit (Sinta / Scopus Q1). Dilengkapi desain slide deck ujian akhir yang profesional and interaktif.
             </p>
+            <div className="space-y-2 pt-2 border-t border-slate-800/60">
+              <div className="flex items-center gap-2 text-[10px] text-slate-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>Format Layouting Naskah Presisi Sesuai Panduan</span>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] text-slate-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                <span>Desain Visual Slide Sidang Menarik</span>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* CTA Banner */}
+        {/* CTA Section */}
         <section className="max-w-4xl mx-auto px-6">
-          <div className="bg-emerald-900 text-white rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden text-center space-y-6">
+          <div className="bg-emerald-900/60 border border-emerald-500/20 text-white rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden text-center space-y-6">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none" />
             <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight">
-              Ingin Menghitung Anggaran Bimbingan Riset Anda?
+              Ingin Menghitung Estimasi Biaya Asistensi Riset Anda?
             </h3>
-            <p className="text-sm text-emerald-200 max-w-xl mx-auto">
-              Gunakan configurator harga akademik instan kami untuk memilih add-on olah data kuantitatif secara modular and jujur.
+            <p className="text-sm text-emerald-200 max-w-xl mx-auto leading-relaxed">
+              Gunakan configurator harga akademik instan kami untuk menyusun item perbaikan layout, sitasi, and analisis modular secara transparan.
             </p>
             <div className="pt-2">
               <Link
                 href="/calculator"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-emerald-600 hover:bg-slate-50 font-bold rounded-2xl transition-all shadow-lg cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl transition-all shadow-lg cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Sparkles className="w-4 h-4" />
-                Mulai Kalkulator Sekarang
+                Mulai Kalkulasi Biaya Sekarang
               </Link>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="py-8 bg-white dark:bg-zinc-950 border-t border-slate-100 dark:border-zinc-900 text-center text-xs text-slate-400">
+      <footer className="py-8 bg-[#0a0f1d] border-t border-[#1e293b] text-center text-xs text-slate-500">
         © 2026 INFRAMEET. Seluruh hak cipta dilindungi undang-undang.
       </footer>
     </div>
