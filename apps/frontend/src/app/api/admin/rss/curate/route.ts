@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { Groq } from "groq-sdk";
+import { AIContentParser } from "@/lib/rss/aiContentParser";
 
 export async function POST(request: Request) {
   try {
@@ -24,7 +25,6 @@ export async function POST(request: Request) {
     const groq = new Groq({ apiKey: groqApiKey });
 
     // 1. Fetch 5 most recent uncurated RSS items
-    // (We consider items with relevance_score exactly 0.75 as uncurated, or we can just curate the latest items)
     const { data: items, error: itemsError } = await supabaseAdmin
       .from("rss_items")
       .select("*")
@@ -48,15 +48,22 @@ export async function POST(request: Request) {
 
     const curatedItems = [];
 
-    // 2. Curate each article using Groq SDK
+    // 2. Curate each article using Groq SDK and extract matching tools
     for (const item of items) {
       try {
+        // Run AI analysis & tool extraction on the content first
+        const analysis = await AIContentParser.parseAndExtractTools(
+          item.title,
+          item.content_summary || ""
+        );
+
         const prompt = `
         Anda adalah asisten AI kurator riset dan konten teknologi eksklusif untuk platform INFRAMEET.
         Tugas Anda adalah menelaah, menerjemahkan, and meringkas artikel sains/IT berikut ini ke dalam Bahasa Indonesia kelas atas, formal, and mudah dipahami oleh audiens B2B enterprise and akademisi.
 
         Judul Asli: ${item.title}
-        Ringkasan Asli: ${item.content_summary}
+        Ringkasan Analisis AI: ${analysis.summary}
+        Kata Kunci / Tags: ${analysis.tags.join(", ")}
 
         Harap kembalikan respon berupa objek JSON murni (strict JSON) dengan skema berikut:
         {
@@ -90,14 +97,22 @@ export async function POST(request: Request) {
 
         const parsedContent = JSON.parse(rawText);
 
-        // Update database with curated content
+        // Formulate curated executive summary & FAQ blocks
         const curatedSummary = `**Executive Summary (TL;DR):**\n${parsedContent.executive_summary}\n\n**FAQ:**\n${parsedContent.faq.map((f: any) => `* **Q: ${f.question}**\n  A: ${f.answer}`).join("\n")}`;
 
+        // Consolidate categories and matching affiliate tool tags
+        const dbCategories = [
+          ...analysis.tags,
+          ...analysis.matchedToolSlugs.map((slug) => `tool:${slug}`)
+        ];
+
+        // Save curated result back to database
         const { error: updateError } = await supabaseAdmin
           .from("rss_items")
           .update({
             title: parsedContent.curated_title,
             content_summary: curatedSummary,
+            categories: dbCategories,
             relevance_score: 0.95, // Mark as curated
           })
           .eq("id", item.id);

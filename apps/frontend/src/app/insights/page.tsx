@@ -6,6 +6,7 @@ import MegaMenu from "../components/MegaMenu";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Link from "next/link";
 import { Sparkles, ArrowRight, BookOpen, Cpu, Calendar, Tag, ChevronDown, RefreshCw } from "lucide-react";
+import InlineAffiliateRecommendation from "../components/InlineAffiliateRecommendation";
 
 export default function InsightsPage() {
   const [articles, setArticles] = useState<any[]>([]);
@@ -228,6 +229,18 @@ export default function InsightsPage() {
                           </div>
                         ))}
                       </div>
+
+                      {/* Dynamic Inline Affiliate Recommendations */}
+                      {(() => {
+                        const toolSlugs = Array.isArray(art.categories)
+                          ? art.categories
+                              .filter((cat: string) => cat.startsWith("tool:"))
+                              .map((cat: string) => cat.replace("tool:", ""))
+                          : [];
+                        return toolSlugs.map((toolSlug: string) => (
+                          <InlineAffiliateRecommendation key={toolSlug} toolSlug={toolSlug} />
+                        ));
+                      })()}
 
                       {/* Dynamic FAQ Accordion */}
                       {faqs.length > 0 && (
