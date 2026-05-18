@@ -237,6 +237,105 @@ export default function ToolsPage() {
           </div>
         </section>
 
+        {/* FREE ACADEMIC & ENTERPRISE TOOLS GRID */}
+        <section className="max-w-7xl mx-auto px-6 space-y-6">
+          <div className="space-y-1">
+            <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-indigo-400" />
+              Alat Asistensi Instan & Lead Magnets Gratis
+            </h2>
+            <p className="text-xs text-slate-400">
+              Coba perkakas gratis kami untuk merumuskan resume ATS, menelaah plagiarism, audit PageSpeed Core Web Vitals, dan mencari referensi sitasi secara instan.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* ATS Resume */}
+            <Link 
+              href="/tools/resume" 
+              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
+            >
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">ATS Resume Builder</h3>
+                  <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mt-1">Buat lembar portofolio CV satu halaman standar ATS secara instan and rapi.</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold text-indigo-400 flex items-center gap-1">
+                Gunakan Alat <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+
+            {/* Plagiarism Checker */}
+            <Link 
+              href="/tools/plagiarism" 
+              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
+            >
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">Plagiarism Checker</h3>
+                  <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mt-1">Uji orisinalitas riset and naskah ilmiah Anda secara instan and steril.</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold text-indigo-400 flex items-center gap-1">
+                Gunakan Alat <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+
+            {/* PageSpeed */}
+            <Link 
+              href="/tools/pagespeed" 
+              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
+            >
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">PageSpeed Domain Auditor</h3>
+                  <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mt-1">Audit kecepatan Core Web Vitals domain web B2B Anda secara otomatis.</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold text-indigo-400 flex items-center gap-1">
+                Gunakan Alat <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+
+            {/* Citation Fetcher */}
+            <Link 
+              href="/tools/citation" 
+              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
+            >
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">Crossref Citation Fetcher</h3>
+                  <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mt-1">Konversi sitasi nomor DOI naskah ilmiah ke format APA/Harvard/MLA instan.</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold text-indigo-400 flex items-center gap-1">
+                Gunakan Alat <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          </div>
+        </section>
+
         {/* Dynamic Tools Grid list */}
         <section className="max-w-7xl mx-auto px-6">
           {loading ? (
