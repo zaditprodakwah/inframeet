@@ -73,34 +73,54 @@ export default async function Home() {
 
   const articlesToShow = liveArticles.length > 0 ? liveArticles : HOMEPAGE_FALLBACK_ARTICLES;
 
-  // JSON-LD FAQPage Schema for Answer Engine Optimization (AEO/GEO/SEO)
-  const faqJsonLd = {
+  // Consolidated JSON-LD Schema (Organization, Person, FAQ) for E-E-A-T Optimization (AEO/GEO/SEO)
+  const schemaJsonLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "Apa itu INFRAMEET?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "INFRAMEET adalah mitra kemitraan digital B2B premium dan asistensi riset akademik kuantitatif. Kami membebaskan korporasi dari biaya server bulanan berlebih melalui integrasi serverless cloud, serta membimbing peneliti merampungkan olah data statistik secara transparan."
+        "@type": "Organization",
+        "@id": "https://inframeet.vercel.app/#organization",
+        "name": "INFRAMEET",
+        "url": "https://inframeet.vercel.app",
+        "logo": "https://inframeet.vercel.app/assets/img/logo.png",
+        "description": "Platform kemitraan digital B2B premium dan asistensi riset akademik kuantitatif.",
+        "founder": {
+          "@type": "Person",
+          "name": "Muhammad Zadit",
+          "jobTitle": "Principal Architect & Founder",
+          "image": "https://inframeet.vercel.app/assets/img/photo.jpg",
+          "url": "https://github.com/zaditprodakwah"
         }
       },
       {
-        "@type": "Question",
-        "name": "Apakah INFRAMEET menyediakan layanan Joki?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sama sekali TIDAK. Kami menjunjung tinggi integritas akademik. Kami melarang keras perjokian naskah. Seluruh instrumen bantuan kami murni bersifat asistensi teknis olah data (SPSS/PLS), perapian format tata letak jurnal/skripsi, and cek plagiarisme Turnitin secara transparan."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Bagaimana cara melakukan estimasi harga proyek?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Anda dapat menggunakan kalkulator onboarding kami di halaman /calculator. Pilih segmentasi Anda (B2B atau Akademik), lalu sesuaikan slider anggaran atau centang fitur-fitur modular kustom yang diinginkan secara transparan."
-        }
+        "@type": "FAQPage",
+        "@id": "https://inframeet.vercel.app/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Apa itu INFRAMEET?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "INFRAMEET adalah mitra kemitraan digital B2B premium dan asistensi riset akademik kuantitatif. Kami membebaskan korporasi dari biaya server bulanan berlebih melalui integrasi serverless cloud, serta membimbing peneliti merampungkan olah data statistik secara transparan."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apakah INFRAMEET menyediakan layanan Joki?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sama sekali TIDAK. Kami menjunjung tinggi integritas akademik. Kami melarang keras perjokian naskah. Seluruh instrumen bantuan kami murni bersifat asistensi teknis olah data (SPSS/PLS), perapian format tata letak jurnal/skripsi, and cek plagiarisme Turnitin secara transparan."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Bagaimana cara melakukan estimasi harga proyek?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Anda dapat menggunakan kalkulator onboarding kami di halaman /calculator. Pilih segmentasi Anda (B2B atau Akademik), lalu sesuaikan slider anggaran atau centang fitur-fitur modular kustom yang diinginkan secara transparan."
+            }
+          }
+        ]
       }
     ]
   };
@@ -171,6 +191,31 @@ export default async function Home() {
               >
                 Lihat Solusi Utama Kami <ArrowRight className="w-3.5 h-3.5" />
               </a>
+            </div>
+          </div>
+        </section>
+
+        {/* DYNAMIC TRUST INDICATOR BAR (UPGRADE 3.0) */}
+        <section className="max-w-6xl mx-auto px-6 -mt-8 relative z-20 font-sans">
+          <div className="bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border border-slate-200 dark:border-zinc-800 rounded-3xl p-6 shadow-xl shadow-indigo-500/[0.02] flex flex-wrap justify-around items-center gap-6 text-center">
+            <div className="space-y-1">
+              <p className="text-2xl font-black text-slate-900 dark:text-zinc-50 tracking-tight">1,200+</p>
+              <p className="text-[9px] font-bold text-slate-400 dark:text-zinc-550 uppercase tracking-widest">Sinyal Riset Dipantau (SLA 24j)</p>
+            </div>
+            <div className="h-8 w-px bg-slate-200 dark:bg-zinc-800 hidden md:block" />
+            <div className="space-y-1">
+              <p className="text-2xl font-black text-indigo-500 dark:text-indigo-400 tracking-tight">Rp 0</p>
+              <p className="text-[9px] font-bold text-slate-400 dark:text-zinc-550 uppercase tracking-widest">Biaya Server Bulanan Klien SaaS</p>
+            </div>
+            <div className="h-8 w-px bg-slate-200 dark:bg-zinc-800 hidden md:block" />
+            <div className="space-y-1">
+              <p className="text-2xl font-black text-emerald-500 dark:text-emerald-400 tracking-tight">100%</p>
+              <p className="text-[9px] font-bold text-slate-400 dark:text-zinc-550 uppercase tracking-widest">Anti-Joki &amp; Turnitin Safe</p>
+            </div>
+            <div className="h-8 w-px bg-slate-200 dark:bg-zinc-800 hidden md:block" />
+            <div className="space-y-1">
+              <p className="text-2xl font-black text-slate-900 dark:text-zinc-50 tracking-tight">2 Jam</p>
+              <p className="text-[9px] font-bold text-slate-400 dark:text-zinc-550 uppercase tracking-widest">SLA Respons Resolusi Kritis</p>
             </div>
           </div>
         </section>
@@ -348,6 +393,46 @@ export default async function Home() {
                 <Link href="/portfolio" className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1">
                   Detail Portofolio <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* EXECUTIVE ARCHITECT PROFILE SECTION (FOUNDER'S CORNER) */}
+        <section className="relative overflow-hidden py-12 max-w-7xl mx-auto px-6 font-sans">
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="bg-white/40 dark:bg-zinc-950/40 backdrop-blur-md border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-12 items-center">
+            {/* Image Frame */}
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-3xl overflow-hidden border border-slate-200 dark:border-zinc-800 shadow-xl shrink-0 relative group">
+              <img
+                src="/assets/img/photo.jpg"
+                alt="Muhammad Zadit - Founder & Principal Architect INFRAMEET"
+                loading="lazy"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
+                <span className="text-[10px] font-bold text-zinc-100 uppercase tracking-widest">Muhammad Zadit</span>
+              </div>
+            </div>
+            {/* Biography & Copy */}
+            <div className="space-y-6 flex-1">
+              <span className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest font-mono">Principal Architect &amp; Founder</span>
+              <h3 className="text-3xl font-extrabold text-slate-900 dark:text-zinc-50 tracking-tight leading-tight">
+                Membangun Sistem Pendapatan &amp; Infrastruktur Reputasi Tepercaya
+              </h3>
+              <p className="text-sm text-slate-500 dark:text-zinc-400 leading-relaxed">
+                Di <strong>INFRAMEET</strong>, saya mengawasi desain arsitektur digital dan pemrosesan sains riset secara pribadi. Dengan latar belakang mendalam di bidang <em>Cloud Serverless Engineering</em> dan metodologi <em>Kuantitatif Olah Data</em>, filosofi kerja kami didasarkan pada <strong>Academic Harm Reduction</strong>—menghadirkan transparansi penuh, melindungi hak cipta ilmiah secara absolut, and menghilangkan biaya pemeliharaan infrastruktur server konvensional yang berlebih.
+              </p>
+              <div className="flex flex-wrap gap-4 pt-2">
+                <div className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-slate-200/50 dark:border-zinc-800 text-xs font-semibold text-slate-700 dark:text-zinc-300">
+                  ⚡ Cloud Native Systems
+                </div>
+                <div className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-slate-200/50 dark:border-zinc-800 text-xs font-semibold text-slate-700 dark:text-zinc-300">
+                  📊 SEM-PLS &amp; Quantitative Statistics
+                </div>
+                <div className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-slate-200/50 dark:border-zinc-800 text-xs font-semibold text-slate-700 dark:text-zinc-300">
+                  🛡️ E-E-A-T Authority Auditing
+                </div>
               </div>
             </div>
           </div>
@@ -560,10 +645,10 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Inject JSON-LD FAQPage Schema */}
+          {/* Inject JSON-LD Schema (Organization, Person, FAQ) */}
           <script
             type="application/ld-json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
           />
         </section>
 
