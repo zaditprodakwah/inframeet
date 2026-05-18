@@ -4,6 +4,7 @@
   "private": true,
   "main": "index.js",
   "exports": {
+    ".": "./index.js",
     "./brand": "./brand.json",
     "./quiz": "./quiz.json",
     "./services": "./services.json",

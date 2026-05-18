@@ -20,11 +20,13 @@
     }
   },
   "payments": {
+    "gateway_provider": "Xendit",
+    "invoice_due_days": 7,
     "handling_fee_idr": 5000,
-    "invoice_due_days": 7
+    "handling_fee_strategy": "pass_to_customer"
   },
   "contact": {
-    "support_email": "support@inframeet.com",
+    "support_email": "inframeet@emailforums.biz",
     "whatsapp_channel": "+62-812-3456789"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "legal_version": "5.0",
+  "legal_version": "6.0",
   "contracts": {
     "b2b_kemitraan": {
       "ip_rights": "Seluruh Hak Kekayaan Intelektual (HKI) termasuk namun tidak terbatas pada source code, desain antarmuka, dan arsitektur basis data yang dikembangkan dalam proyek ini adalah milik PIHAK PERTAMA (INFRAMEET) sepenuhnya, hingga PIHAK KEDUA (Klien) melunasi 100% dari total Nilai Proyek. Setelah pelunasan diterima, hak guna komersial tanpa batas waktu akan ditransfer kepada PIHAK KEDUA.",
@@ -13,6 +13,51 @@
     },
     "bast_lock": {
       "lock_clause": "Dengan ditandatanganinya Berita Acara Serah Terima (BAST) ini, KLIEN menyatakan bahwa seluruh Deliverables telah diuji coba (User Acceptance Test), dan dinyatakan SELESAI tanpa cacat fungsional serta telah sesuai dengan Scope of Work (SoW). KLIEN melepaskan INFRAMEET dari segala tuntutan pengerjaan fitur/perubahan baru."
+    }
+  },
+  "public_legal": {
+    "terms_of_service": {
+      "title": "Terms of Service & Conditions",
+      "sections": [
+        {
+          "heading": "1. Ketentuan Umum & Penerimaan Syarat",
+          "content": "Dengan mengakses, menggunakan, atau memesan layanan melalui platform INFRAMEET, Pengguna dianggap telah membaca, memahami, dan menyetujui seluruh Syarat dan Ketentuan ini. Jika Pengguna tidak menyetujui syarat ini, Pengguna tidak diperkenankan menggunakan layanan kami."
+        },
+        {
+          "heading": "2. Batasan Integritas Akademik (Klausul Anti-Joki)",
+          "content": "Untuk layanan pada segmen Academic & Research Support, INFRAMEET dengan tegas menyatakan TIDAK menyediakan jasa pembuatan/penulisan substansi karya ilmiah (skripsi, tesis, disertasi, jurnal) dari nol. Layanan kami murni terbatas pada dukungan teknis operasional: Formatting/Layouting sesuai panduan institusi, pengecekan tata bahasa (Proofreading), dan pengolahan statistik dari data mentah yang disediakan secara sah oleh Pengguna. Pengguna bertanggung jawab penuh atas orisinalitas, klaim bebas plagiarisme, dan kepatuhan terhadap kode etik akademik di institusi masing-masing."
+        },
+        {
+          "heading": "3. Kebijakan Pembayaran & Pengembalian Dana (No-Refund Policy)",
+          "content": "Seluruh pembayaran Uang Muka (Down Payment/DP) dan pelunasan bersifat final. Karena sifat produk kami yang berupa waktu pengerjaan tenaga ahli (man-hours) dan aset digital, tidak ada pengembalian dana (refund) untuk proyek yang pengerjaannya sudah dimulai atau telah diserahkan (BAST ditandatangani). Apabila Pengguna membatalkan proyek secara sepihak di tengah proses pengembangan, Uang Muka dinyatakan hangus sebagai kompensasi alokasi sumber daya kami."
+        },
+        {
+          "heading": "4. Batasan Tanggung Jawab (Limitation of Liability)",
+          "content": "INFRAMEET tidak bertanggung jawab atas kerugian tidak langsung, kerugian insidental, hilangnya potensi keuntungan bisnis (untuk segmen B2B), atau penolakan/revisi dari institusi pendidikan (untuk segmen Akademik) yang diakibatkan oleh penggunaan hasil kerja kami. Tanggung jawab maksimal INFRAMEET dalam kondisi apa pun tidak akan melebihi total nilai yang dibayarkan Pengguna untuk layanan terkait."
+        }
+      ]
+    },
+    "privacy_policy": {
+      "title": "Kebijakan Privasi & Perlindungan Data",
+      "compliance": "Kepatuhan penuh terhadap UU Pelindungan Data Pribadi (UU PDP No. 27/2022) Republik Indonesia & General Data Protection Regulation (GDPR) Uni Eropa.",
+      "sections": [
+        {
+          "heading": "1. Prinsip Pengumpulan Data (Data Collection)",
+          "content": "INFRAMEET hanya mengumpulkan data yang relevan dan diperlukan (Data Minimization) untuk penyelesaian proyek. Data ini mencakup: Data Identitas (Nama, Jabatan, Institusi), Data Kontak (Email, No. HP), dan Data Proyek (Dokumen mentah, arsitektur database klien, data kuesioner riset). Kami juga mengumpulkan analitik penggunaan web secara anonim (First-party cookies) murni untuk meningkatkan pengalaman antarmuka."
+        },
+        {
+          "heading": "2. Penggunaan & Non-Distribusi Data (Data Usage & Sharing)",
+          "content": "Seluruh data yang Anda unggah ke server INFRAMEET digunakan eksklusif untuk keperluan penyelesaian proyek Anda. Kami dengan tegas menyatakan bahwa INFRAMEET TIDAK AKAN PERNAH menjual, menyewakan, atau mendistribusikan data mentah, data pelanggan klien (B2B), maupun hasil riset (Akademik) Anda kepada pialang data (data brokers), institusi lain, atau pihak ketiga mana pun tanpa persetujuan tertulis."
+        },
+        {
+          "heading": "3. Keamanan & Penyimpanan (Security & Retention)",
+          "content": "Data proyek Anda disimpan menggunakan standar enkripsi cloud industri. Berkas proyek (dokumen, aset visual, source code) akan disimpan secara aktif selama masa pengerjaan dan masa Maintenance (jika ada). Pasca penyelesaian proyek (setelah BAST), berkas kerja utama (working files) dapat kami hapus dari server kami setelah 90 hari untuk tujuan efisiensi kapasitas, kecuali disepakati lain dalam Retainer Agreement. Dokumen administratif seperti Invoice dan Kontrak akan disimpan selama 5 (lima) tahun untuk keperluan audit pajak dan legal."
+        },
+        {
+          "heading": "4. Hak Subjek Data (Right to Access & Right to be Forgotten)",
+          "content": "Pengguna memiliki kendali penuh atas data mereka. Anda berhak untuk: (a) Meminta salinan data pribadi Anda yang ada di sistem kami, (b) Melakukan koreksi atas data yang tidak akurat, dan (c) Right to be Forgotten: Mengajukan permohonan pemusnahan data (deletion request) secara tertulis. INFRAMEET akan menghapus seluruh jejak data pribadi, berkas riset, dan source code spesifik Anda dari database operasional kami dalam batas waktu maksimal 30 (tiga puluh) hari kerja sejak permintaan diterima, dengan mengesampingkan dokumen penagihan yang wajib disimpan oleh hukum."
+        }
+      ]
     }
   }
 }

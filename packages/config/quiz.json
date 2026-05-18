@@ -1,72 +1,131 @@
 {
-  "quiz_version": "5.5",
+  "quiz_version": "6.5-Dynamic",
   "steps": {
     "step_1": {
-      "question": "Pilih identitas ekosistem Anda untuk menyesuaikan layanan:",
+      "question": "Pilih identitas ekosistem Anda untuk penyesuaian infrastruktur:",
       "options": [
-        { "id": "b2b", "label": "Perusahaan / Brand / Start-up", "icon": "Building", "next_step": "step_2_b2b" },
-        { "id": "academic", "label": "Akademisi / Mahasiswa / Peneliti", "icon": "GraduationCap", "next_step": "step_2_acad" }
+        { "id": "b2b", "label": "Perusahaan / Brand / Start-up", "icon": "Building", "next_step": "step_2_b2b_dynamic" },
+        { "id": "academic", "label": "Akademisi / Mahasiswa / Peneliti", "icon": "GraduationCap", "next_step": "step_2_acad_dynamic" }
+      ]
+    },
+    "step_2_b2b_dynamic": {
+      "question": "Metode penentuan spesifikasi yang Anda sukai?",
+      "options": [
+        { "id": "by_budget", "label": "Sesuaikan Fitur Berdasarkan Target Budget Saya", "action": "open_range_slider_b2b", "next_step": "step_final_configurator" },
+        { "id": "by_features", "label": "Pilih Komponen Fitur Sesuai Kebutuhan Nyata", "action": "open_toggle_matrix_b2b", "next_step": "step_final_configurator" },
+        { "id": "by_quiz_traditional_b2b", "label": "Gunakan Kuis Asistensi Interaktif (Rekomendasi)", "next_step": "step_2_b2b" }
+      ]
+    },
+    "step_2_acad_dynamic": {
+      "question": "Bagaimana Anda ingin menyusun draf biaya riset Anda?",
+      "options": [
+        { "id": "by_budget_acad", "label": "Atur Opsi Sesuai Batas Saku / Anggaran", "action": "open_range_slider_acad", "next_step": "step_final_configurator" },
+        { "id": "by_features_acad", "label": "Pilih Item Perbaikan (Layout / Olah Data / Turnitin)", "action": "open_toggle_matrix_acad", "next_step": "step_final_configurator" },
+        { "id": "by_quiz_traditional_acad", "label": "Gunakan Kuis Asistensi Interaktif (Rekomendasi)", "next_step": "step_2_acad" }
       ]
     },
     "step_2_b2b": {
-      "question": "Fokus eskalasi utama bisnis Anda saat ini?",
+      "question": "Tujuan dan kebutuhan utama bisnis Anda saat ini?",
       "options": [
-        { "id": "web_dev", "label": "Pembangunan Arsitektur Platform / Web", "next_step": "step_3_b2b_budget" },
-        { "id": "growth", "label": "Skalabilitas Iklan (Paid Ads) & SEO", "next_step": "step_addons_b2b" },
-        { "id": "legal", "label": "Penyusunan Kontrak Kerja, MoU & Administrasi", "next_step": "step_addons_b2b" }
+        { "id": "web_dev", "label": "Pembangunan Arsitektur Web & Sistem IT", "next_step": "step_3_b2b_budget" },
+        { "id": "growth", "label": "Skalabilitas Iklan (Paid Ads) & SEO", "next_step": "step_3_b2b_growth" },
+        { "id": "corp_docs", "label": "Penyusunan Pitch Deck Investor & Company Profile", "result_sku": "B2B-DOC-PTC", "next_step": "step_addons_b2b" },
+        { "id": "legal_data", "label": "Drafting Dokumen Legal / MoU / Data Vis.", "next_step": "step_3_b2b_operations" },
+        { "id": "custom", "label": "Kebutuhan Kustom & Spesifik Lainnya", "result_sku": "B2B-CST-01", "next_step": "step_final_custom_b2b" }
       ]
     },
     "step_2_acad": {
-      "question": "Kendala utama riset Anda yang perlu diselesaikan segera?",
+      "question": "Kendala operasional riset yang perlu diselesaikan?",
       "options": [
-        { "id": "layout", "label": "Perapian Format & Layouting (Jurnal / Skripsi)", "next_step": "step_3_acad_pages" },
-        { "id": "data", "label": "Olah Data Kuantitatif (SPSS / Asumsi Klasik)", "next_step": "step_3_acad_data" },
-        { "id": "slide", "label": "Desain Slide Presentasi Sidang Premium", "next_step": "step_addons_acad" }
+        { "id": "layout", "label": "Perapian Format & Tata Letak (Jurnal/Skripsi)", "next_step": "step_3_acad_pages" },
+        { "id": "data", "label": "Analisis / Olah Data Kuantitatif", "next_step": "step_3_acad_data" },
+        { "id": "slide", "label": "Desain Slide Presentasi Sidang Premium", "result_sku": "ACD-SLD-P1", "next_step": "step_addons_acad" },
+        { "id": "custom", "label": "Konsultasi Kebutuhan Akademik Lainnya", "next_step": "step_final_custom_acad" }
+      ]
+    },
+    "step_3_b2b_growth": {
+      "question": "Pilih instrumen pertumbuhan pemasaran Anda:",
+      "options": [
+        { "id": "ads", "label": "Paid Ads Engine (Meta/Google CAPI)", "result_sku": "B2B-ADS-01", "next_step": "step_addons_b2b" },
+        { "id": "seo", "label": "SEO Retainer & AI Content", "result_sku": "B2B-SEO-01", "next_step": "step_addons_b2b" }
+      ]
+    },
+    "step_3_b2b_operations": {
+      "question": "Spesifikasi dukungan operasional apa yang Anda butuhkan?",
+      "options": [
+        { "id": "legal", "label": "Penyusunan Kontrak, MoU, & Syarat Kebijakan", "result_sku": "B2B-DOC-LGL", "next_step": "step_addons_b2b" },
+        { "id": "data_vis", "label": "Visualisasi Data RUPS / Infografis Laporan", "result_sku": "B2B-DTA-VIS", "next_step": "step_addons_b2b" }
       ]
     },
     "step_3_b2b_budget": {
-      "question": "Estimasi alokasi anggaran proyek infrastruktur digital Anda?",
+      "question": "Alokasi anggaran dasar untuk infrastruktur platform Anda?",
       "options": [
         { "id": "tier_1", "label": "Di bawah Rp 15 Juta", "result_sku": "B2B-WEB-STT", "next_step": "step_4_b2b_infrastructure" },
         { "id": "tier_2", "label": "Rp 15 Juta - Rp 35 Juta", "result_sku": "B2B-WEB-COR", "next_step": "step_4_b2b_infrastructure" },
-        { "id": "tier_3", "label": "Di atas Rp 35 Juta", "result_sku": "B2B-WEB-PRO", "next_step": "step_4_b2b_infrastructure" }
+        { "id": "tier_3", "label": "Di atas Rp 35 Juta (Enterprise)", "result_sku": "B2B-WEB-PRO", "next_step": "step_4_b2b_infrastructure" }
       ]
     },
     "step_3_acad_pages": {
-      "question": "Jumlah total estimasi halaman draf riset Anda?",
+      "question": "Jenis naskah riset Anda?",
       "options": [
-        { "id": "proposal", "label": "Proposal Penelitian (Maks 30 Halaman)", "result_sku": "ACD-LYT-P1", "next_step": "step_addons_acad" },
-        { "id": "thesis", "label": "Skripsi / Tesis / Disertasi (Maks 100 Halaman)", "result_sku": "ACD-LYT-S1", "next_step": "step_addons_acad" },
-        { "id": "journal", "label": "Artikel Jurnal Ilmiah (Sinta / Scopus / IEEE)", "result_sku": "ACD-LYT-J1", "next_step": "step_addons_acad" }
+        { "id": "proposal", "label": "Proposal / Bab Awal (Maks 30 Halaman)", "result_sku": "ACD-LYT-P1", "next_step": "step_addons_acad" },
+        { "id": "thesis", "label": "Naskah Skripsi / Tesis / Disertasi Utuh", "result_sku": "ACD-LYT-S1", "next_step": "step_addons_acad" },
+        { "id": "journal", "label": "Jurnal Sinta / Scopus (IEEE/Harvard)", "result_sku": "ACD-LYT-J1", "next_step": "step_addons_acad" }
       ]
     },
     "step_3_acad_data": {
-      "question": "Metodologi olah data yang ingin Anda terapkan?",
+      "question": "Metodologi olah data spesifik Anda?",
       "options": [
-        { "id": "spss", "label": "Regresi Linear / Klasik (SPSS)", "result_sku": "ACD-DTA-B1", "next_step": "step_addons_acad" }
+        { "id": "spss", "label": "Asumsi Klasik / Regresi Linear (SPSS)", "result_sku": "ACD-DTA-B1", "next_step": "step_addons_acad" },
+        { "id": "sem", "label": "Pemodelan Struktural / SEM (SmartPLS/AMOS)", "result_sku": "ACD-DTA-B1", "addon_auto_add": "ADD-SEM-PLS", "next_step": "step_addons_acad" }
       ]
     },
     "step_4_b2b_infrastructure": {
-      "question": "Pilih metode deployment & infrastruktur server penyebaran:",
+      "question": "Pilih metode deployment / server hosting Anda:",
       "is_hosting_selector": true,
       "options": [
         { "id": "shared", "label": "Shared Hosting cPanel (Klasik & Ekonomis)", "hosting_sku": "INF-HOST-SHR", "next_step": "step_addons_b2b" },
-        { "id": "vps", "label": "Managed Virtual Private Server (VPS Linux)", "hosting_sku": "INF-HOST-VPS", "next_step": "step_addons_b2b" },
-        { "id": "serverless", "label": "Serverless Cloud (Vercel & Supabase Rp 0,-)", "hosting_sku": "INF-HOST-VRC", "next_step": "step_addons_b2b" },
-        { "id": "custom", "label": "Infrastruktur Kustom (AWS / GCP Dedicated)", "hosting_sku": "INF-HOST-CST", "next_step": "step_addons_b2b" }
+        { "id": "vps", "label": "Managed VPS Linux (Rekomendasi)", "hosting_sku": "INF-HOST-VPS", "next_step": "step_addons_b2b" },
+        { "id": "serverless", "label": "Serverless Cloud (Vercel Edge Rp 0,-)", "hosting_sku": "INF-HOST-VRC", "next_step": "step_addons_b2b" },
+        { "id": "custom", "label": "Enterprise / Custom AWS GCP", "hosting_sku": "INF-HOST-CST", "next_step": "step_addons_b2b" }
       ]
     },
     "step_addons_b2b": {
-      "question": "Pilih layanan tambahan / Add-ons opsional (Bisa pilih lebih dari satu):",
+      "question": "Layanan tambahan (Bisa dilewati / pilih lebih dari satu):",
       "is_addon_multi_select": true,
       "addon_pool": ["ADD-DOM-COM", "ADD-LANG-MULTI", "ADD-REV-EXTRA"],
       "next_step": "step_final_lead"
     },
     "step_addons_acad": {
-      "question": "Pilih layanan tambahan / Add-ons akademisi (Bisa pilih lebih dari satu):",
+      "question": "Penguatan tambahan (Bisa dilewati / pilih lebih dari satu):",
       "is_addon_multi_select": true,
-      "addon_pool": ["ADD-PL-TURN", "ADD-TRANS-NAT", "ADD-SEM-PLS", "ADD-REV-EXTRA"],
-      "next_step": "step_final_lead"
+      "addon_pool": ["ADD-PL-TURN", "ADD-TRANS-NAT", "ADD-REV-EXTRA"],
+      "next_step": "step_final_acad"
+    },
+    "step_final_configurator": {
+      "is_final": true,
+      "action": "render_dynamic_calculator_view",
+      "message": "Gunakan panel interaktif di bawah untuk mengunci spesifikasi akhir, mengunduh draf SOW instan, atau melanjutkan ke penagihan otomatis."
+    },
+    "step_final_lead": {
+      "is_final": true,
+      "action": "show_lead_form",
+      "message": "Kebutuhan infrastruktur dan operasional Anda telah terekam. Silakan isi detail untuk mendapatkan Quotation instan."
+    },
+    "step_final_custom_b2b": {
+      "is_final": true,
+      "action": "show_discovery_call_calendar",
+      "message": "Untuk kebutuhan tingkat tinggi yang tidak standar, kami menyarankan Discovery Call gratis (15 Menit) bersama Arsitek Utama kami. Pilih jadwal Anda di bawah."
+    },
+    "step_final_acad": {
+      "is_final": true,
+      "action": "show_checkout_form",
+      "message": "Spesifikasi dokumen akademik Anda telah tervalidasi. Lanjutkan untuk pembuatan Invoice pengerjaan."
+    },
+    "step_final_custom_acad": {
+      "is_final": true,
+      "action": "show_whatsapp_redirect",
+      "message": "Kebutuhan Anda bersifat unik. Silakan hubungi tim asisten riset kami langsung via WhatsApp untuk diskusi teknis."
     }
   }
 }
