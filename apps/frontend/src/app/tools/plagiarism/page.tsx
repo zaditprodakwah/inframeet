@@ -29,7 +29,7 @@ export default function PlagiarismCheckerPage() {
     if (email.trim().length > 0) {
       const emailValidation = emailSchema.safeParse(email);
       if (!emailValidation.success) {
-        setErrorMsg(emailValidation.error.errors[0].message);
+        setErrorMsg(emailValidation.error.issues[0].message);
         return;
       }
     }

@@ -47,7 +47,7 @@ function ManualCheckoutContent() {
     // Validate using Zod
     const validation = uploadProofSchema.safeParse({ file: selectedFile });
     if (!validation.success) {
-      setErrorMsg(validation.error.errors[0].message);
+      setErrorMsg(validation.error.issues[0].message);
       setFile(null);
       return;
     }

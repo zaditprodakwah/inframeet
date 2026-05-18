@@ -36,7 +36,7 @@ export default function FloatingContactForm() {
     // Validate using Zod
     const validation = leadIntakeSchema.safeParse(payload);
     if (!validation.success) {
-      setErrorMsg(validation.error.errors[0].message);
+      setErrorMsg(validation.error.issues[0].message);
       setIsLoading(false);
       return;
     }
