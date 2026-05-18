@@ -6,8 +6,8 @@ import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("muhzadit@gmail.com");
-  const [password, setPassword] = useState("@InframeetAdmin2026!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -29,11 +29,24 @@ export default function LoginPage() {
         return;
       }
 
-      if (data?.user) {
+      if (data?.user && data?.session) {
+        // Set the token inside the cookie so NEXT.js middleware can read it immediately
+        const sessionData = {
+          access_token: data.session.access_token,
+          refresh_token: data.session.refresh_token,
+        };
+        const tokenValue = JSON.stringify(sessionData);
+        
+        // Write the cookie manually
+        document.cookie = `sb-iwowggzeqkzewdrdjkvu-auth-token=${encodeURIComponent(tokenValue)}; path=/; max-age=${data.session.expires_in}; SameSite=Lax; Secure`;
+
         setIsSuccess(true);
         setTimeout(() => {
           router.push("/admin");
         }, 1200);
+      } else {
+        setErrorMsg("Sesi login tidak valid. Silakan hubungi pengelola.");
+        setIsLoading(false);
       }
     } catch (err: any) {
       setErrorMsg("Terjadi kesalahan sistem. Silakan coba lagi.");

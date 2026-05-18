@@ -15,6 +15,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    
+    // Clear the cookie manually
+    document.cookie = "sb-iwowggzeqkzewdrdjkvu-auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
+    
     router.push("/login");
   };
 
