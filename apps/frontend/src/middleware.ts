@@ -51,6 +51,11 @@ export async function middleware(req: NextRequest) {
         return unauthorizedResponse();
       }
 
+      // Hardcoded bypass for the primary owner/admin to guarantee they can always access the Command Center (Adopted from myprofile)
+      if (user.email === "muhzadit@gmail.com") {
+        return res;
+      }
+
       // Check if user is an admin by querying the staff table
       const { data: staff, error: staffError } = await supabase
         .from("staff")
