@@ -14,7 +14,10 @@ import {
   Globe, 
   Send, 
   ShieldCheck, 
-  Activity 
+  Activity,
+  Zap,
+  Key,
+  RefreshCw
 } from "lucide-react";
 
 export default function SiteSettingsPage() {
@@ -35,6 +38,13 @@ export default function SiteSettingsPage() {
   const [waMessage, setWaMessage] = useState("");
   const [isTestingWA, setIsTestingWA] = useState(false);
 
+  // Enterprise SCIM & n8n integrations
+  const [scimToken, setScimToken] = useState("scim_token_zadit_2026");
+  const [n8nWebhook, setN8nWebhook] = useState("");
+  const [isSavingEnterprise, setIsSavingEnterprise] = useState(false);
+  const [enterpriseSuccess, setEnterpriseSuccess] = useState(false);
+  const [isTestingN8n, setIsTestingN8n] = useState(false);
+
   // Staff management states
   const [staff, setStaff] = useState<any[]>([]);
   const [isLoadingStaff, setIsLoadingStaff] = useState(true);
@@ -52,11 +62,15 @@ export default function SiteSettingsPage() {
       const [
         { data: staffData },
         { data: financeData },
-        { data: sitemapData }
+        { data: sitemapData },
+        { data: scimData },
+        { data: n8nData }
       ] = await Promise.all([
         supabase.from("staff").select("*").order("name", { ascending: true }),
         supabase.from("system_settings").select("*").eq("key", "finance_settings").single(),
-        supabase.from("system_settings").select("*").eq("key", "sitemap_configurations").single()
+        supabase.from("system_settings").select("*").eq("key", "sitemap_configurations").single(),
+        supabase.from("system_settings").select("*").eq("key", "scim_security_token").single(),
+        supabase.from("system_settings").select("*").eq("key", "n8n_social_webhook").single()
       ]);
 
       setStaff(staffData || []);
@@ -71,6 +85,16 @@ export default function SiteSettingsPage() {
         setSitemapFreq(sitemapData.value.change_frequency || "weekly");
         setPriorityHome(sitemapData.value.priority_home || 1.0);
         setPriorityRoutes(sitemapData.value.priority_routes || 0.8);
+      }
+
+      if (scimData && scimData.value) {
+        const val = typeof scimData.value === "object" ? (scimData.value.token || scimData.value.value) : scimData.value;
+        if (val) setScimToken(val);
+      }
+
+      if (n8nData && n8nData.value) {
+        const val = typeof n8nData.value === "object" ? (n8nData.value.url || n8nData.value.value) : n8nData.value;
+        if (val) setN8nWebhook(val);
       }
     } catch (err) {
       console.error("Gagal menarik data konfigurasi settings:", err);
@@ -116,6 +140,65 @@ export default function SiteSettingsPage() {
       alert("🎉 Konfigurasi Sitemap disimpan di database!");
     } else {
       alert(`Gagal: ${res.message}`);
+    }
+  };
+
+  const handleSaveEnterpriseSettings = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSavingEnterprise(true);
+    setEnterpriseSuccess(false);
+
+    try {
+      const resScim = await saveSystemSettings("scim_security_token", scimToken, "Enterprise SCIM 2.0 provisioning authorization bearer token.");
+      const resN8n = await saveSystemSettings("n8n_social_webhook", n8nWebhook, "n8n omnichannel social auto-blast webhook target endpoint.");
+
+      if (resScim.success && resN8n.success) {
+        setEnterpriseSuccess(true);
+        setTimeout(() => setEnterpriseSuccess(false), 3000);
+      } else {
+        alert(`Gagal menyimpan: ${resScim.message || resN8n.message}`);
+      }
+    } catch (err: any) {
+      alert(`Error: ${err.message}`);
+    } finally {
+      setIsSavingEnterprise(false);
+    }
+  };
+
+  const handleGenerateScimToken = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let token = "scim_";
+    for (let i = 0; i < 32; i++) {
+      token += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setScimToken(token);
+  };
+
+  const handleTestN8nWebhook = async () => {
+    if (!n8nWebhook) {
+      alert("Harap isi alamat webhook n8n terlebih dahulu!");
+      return;
+    }
+    setIsTestingN8n(true);
+    try {
+      const response = await fetch(n8nWebhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event: "integration.test",
+          message: "Konektivitas blast webhook n8n dari panel admin INFRAMEET aktif!",
+          timestamp: new Date().toISOString()
+        })
+      });
+      if (response.ok) {
+        alert("🎉 Webhook disemburkan sukses! n8n merespon status 200 OK.");
+      } else {
+        alert(`Gagal menyemburkan: Webhook merespon status ${response.status}`);
+      }
+    } catch (err: any) {
+      alert(`Gagal terhubung ke webhook n8n: ${err.message}`);
+    } finally {
+      setIsTestingN8n(false);
     }
   };
 
@@ -193,7 +276,7 @@ export default function SiteSettingsPage() {
           <h1 className="text-xl font-bold text-white tracking-tight">Konfigurasi & Manajemen Tim</h1>
         </div>
         <p className="text-xs text-slate-400">
-          Kelola dynamic env overrides, tunjukan priority sitemap, and konfigurasi tim staff operasional.
+          Kelola dynamic env overrides, tunjukan priority sitemap, konfigurasi SCIM SSO, dan manajemen hak akses staff.
         </p>
       </div>
 
@@ -261,7 +344,7 @@ export default function SiteSettingsPage() {
                 <button
                   type="submit"
                   disabled={isSavingSettings}
-                  className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-850 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-indigo-600/10 flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-850 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-indigo-600/10 flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   {isSavingSettings ? "Menyimpan..." : "Simpan Konfigurasi"}
                 </button>
@@ -277,7 +360,82 @@ export default function SiteSettingsPage() {
             </form>
           </section>
 
-          {/* Group 2: Sitemap Priorities override */}
+          {/* Group 2: Enterprise SSO SCIM & Omnichannel (n8n) Integrations */}
+          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-850 backdrop-blur-md space-y-6">
+            <div className="flex items-center gap-2 border-b border-slate-850 pb-3">
+              <ShieldCheck className="w-4 h-4 text-indigo-400" />
+              <h2 className="text-xs font-bold text-white uppercase tracking-wider">Enterprise SSO (SCIM 2.0) & Omnichannel</h2>
+            </div>
+
+            <form onSubmit={handleSaveEnterpriseSettings} className="space-y-4">
+              
+              {/* SCIM Security Key Input */}
+              <div className="flex flex-col gap-1.5">
+                <div className="flex justify-between items-center">
+                  <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
+                    <Key className="w-3 h-3 text-indigo-400" /> Okta / AD SCIM Provisioning Token
+                  </label>
+                  <button
+                    type="button"
+                    onClick={handleGenerateScimToken}
+                    className="text-[9px] font-extrabold text-indigo-400 hover:text-indigo-300 flex items-center gap-0.5 cursor-pointer transition-colors"
+                  >
+                    <RefreshCw className="w-2.5 h-2.5" /> Generate Baru
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  value={scimToken}
+                  onChange={(e) => setScimToken(e.target.value)}
+                  placeholder="Format: scim_..."
+                  className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-mono"
+                />
+              </div>
+
+              {/* n8n Webhook Input */}
+              <div className="flex flex-col gap-1.5">
+                <div className="flex justify-between items-center">
+                  <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
+                    <Zap className="w-3 h-3 text-emerald-400" /> n8n Omnichannel Webhook Target URL
+                  </label>
+                  {n8nWebhook && (
+                    <button
+                      type="button"
+                      disabled={isTestingN8n}
+                      onClick={handleTestN8nWebhook}
+                      className="text-[9px] font-extrabold text-emerald-400 hover:text-emerald-300 cursor-pointer transition-colors"
+                    >
+                      {isTestingN8n ? "Menguji..." : "Test Kirim Webhook"}
+                    </button>
+                  )}
+                </div>
+                <input
+                  type="url"
+                  value={n8nWebhook}
+                  onChange={(e) => setN8nWebhook(e.target.value)}
+                  placeholder="https://n8n.domain.com/g/webhook/..."
+                  className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-mono"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSavingEnterprise}
+                className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-850 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-indigo-600/10 flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                {isSavingEnterprise ? "Menyimpan Integrasi..." : "Simpan Pengaturan Integrasi"}
+              </button>
+
+              {enterpriseSuccess && (
+                <div className="flex items-center justify-center gap-1.5 text-xs text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 py-2 rounded-xl">
+                  <Check className="w-4 h-4" />
+                  Integrasi berhasil diselaraskan ke Database!
+                </div>
+              )}
+            </form>
+          </section>
+
+          {/* Group 3: Sitemap Priorities override */}
           <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-850 backdrop-blur-md space-y-6">
             <div className="flex items-center gap-2 border-b border-slate-850 pb-3">
               <Globe className="w-4 h-4 text-emerald-400" />
@@ -337,7 +495,7 @@ export default function SiteSettingsPage() {
             </form>
           </section>
 
-          {/* Group 3: WhatsApp Gateway tester */}
+          {/* Group 4: WhatsApp Gateway tester */}
           <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-850 backdrop-blur-md space-y-6">
             <div className="flex items-center gap-2 border-b border-slate-850 pb-3">
               <Activity className="w-4 h-4 text-violet-400" />

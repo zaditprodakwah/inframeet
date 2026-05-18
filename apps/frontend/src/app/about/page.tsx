@@ -10,13 +10,17 @@ const TEAM = [
     name: "Muhammad Zadit",
     role: "Principal Cloud Solutions Architect",
     desc: "Arsitek sistem bersertifikasi dengan 6+ tahun pengalaman merancang arsitektur cloud serverless global, optimasi caching Edge, and integrasi database relasional skala tinggi.",
-    avatar: "👨‍💻"
+    avatar: "/assets/img/photo.jpg",
+    links: [
+      { label: "GitHub Profile", url: "https://github.com/zaditprodakwah" }
+    ]
   },
   {
     name: "Dr. Farah Anindya",
     role: "Senior Academic Research Advisor",
     desc: "Penasihat metodologi kuantitatif dengan keahlian mendalam pada pemrosesan SEM (Structural Equation Modeling) dan standardisasi naskah terindeks Scopus/Sinta.",
-    avatar: "👩‍🔬"
+    avatar: "👩‍🔬",
+    links: []
   }
 ];
 
@@ -93,13 +97,33 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {TEAM.map((member) => (
               <div key={member.name} className="rounded-3xl border border-slate-800 bg-slate-900/50 p-6 flex flex-col sm:flex-row items-start gap-5 hover:border-indigo-500/10 transition-all">
-                <div className="w-16 h-16 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center text-3xl shrink-0">
-                  {member.avatar}
+                <div className="w-16 h-16 rounded-2xl bg-slate-950 border border-slate-850 flex items-center justify-center text-3xl shrink-0 overflow-hidden">
+                  {member.avatar.startsWith("/") ? (
+                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                  ) : (
+                    member.avatar
+                  )}
                 </div>
                 <div className="space-y-2">
                   <h4 className="text-base font-bold text-white">{member.name}</h4>
                   <span className="text-[10px] uppercase font-bold tracking-widest text-indigo-400 block">{member.role}</span>
                   <p className="text-xs text-slate-400 leading-relaxed">{member.desc}</p>
+                  
+                  {member.links && member.links.length > 0 && (
+                    <div className="flex gap-3 pt-2">
+                      {member.links.map((link) => (
+                        <a 
+                          key={link.label}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[10px] text-indigo-400 hover:text-indigo-300 font-bold underline transition-colors"
+                        >
+                          {link.label} →
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

@@ -134,6 +134,15 @@ export default function MegaMenu() {
                         Format naskah jurnal terakreditasi and deck sidang estetik.
                       </p>
                     </Link>
+                    <Link href="/tools/citation" className="group block space-y-1 p-2 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-xl transition-all">
+                      <div className="flex items-center gap-2 font-bold text-sm text-slate-900 dark:text-zinc-50 group-hover:text-emerald-600">
+                        <BookOpen className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
+                        Smart Citation Formatter
+                      </div>
+                      <p className="text-xs text-slate-500 dark:text-zinc-400 pl-6">
+                        Format bibliography & cari DOI (APA, IEEE, Harvard) gratis.
+                      </p>
+                    </Link>
                   </div>
                 </div>
 
@@ -217,6 +226,13 @@ export default function MegaMenu() {
             className="block text-sm font-bold text-slate-800 dark:text-zinc-200 hover:text-indigo-600 py-2 border-b border-slate-50 dark:border-zinc-900"
           >
             Tools Direktori
+          </Link>
+          <Link 
+            href="/tools/citation" 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="block text-sm font-bold text-indigo-600 dark:text-indigo-400 py-2 border-b border-slate-50 dark:border-zinc-900 pl-4"
+          >
+            ✦ Smart Citation Formatter
           </Link>
           <Link 
             href="/insights" 
