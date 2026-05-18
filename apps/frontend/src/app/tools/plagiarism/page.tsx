@@ -206,7 +206,7 @@ export default function PlagiarismCheckerPage() {
                     scanResult.score > 50 ? "bg-red-500/10 text-red-400 border border-red-500/20" : scanResult.score > 15 ? "bg-amber-500/10 text-amber-400 border border-amber-500/20" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                   }`}>
                     {scanResult.status === "HIGH_RISK" ? "Sangat Rentan" : scanResult.status === "WARNING" ? "Peringatan" : "Aman / Orisinil"}
-                  </div>
+                  </span>
                 </div>
 
                 {/* Recommendations */}
