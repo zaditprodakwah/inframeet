@@ -126,6 +126,46 @@ export async function POST(request: Request) {
       console.warn("SMTP settings not configured, skipping lead notification email.");
     }
 
+    // 4. Send Real-Time WhatsApp Notification to Admin using Fonnte Gateway (Adopted from Klaritas)
+    const fonnteToken = process.env.FONNTE_TOKEN;
+    const adminPhone = process.env.FONNTE_ADMIN_PHONE || "08123456789"; // target phone number
+
+    if (fonnteToken) {
+      try {
+        const waMessage = `🔥 *[LEAD BARU - INFRAMEET]*\n\n` +
+          `👤 *Nama:* ${name}\n` +
+          `📧 *Email:* ${email}\n` +
+          `📞 *Telepon/WA:* ${phone}\n` +
+          `🏷️ *Kategori:* ${category.replace("_", " ").toUpperCase()}\n\n` +
+          `💬 *Spesifikasi Kebutuhan:*\n"${message}"\n\n` +
+          `📅 *Waktu:* ${new Date().toLocaleString("id-ID")}\n\n` +
+          `👉 _Tinjau detail selengkapnya di Console Admin._`;
+
+        const formData = new URLSearchParams();
+        formData.append("target", adminPhone);
+        formData.append("message", waMessage);
+
+        const waResponse = await fetch("https://api.fonnte.com/send", {
+          method: "POST",
+          headers: {
+            Authorization: fonnteToken,
+          },
+          body: formData,
+        });
+
+        const waData = await waResponse.json();
+        if (waData.status) {
+          console.log(`WhatsApp notification successfully sent to admin via Fonnte for lead: ${email}`);
+        } else {
+          console.error("Fonnte API responded with error:", waData.reason || waData);
+        }
+      } catch (waErr) {
+        console.error("Failed to send WhatsApp notification via Fonnte:", waErr);
+      }
+    } else {
+      console.warn("FONNTE_TOKEN is not configured, skipping admin WhatsApp notification dispatch.");
+    }
+
     return NextResponse.json({
       success: true,
       message: "Lead intake registered successfully.",

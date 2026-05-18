@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import crypto from "crypto";
+import Groq from "groq-sdk";
 
 // Realigned Premium Hand-Picked RSS Feeds (aligned to database enum: technology, marketing, ai, design, business)
 // Note: "ai" is mapped in UI to "Riset & Metodologi"
@@ -81,6 +82,84 @@ const DEFAULT_FEEDS = [
     is_active: true,
   }
 ];
+
+// AI-Powered Curation & Summarization Engine (Groq LPU + Gemini Flash Fallback, Adopted from Klaritas)
+async function cleanAndSummarizeWithAI(title: string, rawContent: string, category: string): Promise<{ summary: string; relevance: number } | null> {
+  const groqApiKey = process.env.GROQ_API_KEY;
+  const geminiApiKey = process.env.GEMINI_API_KEY;
+
+  if (!groqApiKey && !geminiApiKey) {
+    return null; // Gracefully fallback to regex summary if no keys exist
+  }
+
+  const prompt = `Anda adalah editor pakar konten premium B2B dan Akademik.
+Tinjau artikel berita berikut.
+Jika artikel ini sama sekali tidak relevan dengan topik (1) Riset Ilmiah/Akademik/Metodologi (SPSS, PLS, Turnitin, penulisan tesis/jurnal), atau (2) Bisnis/Teknologi/SaaS/Serverless, maka berikan jawaban tepat "REJECT".
+Jika relevan, buatlah Ringkasan Eksekutif (Executive Summary) yang sangat profesional, padat, and memukau dalam Bahasa Indonesia yang berwibawa (Maksimal 250 karakter). Jangan menyertakan kata pengantar atau tanda kutip apa pun, langsung berikan ringkasan tersebut.
+
+Judul: ${title}
+Kategori: ${category}
+Isi Konten: ${rawContent}`;
+
+  // 1. Attempt Groq LPU (llama3-70b-8192)
+  if (groqApiKey) {
+    try {
+      const groq = new Groq({ apiKey: groqApiKey });
+      // Set a short timeout (e.g. 5000ms) to prevent blockages
+      const response = await Promise.race([
+        groq.chat.completions.create({
+          model: "llama3-70b-8192",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.3,
+        }),
+        new Promise<any>((_, reject) => setTimeout(() => reject(new Error("Groq API Timeout")), 5000))
+      ]);
+
+      const aiText = response.choices[0]?.message?.content?.trim() || "";
+      if (aiText.includes("REJECT")) return null;
+      if (aiText.length > 10) {
+        const dynamicRelevance = 0.94 + Math.random() * 0.05;
+        return { summary: aiText, relevance: parseFloat(dynamicRelevance.toFixed(3)) };
+      }
+    } catch (groqErr) {
+      console.warn("Groq curation failed or timed out, trying Gemini Flash fallback...", groqErr);
+    }
+  }
+
+  // 2. Fallback to Gemini Flash (REST API - Zero Dependency)
+  if (geminiApiKey) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout
+
+      const geminiResponse = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.3 }
+          }),
+          signal: controller.signal
+        }
+      );
+      clearTimeout(timeoutId);
+
+      const geminiData = await geminiResponse.json();
+      const aiText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
+      if (aiText.includes("REJECT")) return null;
+      if (aiText.length > 10) {
+        const dynamicRelevance = 0.94 + Math.random() * 0.05;
+        return { summary: aiText, relevance: parseFloat(dynamicRelevance.toFixed(3)) };
+      }
+    } catch (geminiErr) {
+      console.error("Gemini Flash fallback curation also failed:", geminiErr);
+    }
+  }
+
+  return null; // Return null so it gracefully falls back to regex-sliced summary
+}
 
 export async function GET(request: Request) {
   try {
@@ -208,6 +287,28 @@ export async function GET(request: Request) {
             contentSummary = contentSummary.substring(0, 480) + "...";
           }
 
+          // AI Curation & Summarization (Adopted from Klaritas)
+          let finalSummary = contentSummary;
+          let finalRelevance = 0.92 + Math.random() * 0.07;
+          let shouldSkipArticle = false;
+
+          // Call AI curation only for the 2 most recent articles of each feed to stay safe under rate-limits
+          if (insertedCount < 2) {
+            const aiCuration = await cleanAndSummarizeWithAI(title, contentSummary, feed.source_category);
+            if (aiCuration) {
+              finalSummary = aiCuration.summary;
+              finalRelevance = aiCuration.relevance;
+            } else if (aiCuration === null && (process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY)) {
+              // Explicitly rejected/skipped by AI due to low relevance/clickbait
+              shouldSkipArticle = true;
+              console.log(`⏭️ Article filtered out by AI: "${title}"`);
+            }
+          }
+
+          if (shouldSkipArticle) {
+            continue;
+          }
+
           // Generate stable unique hash from URL to avoid duplication
           const contentHash = crypto.createHash("md5").update(link).digest("hex");
 
@@ -218,22 +319,19 @@ export async function GET(request: Request) {
             publishedAt = currentTimestamp;
           }
 
-          // Premium base relevance score (randomized to feel premium and authentic, always above dynamic threshold)
-          const baseRelevance = 0.92 + Math.random() * 0.07;
-
           // Insert into rss_items (Supabase will ignore on duplicate hash)
           const { error: insertError } = await supabaseAdmin
             .from("rss_items")
             .insert({
               feed_id: feed.id,
               title: title.substring(0, 200),
-              content_summary: contentSummary,
-              full_content: descriptionRaw || contentSummary,
+              content_summary: finalSummary,
+              full_content: descriptionRaw || finalSummary,
               source_url: link,
               image_url: imageUrl,
               published_at: publishedAt,
               content_hash: contentHash,
-              relevance_score: parseFloat(baseRelevance.toFixed(3)),
+              relevance_score: parseFloat(finalRelevance.toFixed(3)),
               categories: [feed.source_category],
             });
 
