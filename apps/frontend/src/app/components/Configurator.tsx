@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
 import { useConfigurator } from "../../lib/useConfigurator";
 import { calculatePricing, reverseEngineerFeatures } from "../../lib/pricingMath";
 import { services, quiz, brand } from "@inframeet/config";
@@ -142,11 +142,15 @@ export default function Configurator() {
     <div className="w-full max-w-5xl mx-auto px-4 py-8">
       {/* 1. INTERACTIVE STEPS BLOCK */}
       {!showConfigurator && currentStep !== "step_success" && (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 shadow-xl max-w-2xl mx-auto"
-        >
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={currentStep}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 shadow-xl max-w-2xl mx-auto"
+          >
           {currentStepData && (
             <>
               <div className="flex items-center gap-3 mb-6">
@@ -191,6 +195,7 @@ export default function Configurator() {
             </>
           )}
         </motion.div>
+        </AnimatePresence>
       )}
 
       {/* 2. DYNAMIC CONFIGURATOR BLOCK */}

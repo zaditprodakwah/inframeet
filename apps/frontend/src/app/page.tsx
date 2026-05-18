@@ -79,12 +79,12 @@ export default function Home() {
 
             {/* H1 Headline - Main SEO Keyword Entity */}
             <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-zinc-50 tracking-tight leading-[1.1] max-w-4xl mx-auto">
-              Mitra Arsitektur <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500">Infrastruktur Digital</span> & Riset Berbasis AI
+              Fokus pada Visi Bisnis dan Kelulusan Riset Anda. <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500">Biarkan Kami yang Menangani</span> Kerumitan Infrastrukturnya.
             </h1>
 
             {/* H2 Sub-headline */}
-            <h2 className="text-base md:text-xl text-slate-500 dark:text-zinc-400 max-w-2xl mx-auto font-normal">
-              Platform kalkulator harga modular instan untuk kebutuhan pengembangan web bisnis premium, cloud serverless beban nol bulanan, dan pengolahan data riset tepercaya.
+            <h2 className="text-base md:text-xl text-slate-500 dark:text-zinc-400 max-w-3xl mx-auto font-normal leading-relaxed">
+              Mitra konsultan strategis untuk transformasi arsitektur digital enterprise dan asistensi riset akademik. Kami mengamankan skalabilitas bisnis dan validitas data Anda dengan presisi tinggi, transparan sejak hari pertama.
             </h2>
 
             {/* Dual Action CTA Buttons */}
@@ -104,6 +104,11 @@ export default function Home() {
               </a>
             </div>
           </div>
+        </section>
+
+        {/* Dynamic visual trust badges block */}
+        <section className="py-6">
+          <TrustBadges />
         </section>
 
         {/* 3. SOCIAL PROOF & TRUST BAR */}
@@ -420,6 +425,60 @@ export default function Home() {
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function TrustBadges() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-6 py-8">
+      <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-md flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition-all">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
+            <ShieldCheck className="w-5 h-5 text-indigo-500 shrink-0" />
+          </div>
+          <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">100% Anti-Joki Policy</h4>
+        </div>
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Dukungan tata letak & pengolahan data steril. Hak cipta & orisinalitas riset 100% milik Anda secara absolut.
+        </p>
+      </div>
+
+      <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-md flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition-all">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
+            <Sparkles className="w-5 h-5 text-indigo-500 shrink-0" />
+          </div>
+          <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">SLA Respons 2 Jam</h4>
+        </div>
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Menjamin waktu respons maksimal 2 jam pada kanal resmi untuk insiden prioritas tinggi secara profesional.
+        </p>
+      </div>
+
+      <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-md flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition-all">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
+            <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0" />
+          </div>
+          <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Kepatuhan UU PDP</h4>
+        </div>
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Menjamin kerahasiaan penuh atas source code, data transaksi, dan dokumen riset tanpa berbagi ke pihak ketiga.
+        </p>
+      </div>
+
+      <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-md flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition-all">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
+            <TrendingUp className="w-5 h-5 text-indigo-500 shrink-0" />
+          </div>
+          <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Jaminan Kualitas UAT</h4>
+        </div>
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Penyerahan hasil kerja melalui Berita Acara Serah Terima formal yang teruji bebas dari cacat fungsional.
+        </p>
+      </div>
     </div>
   );
 }

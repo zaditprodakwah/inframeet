@@ -5,7 +5,7 @@
     "sku": "B2B-CORE-BASE",
     "name": "Arsitektur Inti Web & API",
     "base_price_idr": 5000000,
-    "description": "Mesin dasar React/Next.js dengan optimasi SEO On-Page dasar dan kesiapan hosting serverless.",
+    "description": "Fondasi website berkinerja tinggi yang dirancang untuk mencegah pengunjung kabur akibat loading lambat, siap menampung lonjakan trafik ekstrim tanpa biaya server bulanan.",
     "included_features": [
       "responsive_mobile_and_tablet",
       "seo_on_page_basic",
@@ -54,7 +54,7 @@
       "sku": "B2B-MOD-SPD",
       "name": "Optimasi Super Speed (Lighthouse >90)",
       "price_flat_idr": 2500000,
-      "description": "Pemberian struktur caching, minimalisasi bundle javascript, dan kompresi aset otomatis pada Edge CDN.",
+      "description": "Audit dan perombakan arsitektur agar website memuat dalam < 2 detik (Lighthouse > 90), krusial untuk meningkatkan rasio konversi iklan dan dominasi peringkat Google Anda.",
       "is_volume_based": false
     },
     {
@@ -110,7 +110,7 @@
       "sku": "ACD-MOD-SPSS",
       "name": "Olah Data Statistik Kuantitatif (SPSS/Python)",
       "price_flat_idr": 450000,
-      "description": "Pengolahan regresi linear berganda, uji asumsi klasik, validitas, dan reliabilitas disertai interpretasi output.",
+      "description": "Validasi hipotesis riset Anda secara ilmiah. Kami menangani komputasi statistik (SPSS/Python) yang rumit agar Anda dapat fokus mempersiapkan argumen terbaik untuk sidang.",
       "is_volume_based": false
     },
     {

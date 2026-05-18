@@ -2,14 +2,14 @@
   "quiz_version": "6.5-Dynamic",
   "steps": {
     "step_1": {
-      "question": "Pilih identitas ekosistem Anda untuk penyesuaian infrastruktur:",
+      "question": "Selamat datang! Untuk memastikan kami memberikan solusi yang paling tepat sasaran, mari mulai dengan mengetahui fokus utama Anda:",
       "options": [
         { "id": "b2b", "label": "Perusahaan / Brand / Start-up", "icon": "Building", "next_step": "step_2_b2b_dynamic" },
         { "id": "academic", "label": "Akademisi / Mahasiswa / Peneliti", "icon": "GraduationCap", "next_step": "step_2_acad_dynamic" }
       ]
     },
     "step_2_b2b_dynamic": {
-      "question": "Metode penentuan spesifikasi yang Anda sukai?",
+      "question": "Sebagai mitra strategis, kami sangat fleksibel. Bagaimana Anda ingin kami merancang arsitektur proyek ini?",
       "options": [
         { "id": "by_budget", "label": "Sesuaikan Fitur Berdasarkan Target Budget Saya", "action": "open_range_slider_b2b", "next_step": "step_final_configurator" },
         { "id": "by_features", "label": "Pilih Komponen Fitur Sesuai Kebutuhan Nyata", "action": "open_toggle_matrix_b2b", "next_step": "step_final_configurator" },
