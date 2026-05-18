@@ -1,0 +1,15 @@
+{
+  "name": "inframeet-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter \"@inframeet/frontend\" dev",
+    "build": "pnpm --filter \"@inframeet/frontend\" build",
+    "start": "pnpm --filter \"@inframeet/frontend\" start",
+    "lint": "pnpm --filter \"*\" lint"
+  }
+}

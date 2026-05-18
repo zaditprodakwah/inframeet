@@ -1,0 +1,50 @@
+{
+  "quiz_version": "5.0",
+  "steps": {
+    "step_1": {
+      "question": "Pilih identitas ekosistem Anda untuk menyesuaikan layanan:",
+      "options": [
+        { "id": "b2b", "label": "Perusahaan / Brand", "icon": "Building", "next_step": "step_2_b2b" },
+        { "id": "academic", "label": "Akademisi / Peneliti", "icon": "GraduationCap", "next_step": "step_2_acad" }
+      ]
+    },
+    "step_2_b2b": {
+      "question": "Fokus eskalasi utama bisnis Anda saat ini?",
+      "options": [
+        { "id": "web_dev", "label": "Pembangunan Arsitektur Platform / Web", "next_step": "step_3_b2b_budget" },
+        { "id": "growth", "label": "Skalabilitas Iklan (Paid Ads) & SEO", "next_step": "step_final_lead_b2b" },
+        { "id": "legal", "label": "Dokumen Pitch Deck, MoU & Administrasi", "next_step": "step_final_lead_b2b" }
+      ]
+    },
+    "step_2_acad": {
+      "question": "Kendala utama riset Anda yang perlu diselesaikan segera?",
+      "options": [
+        { "id": "layout", "label": "Perapian Format & Layouting Jurnal/Skripsi", "next_step": "step_3_acad_pages" },
+        { "id": "data", "label": "Olah Data Statistik (SPSS/PLS/Python)", "next_step": "step_3_acad_data" },
+        { "id": "slide", "label": "Desain Slide Presentasi Sidang Premium", "next_step": "step_final_acad" }
+      ]
+    },
+    "step_3_b2b_budget": {
+      "question": "Estimasi alokasi anggaran proyek infrastruktur Anda?",
+      "options": [
+        { "id": "tier_1", "label": "Di bawah Rp 15 Juta", "result_sku": "B2B-WEB-STT" },
+        { "id": "tier_2", "label": "Rp 15 Juta - Rp 35 Juta", "result_sku": "B2B-WEB-COR" },
+        { "id": "tier_3", "label": "Di atas Rp 35 Juta", "result_sku": "B2B-WEB-PRO" }
+      ]
+    },
+    "step_3_acad_pages": {
+      "question": "Jumlah total estimasi halaman draf riset Anda?",
+      "options": [
+        { "id": "proposal", "label": "Proposal Penelitian (Maks 30 Halaman)", "result_sku": "ACD-LYT-P1" },
+        { "id": "thesis", "label": "Skripsi / Tesis / Disertasi (Maks 100 Halaman)", "result_sku": "ACD-LYT-S1" },
+        { "id": "journal", "label": "Artikel Jurnal Ilmiah (Sinta/Scopus)", "result_sku": "ACD-LYT-J1" }
+      ]
+    },
+    "step_3_acad_data": {
+      "question": "Metodologi olah data yang ingin Anda terapkan?",
+      "options": [
+        { "id": "spss", "label": "Regresi Linear / Klasik (SPSS)", "result_sku": "ACD-DTA-B1" }
+      ]
+    }
+  }
+}

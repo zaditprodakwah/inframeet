@@ -1,0 +1,18 @@
+{
+  "legal_version": "5.0",
+  "contracts": {
+    "b2b_kemitraan": {
+      "ip_rights": "Seluruh Hak Kekayaan Intelektual (HKI) termasuk namun tidak terbatas pada source code, desain antarmuka, dan arsitektur basis data yang dikembangkan dalam proyek ini adalah milik PIHAK PERTAMA (INFRAMEET) sepenuhnya, hingga PIHAK KEDUA (Klien) melunasi 100% dari total Nilai Proyek. Setelah pelunasan diterima, hak guna komersial tanpa batas waktu akan ditransfer kepada PIHAK KEDUA.",
+      "penalty": "Apabila PIHAK KEDUA gagal melakukan pembayaran sesuai dengan termin dan tanggal jatuh tempo, maka PIHAK KEDUA akan dikenakan denda keterlambatan sebesar 1% (satu persen) per minggu dari total nilai tagihan yang tertunggak. Penundaan melebihi 30 (tiga puluh) hari kalender memberikan hak kepada PIHAK PERTAMA untuk menangguhkan layanan."
+    },
+    "academic_service": {
+      "boundary": "PIHAK PERTAMA hanya bertindak sebagai penyedia jasa perbantuan teknis tata letak (layouting), visualisasi, dan pengolahan data numerik. Seluruh substansi materi riset, orisinalitas ide, data mentah, dan hak cipta penelitian adalah 100% milik PIHAK KEDUA. PIHAK PERTAMA dibebaskan dari segala tuntutan akademis yang timbul dari institusi pendidikan PIHAK KEDUA."
+    },
+    "retainer_sla": {
+      "response_sla": "PIHAK PERTAMA menjamin Waktu Respons (Response Time) maksimal 2 (dua) jam sejak pelaporan diterima melalui kanal resmi, khusus untuk insiden dengan prioritas tinggi (Critical/Downtime). Ketentuan ini berlaku pada Hari Kerja Nasional, Senin hingga Jumat, pukul 09.00 - 17.00 WIB."
+    },
+    "bast_lock": {
+      "lock_clause": "Dengan ditandatanganinya Berita Acara Serah Terima (BAST) ini, KLIEN menyatakan bahwa seluruh Deliverables telah diuji coba (User Acceptance Test), dan dinyatakan SELESAI tanpa cacat fungsional serta telah sesuai dengan Scope of Work (SoW). KLIEN melepaskan INFRAMEET dari segala tuntutan pengerjaan fitur/perubahan baru."
+    }
+  }
+}

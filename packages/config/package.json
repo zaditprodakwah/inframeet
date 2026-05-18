@@ -1,0 +1,12 @@
+{
+  "name": "@inframeet/config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "exports": {
+    "./brand": "./brand.json",
+    "./quiz": "./quiz.json",
+    "./services": "./services.json",
+    "./legal": "./legal.json"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "brand_name": "INFRAMEET",
+  "tagline": "Fondasi Presisi. Pertumbuhan Pasti.",
+  "theme": {
+    "colors": {
+      "background_primary": "#F8FAFC",
+      "background_card": "#FFFFFF",
+      "trust_anchor_indigo": "#4F46E5",
+      "status_success_emerald": "#10B981",
+      "status_pending_amber": "#F59E0B",
+      "status_error_rose": "#F43F5E",
+      "typography_headline": "#0F172A",
+      "typography_body": "#475569"
+    },
+    "typography": {
+      "font_family_primary": "Plus Jakarta Sans, Inter, sans-serif",
+      "border_radius": "8px",
+      "shadow_level": "shadow-sm",
+      "border_style": "border border-slate-200"
+    }
+  },
+  "payments": {
+    "handling_fee_idr": 5000,
+    "invoice_due_days": 7
+  },
+  "contact": {
+    "support_email": "support@inframeet.com",
+    "whatsapp_channel": "+62-812-3456789"
+  }
+}
