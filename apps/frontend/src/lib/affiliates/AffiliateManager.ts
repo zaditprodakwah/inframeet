@@ -1,12 +1,16 @@
 import { supabaseAdmin } from "../supabase";
 import { PartnerStackAdapter } from "./PartnerStackAdapter";
 import { InvolveAsiaAdapter } from "./InvolveAsiaAdapter";
+import { AccessTradeAdapter } from "./AccessTradeAdapter";
+import { ImpactAdapter } from "./ImpactAdapter";
 import { IAffiliateAdapter } from "./IAffiliateAdapter";
 
 export class AffiliateManager {
   private static adapters: Record<string, IAffiliateAdapter> = {
     partnerstack: new PartnerStackAdapter(),
-    involve_asia: new InvolveAsiaAdapter()
+    involve_asia: new InvolveAsiaAdapter(),
+    accesstrade: new AccessTradeAdapter(),
+    impact: new ImpactAdapter()
   };
 
   /**
