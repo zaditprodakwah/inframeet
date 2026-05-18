@@ -247,26 +247,35 @@ export function generateDocxBuffer(data: DocxSowData): Buffer {
   </w:body>
 </w:document>`;
 
-  // 1. Pack basic OpenXML file nodes into the Zip container
-  const zip = new PizZip();
-  zip.file("[Content_Types].xml", contentTypesXml);
-  zip.file("_rels/.rels", relsXml);
-  zip.file("word/document.xml", documentXml);
+  try {
+    // 1. Pack basic OpenXML file nodes into the Zip container
+    let zip: PizZip | null = new PizZip();
+    zip.file("[Content_Types].xml", contentTypesXml);
+    zip.file("_rels/.rels", relsXml);
+    zip.file("word/document.xml", documentXml);
 
-  // 2. Parse OpenXML tree nodes via docxtemplater
-  const doc = new Docxtemplater(zip, {
-    paragraphLoop: true,
-    linebreaks: true,
-  });
+    // 2. Parse OpenXML tree nodes via docxtemplater
+    let doc: Docxtemplater | null = new Docxtemplater(zip, {
+      paragraphLoop: true,
+      linebreaks: true,
+    });
 
-  // 3. Render tags dynamically
-  doc.render(data);
+    // 3. Render tags dynamically
+    doc.render(data);
 
-  // 4. Return as native binary node Buffer
-  const out = doc.getZip().generate({
-    type: "nodebuffer",
-    compression: "DEFLATE",
-  });
+    // 4. Return as native binary node Buffer
+    const out = doc.getZip().generate({
+      type: "nodebuffer",
+      compression: "DEFLATE",
+    });
 
-  return out;
+    // Clean references to prevent memory leaks in serverless edge container environments
+    doc = null;
+    zip = null;
+
+    return out;
+  } catch (err: any) {
+    console.error("Gagal melakukan render dokumen SOW DOCX:", err);
+    throw new Error(`Kesalahan Docx Templating: ${err.message}`);
+  }
 }
