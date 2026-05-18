@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import CommandMenu from "./components/CommandMenu";
+import MobileBottomNav from "@/components/MobileBottomNav";
+import FloatingContactForm from "@/components/FloatingContactForm";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,8 +30,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col pb-16 md:pb-0">
         {children}
+        <MobileBottomNav />
+        <FloatingContactForm />
         <CommandMenu />
       </body>
     </html>

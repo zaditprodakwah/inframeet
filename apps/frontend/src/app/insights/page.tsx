@@ -347,7 +347,7 @@ export default function InsightsPage() {
                               {highlightText(art.title, debouncedSearch)}
                             </a>
                           ) : (
-                            <Link href={`/insights/${art.id}`}>
+                            <Link href={`/insights/${art.slug || art.id}`}>
                               {highlightText(art.title, debouncedSearch)}
                             </Link>
                           )}
@@ -438,7 +438,7 @@ export default function InsightsPage() {
                           </a>
                         ) : (
                           <Link
-                            href={`/insights/${art.id}`}
+                            href={`/insights/${art.slug || art.id}`}
                             className="text-amber-400 hover:text-amber-300 font-extrabold flex items-center gap-1 transition animate-pulse"
                           >
                             Baca Ulasan Analis <ArrowRight className="w-3 h-3" />

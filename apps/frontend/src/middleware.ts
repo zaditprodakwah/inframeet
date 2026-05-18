@@ -6,13 +6,23 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const { pathname } = req.nextUrl;
 
-  // 1. Guard administrative routes
-  if (pathname.startsWith("/admin")) {
+  // 1. Guard administrative routes and serverless APIs
+  const isAdminPath = pathname.startsWith("/admin");
+  const isAdminApiPath = pathname.startsWith("/api/admin");
+
+  if (isAdminPath || isAdminApiPath) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
+    const unauthorizedResponse = () => {
+      if (isAdminApiPath) {
+        return NextResponse.json({ error: "Sesi admin tidak sah / tidak berhak (401 Unauthorized)." }, { status: 401 });
+      }
+      return NextResponse.redirect(new URL("/login", req.url));
+    };
+
     if (!supabaseUrl || !supabaseAnonKey) {
-      return NextResponse.redirect(new URL("/", req.url));
+      return unauthorizedResponse();
     }
 
     // Try to get token from Supabase default cookies
@@ -23,8 +33,7 @@ export async function middleware(req: NextRequest) {
     const authCookie = cookieStore.get(`sb-${projectRef}-auth-token`) || cookieStore.get("sb-access-token");
 
     if (!authCookie) {
-      // Redirect to custom admin login page if no token exists
-      return NextResponse.redirect(new URL("/calculator", req.url));
+      return unauthorizedResponse();
     }
 
     try {
@@ -39,22 +48,25 @@ export async function middleware(req: NextRequest) {
       const { data: { user }, error } = await supabase.auth.getUser(token);
 
       if (error || !user) {
-        return NextResponse.redirect(new URL("/calculator", req.url));
+        return unauthorizedResponse();
       }
 
       // Check if user is an admin by querying the staff table
       const { data: staff, error: staffError } = await supabase
         .from("staff")
-        .select("role")
+        .select("role, is_active")
         .eq("auth_user_id", user.id)
         .single();
 
-      if (staffError || !staff || staff.role !== "admin") {
+      if (staffError || !staff || staff.role !== "admin" || !staff.is_active) {
+        if (isAdminApiPath) {
+          return NextResponse.json({ error: "Akses Ditolak: Peran Administrator tidak aktif (403 Forbidden)." }, { status: 403 });
+        }
         return NextResponse.redirect(new URL("/", req.url));
       }
     } catch (err) {
       console.error("Admin middleware auth verification failed:", err);
-      return NextResponse.redirect(new URL("/calculator", req.url));
+      return unauthorizedResponse();
     }
   }
 
@@ -62,5 +74,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/r/:path*"]
+  matcher: ["/admin/:path*", "/api/admin/:path*", "/r/:path*"]
 };

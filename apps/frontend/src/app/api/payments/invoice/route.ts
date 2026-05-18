@@ -150,68 +150,83 @@ export async function POST(request: Request) {
       );
     }
 
-    // 5. Build Xendit API request payload
+    // 5. Try to process with Xendit or Fallback to Manual Billing
     const xenditSecretKey = process.env.XENDIT_SECRET_KEY;
-    if (!xenditSecretKey) {
-      return NextResponse.json(
-        { error: "XENDIT_SECRET_KEY tidak terkonfigurasi di server!" },
-        { status: 500 }
-      );
+    let useManualCheckout = !xenditSecretKey;
+    let xenditInvoice: any = null;
+    const invoiceNumber = `INV-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+    const descriptionText = `Pembayaran Kontrak INFRAMEET - ${invoiceType.toUpperCase()} (${terms})`;
+
+    if (!useManualCheckout) {
+      try {
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://inframeet.vercel.app";
+        const xenditInvoicePayload = {
+          external_id: contractId,
+          amount: finalAmount,
+          description: descriptionText,
+          payer_email: client.email,
+          customer: {
+            given_names: client.company_name || client.email,
+            email: client.email,
+            mobile_number: client.phone || undefined,
+          },
+          success_redirect_url: `${appUrl}/contracts/${contractId}?status=paid`,
+          failure_redirect_url: `${appUrl}/contracts/${contractId}?status=failed`,
+        };
+
+        const basicAuthHeader = Buffer.from(xenditSecretKey + ":").toString("base64");
+
+        const xenditResponse = await fetch("https://api.xendit.co/v2/invoices", {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${basicAuthHeader}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(xenditInvoicePayload),
+        });
+
+        if (xenditResponse.ok) {
+          xenditInvoice = await xenditResponse.json();
+        } else {
+          console.warn("Xendit API returned error, falling back to manual billing");
+          useManualCheckout = true;
+        }
+      } catch (xenditErr) {
+        console.error("Xendit connection failed, falling back to manual billing:", xenditErr);
+        useManualCheckout = true;
+      }
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://inframeet.vercel.app";
-    const xenditInvoicePayload = {
-      external_id: contractId,
-      amount: finalAmount,
-      description: `Pembayaran Kontrak INFRAMEET - ${invoiceType.toUpperCase()} (${terms})`,
-      payer_email: client.email,
-      customer: {
-        given_names: client.company_name || client.email,
-        email: client.email,
-        mobile_number: client.phone || undefined,
-      },
-      success_redirect_url: `${appUrl}/contracts/${contractId}?status=paid`,
-      failure_redirect_url: `${appUrl}/contracts/${contractId}?status=failed`,
-    };
+    let finalAmountWithTail = finalAmount;
+    let paymentLink = "";
+    let xenditInvoiceId = null;
 
-    const basicAuthHeader = Buffer.from(xenditSecretKey + ":").toString("base64");
-
-    // 6. Call Xendit Invoice v2 Endpoint
-    const xenditResponse = await fetch("https://api.xendit.co/v2/invoices", {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${basicAuthHeader}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(xenditInvoicePayload),
-    });
-
-    if (!xenditResponse.ok) {
-      const errorText = await xenditResponse.text();
-      return NextResponse.json(
-        { error: `Kesalahan API Xendit: ${errorText}` },
-        { status: 502 }
-      );
+    if (useManualCheckout) {
+      // Generate 3 digit tail code for unique transfer verification (001 - 999)
+      const tailCode = Math.floor(Math.random() * 999) + 1;
+      finalAmountWithTail = finalAmount + tailCode;
+      paymentLink = `/checkout/manual?invoiceNumber=${invoiceNumber}&amount=${finalAmountWithTail}&contractId=${contractId}`;
+    } else {
+      paymentLink = xenditInvoice.invoice_url;
+      xenditInvoiceId = xenditInvoice.id;
     }
-
-    const xenditInvoice = await xenditResponse.json();
 
     // 7. Insert the generated invoice record into Supabase
-    const invoiceNumber = `INV-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
     const { data: newInvoice, error: insertError } = await supabaseAdmin
       .from("invoices")
       .insert({
         project_id: contract.project_id,
         sow_id: contract.sow_id,
         invoice_number: invoiceNumber,
-        amount_idr: finalAmount,
+        amount_idr: finalAmountWithTail,
         invoice_type: invoiceType,
-        xendit_invoice_id: xenditInvoice.id,
-        payment_link: xenditInvoice.invoice_url,
+        xendit_invoice_id: xenditInvoiceId,
+        payment_link: paymentLink,
         status: "pending",
-        due_date: new Date(xenditInvoice.expiry_date || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)).toISOString(),
+        due_date: new Date(xenditInvoice?.expiry_date || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)).toISOString(),
         client_email: client.email,
-        description: xenditInvoicePayload.description,
+        description: descriptionText,
       })
       .select()
       .single();

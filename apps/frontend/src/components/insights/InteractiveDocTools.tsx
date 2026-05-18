@@ -127,7 +127,7 @@ export default function InteractiveDocTools({ id, title, url, publishedAt }: Int
         </div>
 
         <div className="relative p-3 bg-slate-900 border border-slate-800/60 rounded-xl">
-          <p className="text-xs text-slate-300 font-mono pr-12 leading-relaxed select-all">
+          <p className="text-xs text-slate-300 font-mono pr-12 leading-relaxed select-all break-all break-words whitespace-pre-wrap">
             {citations[activeTab]}
           </p>
           <button

@@ -15,11 +15,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { id } = await params;
   if (!supabaseAdmin) return {};
 
-  const { data: article } = await supabaseAdmin
-    .from("rss_items")
-    .select("title, content_summary, image_url")
-    .eq("id", id)
-    .single();
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+  const query = supabaseAdmin.from("rss_items").select("title, content_summary, image_url, slug");
+  const { data: article } = await (isUuid ? query.eq("id", id) : query.eq("slug", id)).single();
 
   if (!article) return { title: "Ulasan Analis | INFRAMEET" };
 
@@ -52,12 +50,10 @@ export default async function InsightDetailPage({ params }: PageProps) {
     );
   }
 
-  // 2. Load primary article bypassing RLS
-  const { data: article, error } = await supabaseAdmin
-    .from("rss_items")
-    .select("*, rss_feeds(feed_name, source_category)")
-    .eq("id", id)
-    .single();
+  // 2. Load primary article bypassing RLS (support both UUID and SEO slug resolving)
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+  const baseQuery = supabaseAdmin.from("rss_items").select("*, rss_feeds(feed_name, source_category)");
+  const { data: article, error } = await (isUuid ? baseQuery.eq("id", id) : baseQuery.eq("slug", id)).single();
 
   if (error || !article) {
     notFound();
@@ -126,11 +122,11 @@ export default async function InsightDetailPage({ params }: PageProps) {
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://inframeet.vercel.app/insights/${id}`
+      "@id": `https://inframeet.vercel.app/insights/${article.slug || article.id}`
     }
   };
 
-  const currentLiveUrl = `https://inframeet.vercel.app/insights/${id}`;
+  const currentLiveUrl = `https://inframeet.vercel.app/insights/${article.slug || article.id}`;
 
   return (
     <main className="min-h-screen bg-[#020617] text-slate-100 font-sans pb-24 relative overflow-hidden">
@@ -295,7 +291,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
 
                 return (
                   <Link
-                    href={`/insights/${item.id}`}
+                    href={`/insights/${item.slug || item.id}`}
                     key={item.id}
                     className="group flex flex-col p-4 bg-slate-950/40 border border-slate-900 hover:border-slate-800 rounded-2xl transition-all duration-300"
                   >

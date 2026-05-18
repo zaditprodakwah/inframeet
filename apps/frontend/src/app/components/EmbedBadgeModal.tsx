@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 
 interface EmbedBadgeModalProps {
@@ -10,6 +9,7 @@ interface EmbedBadgeModalProps {
 
 export default function EmbedBadgeModal({ isOpen, onClose, toolName }: EmbedBadgeModalProps) {
   const [copied, setCopied] = useState(false);
+  const [activeTab, setActiveTab] = useState<"badge" | "widget">("badge");
 
   if (!isOpen) return null;
 
@@ -19,11 +19,16 @@ export default function EmbedBadgeModal({ isOpen, onClose, toolName }: EmbedBadg
   const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://inframeet.vercel.app";
   const badgeUrl = `${siteUrl}/api/badges/${toolSlug}`;
   const targetUrl = `${siteUrl}/tools/${toolSlug}`;
+  const widgetUrl = `${siteUrl}/embed/tools/${toolSlug}`;
 
-  const embedCode = `<a href="${targetUrl}" target="_blank" rel="dofollow">\n  <img src="${badgeUrl}" alt="${toolName} Review by INFRAMEET" width="220" height="30" />\n</a>`;
+  const badgeEmbedCode = `<a href="${targetUrl}" target="_blank" rel="dofollow">\n  <img src="${badgeUrl}" alt="${toolName} Review by INFRAMEET" width="220" height="30" />\n</a>`;
+
+  const widgetEmbedCode = `<iframe src="${widgetUrl}" width="100%" height="245" style="border:none; border-radius:16px; overflow:hidden;" scrolling="no"></iframe>`;
+
+  const activeEmbedCode = activeTab === "badge" ? badgeEmbedCode : widgetEmbedCode;
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(embedCode);
+    navigator.clipboard.writeText(activeEmbedCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -37,7 +42,7 @@ export default function EmbedBadgeModal({ isOpen, onClose, toolName }: EmbedBadg
       />
 
       {/* Modal Card */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg mx-4 p-6 shadow-2xl relative z-10 animate-in fade-in zoom-in-95 duration-200 text-slate-100">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg mx-4 p-6 shadow-2xl relative z-10 animate-in fade-in zoom-in-95 duration-200 text-slate-100">
         
         {/* Close Button */}
         <button 
@@ -51,31 +56,69 @@ export default function EmbedBadgeModal({ isOpen, onClose, toolName }: EmbedBadg
 
         {/* Header */}
         <h3 className="text-lg font-bold bg-gradient-to-r from-slate-100 to-slate-200 bg-clip-text text-transparent mb-2">
-          Embed Rating Badge di Blog Anda
+          Embed Rating &amp; Widget di Blog Anda
         </h3>
         <p className="text-sm text-slate-400 mb-6">
-          Tunjukkan ulasan premium dari INFRAMEET di situs Anda untuk menaikkan nilai otoritas dan kepercayaan pengguna.
+          Tampilkan rating resmi dari INFRAMEET di blog atau situs Anda untuk meningkatkan konversi dan kepercayaan calon pengguna.
         </p>
 
-        {/* Live SVG Badge Preview */}
+        {/* Tab Switcher */}
+        <div className="flex bg-slate-950/60 p-1 rounded-xl border border-slate-800/80 mb-6">
+          <button
+            onClick={() => setActiveTab("badge")}
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
+              activeTab === "badge" 
+                ? "bg-indigo-600 text-white shadow-sm" 
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+          >
+            SVG Rating Badge
+          </button>
+          <button
+            onClick={() => setActiveTab("widget")}
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
+              activeTab === "widget" 
+                ? "bg-indigo-600 text-white shadow-sm" 
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+          >
+            Interactive Card Widget
+          </button>
+        </div>
+
+        {/* Live SVG Badge or Widget Preview */}
         <div className="mb-6 flex flex-col items-center justify-center p-6 rounded-xl bg-slate-950/50 border border-slate-800/80">
           <span className="text-xs text-slate-500 font-medium uppercase tracking-wider mb-3">Live Preview</span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img 
-            src={badgeUrl} 
-            alt={`${toolName} Review Badge`} 
-            className="shadow-md"
-            onError={(e) => {
-              // Fallback preview
-              (e.target as HTMLElement).style.display = "none";
-            }}
-          />
+          {activeTab === "badge" ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img 
+              src={badgeUrl} 
+              alt={`${toolName} Review Badge`} 
+              className="shadow-md"
+              onError={(e) => {
+                // Fallback preview
+                (e.target as HTMLElement).style.display = "none";
+              }}
+            />
+          ) : (
+            <div className="w-full max-w-sm rounded-2xl overflow-hidden border border-slate-800 shadow-md">
+              <iframe 
+                src={widgetUrl} 
+                width="100%" 
+                height="245" 
+                style={{ border: "none", overflow: "hidden" }} 
+                scrolling="no"
+              />
+            </div>
+          )}
         </div>
 
         {/* Code Snippet Box */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-400 font-semibold tracking-wide">HTML Embed Code</span>
+            <span className="text-xs text-slate-400 font-semibold tracking-wide">
+              {activeTab === "badge" ? "HTML Embed Code" : "HTML IFrame Code"}
+            </span>
             <button
               onClick={handleCopy}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
@@ -103,7 +146,7 @@ export default function EmbedBadgeModal({ isOpen, onClose, toolName }: EmbedBadg
           </div>
           
           <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 overflow-x-auto text-xs font-mono leading-relaxed text-indigo-300 select-all select-none">
-            <code>{embedCode}</code>
+            <code>{activeEmbedCode}</code>
           </pre>
         </div>
 
@@ -112,7 +155,11 @@ export default function EmbedBadgeModal({ isOpen, onClose, toolName }: EmbedBadg
           <svg className="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>Badge ini mendukung dolfollow links untuk keuntungan SEO mutualisme.</span>
+          <span>
+            {activeTab === "badge" 
+              ? "Badge ini mendukung dolfollow links untuk keuntungan SEO mutualisme." 
+              : "Widget responsif modern yang menyatu sempurna di sidebar atau artikel blog Anda."}
+          </span>
         </div>
       </div>
     </div>
