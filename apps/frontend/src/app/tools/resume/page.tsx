@@ -109,52 +109,84 @@ export default function ResumeBuilderPage() {
           <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 backdrop-blur-md space-y-6">
             
             {/* Personal Info */}
-            <div className="space-y-4">
+            <div className="space-y-4 font-sans">
               <h2 className="text-xs font-bold text-indigo-400 uppercase tracking-wider">Informasi Pribadi</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  value={personalInfo.fullName}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, fullName: e.target.value })}
-                  placeholder="Nama Lengkap"
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
-                />
-                <input
-                  type="text"
-                  value={personalInfo.title}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, title: e.target.value })}
-                  placeholder="Profesi / Jabatan"
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
-                />
-                <input
-                  type="email"
-                  value={personalInfo.email}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })}
-                  placeholder="Email"
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
-                />
-                <input
-                  type="text"
-                  value={personalInfo.phone}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
-                  placeholder="Telepon/WA"
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
-                />
-                <input
-                  type="text"
-                  value={personalInfo.location}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, location: e.target.value })}
-                  placeholder="Lokasi (e.g. Jakarta, Indonesia)"
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500 md:col-span-2"
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="resume-fullname" className="text-[9px] font-bold text-slate-450 uppercase tracking-wider">Nama Lengkap</label>
+                  <input
+                    id="resume-fullname"
+                    name="fullName"
+                    type="text"
+                    value={personalInfo.fullName}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, fullName: e.target.value })}
+                    placeholder="Nama Lengkap"
+                    className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="resume-title" className="text-[9px] font-bold text-slate-455 uppercase tracking-wider">Profesi / Jabatan</label>
+                  <input
+                    id="resume-title"
+                    name="title"
+                    type="text"
+                    value={personalInfo.title}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, title: e.target.value })}
+                    placeholder="Profesi / Jabatan"
+                    className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="resume-email" className="text-[9px] font-bold text-slate-455 uppercase tracking-wider">Alamat Email</label>
+                  <input
+                    id="resume-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    value={personalInfo.email}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })}
+                    placeholder="Email"
+                    className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="resume-phone" className="text-[9px] font-bold text-slate-455 uppercase tracking-wider">Nomor Telepon</label>
+                  <input
+                    id="resume-phone"
+                    name="phone"
+                    type="text"
+                    autoComplete="tel"
+                    value={personalInfo.phone}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
+                    placeholder="Telepon/WA"
+                    className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+                <div className="flex flex-col gap-1 md:col-span-2">
+                  <label htmlFor="resume-location" className="text-[9px] font-bold text-slate-455 uppercase tracking-wider">Domisili / Lokasi</label>
+                  <input
+                    id="resume-location"
+                    name="location"
+                    type="text"
+                    value={personalInfo.location}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, location: e.target.value })}
+                    placeholder="Lokasi (e.g. Jakarta, Indonesia)"
+                    className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="resume-summary" className="text-[9px] font-bold text-slate-455 uppercase tracking-wider">Rangkuman Karir / Profil</label>
+                <textarea
+                  id="resume-summary"
+                  name="summary"
+                  value={personalInfo.summary}
+                  rows={3}
+                  onChange={(e) => setPersonalInfo({ ...personalInfo, summary: e.target.value })}
+                  placeholder="Rangkuman Karir / Profil Singkat"
+                  className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"
                 />
               </div>
-              <textarea
-                value={personalInfo.summary}
-                rows={3}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, summary: e.target.value })}
-                placeholder="Rangkuman Karir / Profil Singkat"
-                className="w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"
-              />
             </div>
 
             <hr className="border-slate-850" />

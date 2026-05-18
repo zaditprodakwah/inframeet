@@ -131,22 +131,28 @@ export default function FloatingContactForm() {
               
               {/* Row 1: Nama & Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Nama Lengkap</label>
+                <div className="flex flex-col gap-1.5 font-sans">
+                  <label htmlFor="client-name" className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Nama Lengkap</label>
                   <input
+                    id="client-name"
+                    name="name"
                     type="text"
                     required
+                    autoComplete="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Nama Anda"
                     className="w-full px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-850 text-slate-200 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
                   />
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Email Kontak</label>
+                <div className="flex flex-col gap-1.5 font-sans">
+                  <label htmlFor="client-email" className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Email Kontak</label>
                   <input
+                    id="client-email"
+                    name="email"
                     type="email"
                     required
+                    autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="email@domain.com"
@@ -154,23 +160,28 @@ export default function FloatingContactForm() {
                   />
                 </div>
               </div>
-
+ 
               {/* Row 2: Telepon & Kategori */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Nomor Telepon / WA</label>
+                <div className="flex flex-col gap-1.5 font-sans">
+                  <label htmlFor="client-phone" className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Nomor Telepon / WA</label>
                   <input
+                    id="client-phone"
+                    name="phone"
                     type="text"
                     required
+                    autoComplete="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="082xxxxxxxxx"
                     className="w-full px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-850 text-slate-200 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
                   />
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Kategori Kebutuhan</label>
+                <div className="flex flex-col gap-1.5 font-sans">
+                  <label htmlFor="client-category" className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Kategori Kebutuhan</label>
                   <select
+                    id="client-category"
+                    name="category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     className="w-full px-3 py-2 rounded-lg bg-slate-950/80 border border-slate-850 text-slate-200 text-xs focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer"
@@ -182,11 +193,13 @@ export default function FloatingContactForm() {
                   </select>
                 </div>
               </div>
-
+ 
               {/* Row 3: Detail Deskripsi */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Rumusan Spesifikasi Kebutuhan Anda</label>
+              <div className="flex flex-col gap-1.5 font-sans">
+                <label htmlFor="client-message" className="text-[9px] font-bold text-slate-450 uppercase tracking-widest">Rumusan Spesifikasi Kebutuhan Anda</label>
                 <textarea
+                  id="client-message"
+                  name="message"
                   required
                   rows={4}
                   value={message}

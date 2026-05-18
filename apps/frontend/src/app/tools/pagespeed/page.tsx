@@ -144,29 +144,37 @@ export default function PageSpeedAuditorPage() {
         {/* Audit Request Card */}
         <section className="space-y-6">
           <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 backdrop-blur-md space-y-6">
-            <form onSubmit={handleAudit} className="flex flex-col md:flex-row gap-3">
-              <input
-                type="text"
-                required
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                placeholder="Masukkan domain situs Anda (contoh: inframeet.com)..."
-                className="flex-1 px-4 py-3 bg-slate-950 border border-slate-850 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
-              />
-              <button
-                type="submit"
-                disabled={isAuditing || url.trim().length === 0}
-                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-850 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-indigo-600/15 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
-              >
-                {isAuditing ? (
-                  <>
-                    <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Menganalisis Core Web Vitals...
-                  </>
-                ) : (
-                  "Analisis Performa"
-                )}
-              </button>
+            <form onSubmit={handleAudit} className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1.5 font-sans">
+                <label htmlFor="pagespeed-url" className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Alamat URL / Domain Situs</label>
+                <div className="flex flex-col md:flex-row gap-3">
+                  <input
+                    id="pagespeed-url"
+                    name="url"
+                    type="text"
+                    required
+                    autoComplete="url"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    placeholder="Masukkan domain situs Anda (contoh: inframeet.com)..."
+                    className="flex-1 px-4 py-3 bg-slate-950 border border-slate-850 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isAuditing || url.trim().length === 0}
+                    className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-850 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-indigo-600/15 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
+                  >
+                    {isAuditing ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Menganalisis Core Web Vitals...
+                      </>
+                    ) : (
+                      "Analisis Performa"
+                    )}
+                  </button>
+                </div>
+              </div>
             </form>
 
             {errorMsg && (

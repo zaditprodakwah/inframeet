@@ -149,29 +149,37 @@ export default function CitationFetcherPage() {
         {/* Search Block Card */}
         <section className="space-y-6">
           <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 backdrop-blur-md space-y-6">
-            <form onSubmit={handleFetch} className="flex flex-col md:flex-row gap-3">
-              <input
-                type="text"
-                required
-                value={doi}
-                onChange={(e) => setDoi(e.target.value)}
-                placeholder="Masukkan Nomor DOI Akademik (contoh: 10.1038/nature12373)..."
-                className="flex-1 px-4 py-3 bg-slate-950 border border-slate-850 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
-              />
-              <button
-                type="submit"
-                disabled={isLoading || doi.trim().length === 0}
-                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-850 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-indigo-600/15 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
-              >
-                {isLoading ? (
-                  <>
-                    <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Menghubungi Crossref API...
-                  </>
-                ) : (
-                  "Generate Sitasi"
-                )}
-              </button>
+            <form onSubmit={handleFetch} className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1.5 font-sans">
+                <label htmlFor="citation-doi" className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Nomor Seri DOI Jurnal / Karya Ilmiah</label>
+                <div className="flex flex-col md:flex-row gap-3">
+                  <input
+                    id="citation-doi"
+                    name="doi"
+                    type="text"
+                    required
+                    autoComplete="off"
+                    value={doi}
+                    onChange={(e) => setDoi(e.target.value)}
+                    placeholder="Masukkan Nomor DOI Akademik (contoh: 10.1038/nature12373)..."
+                    className="flex-1 px-4 py-3 bg-slate-950 border border-slate-850 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isLoading || doi.trim().length === 0}
+                    className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-850 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-indigo-600/15 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
+                  >
+                    {isLoading ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Menghubungi Crossref API...
+                      </>
+                    ) : (
+                      "Generate Sitasi"
+                    )}
+                  </button>
+                </div>
+              </div>
             </form>
 
             {errorMsg && (

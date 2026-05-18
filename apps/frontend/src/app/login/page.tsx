@@ -87,24 +87,30 @@ export default function LoginPage() {
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           
           {/* Input: Email */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email Admin</label>
+          <div className="flex flex-col gap-1.5 font-sans">
+            <label htmlFor="login-email" className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email Admin</label>
             <input
+              id="login-email"
+              name="email"
               type="email"
               required
+              autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@inframeet.com"
               className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-850 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
             />
           </div>
-
+ 
           {/* Input: Password */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kata Sandi</label>
+          <div className="flex flex-col gap-1.5 font-sans">
+            <label htmlFor="login-password" className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kata Sandi</label>
             <input
+              id="login-password"
+              name="password"
               type="password"
               required
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"

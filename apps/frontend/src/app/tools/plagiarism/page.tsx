@@ -125,9 +125,11 @@ export default function PlagiarismCheckerPage() {
             <form onSubmit={handleScan} className="space-y-4">
               
               {/* Text Input Block */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Naskah Akademik (Maks. 10.000 Karakter)</label>
+              <div className="flex flex-col gap-1.5 font-sans">
+                <label htmlFor="plagiarism-text" className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Naskah Akademik (Maks. 10.000 Karakter)</label>
                 <textarea
+                  id="plagiarism-text"
+                  name="plagiarism-text"
                   required
                   rows={8}
                   maxLength={10000}
@@ -141,15 +143,18 @@ export default function PlagiarismCheckerPage() {
                   <span>Kata: {text.split(/\s+/).filter(Boolean).length}</span>
                 </div>
               </div>
-
+ 
               {/* Email capture to unlock details */}
-              <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-slate-950/60 border border-slate-850/80">
-                <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider">Kirimkan Hasil Laporan Ke Email (Opsional)</span>
+              <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-slate-950/60 border border-slate-850/80 font-sans">
+                <label htmlFor="plagiarism-email" className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider cursor-pointer">Kirimkan Hasil Laporan Ke Email (Opsional)</label>
                 <p className="text-[10px] text-slate-450 leading-relaxed">
                   Masukkan email Anda jika ingin laporan lengkap beserta panduan rekonsiliasi format sitasi (APA/MLA) dikirimkan otomatis ke kotak masuk Anda.
                 </p>
                 <input
+                  id="plagiarism-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="email@domain.com"
