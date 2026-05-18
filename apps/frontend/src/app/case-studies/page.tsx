@@ -3,36 +3,78 @@
 import MegaMenu from "../components/MegaMenu";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Link from "next/link";
-import { Sparkles, ArrowRight, ShieldCheck, CheckCircle2, TrendingUp, Layers, Award } from "lucide-react";
+import { Sparkles, ArrowRight, ShieldCheck, Award, GraduationCap, Building2 } from "lucide-react";
 
 const FEATURED_STUDIES = [
   {
     id: "study-1",
     client: "Astra Digital Enterprise",
-    title: "Migrasi Arsitektur Serverless Cloud & Headless CMS",
+    title: "Penyelarasan Serverless & Optimasi Hosting Tradisional VPS",
     segment: "B2B Solutions",
-    challenge: "Biaya hosting cPanel bulanan membengkak drastis dengan rasio pemuatan halaman melambat seiring kenaikan trafik iklan produk.",
-    solution: "Melakukan perombakan penuh arsitektur menjadi Next.js serverless global, memigrasikan konten ke Headless CMS, and mengaktifkan Supabase RLS Sandbox.",
+    challenge: "Klien ingin mempercepat portal publisitas mereka namun terkendala regulasi internal perusahaan yang mewajibkan database disimpan di server VPS mandiri daripada cloud tanpa server.",
+    solution: "Kami merancang arsitektur Next.js statis yang hemat biaya untuk frontend, and mempertahankan backend database di VPS lama klien melalui gerbang API Nginx yang aman. Kami mengakomodir infrastruktur yang sudah ada tanpa memaksa migrasi cloud penuh.",
     metrics: [
-      { name: "Kecepatan Pemuatan Halaman", value: "99% (Lighthouse)", color: "bg-indigo-500" },
-      { name: "Efisiensi Biaya Operasional", value: "Mengurangi Tagihan Bulanan ke Rp 0 (Free Tier)", color: "bg-indigo-500" },
-      { name: "Peningkatan Konversi Iklan", value: "+34.6% Rasio Klik", color: "bg-indigo-500" }
+      { name: "Kecepatan Pemuatan Awal", value: "1.2 Detik (Lighthouse >95)", color: "bg-indigo-500" },
+      { name: "Efisiensi Biaya Tetap", value: "Menghemat Rp 7,8 Juta / Bulan", color: "bg-indigo-500" },
+      { name: "Kesesuaian Regulasi IT", value: "100% Sesuai Regulasi Internal", color: "bg-indigo-500" }
     ],
-    tech: ["Next.js Edge", "Supabase PostgreSQL", "Sanity CMS"]
+    tech: ["Next.js", "Ubuntu VPS", "Nginx Gateways"]
   },
   {
     id: "study-2",
-    client: "Universitas Indonesia (Fakultas Ekonomi)",
-    title: "Analisis Structural Equation Modeling (SEM) Jalur Makro",
-    segment: "Academic Service",
-    challenge: "Peneliti menghadapi tenggat waktu sidang doktoral (S3) yang mendesak dengan kesulitan validasi data kuantitatif multivariat kompleks.",
-    solution: "Menyediakan bimbingan terstruktur pengolahan statistik multivariat (SmartPLS & SPSS), penyelarasan daftar pustaka Scopus, and cek Turnitin steril.",
+    client: "UMKM Toko Kelontong Sinar Mulia",
+    title: "Optimasi Database & Performa Website Toko Online",
+    segment: "B2B Solutions",
+    challenge: "Website toko online berbasis WordPress sering mengalami kelambatan pemuatan and crash saat lonjakan pengunjung promo karena menggunakan hosting cPanel murah.",
+    solution: "Kami melakukan optimasi database MySQL, pembersihan berkas sampah, and pemasangan CDN Cloudflare gratis. Kami menghormati anggaran UMKM klien dengan memaksimalkan performa hosting cPanel yang sudah berjalan tanpa perlu sewa server mahal.",
     metrics: [
-      { name: "Presisi Uji Statistik", value: "100% Validasi Hipotesis", color: "bg-emerald-500" },
-      { name: "Indeks Plagiarisme Turnitin", value: "&lt; 10% Kemiripan", color: "bg-emerald-500" },
-      { name: "Kepatuhan Kode Etik Sidang", value: "100% Anti-Joki Steril", color: "bg-emerald-500" }
+      { name: "Kecepatan Akses Halaman", value: "Meningkat 3x Lebih Cepat", color: "bg-indigo-500" },
+      { name: "Ketahanan Trafik Lonjakan", value: "100% Uptime Saat Flash Sale", color: "bg-indigo-500" },
+      { name: "Biaya Infrastruktur Baru", value: "Rp 0 (Maksimalisasi cPanel)", color: "bg-indigo-500" }
+    ],
+    tech: ["WordPress", "cPanel Hosting", "Cloudflare CDN"]
+  },
+  {
+    id: "study-3",
+    client: "Program Pascasarjana FE Universitas Indonesia",
+    title: "Bimbingan Metodologi & SEM Pengaruh Makroekonomi (S3)",
+    segment: "Academic Service (S3)",
+    challenge: "Kandidat doktor menghadapi kendala dalam memvalidasi model hipotesis jalur multivariat kompleks di tengah tenggat sidang kelayakan disertasi yang sangat ketat.",
+    solution: "Memberikan asistensi pengolahan statistik multivariat menggunakan SmartPLS 4, pembacaan uji validitas reliabilitas, and bimbingan Turnitin agar naskah disertasi steril dari kekeliruan sitasi akademik.",
+    metrics: [
+      { name: "Presisi Hipotesis Model", value: "100% Lolos Uji Sidang Komisi", color: "bg-emerald-500" },
+      { name: "Hasil Kemiripan Turnitin", value: "8% (Batas Aman Kampus <15%)", color: "bg-emerald-500" },
+      { name: "Kepatuhan Integritas", value: "100% Anti-Joki (Bimbingan Murni)", color: "bg-emerald-500" }
     ],
     tech: ["SmartPLS 4", "SPSS Statistics", "Turnitin Premium"]
+  },
+  {
+    id: "study-4",
+    client: "Teknik Informatika ITB",
+    title: "Standardisasi Format Jurnal & Parafrase Turnitin Skripsi (S1)",
+    segment: "Academic Service (S1)",
+    challenge: "Draf skripsi mahasiswa sarjana terdeteksi Turnitin sebesar 34% karena banyaknya sitasi definisi teknis yang mirip dengan dokumen publik.",
+    solution: "Membantu rekonstruksi struktur kalimat naskah (parafrase manual) tanpa mengubah makna ilmiah, serta merapikan sitasi Mendeley agar sesuai format penulisan skripsi kampus.",
+    metrics: [
+      { name: "Penurunan Skor Turnitin", value: "Dari 34% Turun Menjadi 12%", color: "bg-emerald-500" },
+      { name: "Kesesuaian Format Jurnal", value: "100% Presisi Mendeley", color: "bg-emerald-500" },
+      { name: "Proses Transparansi Kerja", value: "Bimbingan Live Online", color: "bg-emerald-500" }
+    ],
+    tech: ["Turnitin Premium", "Mendeley Reference", "LaTeX Formatting"]
+  },
+  {
+    id: "study-5",
+    client: "Sekolah Menengah Kejuruan (Tugas Akhir)",
+    title: "Asistensi Visualisasi Google Sheets & Slide Deck Ujian Praktek",
+    segment: "Academic Service (Sekolah)",
+    challenge: "Siswa sekolah menengah membutuhkan panduan praktis untuk merapikan tabel survei spreadsheet and menyusun slide deck agar siap dipresentasikan di depan penguji praktek.",
+    solution: "Kami mengajarkan pengolahan grafik pivot table di Google Sheets, merancang tata letak presentasi yang profesional, and melatih penyampaian materi agar mudah dipahami.",
+    metrics: [
+      { name: "Kualitas Slide Presentasi", value: "Sangat Menarik (Nilai Ujian A)", color: "bg-emerald-500" },
+      { name: "Pemahaman Olah Data", value: "Siswa Paham VLOOKUP & Pivot", color: "bg-emerald-500" },
+      { name: "Metode Pengajaran", value: "Step-by-step Ramah Pelajar", color: "bg-emerald-500" }
+    ],
+    tech: ["Google Sheets", "PowerPoint Layouts", "Visual Design"]
   }
 ];
 
@@ -49,13 +91,13 @@ export default function CaseStudiesPage() {
         {/* Banner Section */}
         <section className="max-w-4xl mx-auto px-6 text-center space-y-5">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            <Award className="w-3.5 h-3.5" /> Analisis Transformasi Riil
+            <Award className="w-3.5 h-3.5" /> Jurnal &amp; Catatan Portofolio Riil
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Executive <span className="text-indigo-500">Case Studies</span>
+            Transformasi <span className="text-indigo-500">Studi Kasus</span>
           </h1>
           <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Menelusuri bagaimana kami membantu brand nasional mengamankan infrastruktur global and peneliti menyelesaikan validasi ilmiah secara jujur and presisi.
+            Menelusuri bagaimana kami membantu menyelaraskan kebutuhan infrastruktur digital bisnis, mengoptimalkan hosting UMKM sesuai anggaran, and membimbing orisinalitas riset akademik dari tingkat sekolah hingga doktoral (S3).
           </p>
         </section>
 
@@ -70,11 +112,16 @@ export default function CaseStudiesPage() {
                 <div className="space-y-6">
                   {/* Segment Badge & Client */}
                   <div className="flex items-center justify-between">
-                    <span className={`text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border ${
+                    <span className={`text-[10px] uppercase font-extrabold tracking-widest px-3 py-1 rounded-full border flex items-center gap-1 ${
                       study.segment.includes("B2B") 
                         ? "bg-indigo-500/10 text-indigo-400 border-indigo-500/20" 
                         : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
                     }`}>
+                      {study.segment.includes("B2B") ? (
+                        <Building2 className="w-3 h-3 text-indigo-400" />
+                      ) : (
+                        <GraduationCap className="w-3 h-3 text-emerald-400" />
+                      )}
                       {study.segment}
                     </span>
                     <span className="text-xs font-bold text-slate-500">{study.client}</span>
@@ -89,11 +136,11 @@ export default function CaseStudiesPage() {
                   <div className="space-y-4 text-xs leading-relaxed text-slate-400">
                     <div className="space-y-1">
                       <span className="text-[9px] uppercase tracking-wider text-slate-500 font-extrabold block">Tantangan Klien</span>
-                      <p>{study.challenge}</p>
+                      <p className="text-slate-300">{study.challenge}</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[9px] uppercase tracking-wider text-slate-500 font-extrabold block">Solusi Rekayasa Kami</span>
-                      <p>{study.solution}</p>
+                      <span className="text-[9px] uppercase tracking-wider text-slate-500 font-extrabold block">Pendekatan Akomodatif Kami</span>
+                      <p className="text-slate-300">{study.solution}</p>
                     </div>
                   </div>
 
@@ -123,13 +170,13 @@ export default function CaseStudiesPage() {
                 <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between">
                   <span className="text-[10px] text-slate-500 flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" />
-                    Verified SOW Deliverable Active
+                    Verified Deliverable
                   </span>
                   <Link 
                     href="/portfolio" 
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer"
                   >
-                    Buka Log Portofolio Lengkap
+                    Buka Log Portofolio
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -140,9 +187,9 @@ export default function CaseStudiesPage() {
 
         {/* Action Link Row */}
         <section className="max-w-4xl mx-auto px-6 text-center space-y-6 pt-12">
-          <h3 className="text-xl font-bold text-white">Butuh Solusi Kustom Sesuai Masalah Bisnis Anda?</h3>
+          <h3 className="text-xl font-bold text-white">Butuh Solusi Fleksibel Sesuai Kebutuhan &amp; Anggaran Anda?</h3>
           <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
-            Mulai kalkulasi spesifikasi modular secara transparan atau diskusikan kebutuhan Anda secara langsung bersama Principal Cloud Architect kami.
+            Mulai kalkulasi spesifikasi modular secara transparan atau diskusikan kebutuhan Anda secara langsung bersama tim konsultan ahli kami.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link

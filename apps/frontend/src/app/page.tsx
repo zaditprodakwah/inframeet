@@ -229,7 +229,7 @@ export default function Home() {
               </Link>
               <Link href="/insights" className="text-xs font-bold text-slate-500 hover:text-indigo-600 flex items-center gap-1 transition-colors">
                 <BookOpen className="w-3.5 h-3.5" />
-                Insights AI
+                Insights
               </Link>
             </div>
           </div>

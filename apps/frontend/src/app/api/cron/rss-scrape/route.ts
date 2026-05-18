@@ -74,12 +74,12 @@ export async function GET(request: Request) {
 
         const xmlText = await response.text();
 
-        // 3. Parse XML using high-performance regex (zero-dependency)
-        const itemRegex = /<item>([\s\S]*?)<\/item>/g;
-        const titleRegex = /<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/;
-        const linkRegex = /<link>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/link>/;
-        const descRegex = /<description>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/;
-        const pubDateRegex = /<pubDate>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/pubDate>/;
+        // 3. Parse XML using high-performance regex (zero-dependency) - supporting attributes & namespaces
+        const itemRegex = /<item[\s\S]*?>([\s\S]*?)<\/item>/g;
+        const titleRegex = /<title[\s\S]*?>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/;
+        const linkRegex = /<link[\s\S]*?>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/link>/;
+        const descRegex = /<(?:description|content:encoded)[\s\S]*?>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/(?:description|content:encoded)>/;
+        const pubDateRegex = /<(?:pubDate|dc:date)[\s\S]*?>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/(?:pubDate|dc:date)>/;
 
         let match;
         let insertedCount = 0;

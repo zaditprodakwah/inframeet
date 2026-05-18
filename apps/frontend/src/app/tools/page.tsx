@@ -8,6 +8,80 @@ import EmbedBadgeModal from "../components/EmbedBadgeModal";
 import Link from "next/link";
 import { Sparkles, ArrowRight, Server, Search, CheckCircle, Star, BadgeAlert, Layers, ShieldCheck } from "lucide-react";
 
+// Robust fallback tools to prevent "empty showcase" syndrome
+const DEFAULT_TOOLS = [
+  {
+    id: "tool-vercel",
+    name: "Vercel Cloud",
+    category: "Hosting",
+    description: "Platform cloud serverless global yang dioptimalkan khusus untuk framework frontend modern seperti Next.js. Sangat handal untuk menangani jutaan trafik tanpa biaya server bulanan statis.",
+    pricing_info: "Gratis (Hobby Tier) / $20 per Anggota per Bulan",
+    rating_performance: 98,
+    rating_ease_of_use: 96,
+    rating_documentation: 94,
+    rating_community: 95,
+    sponsor_status: "GOLD",
+    team_uses: true,
+    tags: ["serverless", "nextjs", "cdn"]
+  },
+  {
+    id: "tool-hostinger",
+    name: "Hostinger VPS & Shared",
+    category: "Hosting",
+    description: "Layanan hosting tradisional berbasis shared and VPS dengan harga terjangkau. Pilihan ideal untuk UMKM and startup yang menginginkan kontrol server penuh dengan dukungan cPanel.",
+    pricing_info: "Mulai Rp 29.000 per Bulan",
+    rating_performance: 85,
+    rating_ease_of_use: 90,
+    rating_documentation: 88,
+    rating_community: 85,
+    sponsor_status: "SILVER",
+    team_uses: false,
+    tags: ["vps", "cpanel", "wordpress"]
+  },
+  {
+    id: "tool-spss",
+    name: "IBM SPSS Statistics",
+    category: "Statistik",
+    description: "Software pengolah data statistik kuantitatif terpopuler untuk riset akademik. Sangat andal untuk analisis regresi linear, uji asumsi klasik, and validasi hipotesis tesis.",
+    pricing_info: "Uji Coba Gratis / Lisensi Akademik Mulai $99",
+    rating_performance: 92,
+    rating_ease_of_use: 82,
+    rating_documentation: 95,
+    rating_community: 98,
+    sponsor_status: "none",
+    team_uses: true,
+    tags: ["spss", "statistika", "akademik"]
+  },
+  {
+    id: "tool-smartpls",
+    name: "SmartPLS 4",
+    category: "Statistik",
+    description: "Software pemodelan Structural Equation Modeling (SEM) berbasis variance (PLS-SEM). Sangat diunggulkan dalam riset doktoral (S2/S3) untuk pengujian teori multivariat kompleks.",
+    pricing_info: "Uji Coba Gratis / Lisensi Akademik Mulai €49",
+    rating_performance: 95,
+    rating_ease_of_use: 88,
+    rating_documentation: 92,
+    rating_community: 90,
+    sponsor_status: "none",
+    team_uses: true,
+    tags: ["sem", "smartpls", "multivariat"]
+  },
+  {
+    id: "tool-sanity",
+    name: "Sanity CMS",
+    category: "CMS",
+    description: "Headless Content Management System modern berbasis real-time data store. Memungkinkan tim pemasaran memperbarui konten situs secara fleksibel tanpa menyentuh kode.",
+    pricing_info: "Gratis (Free Tier) / Skala Bisnis Kustom",
+    rating_performance: 96,
+    rating_ease_of_use: 92,
+    rating_documentation: 90,
+    rating_community: 88,
+    sponsor_status: "none",
+    team_uses: false,
+    tags: ["headless", "cms", "content-lake"]
+  }
+];
+
 export default function ToolsPage() {
   const [tools, setTools] = useState<any[]>([]);
   const [filteredTools, setFilteredTools] = useState<any[]>([]);
@@ -28,12 +102,17 @@ export default function ToolsPage() {
 
       if (error) {
         console.error("Gagal memuat direktori tools:", error);
+        setTools(DEFAULT_TOOLS);
+        setFilteredTools(DEFAULT_TOOLS);
       } else {
-        setTools(data || []);
-        setFilteredTools(data || []);
+        const loadedTools = data && data.length > 0 ? data : DEFAULT_TOOLS;
+        setTools(loadedTools);
+        setFilteredTools(loadedTools);
       }
     } catch (err) {
       console.error(err);
+      setTools(DEFAULT_TOOLS);
+      setFilteredTools(DEFAULT_TOOLS);
     } finally {
       setLoading(false);
     }

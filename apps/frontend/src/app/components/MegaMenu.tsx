@@ -15,7 +15,9 @@ import {
   Menu, 
   X,
   FileCheck,
-  Award
+  Award,
+  Home,
+  BookOpen
 } from "lucide-react";
 
 export default function MegaMenu() {
@@ -149,7 +151,7 @@ export default function MegaMenu() {
             href="/insights" 
             className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
           >
-            Insights AI
+            Insights
           </Link>
           <Link 
             href="/case-studies" 
@@ -221,7 +223,7 @@ export default function MegaMenu() {
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-sm font-bold text-slate-800 dark:text-zinc-200 hover:text-indigo-600 py-2 border-b border-slate-50 dark:border-zinc-900"
           >
-            Insights AI
+            Insights
           </Link>
           <Link 
             href="/case-studies" 
@@ -246,6 +248,30 @@ export default function MegaMenu() {
           </Link>
         </div>
       )}
+
+      {/* Native-style Mobile Bottom Navigation Bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#020617]/95 backdrop-blur-md border-t border-slate-800/80 px-4 py-2.5 flex items-center justify-around shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.3)]">
+        <Link href="/" className="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-400 hover:text-indigo-400 transition-colors cursor-pointer">
+          <Home className="w-5 h-5 text-indigo-400" />
+          <span>Beranda</span>
+        </Link>
+        <Link href="/layanan/b2b" className="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-400 hover:text-indigo-400 transition-colors cursor-pointer">
+          <Building className="w-5 h-5 text-indigo-400" />
+          <span>B2B</span>
+        </Link>
+        <Link href="/layanan/akademik" className="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-400 hover:text-indigo-400 transition-colors cursor-pointer">
+          <GraduationCap className="w-5 h-5 text-indigo-400" />
+          <span>Akademik</span>
+        </Link>
+        <Link href="/case-studies" className="flex flex-col items-center gap-1 text-[10px] font-bold text-slate-400 hover:text-indigo-400 transition-colors cursor-pointer">
+          <Award className="w-5 h-5 text-indigo-400" />
+          <span>Kasus</span>
+        </Link>
+        <Link href="/calculator" className="flex flex-col items-center gap-1 text-[10px] font-bold text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer">
+          <Sparkles className="w-5 h-5 text-indigo-400 animate-pulse" />
+          <span>Kalkulator</span>
+        </Link>
+      </div>
     </header>
   );
 }

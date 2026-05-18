@@ -50,8 +50,8 @@ export default function InsightsPage() {
       setFilteredArticles(
         articles.filter(
           (art) =>
-            art.categories?.includes(activeTab) ||
-            art.rss_feeds?.source_category === activeTab
+              art.categories?.includes(activeTab) ||
+              art.rss_feeds?.source_category === activeTab
         )
       );
     }
@@ -65,13 +65,13 @@ export default function InsightsPage() {
       const scrapeRes = await fetch("/api/cron/rss-scrape");
       const scrapeData = await scrapeRes.json();
 
-      // Step 2: Curate using Groq SDK
+      // Step 2: Curate
       const curateRes = await fetch("/api/admin/rss/curate", { method: "POST" });
       const curateData = await curateRes.json();
 
       // Reload
       await loadArticles();
-      alert(`Sinkronisasi Selesai! ${curateData.curatedCount || 0} artikel baru sukses dikurasi oleh Groq AI.`);
+      alert(`Sinkronisasi Selesai! ${curateData.curatedCount || 0} artikel baru sukses dikurasi.`);
     } catch (err) {
       console.error(err);
       alert("Gagal melakukan sinkronisasi otomatis.");
@@ -89,7 +89,6 @@ export default function InsightsPage() {
   const parseCuratedContent = (content: string) => {
     if (!content) return { summaryPoints: [], faqs: [] };
 
-    // Check if it's AI Curated (contains Executive Summary markers)
     if (content.includes("Executive Summary") || content.includes("TL;DR")) {
       const parts = content.split("**FAQ:**");
       const summaryPart = parts[0].replace("**Executive Summary (TL;DR):**", "").trim();
@@ -118,7 +117,6 @@ export default function InsightsPage() {
       return { summaryPoints, faqs };
     }
 
-    // Fallback for uncurated plain RSS descriptions
     return {
       summaryPoints: [content],
       faqs: [],
@@ -137,23 +135,23 @@ export default function InsightsPage() {
         {/* Banner Section */}
         <section className="max-w-4xl mx-auto px-6 text-center space-y-5 animate-fade-in">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            <Sparkles className="w-3.5 h-3.5" /> Headless AI Scraper & News Curation
+            <Sparkles className="w-3.5 h-3.5" /> Sindikasi Tren &amp; Analisis Industri
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Curated Industry <span className="text-indigo-500">Insights</span>
           </h1>
           <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Dapatkan ringkasan TL;DR and ulasan teknis arsitektur cloud serverless, SaaS development, and riset ilmiah terkini yang dikurasi secara cerdas oleh Groq AI (Llama 3 70B).
+            Dapatkan ringkasan taktis and ulasan arsitektur modern, SaaS, serta riset ilmiah terkini yang dikurasi secara mendalam oleh tim ahli kami.
           </p>
 
           <div className="flex justify-center gap-3">
             <button
               onClick={handleManualSync}
               disabled={syncing}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-800 text-white rounded-lg text-xs font-bold transition shadow-lg"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-800 text-white rounded-lg text-xs font-bold transition shadow-lg cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${syncing ? "animate-spin" : ""}`} />
-              {syncing ? "Sinkronisasi AI..." : "Sync Feed & Curation Sekarang"}
+              {syncing ? "Memperbarui Artikel..." : "Perbarui Ulasan & Tren"}
             </button>
           </div>
         </section>
@@ -164,13 +162,13 @@ export default function InsightsPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 text-xs font-bold rounded-lg uppercase tracking-wider border transition-all ${
+              className={`px-4 py-2 text-xs font-bold rounded-lg uppercase tracking-wider border transition-all cursor-pointer ${
                 activeTab === tab
                   ? "bg-indigo-600 border-indigo-500 text-white"
                   : "bg-[#0f172a] border-[#334155] text-slate-400 hover:text-white"
               }`}
             >
-              {tab === "all" ? "Semua" : tab === "ai" ? "AI & Research" : tab === "technology" ? "Teknologi" : "Bisnis"}
+              {tab === "all" ? "Semua" : tab === "ai" ? "Riset & Metodologi" : tab === "technology" ? "Teknologi" : "Bisnis"}
             </button>
           ))}
         </div>
@@ -180,12 +178,12 @@ export default function InsightsPage() {
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 space-y-3">
               <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-              <p className="text-slate-400 text-xs animate-pulse">Menghubungkan ke Pusat Curation AI...</p>
+              <p className="text-slate-400 text-xs animate-pulse">Memuat Analisis Industri...</p>
             </div>
           ) : filteredArticles.length === 0 ? (
             <div className="text-center py-20 bg-[#0f172a] border border-[#334155] rounded-3xl p-8 max-w-md mx-auto space-y-3">
-              <p className="text-slate-400 text-sm font-semibold">Belum ada artikel terkurasi di tab ini.</p>
-              <p className="text-slate-500 text-xs">Klik tombol "Sync Feed" di atas untuk memicu scraper AI otomatis pertama Anda.</p>
+              <p className="text-slate-400 text-sm font-semibold">Belum ada artikel ulasan di tab ini.</p>
+              <p className="text-slate-500 text-xs">Klik tombol "Perbarui Ulasan" di atas untuk memuat kurasi artikel pertama Anda.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -201,7 +199,7 @@ export default function InsightsPage() {
                         <span className={`px-2 py-0.5 rounded capitalize ${
                           isCurated ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-slate-500/10 text-slate-400"
                         }`}>
-                          {isCurated ? "🟢 AI CURATED" : "RAW FEED"}
+                          {isCurated ? "🟢 EXPERT REVIEW" : "BERITA SEKTOR"}
                         </span>
                         <span className="flex items-center gap-1 text-slate-400">
                           <Calendar className="w-3 h-3" />
@@ -245,14 +243,14 @@ export default function InsightsPage() {
                       {/* Dynamic FAQ Accordion */}
                       {faqs.length > 0 && (
                         <div className="mt-4 pt-4 border-t border-[#1e293b] space-y-2">
-                          <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest font-mono">Frequently Asked Questions (AI)</span>
+                          <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest font-mono">Pertanyaan &amp; Jawaban Penjelas</span>
                           {faqs.map((faq, idx) => {
                             const isExpanded = expandedFaq[`${art.id}-${idx}`];
                             return (
                               <div key={idx} className="border border-[#1e293b] rounded-lg overflow-hidden bg-[#0a0f1d] transition">
                                 <button
                                   onClick={() => toggleFaq(art.id, idx)}
-                                  className="w-100 p-3 text-left flex items-center justify-between text-xs font-bold text-slate-200 hover:text-white"
+                                  className="w-full p-3 text-left flex items-center justify-between text-xs font-bold text-slate-200 hover:text-white"
                                 >
                                   <span>{faq.q}</span>
                                   <ChevronDown className={`w-3.5 h-3.5 text-indigo-500 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
@@ -294,7 +292,7 @@ export default function InsightsPage() {
         {/* Global CTA */}
         <section className="max-w-4xl mx-auto px-6 text-center space-y-6 pt-12">
           <div className="w-12 h-12 rounded-full bg-indigo-500/10 text-indigo-500 flex items-center justify-center mx-auto animate-float">
-            <Cpu className="w-6 h-6" />
+            <BookOpen className="w-6 h-6" />
           </div>
           <h3 className="text-2xl font-bold text-white">Butuh Integrasi Solusi ke Produk Anda?</h3>
           <p className="text-sm text-slate-400 max-w-lg mx-auto">

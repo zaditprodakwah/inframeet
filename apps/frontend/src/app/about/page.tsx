@@ -26,12 +26,12 @@ export default function AboutPage() {
       <MegaMenu />
       <Breadcrumbs />
 
-      <main className="flex-1 py-12 space-y-16">
+      <main className="flex-grow py-16 space-y-20 max-w-7xl mx-auto px-6 lg:px-12 xl:px-16">
         
         {/* Banner Section */}
-        <section className="max-w-4xl mx-auto px-6 text-center space-y-5">
+        <section className="max-w-4xl mx-auto text-center space-y-5">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            <Users className="w-3.5 h-3.5" /> Tentang Agensi & Nilai Kami (E-E-A-T)
+            <Users className="w-3.5 h-3.5" /> Tentang Agensi &amp; Nilai Kami (E-E-A-T)
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Mengenal <span className="text-indigo-500">INFRAMEET</span> Lebih Dekat
@@ -42,7 +42,7 @@ export default function AboutPage() {
         </section>
 
         {/* Vision & Mission Row */}
-        <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="rounded-3xl border border-slate-800/80 bg-slate-900/40 backdrop-blur-md p-8 space-y-4">
             <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
               <Cpu className="w-5 h-5" />
@@ -65,14 +65,14 @@ export default function AboutPage() {
         </section>
 
         {/* Academic policy shield banner */}
-        <section className="max-w-7xl mx-auto px-6">
+        <section className="w-full">
           <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div className="space-y-1.5">
-                <h4 className="text-lg font-bold text-white">100% Anti-Ghostwriting & Academic Integrity Policy</h4>
+                <h4 className="text-lg font-bold text-white">100% Anti-Ghostwriting &amp; Academic Integrity Policy</h4>
                 <p className="text-xs text-slate-400 leading-relaxed max-w-3xl">
                   Berdasarkan Syarat Ketentuan Layanan kami di [**`legal.json`**](file:///Users/mac/Downloads/HUBPLATFORM/packages/config/legal.json), INFRAMEET hanya membantu pengerjaan teknis pengolahan data statistik numerik (SPSS/SmartPLS) dan layouting naskah. Hak kekayaan intelektual, orisinalitas ide, dan kepemilikan riset sepenuhnya berada di tangan Anda secara absolut. Kami menjaga reputasi ilmiah Anda agar steril dari tuduhan perjokian.
                 </p>
@@ -82,7 +82,7 @@ export default function AboutPage() {
         </section>
 
         {/* Team Section */}
-        <section className="max-w-7xl mx-auto px-6 space-y-8">
+        <section className="space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <h3 className="text-2xl font-bold text-white">Tenaga Ahli di Balik INFRAMEET</h3>
             <p className="text-xs text-slate-400">
@@ -107,9 +107,9 @@ export default function AboutPage() {
         </section>
 
         {/* Core Competencies Checklist */}
-        <section className="max-w-7xl mx-auto px-6 py-8 border-t border-slate-900 max-w-3xl mx-auto space-y-6">
+        <section className="max-w-3xl mx-auto py-8 border-t border-slate-900 space-y-6">
           <h3 className="text-lg font-bold text-center text-white">SLA Jaminan Kualitas Layanan Kami</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="flex items-start gap-2.5 text-xs text-slate-300">
               <FileText className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
               <div>
@@ -129,7 +129,7 @@ export default function AboutPage() {
         </section>
 
         {/* Global CTA */}
-        <section className="max-w-4xl mx-auto px-6 text-center space-y-6 pt-12">
+        <section className="max-w-4xl mx-auto text-center space-y-6 pt-12">
           <h3 className="text-xl font-bold text-white">Siap Bermitra dengan Tenaga Ahli Kami?</h3>
           <p className="text-xs text-slate-400 max-w-md mx-auto">
             Sampaikan visi bisnis digital atau kebutuhan analisis riset ilmiah Anda. Kalkulator transparan kami siap menyusun estimasi harga dalam hitungan detik.
@@ -139,7 +139,7 @@ export default function AboutPage() {
               href="/calculator"
               className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer"
             >
-              Mulai Konsultasi & Kalkulasi Biaya
+              Mulai Konsultasi &amp; Kalkulasi Biaya
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
