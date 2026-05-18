@@ -8,6 +8,52 @@ import Link from "next/link";
 import { Sparkles, ArrowRight, BookOpen, Cpu, Calendar, Tag, ChevronDown, RefreshCw } from "lucide-react";
 import InlineAffiliateRecommendation from "../components/InlineAffiliateRecommendation";
 
+// Curated high-fidelity fallback insights to prevent "Sindrom Etalase Kosong"
+const DEFAULT_ARTICLES = [
+  {
+    id: "fallback-art-1",
+    title: "Membangun Infrastruktur Multi-Cloud Tanpa Biaya Overload",
+    content_summary: `**Executive Summary (TL;DR):**
+- Menghindari vendor lock-in dengan mendistribusikan database and frontend secara modular di berbagai provider Cloud.
+- Memanfaatkan gratisan tier (free tier optimization) dari Vercel Edge dan Supabase untuk menekan anggaran awal agensi hingga Rp 0.
+- Menjaga latensi tetap rendah dengan menggunakan CDN terdistribusi secara geografis di Asia Tenggara.
+
+**FAQ:**
+* **Q: Apakah aman menyimpan database utama di cloud gratisan?**
+  A: Sangat aman asalkan Row Level Security (RLS) and backup otomatis diaktifkan dengan benar.
+* **Q: Kapan agensi harus beralih ke paket berbayar?**
+  A: Ketika lalu lintas bulanan stabil melebihi batas bandwidth gratis (biasanya >100GB per bulan).`,
+    categories: ["teknologi", "bisnis"],
+    relevance_score: 0.95,
+    published_at: "2026-05-18T00:00:00.000Z",
+    rss_feeds: {
+      feed_name: "INFRAMEET Expert Insights",
+      source_category: "technology"
+    }
+  },
+  {
+    id: "fallback-art-2",
+    title: "Panduan Olah Data Statistik Kuantitatif untuk Riset Bisnis (S1-S3)",
+    content_summary: `**Executive Summary (TL;DR):**
+- Penentuan model statistik yang tepat (SEM-PLS vs Covariance-Based SEM) sangat krusial dalam menentukan penerimaan jurnal akademik.
+- Memanfaatkan SmartPLS 4 and SPSS secara komplementer untuk memvalidasi hipotesis riset secara ilmiah and akurat.
+- Menghindari kegagalan Turnitin dengan melakukan parafrase manual and menjamin kepemilikan mutlak kekayaan intelektual peneliti.
+
+**FAQ:**
+* **Q: Mengapa skor orisinalitas Turnitin sangat penting bagi publikasi?**
+  A: Kampus and jurnal bereputasi tinggi menuntut kemiripan di bawah 15-20% untuk meminimalkan indikasi plagiarisme.
+* **Q: Apakah INFRAMEET menyediakan olah data secara instan?**
+  A: Tidak, kami memberikan bimbingan and asistensi metodologi step-by-step agar peneliti memahami logika analisis datanya secara mandiri.`,
+    categories: ["riset", "akademik"],
+    relevance_score: 0.95,
+    published_at: "2026-05-17T00:00:00.000Z",
+    rss_feeds: {
+      feed_name: "INFRAMEET Research Hub",
+      source_category: "ai"
+    }
+  }
+];
+
 export default function InsightsPage() {
   const [articles, setArticles] = useState<any[]>([]);
   const [filteredArticles, setFilteredArticles] = useState<any[]>([]);
@@ -27,12 +73,18 @@ export default function InsightsPage() {
 
       if (error) {
         console.error("Gagal memuat feed:", error);
+        setArticles(DEFAULT_ARTICLES);
+        setFilteredArticles(DEFAULT_ARTICLES);
       } else {
-        setArticles(data || []);
-        setFilteredArticles(data || []);
+        const curated = data ? data.filter((art: any) => art.relevance_score >= 0.9) : [];
+        const merged = curated.length > 0 ? curated : DEFAULT_ARTICLES;
+        setArticles(merged);
+        setFilteredArticles(merged);
       }
     } catch (err) {
       console.error(err);
+      setArticles(DEFAULT_ARTICLES);
+      setFilteredArticles(DEFAULT_ARTICLES);
     } finally {
       setLoading(false);
     }

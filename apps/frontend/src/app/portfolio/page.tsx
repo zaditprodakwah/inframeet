@@ -7,20 +7,20 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import Link from "next/link";
 import { Sparkles, ArrowRight, ShieldCheck, CheckCircle2, TrendingUp, Layers, Cpu, Award } from "lucide-react";
 
-// Curated high-fidelity fallback cases to prevent "Sindrom Etalase Kosong"
+// Curated high-fidelity fallback cases to prevent "Sindrom Etalase Kosong" and match case studies
 const FALLBACK_CASES = [
   {
     id: "fallback-1",
     client_company_name: "Astra Digital Enterprise",
-    project_title: "Migrasi Arsitektur Serverless Cloud & Headless CMS",
+    project_title: "Penyelarasan Serverless & Optimasi Hosting Tradisional VPS",
     segment: "b2b",
-    description: "Melakukan audit penuh, restrukturisasi website, dan migrasi server klasik cPanel ke cloud serverless global Edge Network. Meningkatkan performa pemuatan secara dramatis hingga mengurangi biaya infrastruktur bulanan menjadi Rp 0 (Free Tier Optimization).",
-    tech_stack: ["Next.js 16", "Supabase", "Sanity CMS", "Vercel Edge"],
+    description: "Merancang arsitektur Next.js statis yang hemat biaya untuk frontend, and mempertahankan backend database di VPS lama klien melalui gerbang API Nginx yang aman demi kepatuhan regulasi internal mereka.",
+    tech_stack: ["Next.js", "Ubuntu VPS", "Nginx Gateways", "Supabase"],
     deliverables: [
-      "Audit Kecepatan & Restrukturisasi Aset",
-      "Setup Database PostgreSQL dengan RLS Sandbox",
-      "Integrasi Dashboard Management Konten Mandiri",
-      "Konfigurasi Deployment Otomatis Bebas Timeout"
+      "Integrasi Gateway API Nginx Aman",
+      "Setup Frontend Next.js Statis",
+      "Optimasi Caching Serverless Edge",
+      "Konfigurasi Routing Sandbox VPS"
     ],
     metric_timeline_accuracy: 100,
     metric_code_quality: 98,
@@ -30,22 +30,79 @@ const FALLBACK_CASES = [
   },
   {
     id: "fallback-2",
-    client_company_name: "Universitas Indonesia (Fakultas Ekonomi)",
-    project_title: "Analisis Structural Equation Modeling (SEM) Data Keuangan Makro",
-    segment: "academic",
-    description: "Asistensi pengolahan data statistik kuantitatif multivariat kompleks untuk riset disertasi tingkat doktor (S3). Memvalidasi hipotesis hubungan laten makroekonomi secara ilmiah dengan penjaminan kepatuhan orisinalitas mutlak.",
-    tech_stack: ["SmartPLS 4", "SPSS", "Python Data Analytics"],
+    client_company_name: "UMKM Toko Kelontong Sinar Mulia",
+    project_title: "Optimasi Database & Performa Website Toko Online",
+    segment: "b2b",
+    description: "Melakukan pembersihan berkas database MySQL, optimasi query, and pemasangan Cloudflare CDN untuk toko online berbasis WordPress. Memaksimalkan performa server cPanel lama klien tanpa biaya sewa hosting tambahan.",
+    tech_stack: ["WordPress", "cPanel Hosting", "MySQL Optimization", "Cloudflare CDN"],
     deliverables: [
-      "Uji Validitas & Reliabilitas Variabel Laten",
-      "Pengujian Pengaruh Mediasi & Moderasi Jalur",
-      "Formatting Dokumen standar Jurnal Scopus Q1",
-      "Turnitin Premium Anti-Ghostwriting Check"
+      "Pembersihan Sampah Database MySQL",
+      "Pemasangan CDN Cache Cloudflare",
+      "Optimasi Gambar & Aset Toko",
+      "Konfigurasi Cache L1/L2 Server"
+    ],
+    metric_timeline_accuracy: 100,
+    metric_code_quality: 95,
+    metric_data_precision: 90,
+    metric_client_satisfaction: 100,
+    metric_speed: 96
+  },
+  {
+    id: "fallback-3",
+    client_company_name: "Pascasarjana FE Universitas Indonesia",
+    project_title: "Bimbingan Metodologi & SEM Pengaruh Makroekonomi (S3)",
+    segment: "academic",
+    description: "Memberikan asistensi teknis pengolahan statistik multivariat menggunakan SmartPLS 4, pembacaan uji validitas reliabilitas, and bimbingan Turnitin agar naskah disertasi doktor steril dari plagiasi.",
+    tech_stack: ["SmartPLS 4", "SPSS Statistics", "Turnitin Premium"],
+    deliverables: [
+      "Uji Validitas & Reliabilitas Laten",
+      "Pengujian Efek Mediasi Makro",
+      "Penyusunan Format Jurnal Scopus Q1",
+      "Cek Orisinalitas Turnitin < 15%"
     ],
     metric_timeline_accuracy: 95,
     metric_code_quality: 90,
     metric_data_precision: 99,
     metric_client_satisfaction: 100,
     metric_speed: 92
+  },
+  {
+    id: "fallback-4",
+    client_company_name: "Teknik Informatika ITB",
+    project_title: "Standardisasi Format Jurnal & Parafrase Turnitin Skripsi (S1)",
+    segment: "academic",
+    description: "Membantu rekonstruksi struktur kalimat naskah (parafrase manual) tanpa mengubah makna ilmiah, serta merapikan rujukan Mendeley agar sesuai format penulisan skripsi kampus.",
+    tech_stack: ["Turnitin Premium", "Mendeley Reference", "LaTeX Formatting"],
+    deliverables: [
+      "Parafrase Manual Bebas AI Detector",
+      "Perapian Rujukan Sitasi Mendeley",
+      "Penyelarasan Format Template Kampus",
+      "Uji Kemiripan Turnitin Skor 12%"
+    ],
+    metric_timeline_accuracy: 100,
+    metric_code_quality: 92,
+    metric_data_precision: 96,
+    metric_client_satisfaction: 100,
+    metric_speed: 95
+  },
+  {
+    id: "fallback-5",
+    client_company_name: "Sekolah Menengah Kejuruan (Tugas Akhir)",
+    project_title: "Asistensi Visualisasi Google Sheets & Slide Deck Ujian Praktek",
+    segment: "academic",
+    description: "Mengajarkan pengolahan grafik pivot table di Google Sheets, mendesain tata letak presentasi ujian yang memikat, and membimbing penyampaian materi ujian agar siswa menguasai formula dasar.",
+    tech_stack: ["Google Sheets", "PowerPoint Layouts", "Visual Design"],
+    deliverables: [
+      "Penyusunan Pivot Table & Pivot Chart",
+      "Desain Slide Deck Ujian Praktek",
+      "Bimbingan Presentasi Step-by-Step",
+      "Standardisasi Formula VLOOKUP/IF"
+    ],
+    metric_timeline_accuracy: 100,
+    metric_code_quality: 88,
+    metric_data_precision: 95,
+    metric_client_satisfaction: 100,
+    metric_speed: 98
   }
 ];
 

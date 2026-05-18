@@ -87,7 +87,7 @@ export async function POST(request: Request) {
             { role: "system", content: "You are a professional research curator. You must output ONLY a valid, parseable JSON object." },
             { role: "user", content: prompt },
           ],
-          model: "llama3-70b-8192",
+          model: "llama-3.3-70b-versatile",
           temperature: 0.2,
           response_format: { type: "json_object" },
         });
