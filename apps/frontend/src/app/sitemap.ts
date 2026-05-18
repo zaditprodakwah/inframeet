@@ -21,25 +21,46 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/layanan/b2b",
   ];
 
+  // Retrieve dynamic sitemap overrides from settings table if present
+  let changeFrequency = "weekly";
+  let priorityHome = 1.0;
+  let priorityRoutes = 0.8;
+
+  try {
+    const { data: settings } = await supabase
+      .from("system_settings")
+      .select("value")
+      .eq("key", "sitemap_configurations")
+      .single();
+
+    if (settings && settings.value) {
+      changeFrequency = settings.value.change_frequency || "weekly";
+      priorityHome = settings.value.priority_home ?? 1.0;
+      priorityRoutes = settings.value.priority_routes ?? 0.8;
+    }
+  } catch (e) {
+    console.warn("Fallback to default sitemap priorities:", e);
+  }
+
   const sitemapEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: route === "" ? 1.0 : 0.8,
+    changeFrequency: changeFrequency as any,
+    priority: route === "" ? priorityHome : priorityRoutes,
   }));
 
   // Append dynamic insights articles from Supabase
   try {
     const { data: insights } = await supabase
-      .from("insights")
-      .select("id, updated_at")
-      .order("updated_at", { ascending: false });
+      .from("rss_items")
+      .select("id, created_at")
+      .order("created_at", { ascending: false });
 
     if (insights && insights.length > 0) {
       insights.forEach((item: any) => {
         sitemapEntries.push({
           url: `${baseUrl}/insights/${item.id}`,
-          lastModified: new Date(item.updated_at || Date.now()),
+          lastModified: new Date(item.created_at || Date.now()),
           changeFrequency: "daily",
           priority: 0.6,
         });
