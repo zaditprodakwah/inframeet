@@ -1,63 +1,197 @@
 {
-  "catalog_version": "5.0",
+  "catalog_version": "5.5",
   "b2b_services": [
     {
       "sku": "B2B-WEB-STT",
-      "name": "Web Starter",
+      "name": "Web Starter Package",
       "base_price_idr": 7500000,
-      "description": "Landing Page (1-3 Halaman), Next.js, SEO Basic, Form Leads.",
-      "features": ["1-3 Pages", "React/Next.js Engine", "Google Analytics", "Form Contact"]
+      "description": "Solusi landing page premium untuk presensi digital cepat dan responsif.",
+      "optional_description": "Sangat cocok untuk portofolio perusahaan, katalog produk statis, atau peluncuran produk baru.",
+      "features_checklist": [
+        { "id": "pages", "label": "Desain 1 - 3 Halaman Kustom", "included": true, "optional": false },
+        { "id": "engine", "label": "React / Next.js Engine", "included": true, "optional": false },
+        { "id": "seo", "label": "SEO On-Page Basic (Meta & Sitemap)", "included": true, "optional": false },
+        { "id": "analytics", "label": "Google Analytics Integration", "included": true, "optional": false },
+        { "id": "contact_form", "label": "Formulir Kontak Klien (Spam Protected)", "included": true, "optional": false },
+        { "id": "responsive", "label": "Paritas Responsif Mobile & Tablet", "included": true, "optional": false },
+        { "id": "admin_panel", "label": "Dashboard Admin / CMS Headless", "included": false, "optional": true, "sku_upgrade": "ADD-CMS-BASIC" }
+      ]
     },
     {
       "sku": "B2B-WEB-COR",
-      "name": "Web Core",
+      "name": "Web Core Business",
       "base_price_idr": 15000000,
-      "description": "CMS Headless, SEO Ready, 5 Halaman Utama, Integrasi Analytics.",
-      "features": ["5 Pages", "Sanity/Strapi CMS", "Search Engine Optimization", "Sentry Monitoring"]
+      "description": "Sistem web interaktif terintegrasi dengan CMS Headless untuk pengelolaan konten mandiri.",
+      "optional_description": "Dirancang untuk bisnis skala menengah yang memerlukan pembaruan blog, berita, portfolio, atau produk secara berkala.",
+      "features_checklist": [
+        { "id": "pages", "label": "Hingga 7 Halaman Utama", "included": true, "optional": false },
+        { "id": "cms", "label": "CMS Headless (Sanity/PayloadCMS) Terintegrasi", "included": true, "optional": false },
+        { "id": "seo", "label": "SEO On-Page Advanced & Schema Markup", "included": true, "optional": false },
+        { "id": "sentry", "label": "Sentry Real-time Error Monitoring", "included": true, "optional": false },
+        { "id": "speed", "label": "Optimasi Kecepatan Loading (Lighthouse Score >90)", "included": true, "optional": false },
+        { "id": "auth", "label": "Portal Akun & Login Klien Dasar", "included": false, "optional": true, "sku_upgrade": "ADD-AUTH-SUPA" }
+      ]
     },
     {
       "sku": "B2B-WEB-PRO",
-      "name": "Web Enterprise",
+      "name": "Web Enterprise Suite",
       "base_price_idr": 35000000,
-      "description": "Core + Payment Gateway (Xendit), Dashboard Admin, Auth System.",
-      "features": ["Unlimited Pages", "Xendit Integration", "Client Portal", "Database Auth + RLS"]
+      "description": "Platform digital tangguh dengan dashboard admin penuh, sistem otentikasi, dan pembayaran.",
+      "optional_description": "Pilihan terbaik untuk aplikasi SaaS, platform keanggotaan (membership), atau sistem manajemen internal bisnis.",
+      "features_checklist": [
+        { "id": "pages", "label": "Halaman Utama Tanpa Batas (Dynamic Routes)", "included": true, "optional": false },
+        { "id": "auth", "label": "Sistem Otentikasi Multi-Role (Auth.js + RLS)", "included": true, "optional": false },
+        { "id": "payment", "label": "Integrasi Payment Gateway (Xendit Invoicing)", "included": true, "optional": false },
+        { "id": "database", "label": "Database Relasional Supabase PostgreSQL", "included": true, "optional": false },
+        { "id": "signature", "label": "HTML5 Canvas E-Signature Pad System", "included": true, "optional": false },
+        { "id": "audit", "label": "Immutable Audit Trail Logging", "included": true, "optional": false }
+      ]
     }
   ],
   "academic_services": [
     {
       "sku": "ACD-LYT-P1",
-      "name": "Layout Proposal",
+      "name": "Layout Proposal Penelitian",
       "base_price_idr": 250000,
-      "limit_description": "Maks 30 Halaman, Mendeley, Cek Typo",
-      "add_on_option": { "sku": "ADD-PG-10", "price_per_unit_idr": 150000 }
+      "limit_description": "Maksimal 30 halaman draf riset.",
+      "features_checklist": [
+        { "id": "layout", "label": "Format Layout Standar Kampus / Dikti", "included": true, "optional": false },
+        { "id": "references", "label": "Perapian Sitasi Mendeley / Zotero", "included": true, "optional": false },
+        { "id": "typo", "label": "Cek & Perbaikan Typo EBI/PUEBI", "included": true, "optional": false },
+        { "id": "turnitin", "label": "Cek Plagiasi Turnitin Premium", "included": false, "optional": true, "sku_upgrade": "ADD-PL-TURN" }
+      ]
     },
     {
       "sku": "ACD-LYT-S1",
-      "name": "Layout Skripsi/Tesis",
+      "name": "Layout Skripsi / Tesis / Disertasi",
       "base_price_idr": 550000,
-      "limit_description": "Maks 100 Halaman, Margin Kampus, Daftar Isi",
-      "add_on_option": { "sku": "ADD-PL-TURN", "price_per_unit_idr": 250000 }
+      "limit_description": "Maksimal 100 halaman draf riset.",
+      "features_checklist": [
+        { "id": "layout", "label": "Format Margin, Font & Spacing Kampus", "included": true, "optional": false },
+        { "id": "toc", "label": "Daftar Isi, Gambar & Tabel Automatis", "included": true, "optional": false },
+        { "id": "references", "label": "Sinkronisasi Sitasi & Daftar Pustaka", "included": true, "optional": false },
+        { "id": "turnitin", "label": "Cek Plagiasi Turnitin Premium", "included": false, "optional": true, "sku_upgrade": "ADD-PL-TURN" }
+      ]
     },
     {
       "sku": "ACD-LYT-J1",
-      "name": "Layout Jurnal",
+      "name": "Layout Jurnal Ilmiah (Sinta / Scopus)",
       "base_price_idr": 400000,
-      "limit_description": "Format Scopus/IEEE, 2 Kolom, Tabel Saintifik",
-      "add_on_option": { "sku": "ADD-TRANS-NAT", "price_per_unit_idr": 150000 }
+      "limit_description": "Sesuai template jurnal sasaran (Maks 15 hal).",
+      "features_checklist": [
+        { "id": "template", "label": "Formatting Sesuai Template Jurnal (Scopus/IEEE/Sinta)", "included": true, "optional": false },
+        { "id": "columns", "label": "Desain 2-Kolom & Grid Tabel Saintifik", "included": true, "optional": false },
+        { "id": "references", "label": "Standardisasi Referensi (APA/Harvard/IEEE)", "included": true, "optional": false },
+        { "id": "translate", "label": "Penerjemahan Abstrak Inggris Akademis", "included": false, "optional": true, "sku_upgrade": "ADD-TRANS-NAT" }
+      ]
     },
     {
       "sku": "ACD-DTA-B1",
-      "name": "Olah Data Kuantitatif",
+      "name": "Olah Data Kuantitatif Statistik",
       "base_price_idr": 600000,
-      "limit_description": "Regresi Berganda SPSS, Asumsi Klasik",
-      "add_on_option": { "sku": "ADD-SEM-PLS", "price_per_unit_idr": 300000 }
+      "limit_description": "Pengolahan data numerik dasar.",
+      "features_checklist": [
+        { "id": "spss", "label": "Analisis Regresi Linear & Deskriptif (SPSS)", "included": true, "optional": false },
+        { "id": "classic", "label": "Uji Asumsi Klasik (Normalitas, Multikolinearitas)", "included": true, "optional": false },
+        { "id": "charts", "label": "Visualisasi Output Grafik & Interpretasi Tabel", "included": true, "optional": false },
+        { "id": "sem_pls", "label": "Analisis Struktural SEM (SmartPLS)", "included": false, "optional": true, "sku_upgrade": "ADD-SEM-PLS" }
+      ]
+    }
+  ],
+  "hosting_infrastructure_options": [
+    {
+      "sku": "INF-HOST-SHR",
+      "name": "Shared Hosting cPanel",
+      "setup_price_idr": 500000,
+      "yearly_estimate_idr": 450000,
+      "description": "Server hosting klasik terbagi. Ekonomis dan sangat mudah dikelola via cPanel.",
+      "optional_description": "Sangat cocok untuk website starter, landing page statis, atau UKM dengan traffic rendah-menengah.",
+      "features": [
+        "Dashboard cPanel Klasik",
+        "Gratis SSL (Let's Encrypt)",
+        "MySQL Database",
+        "Setup Akun Email Bisnis (@company.com)"
+      ]
     },
     {
-      "sku": "ACD-SLD-P1",
-      "name": "Slide Sidang Premium",
-      "base_price_idr": 300000,
-      "limit_description": "Maks 20 Slide, Template Visual, Grafik",
-      "add_on_option": { "sku": "ADD-SLD-SCRIPT", "price_per_unit_idr": 200000 }
+      "sku": "INF-HOST-VPS",
+      "name": "Managed Virtual Private Server (VPS)",
+      "setup_price_idr": 1500000,
+      "yearly_estimate_idr": 1200000,
+      "description": "Server virtual dedicated dengan Ubuntu Linux, Nginx, PM2, dan SSL otomatis.",
+      "optional_description": "Pilihan terbaik untuk aplikasi Next.js interaktif, high performance, dan kontrol root penuh.",
+      "features": [
+        "Dedicated RAM & CPU (DigitalOcean / Linode)",
+        "Ubuntu Server Hardening & Security Guard",
+        "Nginx Reverse Proxy & Node.js Daemon (PM2)",
+        "Automated Daily Backup Script"
+      ]
+    },
+    {
+      "sku": "INF-HOST-VRC",
+      "name": "Serverless Cloud (Vercel & Supabase)",
+      "setup_price_idr": 1000000,
+      "yearly_estimate_idr": 0,
+      "description": "Infrastruktur cloud serverless modern berkecepatan tinggi dengan Free-Tier optimization.",
+      "optional_description": "Sangat disukai oleh startup/perusahaan baru karena biaya bulanan Rp 0,- (Hobby Tier) dengan performa global Edge Network.",
+      "features": [
+        "Vercel Global Edge Network Deployment",
+        "Supabase Serverless PostgreSQL & RLS Security",
+        "Bypass Serverless Timeout Engine (Client-Side Rendering)",
+        "Otomatisasi Keep-Alive Cron Ping (Anti-Pause)"
+      ]
+    },
+    {
+      "sku": "INF-HOST-CST",
+      "name": "Custom Dedicated / Enterprise Cloud",
+      "setup_price_idr": 3500000,
+      "yearly_estimate_idr": 6000000,
+      "description": "Infrastruktur multi-server skala tinggi (AWS / Google Cloud Platform).",
+      "optional_description": "Wajib bagi aplikasi korporat dengan beban traffic sangat tinggi dan kepatuhan compliance ISO/GDPR.",
+      "features": [
+        "Kubernetes / Docker Container Orchestration",
+        "AWS EC2 / RDS / S3 / CloudFront Setup",
+        "Multi-region Load Balancing",
+        "Keamanan Firewall Tingkat Lanjut & DDoS Protection"
+      ]
+    }
+  ],
+  "optional_addons": [
+    {
+      "sku": "ADD-PL-TURN",
+      "name": "Turnitin Premium Check",
+      "price_idr": 250000,
+      "description": "Cek plagiasi Turnitin No-Repository (Data Anda tidak akan tersimpan di database Turnitin)."
+    },
+    {
+      "sku": "ADD-TRANS-NAT",
+      "name": "Native Academic Translation",
+      "price_idr": 150000,
+      "description": "Penerjemahan abstrak atau naskah riset ke bahasa Inggris akademik berstandar Scopus."
+    },
+    {
+      "sku": "ADD-SEM-PLS",
+      "name": "Upgrade Analisis SmartPLS / AMOS",
+      "price_idr": 300000,
+      "description": "Analisis jalur struktural tingkat tinggi menggunakan Structural Equation Modeling (SEM)."
+    },
+    {
+      "sku": "ADD-DOM-COM",
+      "name": "Domain Registration (.com / .id)",
+      "price_idr": 200000,
+      "description": "Pembelian dan konfigurasi domain kustom premium untuk bisnis selama 1 tahun."
+    },
+    {
+      "sku": "ADD-LANG-MULTI",
+      "name": "Multi-Language Support (Bilingual)",
+      "price_idr": 1500000,
+      "description": "Implementasi sistem internasionalisasi (i18n) Next.js untuk mendukung 2 bahasa dinamis."
+    },
+    {
+      "sku": "ADD-REV-EXTRA",
+      "name": "Ekstra Revisi Tanpa Batas (1 Bulan)",
+      "price_idr": 750000,
+      "description": "Perpanjangan masa garansi revisi layout/sistem selama 30 hari pasca serah terima (BAST)."
     }
   ]
 }

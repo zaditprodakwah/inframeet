@@ -1,50 +1,72 @@
 {
-  "quiz_version": "5.0",
+  "quiz_version": "5.5",
   "steps": {
     "step_1": {
       "question": "Pilih identitas ekosistem Anda untuk menyesuaikan layanan:",
       "options": [
-        { "id": "b2b", "label": "Perusahaan / Brand", "icon": "Building", "next_step": "step_2_b2b" },
-        { "id": "academic", "label": "Akademisi / Peneliti", "icon": "GraduationCap", "next_step": "step_2_acad" }
+        { "id": "b2b", "label": "Perusahaan / Brand / Start-up", "icon": "Building", "next_step": "step_2_b2b" },
+        { "id": "academic", "label": "Akademisi / Mahasiswa / Peneliti", "icon": "GraduationCap", "next_step": "step_2_acad" }
       ]
     },
     "step_2_b2b": {
       "question": "Fokus eskalasi utama bisnis Anda saat ini?",
       "options": [
         { "id": "web_dev", "label": "Pembangunan Arsitektur Platform / Web", "next_step": "step_3_b2b_budget" },
-        { "id": "growth", "label": "Skalabilitas Iklan (Paid Ads) & SEO", "next_step": "step_final_lead_b2b" },
-        { "id": "legal", "label": "Dokumen Pitch Deck, MoU & Administrasi", "next_step": "step_final_lead_b2b" }
+        { "id": "growth", "label": "Skalabilitas Iklan (Paid Ads) & SEO", "next_step": "step_addons_b2b" },
+        { "id": "legal", "label": "Penyusunan Kontrak Kerja, MoU & Administrasi", "next_step": "step_addons_b2b" }
       ]
     },
     "step_2_acad": {
       "question": "Kendala utama riset Anda yang perlu diselesaikan segera?",
       "options": [
-        { "id": "layout", "label": "Perapian Format & Layouting Jurnal/Skripsi", "next_step": "step_3_acad_pages" },
-        { "id": "data", "label": "Olah Data Statistik (SPSS/PLS/Python)", "next_step": "step_3_acad_data" },
-        { "id": "slide", "label": "Desain Slide Presentasi Sidang Premium", "next_step": "step_final_acad" }
+        { "id": "layout", "label": "Perapian Format & Layouting (Jurnal / Skripsi)", "next_step": "step_3_acad_pages" },
+        { "id": "data", "label": "Olah Data Kuantitatif (SPSS / Asumsi Klasik)", "next_step": "step_3_acad_data" },
+        { "id": "slide", "label": "Desain Slide Presentasi Sidang Premium", "next_step": "step_addons_acad" }
       ]
     },
     "step_3_b2b_budget": {
-      "question": "Estimasi alokasi anggaran proyek infrastruktur Anda?",
+      "question": "Estimasi alokasi anggaran proyek infrastruktur digital Anda?",
       "options": [
-        { "id": "tier_1", "label": "Di bawah Rp 15 Juta", "result_sku": "B2B-WEB-STT" },
-        { "id": "tier_2", "label": "Rp 15 Juta - Rp 35 Juta", "result_sku": "B2B-WEB-COR" },
-        { "id": "tier_3", "label": "Di atas Rp 35 Juta", "result_sku": "B2B-WEB-PRO" }
+        { "id": "tier_1", "label": "Di bawah Rp 15 Juta", "result_sku": "B2B-WEB-STT", "next_step": "step_4_b2b_infrastructure" },
+        { "id": "tier_2", "label": "Rp 15 Juta - Rp 35 Juta", "result_sku": "B2B-WEB-COR", "next_step": "step_4_b2b_infrastructure" },
+        { "id": "tier_3", "label": "Di atas Rp 35 Juta", "result_sku": "B2B-WEB-PRO", "next_step": "step_4_b2b_infrastructure" }
       ]
     },
     "step_3_acad_pages": {
       "question": "Jumlah total estimasi halaman draf riset Anda?",
       "options": [
-        { "id": "proposal", "label": "Proposal Penelitian (Maks 30 Halaman)", "result_sku": "ACD-LYT-P1" },
-        { "id": "thesis", "label": "Skripsi / Tesis / Disertasi (Maks 100 Halaman)", "result_sku": "ACD-LYT-S1" },
-        { "id": "journal", "label": "Artikel Jurnal Ilmiah (Sinta/Scopus)", "result_sku": "ACD-LYT-J1" }
+        { "id": "proposal", "label": "Proposal Penelitian (Maks 30 Halaman)", "result_sku": "ACD-LYT-P1", "next_step": "step_addons_acad" },
+        { "id": "thesis", "label": "Skripsi / Tesis / Disertasi (Maks 100 Halaman)", "result_sku": "ACD-LYT-S1", "next_step": "step_addons_acad" },
+        { "id": "journal", "label": "Artikel Jurnal Ilmiah (Sinta / Scopus / IEEE)", "result_sku": "ACD-LYT-J1", "next_step": "step_addons_acad" }
       ]
     },
     "step_3_acad_data": {
       "question": "Metodologi olah data yang ingin Anda terapkan?",
       "options": [
-        { "id": "spss", "label": "Regresi Linear / Klasik (SPSS)", "result_sku": "ACD-DTA-B1" }
+        { "id": "spss", "label": "Regresi Linear / Klasik (SPSS)", "result_sku": "ACD-DTA-B1", "next_step": "step_addons_acad" }
       ]
+    },
+    "step_4_b2b_infrastructure": {
+      "question": "Pilih metode deployment & infrastruktur server penyebaran:",
+      "is_hosting_selector": true,
+      "options": [
+        { "id": "shared", "label": "Shared Hosting cPanel (Klasik & Ekonomis)", "hosting_sku": "INF-HOST-SHR", "next_step": "step_addons_b2b" },
+        { "id": "vps", "label": "Managed Virtual Private Server (VPS Linux)", "hosting_sku": "INF-HOST-VPS", "next_step": "step_addons_b2b" },
+        { "id": "serverless", "label": "Serverless Cloud (Vercel & Supabase Rp 0,-)", "hosting_sku": "INF-HOST-VRC", "next_step": "step_addons_b2b" },
+        { "id": "custom", "label": "Infrastruktur Kustom (AWS / GCP Dedicated)", "hosting_sku": "INF-HOST-CST", "next_step": "step_addons_b2b" }
+      ]
+    },
+    "step_addons_b2b": {
+      "question": "Pilih layanan tambahan / Add-ons opsional (Bisa pilih lebih dari satu):",
+      "is_addon_multi_select": true,
+      "addon_pool": ["ADD-DOM-COM", "ADD-LANG-MULTI", "ADD-REV-EXTRA"],
+      "next_step": "step_final_lead"
+    },
+    "step_addons_acad": {
+      "question": "Pilih layanan tambahan / Add-ons akademisi (Bisa pilih lebih dari satu):",
+      "is_addon_multi_select": true,
+      "addon_pool": ["ADD-PL-TURN", "ADD-TRANS-NAT", "ADD-SEM-PLS", "ADD-REV-EXTRA"],
+      "next_step": "step_final_lead"
     }
   }
 }
