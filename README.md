@@ -1,286 +1,804 @@
-# 🚀 INFRAMEET Platform Hub
+# INFRAMEET SYSTEM CONTEXT & AI COMPLIANCE ROADMAP (llm.txt)
 
-**Fondasi Presisi. Pertumbuhan Pasti.**
-
-INFRAMEET adalah platform kemitraan digital B2B dan asistensi riset akademik yang beroperasi dengan model modular transparan. Kami membantu korporasi enterprise memigrasi sistem server konvensional ke arsitektur serverless cloud beban nol bulanan, serta memberikan asistensi riset ilmiah berkualitas dengan komitmen penuh menjunjung integritas akademik.
-
----
-
-## 📝 Deskripsi Platform
-
-### Esensi Platform: Dua Pilar Bisnis
-
-INFRAMEET menjalankan dual-silo architecture yang memisahkan layanan berdasarkan segmentasi klien:
-
-#### **Pilar 1: Enterprise B2B Growth** 🏢
-- **Target:** Tech companies, startups, digital agencies
-- **Budget:** IDR 5M - 500M+ per project
-- **Core Value:** Transformasi infrastruktur dari server tradisional ke **Vercel Edge + Supabase serverless** (zero monthly bills)
-- **Key Services:**
-  - Landing page high-performance (Lighthouse >90)
-  - Custom SaaS & headless CMS integration (Sanity/PayloadCMS)
-  - Multi-role authentication system (Auth.js + RLS)
-  - Payment gateway integration (Xendit)
-  - Pitch deck designer & investor materials
-  - Legal documentation (ToS, Privacy Policy, contracts)
-
-#### **Pilar 2: Academic & Research Support** 🎓
-- **Target:** Graduate students, researchers, academic institutions
-- **Budget:** IDR 200K - 50M per service
-- **Core Value:** **Anti-Joki Guarantee** - ZERO ghostwriting, ONLY technical assistance
-- **Key Services:**
-  - Document layouting (5K IDR per page)
-  - Quantitative data analysis (SPSS, SEM analysis)
-  - Plagiarism checking (Turnitin Premium)
-  - Slide design untuk sidang (15K IDR per slide)
-  - Citation management (Mendeley/Zotero sync)
-
-### Core Value Proposition
-
-| Feature | Benefit | Implementation |
-|---------|---------|-----------------|
-| **Modular Pricing** | Transparent cost structure, no hidden fees | Dynamic calculator via `services.json` |
-| **Instant Quotation** | Within 5 minutes of quiz completion | Groq LLM scoring engine |
-| **Serverless-First** | Zero monthly hosting costs, pay-per-use | Vercel hobby + Supabase free tier |
-| **Escrow Protection** | Funds held until BAST acceptance | PostgreSQL escrow_ledger table |
-| **Digital Contracts** | Legally binding signatures + timestamps | Docxtemplater DOCX generation |
-| **Audit Trail** | Full compliance tracking (UU PDP, GDPR) | Immutable audit_log table |
-| **AI-Powered Matching** | Smart project → staff allocation | Groq LLM integration |
+**For: Cursor, Windsurf, GitHub Copilot, Claude & Advanced LLMs**
+**Version:** 6.5-Dynamic | **Last Updated:** May 18, 2026
+**Purpose:** Semantic map of entire INFRAMEET architecture for rapid onboarding & compliance-aware code generation
 
 ---
 
-## 🛠️ Tech Stack & Integrasi
+## 🎯 SYSTEM PURPOSE & TARGET CONSTRAINTS
 
-### Frontend & UI Framework
-- **Next.js** 16.2.6 (React 19.2.4) - App Router architecture
-- **Tailwind CSS** 4 + PostCSS - Utility-first styling
-- **Lucide React** - Icon library (60+ icons)
-- **Framer Motion** 12.38.0 - Smooth animations
-- **cmdk** 1.1.1 - Command palette (Cmd+K)
-- **nuqs** 2.8.9 - URL state synchronization
-- **Zustand** 5.0.13 - Lightweight state management
+### Two-Pillar Business Model
 
-### Backend & Database
-- **Supabase** (PostgreSQL)
-  - Row-Level Security (RLS) for multi-tenant data isolation
-  - Real-time subscriptions
-  - Full-text search (FTS)
-  - PostgreSQL extensions: pgvector, pg_trgm
+**Pilar 1: ENTERPRISE B2B GROWTH (High-Ticket, Long-Cycle)**
+- Target: Tech companies, startups, agencies (Budget: IDR 5M - 500M+)
+- Solve: Server migration → Serverless cloud, SaaS integration, payment systems
+- Pricing: Base 5M IDR + modular add-ons (pages, CMS, auth, payment gateway)
+- Duration: 2-12 weeks per project
+- Revenue: Upfront 50% + final 50% (escrow-protected)
+- Profit Sharing: Configurable (default 50:50 split with execution staff)
 
-### API Integrations & Services
-- **Xendit** - Payment gateway (Virtual Account, E-Wallet, Credit Card)
-- **SendGrid** + SMTP (emailforums.biz) - Transactional email
-- **Groq SDK** 1.2.0 - LLM for lead scoring & AI insights
-- **Docxtemplater** 3.68.7 + PizZip 3.2.0 - DOCX generation (SOW, contracts, BAST)
-- **Turnitin** API - Plagiarism checking
-- **UptimeRobot** - Keep-alive pings (free tier optimization)
+**Pilar 2: ACADEMIC RESEARCH SUPPORT (Volume-Driven, Quick-Turnaround)**
+- Target: Students, researchers, institutions (Budget: IDR 200K - 50M)
+- Solve: Layouting, data analysis, plagiarism checks, slide design
+- Pricing: Per-service or per-page (5K IDR/page for layout, 450K for SPSS analysis)
+- Duration: 3-14 days per delivery
+- Anti-Joki Guarantee: NO ghostwriting services, ONLY technical assistance
+- Compliance: Strict audit trail, digital signatures on all work
 
-### Validation & Schema
-- **Zod** 4.4.3 - TypeScript-first schema validation
-- **TypeScript** 5 - Type-safe development
+### Free-Tier Optimized Infrastructure (Zero Monthly Bills)
 
-### Configuration & Shared Packages
-- **@inframeet/config** (workspace package)
-  - `services.json` - Pricing catalog & service definitions
-  - `quiz.json` - Lead qualification flow
-  - `brand.json` - UI theme, colors, typography
-  - `legal.json` - Terms, privacy policy, compliance clauses
+- **Hosting:** Vercel (Next.js hobby tier = free)
+- **Database:** Supabase free tier (500MB storage, basic bandwidth)
+- **Approach:** Bypass serverless timeout via client-side document rendering
+- **Keep-Alive:** UptimeRobot cron pings (prevent db hibernation)
+- **Edge CDN:** Vercel edge functions (auto-scaled, no server costs)
 
-### Package Manager & Monorepo
-- **pnpm** 8+ - Fast, disk-efficient package manager
-- **pnpm workspaces** - Monorepo structure
+### Hard Infrastructure Limits (Respect These!)
+
+- Serverless timeout: 10-30 seconds (Lambda/Vercel Functions)
+- Document generation: <0.5 seconds (docxtemplater + PizZip)
+- PDF rendering: Client-side only (window.print())
+- Database queries: Max 1000 rows per request (pagination required)
+- Memory per function: 256-512MB (OOMP possible if careless with DOCX generation)
 
 ---
 
-## 📂 Arsitektur Monorepo & Peta Folder
+## 📦 CORE DATASETS & DATA LOCATION
 
-```
-inframeet/
-│
-├── 📄 README.md                              # Dokumentasi utama (file ini)
-├── 📄 llm.txt                                # Semantic map untuk LLM integration
-├── 📄 .env.example                           # Template environment variables
-├── 📄 .gitignore                             # Git ignore rules
-├── 📄 package.json                           # Root workspace config (pnpm)
-├── 📄 pnpm-workspace.yaml                    # Monorepo workspace definition
-├── 📄 pnpm-lock.yaml                         # Dependency lock file (140+ KB)
-│
-├── 📁 apps/
-│   └── frontend/                             # Next.js main application
-│       ├── 📄 package.json                   # Frontend dependencies
-│       ├── 📄 next.config.ts                 # Next.js build config
-│       ├── 📄 tsconfig.json                  # TypeScript configuration
-│       ├── 📄 eslint.config.mjs              # Linting rules
-│       ├── 📄 postcss.config.mjs             # PostCSS (Tailwind)
-│       ├── 📄 AGENTS.md                      # AI agent notes
-│       ├── 📄 README.md                      # Frontend-specific docs
-│       │
-│       ├── 📁 public/                        # Static assets (favicon, fonts)
-│       │
-│       └── 📁 src/
-│           ├── 📁 app/                       # Next.js App Router (file-based routing)
-│           │   ├── 📄 layout.tsx             # Root layout + metadata
-│           │   ├── 📄 page.tsx               # Homepage (hero, FAQ, mega menu)
-│           │   ├── 📄 globals.css            # Global styles
-│           │   ├── 📄 favicon.ico            # Brand favicon
-│           │   │
-│           │   ├── 📁 admin/                 # Dashboard (protected routes)
-│           │   ├── 📁 api/                   # API endpoints (backend)
-│           │   │   ├── invoices/create       # Create invoice (price validation)
-│           │   │   ├── contracts/generate    # Generate DOCX contracts
-│           │   │   ├── bast/accept           # BAST digital signing
-│           │   │   ├── xendit/webhook        # Xendit payment webhook
-│           │   │   └── leads/qualify         # Lead scoring via Groq
-│           │   │
-│           │   ├── 📁 calculator/            # Dynamic pricing configurator
-│           │   ├── 📁 components/            # Shared React components
-│           │   ├── 📁 contracts/             # Contract management pages
-│           │   ├── 📁 insights/              # AI insights & RSS feeds
-│           │   ├── 📁 layanan/               # Service pages
-│           │   ├── 📁 search/                # Search & discovery
-│           │   ├── 📁 tools/                 # Tools directory & reviews
-│           │   └── 📁 [dynamic-routes]/      # Catch-all routes
-│           │
-│           └── 📁 lib/                       # Utility functions & hooks
-│               ├── 📄 supabase.ts            # Supabase client (RLS + admin)
-│               ├── 📄 pricingMath.ts         # Pricing calculation engine
-│               ├── 📄 docxHelper.ts          # DOCX document generation
-│               ├── 📄 mail.ts                # Email integration
-│               └── 📄 useConfigurator.ts     # React state hook
-│
-├── 📁 packages/
-│   └── config/                               # Shared configuration package
-│       ├── 📄 package.json                   # Package metadata
-│       ├── 📄 index.js                       # Main exports
-│       ├── 📄 brand.json                     # UI theme (colors, fonts, contact)
-│       ├── 📄 services.json                  # Pricing catalog (CRITICAL)
-│       ├── 📄 quiz.json                      # Lead qualification flow (CRITICAL)
-│       ├── 📄 legal.json                     # Terms, privacy, compliance
-│       └── DOCS-1, DOCS-2, DOCS-3/           # Documentation placeholders
-│
-├── 📁 supabase/                              # Database schema & migrations
-│   ├── 📄 config.toml                        # Supabase project settings
-│   ├── 📄 .gitignore                         # Ignore local state files
-│   │
-│   └── 📁 migrations/                        # PostgreSQL DDL (version-controlled)
-│       ├── 📄 20260518000000_inframeet_schema.sql
-│       ├── 📄 20260518000001_portal_enhancements.sql
-│       ├── 📄 20260518000002_crm_escrow_schema.sql
-│       ├── 📄 20260518000003_crm_escrow_optimizations.sql
-│       ├── 📄 20260518000004_fts_affiliate_masking.sql
-│       └── 📄 20260518000005_rls_crm_escrow.sql
-│
-└── 📁 DOCS-1, DOCS-2, DOCS-3/                # Future documentation modules
+### Configuration Files (Single Source of Truth)
+
+| File | Location | Role | Critical? |
+|------|----------|------|-----------|
+| `services.json` | `packages/config/` | Pricing catalog (B2B components, academic services, hosting options, add-ons) | 🔴 CRITICAL |
+| `quiz.json` | `packages/config/` | Lead qualification flow (step definitions, branching logic, final actions) | 🔴 CRITICAL |
+| `brand.json` | `packages/config/` | UI theme (colors, fonts, contact info, payment gateway config) | 🟡 IMPORTANT |
+| `legal.json` | `packages/config/` | Terms, privacy policy, compliance clauses (anti-joki, GDPR, UU PDP) | 🟡 IMPORTANT |
+| `.env.example` | Root | Environment template (secrets mapping) | 🟢 Reference |
+| `package.json` | Root + `apps/frontend` | Dependencies (Next.js, Supabase, Xendit, Docxtemplater) | 🔴 CRITICAL |
+| `next.config.ts` | `apps/frontend/` | Build optimization (redirect rules, API routes) | 🟡 IMPORTANT |
+| `supabase/config.toml` | `supabase/` | DB project settings (auth providers, storage buckets, extensions) | 🟡 IMPORTANT |
+
+### services.json Deep Dive
+
+```json
+{
+  "b2b_core_base": {
+    "base_price_idr": 5000000,
+    "included_features": ["responsive", "seo_basic", "analytics"]
+  },
+  "b2b_modular_components": [
+    {
+      "id": "extra_page",
+      "price_per_unit_idr": 750000,      // Volume-based
+      "min_units": 1, "max_units": 20
+    },
+    {
+      "id": "cms_headless",
+      "price_flat_idr": 3500000            // Fixed price
+    }
+  ],
+  "academic_modular_components": [
+    {
+      "id": "acad_page_multiplier",
+      "price_per_unit_idr": 5000,          // IDR per page
+      "min_units": 10, "max_units": 300
+    }
+  ],
+  "hosting_infrastructure_options": [
+    {
+      "sku": "INF-HOST-VRC",
+      "yearly_estimate_idr": 0               // SERVERLESS = FREE
+    }
+  ]
+}
 ```
 
----
-
-## 🎛️ Fitur Utama Ekosistem
-
-### 1. Dynamic Pricing Configurator
-- Budget slider (reverse-engineer features from budget)
-- Features matrix (toggle components)
-- Real-time price recalculation
-- Auto-generated SOW documents
-
-### 2. Unified CMS & RSS Aggregator
-- Headless CMS integration (Sanity/PayloadCMS)
-- RSS feed aggregation (tech, AI, business news)
-- Tools directory (500+ software tools)
-- AI insights via Groq
-
-### 3. Escrow & Revenue Sharing
-- Atomic escrow ledger (HELD → RELEASED workflow)
-- Configurable profit splitting (50:50 default)
-- Digital BAST signatures
-- Automated wallet payouts
-
-### 4. Advanced UI/UX
-- Sticky mega menu
-- Command palette (Cmd+K)
-- AI SERP page
-- Soft dark mode
+**Why Structure Matters:**
+- Pricing engine (`pricingMath.ts`) reads `b2b_modular_components` + applies formulas
+- Quiz redirects to pricing tier selections based on service SKU
+- Invoices generated server-side using `services.json` (NOT client-submitted amounts)
 
 ---
 
-## ⚙️ Panduan Setup & Instalasi Lokal
+## 📊 DATABASE ENTITY RELATIONSHIPS (SUPABASE LOGIC)
 
-### Prerequisites
+### Core Entity Diagram
 
-```bash
-node --version        # >=18.0.0
-pnpm --version        # >=8.0.0
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      SUPABASE POSTGRES                       │
+└─────────────────────────────────────────────────────────────┘
+
+┌─ IDENTITY LAYER ─────────────────────────────────────────┐
+│                                                            │
+│  auth.users (Supabase built-in)                          │
+│    ├─ id (UUID)                                          │
+│    ├─ email                                              │
+│    └─ role: 'authenticated' | 'anon'                    │
+│         │                                                │
+│         ├─→ clients (segment: 'enterprise'|'academic')   │
+│         │   ├─ id, email, company_name, phone           │
+│         │   ├─ is_verified, logo_url, website           │
+│         │   └─ metadata (JSONB)                          │
+│         │                                                │
+│         └─→ staff (role: 'admin'|'manager'|'dev')       │
+│             ├─ id, auth_user_id (FK)                    │
+│             ├─ name, email, department                  │
+│             ├─ hourly_rate (for escrow calc)            │
+│             └─ skills (JSONB array)                     │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+
+┌─ PROJECT WORKFLOW LAYER ─────────────────────────────────┐
+│                                                            │
+│  projects                                                 │
+│  ├─ id, client_id (FK → clients)                         │
+│  ├─ assigned_to_staff_id (FK → staff)                    │
+│  ├─ status: 'inquiry' → 'brief_pending' → 'active' → 'completed'
+│  ├─ total_amount_idr, margin_percent                     │
+│  ├─ latest_brief_id, latest_sow_id, latest_contract_id  │
+│  └─ internal_notes (JSONB)                               │
+│         │                                                │
+│         ├─→ briefs                                       │
+│         │   ├─ id, project_id (FK), client_id (FK)      │
+│         │   ├─ budget_range (ENUM: '<50M', '50M-100M')  │
+│         │   ├─ timeline_weeks (2-52)                    │
+│         │   ├─ status: 'draft' → 'submitted' → 'approved'
+│         │   ├─ approved_by_staff_id (FK)                │
+│         │   └─ key_objectives, business_context         │
+│         │         │                                      │
+│         │         └─→ scope_of_work (SOW)               │
+│         │             ├─ id, brief_id (FK)              │
+│         │             ├─ total_amount_idr                │
+│         │             ├─ discount_percent                │
+│         │             ├─ net_amount_idr                  │
+│         │             ├─ payment_terms: '50-50' | '30-70'
+│         │             ├─ status: 'draft' → 'approved'   │
+│         │             └─ document_url, document_storage_key
+│         │                   │                            │
+│         │                   └─→ sow_line_items          │
+│         │                       ├─ id, sow_id (FK)      │
+│         │                       ├─ deliverable           │
+│         │                       ├─ quantity, unit_price  │
+│         │                       └─ total_price_idr       │
+│         │                                                │
+│         ├─→ contracts                                    │
+│         │   ├─ id, project_id (FK), sow_id (FK → RESTRICT)
+│         │   ├─ contract_type: 'kemitraan'|'service'|'retainer'
+│         │   ├─ status: 'draft' → 'pending_signature' → 'fully_signed' → 'executed'
+│         │   ├─ client_signatory_name, client_signed_at  │
+│         │   ├─ company_signatory_name, company_signed_at│
+│         │   ├─ signature_status (JSONB)                 │
+│         │   └─ document_url, document_storage_key       │
+│         │                                                │
+│         └─→ bast (Berita Acara Serah Terima)           │
+│             ├─ id, project_id (FK), contract_id (FK)    │
+│             ├─ status: 'draft' → 'pending_signature' → 'signed'
+│             ├─ total_qa_items, passed_qa_items          │
+│             ├─ qa_status: 'pending' | 'passed' | 'failed'
+│             ├─ deliverables_summary (JSONB)             │
+│             ├─ client_accepted, client_accepted_at      │
+│             ├─ client_signatory_name, client_signature_ip
+│             ├─ staff_verified_by_id (FK → staff)        │
+│             └─ document_url                             │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+
+┌─ FINANCIAL LAYER ────────────────────────────────────────┐
+│                                                            │
+│  invoices                                                 │
+│  ├─ id, project_id (FK), sow_id (FK)                    │
+│  ├─ invoice_number (TEXT UNIQUE)                        │
+│  ├─ amount_idr (verified server-side via services.json) │
+│  ├─ invoice_type: 'deposit' | 'progress' | 'final'     │
+│  ├─ xendit_invoice_id (UNIQUE)                          │
+│  ├─ payment_link, qr_code_url                           │
+│  ├─ status: 'pending' → 'paid' → 'expired' | 'failed'  │
+│  ├─ paid_amount_idr, paid_at                            │
+│  ├─ xendit_webhook_verified (BOOLEAN)                   │
+│  └─ xendit_webhook_timestamp                            │
+│         │                                                │
+│         └─→ (WEBHOOK) → escrow_ledger (if exists)      │
+│             ├─ status: 'HELD' (payment received)        │
+│             │           'RELEASED' (BAST accepted)      │
+│             │           'WITHDRAWN' (staff pulls to wallet)
+│             └─ amount_idr, executor_id, project_id      │
+│                                                            │
+│  retainers                                               │
+│  ├─ id, project_id (FK), client_id (FK)                │
+│  ├─ monthly_amount_idr                                  │
+│  ├─ next_billing_date                                   │
+│  ├─ auto_charge (BOOLEAN)                               │
+│  ├─ status: 'active' | 'paused' | 'terminated'         │
+│  └─ invoices_generated_count                            │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+
+┌─ CONTENT & DIRECTORY LAYER ──────────────────────────────┐
+│                                                            │
+│  rss_feeds                                               │
+│  ├─ id, feed_url (UNIQUE)                               │
+│  ├─ source_category: 'technology' | 'ai' | 'business'  │
+│  ├─ last_sync_at, next_sync_at                          │
+│  └─ sync_error_count, sync_error_message                │
+│         │                                                │
+│         └─→ rss_items                                    │
+│             ├─ id, feed_id (FK ON DELETE CASCADE)       │
+│             ├─ title, content_summary, full_content    │
+│             ├─ source_url, image_url                    │
+│             ├─ relevance_score (0.0-1.0)               │
+│             ├─ published_at, synced_at                  │
+│             └─ content_hash (UNIQUE)                    │
+│                                                            │
+│  tools_directory                                         │
+│  ├─ id, name (UNIQUE)                                   │
+│  ├─ category, description, logo_url                     │
+│  ├─ website_url, affiliate_url                          │
+│  ├─ affiliate_commission_percent                        │
+│  ├─ sponsor_status: 'featured' | 'standard' | 'none'   │
+│  ├─ rating_performance, rating_ease_of_use (1-100)     │
+│  └─ tags (JSONB array)                                  │
+│                                                            │
+│  portfolio_cases                                         │
+│  ├─ id, bast_id (FK RESTRICT), project_id (FK RESTRICT)│
+│  ├─ client_company_name, project_title, segment        │
+│  ├─ images (JSONB array)                                │
+│  ├─ metrics (timeline_accuracy, code_quality, etc.)    │
+│  ├─ deliverables (JSONB), tech_stack (JSONB)           │
+│  ├─ is_published, published_at                          │
+│  └─ (Publicly visible case studies)                     │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+
+┌─ AUDIT & SECURITY LAYER ─────────────────────────────────┐
+│                                                            │
+│  audit_log (append-only, immutable)                      │
+│  ├─ id, entity_type, entity_id                          │
+│  ├─ action: 'CREATE' | 'UPDATE' | 'DELETE'             │
+│  ├─ performed_by_staff_id (FK)                          │
+│  ├─ changes (JSONB - before/after values)               │
+│  ├─ ip_address, user_agent                              │
+│  └─ created_at (never updated)                          │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
 ```
 
-### Installation Steps
+### Key Relationship Rules
 
-```bash
-# 1. Clone
-git clone https://github.com/zaditprodakwah/inframeet.git
-cd inframeet
+1. **Cascade Delete:** Remove `client` → all `projects` removed
+2. **Restrict Delete:** Remove `contract` before removing `sow` (invoices depend on both)
+3. **Set Null on Delete:** Remove `staff` → `assigned_to_staff_id` = NULL (project continues)
+4. **Unique Constraints:** `xendit_invoice_id`, `invoice_number`, `feed_url`, `content_hash`
+5. **Foreign Key Integrity:** All FK references enforced at database layer (no orphaned records)
 
-# 2. Setup env
-cp .env.example .env.local
-# Edit .env.local with your secrets
+---
 
-# 3. Install deps
-pnpm install
+## 🔒 HARD RULES & GUARDRAILS (TIDAK BOLEH DILANGGIR OLEH AI CODER)
 
-# 4. Database setup
-pnpm supabase link --project-ref YOUR_REF
-pnpm supabase db push
+### 1. Anti-Price Tampering Rule ⚠️ CRITICAL
 
-# 5. Development
-pnpm dev
+**Rule:** Pricing validation MUST happen server-side via `/api/payments/invoice`, never trust client calculations.
 
-# 6. Open browser
-# http://localhost:3000
+```typescript
+// ❌ FORBIDDEN: Client-side price calculation used for invoice
+const userPrice = calculatePricing({ selectedFeatures }); // UNTRUSTED
+createInvoice({ amount: userPrice }); // WRONG!
+
+// ✅ MANDATORY: Server-side verification via services.json
+export async function POST(req: Request) {
+  const { selectedComponentIds, volumes } = await req.json();
+  
+  // 1. Fetch services.json (or load from cache)
+  const services = require('@inframeet/config').services;
+  
+  // 2. Validate each component exists in services.json
+  for (const compId of selectedComponentIds) {
+    if (!services.b2b_modular_components.find(c => c.id === compId)) {
+      return res.status(400).json({ error: 'Invalid component' });
+    }
+  }
+  
+  // 3. Recalculate pricing server-side
+  const verified_price = calculatePricing(services, selectedComponentIds, volumes);
+  
+  // 4. Create invoice using verified_price (NOT client-submitted amount)
+  const invoice = await createXenditInvoice(verified_price);
+  
+  return res.json(invoice);
+}
 ```
 
-### Required Environment Variables
+**Why:** Client can use DevTools to modify `amount_idr` in memory → fraud
+
+---
+
+### 2. Serverless Timeout Mitigation Rule ⚠️ CRITICAL
+
+**Rule:** All long-running tasks (document generation, PDF rendering) must complete <0.5s or be offloaded to client.
+
+```typescript
+// ❌ FORBIDDEN: Large DOCX generation in serverless function (timeout risk)
+export async function POST(req: Request) {
+  const docBuffer = generateDocxBuffer(largeData); // Can take 2-5 seconds
+  // Lambda timeout after 10-30 seconds = crash
+}
+
+// ✅ MANDATORY: Client-side rendering with stream response
+export async function GET(req: Request) {
+  const contractData = await fetchFromDB(); // Fast DB query
+  
+  // Return data + client renders DOCX using docxtemplater.js
+  return res.json({ 
+    data: contractData,
+    instructions: 'Download DOCX via client-side generation'
+  });
+}
+
+// OR: Background job queue
+export async function POST(req: Request) {
+  const jobId = generateUUID();
+  
+  // Queue DOCX generation in background
+  await queue.enqueue({ jobId, data: contractData });
+  
+  // Return immediately
+  return res.json({ 
+    status: 'processing',
+    jobId,
+    pollUrl: `/api/contracts/${jobId}/status`
+  });
+}
+```
+
+**Why:** Vercel Functions have 10-30 second timeout → DOCX generation can exceed limit
+
+---
+
+### 3. Escrow Ledger System Rule ⚠️ CRITICAL
+
+**Rule:** Funds MUST be held in "HELD" status until BAST accepted by client, then atomically "RELEASED".
+
+```typescript
+// Flow:
+// 1. Client pays 50% deposit (invoice.status = 'paid')
+//    → escrow_ledger.status = 'HELD' (funds locked)
+//
+// 2. Project execution (staff works)
+//    → operational_tasks tracked
+//
+// 3. BAST signed by client (bast.client_accepted = true)
+//    → ATOMIC: escrow_ledger.status = 'RELEASED'
+//    → ATOMIC: executor_wallet.balance += released_amount
+//
+// 4. Final invoice (50% balance)
+//    → Client pays final amount
+//    → Project status = 'completed'
+
+// ❌ FORBIDDEN: Release funds before BAST acceptance
+UPDATE invoices SET status = 'paid' WHERE id = ?;
+UPDATE executor_wallet SET balance = balance + 2500000 WHERE staff_id = ?;
+// No escrow protection!
+
+// ✅ MANDATORY: Atomic transaction
+BEGIN TRANSACTION;
+  UPDATE invoices SET status = 'paid', paid_at = NOW() WHERE id = ?;
+  INSERT INTO escrow_ledger (project_id, staff_id, amount_idr, status)
+    VALUES (?, ?, 2500000, 'HELD');
+COMMIT;
+
+// Only after BAST accepted:
+BEGIN TRANSACTION;
+  UPDATE escrow_ledger SET status = 'RELEASED' WHERE project_id = ?;
+  UPDATE executor_wallet SET balance = balance + 2500000 WHERE staff_id = ?;
+  UPDATE projects SET status = 'completed' WHERE id = ?;
+COMMIT;
+```
+
+**Why:** Prevents staff from withdrawing money before delivering work
+
+---
+
+### 4. Integrity Rule: Academic Anti-Joki ⚠️ CRITICAL
+
+**Rule:** All academic services MUST NOT include content writing/substance creation. Audit trail tracks every action.
+
+```typescript
+// ✅ ALLOWED Academic Services:
+// - Layouting (format, fonts, spacing)
+// - Data analysis (SPSS, SEM, statistical testing)
+// - Plagiarism checking (Turnitin)
+// - Slide design (visual only, no speech writing)
+// - Citation management (reference formatting)
+
+// ❌ FORBIDDEN:
+// - Writing chapters or sections
+// - Conducting research on behalf of student
+// - Submitting work under student's name
+// - Any "joki" or ghostwriting service
+
+// Audit trail enforcement:
+INSERT INTO audit_log (entity_type, entity_id, action, performed_by_staff_id, changes, ip_address)
+VALUES (
+  'academic_task',
+  'task_id_123',
+  'LAYOUT_COMPLETED', // NOT 'CONTENT_WRITTEN'
+  'staff_uuid',
+  '{"pages_formatted": 50, "spell_check_applied": true}',
+  '203.0.113.42'
+);
+
+// Every task completion logged with:
+// - Staff member ID (accountability)
+// - Action type (service category)
+// - Changes (what was modified)
+// - IP address (trace execution location)
+// - Timestamp (immutable)
+```
+
+**Why:** Compliance with academic integrity standards + legal liability protection
+
+---
+
+### 5. Data Privacy & Masking Rule 🔒 IMPORTANT
+
+**Rule:** Affiliate URLs, commission percentages, and sponsor data must be masked from public view. Use RLS.
+
+```typescript
+// ❌ FORBIDDEN: Public query exposes affiliate data
+SELECT * FROM tools_directory WHERE sponsor_status = 'featured';
+// Returns: affiliate_url, affiliate_commission_percent (exposed!)
+
+// ✅ MANDATORY: RLS policy masks sensitive fields
+CREATE POLICY tools_public_mask ON tools_directory
+  FOR SELECT
+  USING (true)  -- Anyone can select
+  WITH CHECK (
+    -- But masked fields only visible to staff
+    CASE
+      WHEN auth.uid() IN (SELECT auth_user_id FROM staff WHERE role IN ('admin', 'manager'))
+      THEN true
+      ELSE (affiliate_url IS NULL AND affiliate_commission_percent IS NULL)
+    END
+  );
+
+// Client sees:
+{
+  "id": "...",
+  "name": "Vercel",
+  "category": "hosting",
+  "description": "...",
+  // affiliate_url hidden
+  // affiliate_commission_percent hidden
+}
+
+// Admin sees full record with affiliate data
+```
+
+**Why:** Protects business strategy + prevents competitor intelligence gathering
+
+---
+
+### 6. Concurrency & Race Condition Prevention Rule 🔒 IMPORTANT
+
+**Rule:** Critical operations (payment processing, BAST acceptance, retainer billing) must use pessimistic locks.
+
+```typescript
+// ❌ FORBIDDEN: Check-then-act (race condition)
+const invoice = await db.query('SELECT * FROM invoices WHERE id = ? AND status = pending');
+if (invoice) {
+  // Between SELECT and UPDATE, concurrent request could modify invoice
+  await db.query('UPDATE invoices SET status = paid WHERE id = ?');
+}
+
+// ✅ MANDATORY: Atomic lock + update
+const result = await db.query(
+  'UPDATE invoices SET status = paid WHERE id = ? AND status = pending RETURNING *',
+  [invoiceId]
+);
+
+if (result.rowCount === 0) {
+  throw new Error('Invoice already processed or not pending');
+}
+
+// Alternative: SELECT FOR UPDATE (pessimistic lock)
+BEGIN TRANSACTION;
+  SELECT * FROM invoices WHERE id = ? FOR UPDATE; -- Lock row
+  -- Other thread waits here
+  UPDATE invoices SET status = paid WHERE id = ?;
+COMMIT;
+```
+
+**Why:** Prevents double-charging, duplicate invoice generation, race condition bugs
+
+---
+
+### 7. RLS Policy Audit Rule 🔒 IMPORTANT
+
+**Rule:** Before deploying RLS changes, test with multiple user roles (client, staff-analyst, staff-admin).
+
+```typescript
+// Test Scenario 1: Client accessing their own project
+-- Run as client auth.uid = 'client_uuid_123'
+SELECT * FROM projects WHERE client_id IN (SELECT id FROM clients WHERE id = 'client_uuid_123');
+-- MUST return: own projects
+
+-- MUST NOT return: other client's projects
+SELECT * FROM projects WHERE client_id != 'client_uuid_123';
+-- Result: 0 rows (RLS enforced)
+
+// Test Scenario 2: Staff accessing all projects
+-- Run as staff auth.uid = 'staff_uuid_456'
+SELECT * FROM projects;
+-- MUST return: all projects (staff can see all)
+
+// Test Scenario 3: Anon user accessing public data
+-- Run as anon (no auth)
+SELECT * FROM tools_directory;
+-- MUST return: public tools (no affiliate data, no commission)
+-- MUST NOT return: admin-only fields
+```
+
+**Why:** Prevents data leakage, ensures proper authorization
+
+---
+
+## 🔎 ROUTING & COMPONENT DEPENDENCIES
+
+### Main User Journey: Quiz → Invoice → SOW → Contract → BAST → Completion
+
+```
+START USER VISITS HOMEPAGE
+  ↓
+[page.tsx] - Hero section, mega menu, FAQ
+  ├─ JSON-LD schema for SEO
+  ├─ Brand colors from brand.json
+  └─ Links to /calculator or /layanan/*
+  
+  ↓ User clicks "Mulai Kalkulasi Kebutuhan"
+  
+CALCULATOR PAGE [calculator/page.tsx]
+  ├─ Loads quiz.json step_1 (Choose: B2B vs Academic)
+  │
+  ├─→ IF B2B:
+  │   ├─ step_2_b2b_dynamic (Budget slider? Features matrix? Quiz?)
+  │   │  
+  │   ├─→ IF budget_slider:
+  │   │   └─ Loads pricingMath.reverseEngineerFeatures()
+  │   │      (Budget 50M → Auto-select compatible components)
+  │   │      └─ Displays price breakdown from services.json
+  │   │
+  │   ├─→ IF features_matrix:
+  │   │   └─ Shows toggle checkboxes for each component
+  │   │      └─ Real-time recalculation via calculatePricing()
+  │   │         (User selects "extra_page", "cms_headless", etc.)
+  │   │
+  │   └─→ FINAL: "Generate SOW" button
+  │       └─ Downloads auto-generated DOCX (client-side via docxtemplater.js)
+  │          OR submits to server for /api/payments/invoice
+  │
+  └─→ IF ACADEMIC:
+      ├─ step_2_acad_dynamic (Per-page pricing, service selector)
+      │
+      └─ Leads to either:
+         ├─ Per-page layout (5K IDR/page for 10-300 pages)
+         ├─ SPSS data analysis (450K flat)
+         ├─ Slide design (15K IDR per slide, 5-30 slides)
+         └─ Turnitin check (250K flat)
+
+  ↓ User submits quiz responses (or skips to direct entry)
+  
+LEAD QUALIFICATION [via Groq LLM and Custom SMTP Mailer]
+  ├─ API call: POST /api/projects/brief
+  │  └─ Body: { email, phone, companyName, answers, results }
+  │
+  ├─ Groq processes: "Lead score and prioritization engine"
+  │  └─ Returns: { lead_score, suggested_revisions, suggested_sku }
+  │
+  ├─ Create client and project records in Supabase:
+  │  └─ INSERT INTO clients (email, company_name, phone)
+  │  └─ INSERT INTO projects (client_id, budget_range, status='inquiry')
+  │
+  └─ Dispatch transactional emails (SMTP Port 465) to primary admin contact
+     
+INVOICE GENERATION [/api/payments/invoice]
+  ├─ Server-side validation:
+  │  ├─ Fetch services.json
+  │  ├─ Validate selectedComponents exist in catalog
+  │  ├─ Recalculate total price (NOT trusted from client)
+  │  └─ Return 400 if tampering detected
+  │
+  ├─ Create invoice record in Supabase:
+  │  └─ INSERT INTO invoices (project_id, amount_idr, xendit_invoice_id, status='pending')
+  │
+  ├─ Call Xendit API:
+  │  └─ POST /invoices (xendit_secret_key, amount, client_email)
+  │     └─ Returns: payment_link, qr_code_url, invoice_id
+  │
+  └─ Return payment_link + qr_code to client
+     └─ Display: "Scan QRCODE or click link to pay"
+
+PAYMENT WEBHOOK [/api/payments/webhook POST]
+  ├─ Xendit sends callback to verify payment status: { external_id, amount, status }
+  │
+  ├─ Verify callback headers (x-callback-token webhook signature)
+  │  └─ Prevent spoofing and replay attacks
+  │
+  ├─ Update invoice and activate project status:
+  │  ├─ UPDATE invoices SET status = 'paid', paid_at = NOW()
+  │  ├─ UPDATE contracts SET status = 'active'
+  │  ├─ UPDATE projects SET status = 'active'
+  │  └─ Insert HELD status record into escrow_ledger
+  │
+  └─ Dispatch transactional payment confirmation email to client
+     └─ "Terima kasih atas pembayaran Anda. Status kontrak Anda saat ini telah aktif."
+
+SCOPE OF WORK (SOW) DOCUMENT GENERATION
+  ├─ Endpoint: GET /api/contracts/[projectId]/sow
+  │
+  ├─ Fetch from database:
+  │  ├─ SELECT * FROM scope_of_work WHERE project_id = ?
+  │  ├─ SELECT * FROM sow_line_items WHERE sow_id = ?
+  │  └─ SELECT * FROM projects WHERE id = ?
+  │
+  ├─ Call docxtemplater via docxHelper.ts:
+  │  └─ generateDocxBuffer({
+  │       contract_id: "INFRAMEET-2026-05-001",
+  │       client_name: "PT Startup ABC",
+  │       project_title: "Landing Page + Xendit Integration",
+  │       scope_items: [...],
+  │       net_amount_idr: "Rp 12,500,000",
+  │       payment_terms_label: "50% DP, 50% Completion"
+  │     })
+  │
+  ├─ Client downloads DOCX (or views in browser preview)
+  │
+  ├─ Client/Company approves SOW:
+  │  └─ PATCH /api/sow/[sowId] { approved_by_client: true }
+  │     └─ UPDATE scope_of_work SET approved_at = NOW(), status = 'approved'
+  │
+  └─ Next: Contract signing
+
+CONTRACT GENERATION & SIGNING
+  ├─ Endpoint: GET /contracts/[id]
+  │
+  ├─ Present client with HTML5 Signature Canvas signature pad
+  │
+  ├─ Client signs digitally on canvas:
+  │  ├─ POST /api/contracts/sign
+  │  │  └─ Body: { contractId, signatoryName, signatureDataUrl }
+  │  │
+  │  └─ UPDATE contracts SET client_signed_at = NOW(), client_signature_status = 'signed'
+  │
+  └─ System generates legally binding contract draft via docxHelper.ts
+ 
+BAST (BERITA ACARA SERAH TERIMA) / FINAL ACCEPTANCE
+  ├─ When project deliverables are completed:
+  │  └─ Client accepts UAT deliverables via /contracts/[id]
+  │
+  ├─ Client signs final BAST serah-terima:
+  │  ├─ POST /api/contracts/bast
+  │  │  └─ Body: { contractId, signatoryName, signatureDataUrl }
+  │  │
+  │  └─ UPDATE bast SET client_accepted = true, client_accepted_at = NOW()
+  │
+  ├─ ATOMIC: Escrow funds RELEASED to staff wallet:
+  │  ├─ BEGIN TRANSACTION
+  │  ├─ UPDATE escrow_ledger SET status = 'RELEASED' WHERE project_id = ?
+  │  ├─ UPDATE executor_wallet SET balance = balance + escrow_amount WHERE staff_id = ?
+  │  ├─ UPDATE bast SET status = 'signed'
+  │  ├─ UPDATE projects SET status = 'completed'
+  │  └─ COMMIT
+  │
+  └─ Dispatch payout and final completion SMTP email alert
+
+PORTFOLIO CASE CREATION [Optional, for marketing]
+  ├─ After project completion:
+  │  ├─ Admin creates portfolio_cases record:
+  │  └─ INSERT INTO portfolio_cases (
+  │       bast_id,
+  │       project_id,
+  │       client_company_name,
+  │       project_title,
+  │       segment: 'enterprise' | 'academic',
+  │       description,
+  │       images: [...],
+  │       tech_stack: ['Next.js', 'React', 'Xendit'],
+  │       is_published: false (draft)
+  │     )
+  │
+  └─ Publish to /portfolio page (if client approves)
+
+RETAINER BILLING [Recurring revenue]
+  ├─ If contract_type = 'retainer':
+  │  ├─ INSERT INTO retainers (project_id, monthly_amount_idr, next_billing_date, auto_charge=true)
+  │  │
+  │  └─ Cron job (daily 00:00 UTC):
+  │     ├─ Find retainers WHERE next_billing_date <= TODAY
+  │     ├─ If auto_charge = true:
+  │     │  ├─ Create invoice (monthly_amount_idr)
+  │     │  ├─ Call Xendit API (auto-debit if payment method on file)
+  │     │  └─ UPDATE next_billing_date = next_billing_date + 1 MONTH
+  │     │
+  │     └─ (Uses SELECT FOR UPDATE to prevent double-charge)
+
+END: PROJECT COMPLETE + ESCROW RELEASED
+```
+
+### Critical Dependency Matrix
+
+| From | To | Trigger | Method |
+|------|----|---------  |--------|
+| quiz.json | pricingMath.ts | User selects budget or features | calculatePricing() |
+| services.json | /api/payments/invoice | Invoice creation | Server-side verification |
+| projects | invoices | Payment received | Xendit webhook |
+| invoices | escrow_ledger | Status = 'paid' | Atomic transaction |
+| bast | escrow_ledger | Client acceptance | status = 'RELEASED' |
+| retainers | invoices | Cron job runs | Auto-billing |
+| audit_log | ALL tables | Every CREATE/UPDATE | RLS + trigger |
+| brand.json | page.tsx | Component render | CSS variable import |
+
+---
+
+## 📋 ENVIRONMENT VARIABLES QUICK MAP
 
 ```dotenv
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-XENDIT_SECRET_KEY=
-XENDIT_PUBLIC_KEY=
-SENDGRID_API_KEY=
-GROQ_API_KEY=
-NEXTAUTH_SECRET=
+# These MUST be set before running:
+NEXT_PUBLIC_SUPABASE_URL          # Your Supabase project URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY     # Public auth key (safe for browser)
+SUPABASE_SERVICE_ROLE_KEY         # Backend-only, NEVER expose to client
+XENDIT_SECRET_KEY                 # Xendit payment processing
+XENDIT_PUBLIC_KEY                 # Xendit frontend payment form
+SMTP_HOST                         # Transactional SMTP Server Hostname
+SMTP_PORT                         # Transactional SMTP Port (e.g. 465)
+SMTP_USER                         # Transactional SMTP Username/Email
+SMTP_PASSWORD                     # Transactional SMTP Password
+SMTP_SECURE                       # SMTP SSL status (true/false)
+GROQ_API_KEY                      # LLM for lead scoring
+NEXTAUTH_SECRET                   # Session encryption
+
+# These are optional for MVP:
+GEMINI_API_KEY                    # Advanced AI features
+UPTIMEROBOT_API_KEY               # Keep-alive pings
 ```
 
-### Build & Deploy
+---
+
+## 🎓 LLM INSTRUCTIONS (For You, Dear AI)
+
+### When You Generate Code:
+
+1. **Always validate server-side:** If it touches money (invoices, pricing), it must verify via `services.json`
+2. **Never trust client input:** Assume all user submissions are malicious
+3. **Check RLS policies:** Before querying `clients` or `invoices`, ensure RLS protects data
+4. **Use atomic transactions:** Payment processing, BAST acceptance, escrow release
+5. **Log to audit_log:** Every sensitive operation (contract signing, escrow release)
+6. **Test with multiple roles:** Query as client, analyst staff, admin staff, anon
+7. **Respect timeouts:** Offload heavy DOCX generation to client-side or background jobs
+8. **Comply with anti-joki:** Academic services = technical only, NEVER content creation
+9. **Escape template variables:** XSS prevention in docxtemplater (sanitize project_title, etc.)
+10. **No hardcoded secrets:** All keys from environment variables
+
+### Key Files You'll Modify:
+
+- `apps/frontend/src/app/page.tsx` - Homepage hero
+- `apps/frontend/src/app/api/` - Backend endpoints
+- `apps/frontend/src/lib/pricingMath.ts` - Pricing engine
+- `packages/config/services.json` - Service catalog (MOST IMPORTANT)
+- `supabase/migrations/` - Database schema
+- `apps/frontend/src/app/calculator/page.tsx` - Configurator UI
+
+### Before Commit:
 
 ```bash
-# Production build
-pnpm build
-
-# Test production build locally
-pnpm start
-
-# Deploy to Vercel
-vercel deploy
+pnpm lint --fix          # Format + lint
+pnpm build               # Verify build success
+pnpm type-check          # No TypeScript errors
+# Test RLS with multiple roles (manual)
 ```
 
 ---
 
-## 🚀 Quick Links
-
-- 📖 **llm.txt** - AI semantic map (for Cursor, Windsurf, Claude)
-- 🔒 **AUDIT_FINDINGS.md** - Security & performance audit
-- 📋 **services.json** - Pricing catalog
-- ⚖️ **legal.json** - Terms & privacy policy
-
----
-
-## 📞 Support
-
-- **Email:** inframeet@emailforums.biz
-- **WhatsApp:** +62-823-1636-3177
-- **GitHub Issues:** Report bugs
-
----
-
-**Made with ❤️ by INFRAMEET Team**  
-*Last Updated: May 18, 2026*
+**EOF: INFRAMEET Platform Hub**
+**Useful for:** Cursor, Windsurf, Claude, Copilot, ChatGPT Code Interpreter
+**Refresh when:** schema changes, new services added, compliance updates
