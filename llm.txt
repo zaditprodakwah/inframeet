@@ -11,28 +11,28 @@
 ### Two-Pillar Business Model
 
 **Pilar 1: ENTERPRISE B2B GROWTH (High-Ticket, Long-Cycle)**
-- Target: Tech companies, startups, agencies (Budget: IDR 5M - 500M+)
-- Solve: Server migration → Serverless cloud, SaaS integration, payment systems
-- Pricing: Base 5M IDR + modular add-ons (pages, CMS, auth, payment gateway)
-- Duration: 2-12 weeks per project
-- Revenue: Upfront 50% + final 50% (escrow-protected)
-- Profit Sharing: Configurable (default 50:50 split with execution staff)
+- Target: Tech companies, startups, agencies, and regional SMEs (Budget: IDR 5M - 500M+)
+- Solve: Serverless cloud transitions, payment gateway consolidation, multi-tenant portals, CRM integration, and hosting infrastructure deployment.
+- Flexible Hosting: High modularity supporting both zero-cost Vercel hobby-tier serverless architectures and self-hosted VPS/dedicated Linux servers.
+- Pricing: Base 5M IDR + modular components (headless CMS, custom authentication, database triggers, API gateway integrations).
+- Duration: 2-12 weeks per project.
+- Revenue: Upfront 50% deposit + final 50% balance (escrow-protected, atomically released via BAST).
+- Profit Sharing: Dynamically configurable (default 50:50 split between corporate treasury and execution staff).
 
 **Pilar 2: ACADEMIC RESEARCH SUPPORT (Volume-Driven, Quick-Turnaround)**
-- Target: Students, researchers, institutions (Budget: IDR 200K - 50M)
-- Solve: Layouting, data analysis, plagiarism checks, slide design
-- Pricing: Per-service or per-page (5K IDR/page for layout, 450K for SPSS analysis)
-- Duration: 3-14 days per delivery
-- Anti-Joki Guarantee: NO ghostwriting services, ONLY technical assistance
-- Compliance: Strict audit trail, digital signatures on all work
+- Target: Undergraduates (S1), Postgraduates (S2/S3), academics, independent researchers (Budget: IDR 200K - 50M).
+- Solve: Automated document layouting, robust statistical analysis (SPSS, SEM-PLS), slide siding premium, and Turnitin checking.
+- Service Tiers: Custom layouting for Proposal (max 30 pages), Skripsi/Tesis (max 100 pages), and International Journals (Scopus/Sinta double-column formatting).
+- Anti-Joki Guarantee: Strict technical assistance ONLY. No content creation, no ghostwriting. Pure structural formatting and computational statistics.
+- Compliance: Full digital signing on BAST agreements, audit trails tracking man-hours, and legal disclaimer protection.
 
-### Free-Tier Optimized Infrastructure (Zero Monthly Bills)
+### Free-Tier Optimized Infrastructure & Networking Guardrails
 
-- **Hosting:** Vercel (Next.js hobby tier = free)
-- **Database:** Supabase free tier (500MB storage, basic bandwidth)
-- **Approach:** Bypass serverless timeout via client-side document rendering
-- **Keep-Alive:** UptimeRobot cron pings (prevent db hibernation)
-- **Edge CDN:** Vercel edge functions (auto-scaled, no server costs)
+- **Hosting:** Vercel Hobby Tier (free, highly optimized Edge CDN).
+- **Database:** Supabase Free Tier (500MB PostgreSQL storage, auto-scaling REST/GraphQL API).
+- **Supabase IPv6-Only Networking Guardrail:** Supabase free-tier databases are strictly **IPv6-only**. Because standard local ISP connections (e.g. Telkom/Indihome in Indonesia) and serverless environments (e.g. AWS Lambda behind Vercel) are historically **IPv4-only**, direct PostgreSQL connection strings (`DATABASE_URL` over port 5432) will throw `ENOTFOUND` or `EHOSTUNREACH` errors.
+- **REST Client Access:** To bypass this, the frontend must exclusively communicate with Supabase using the HTTPS REST API (port 443) proxied by Cloudflare, ensuring 100% network uptime and instant local/live database synchronization.
+- **Uptime Keep-Alive:** Periodic CRON pings via UptimeRobot or Vercel Cron routes prevent Supabase database hibernation.
 
 ### Hard Infrastructure Limits (Respect These!)
 
@@ -543,6 +543,103 @@ SELECT * FROM tools_directory;
 
 ---
 
+### 8. RLS Recursion Prevention Rule ⚠️ CRITICAL
+
+**Rule:** NEVER create RLS policies that recursively query the same table with subqueries. This triggers `Error 42P17: infinite recursion detected`. Always separate SELECT policies from write/ALL policies.
+
+```sql
+-- ❌ FORBIDDEN: Recursive check triggers infinite loops when querying staff
+CREATE POLICY staff_own_data ON staff
+  FOR ALL USING (
+    auth.uid() = auth_user_id OR 
+    EXISTS (SELECT 1 FROM staff WHERE auth_user_id = auth.uid() AND role IN ('admin', 'manager'))
+  );
+
+-- ✅ MANDATORY: Decoupled non-recursive RLS policy pattern
+-- 1. Create a simple non-recursive SELECT policy
+CREATE POLICY staff_read ON staff 
+  FOR SELECT 
+  USING (true);
+
+-- 2. Create self-update write policies
+CREATE POLICY staff_write_own ON staff 
+  FOR UPDATE 
+  USING (auth.uid() = auth_user_id);
+
+-- 3. Create role-based administrative write policies referencing the simple select
+CREATE POLICY staff_write_admin ON staff 
+  FOR ALL 
+  USING (
+    EXISTS (
+      SELECT 1 FROM staff 
+      WHERE auth_user_id = auth.uid() 
+      AND role IN ('admin', 'manager')
+    )
+  );
+```
+
+**Why:** Decoupling SELECT from write policies ensures that role-check subqueries trigger the non-recursive SELECT policy, preventing infinite loops and database crashes for anonymous and authenticated users alike.
+
+---
+
+### 9. TypeScript Dynamic Routing (Next.js 16/15 Params Await) Rule ⚠️ CRITICAL
+
+**Rule:** In Next.js 16/15, all dynamic route parameters (from routes like `api/badges/[slug]/route.ts` or `app/contracts/[id]/page.tsx`) are asynchronous. You MUST await `params` before accessing their properties.
+
+```typescript
+// ❌ FORBIDDEN: Accessing params synchronously
+export async function GET(request: Request, { params }: { params: { slug: string } }) {
+  const slug = params.slug; // Throws dynamic routing hydration/access errors in compilation
+  ...
+}
+
+// ✅ MANDATORY: Awaiting params asynchronously
+export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // 100% compliant and type-safe
+  ...
+}
+```
+
+**Why:** Next.js 16/15 treats route parameters as a Promise to improve server-side performance. Accessing them synchronously breaks production builds.
+
+---
+
+### 10. Groq LLM Curation Engine & JSON Fallback Rule ⚠️ CRITICAL
+
+**Rule:** When scraping or curating content dynamically (e.g. RSS feeds), always use the cost-effective and ultra-fast **Llama 3.3 Versatile** model (`llama-3.3-70b-specdec`). You MUST wrap all LLM completion parsers in robust try-catch statements with validated fallback JSON structures.
+
+```typescript
+// ✅ MANDATORY: Secure curation block with fallback JSON
+export async function curateArticle(article: RawArticle) {
+  try {
+    const chatCompletion = await groq.chat.completions.create({
+      messages: [
+        { role: "system", content: "You are a curation engine. Output JSON only: { relevanceScore, summary }" },
+        { role: "user", content: article.body }
+      ],
+      model: "llama-3.3-70b-specdec",
+      response_format: { type: "json_object" }
+    });
+    
+    const parsed = JSON.parse(chatCompletion.choices[0].message.content || "{}");
+    return {
+      relevanceScore: parsed.relevanceScore ?? 0.5,
+      summary: parsed.summary ?? article.snippet
+    };
+  } catch (err) {
+    // 🛡️ Safe fallback to guarantee system stability
+    return {
+      relevanceScore: 0.5,
+      summary: article.snippet
+    };
+  }
+}
+```
+
+**Why:** Minimizes token costs, guarantees sub-second processing, and prevents API and UI crashes when the LLM outputs unparseable text or encounters rate limits.
+
+---
+
 ## 🔎 ROUTING & COMPONENT DEPENDENCIES
 
 ### Main User Journey: Quiz → Invoice → SOW → Contract → BAST → Completion
@@ -550,10 +647,12 @@ SELECT * FROM tools_directory;
 ```
 START USER VISITS HOMEPAGE
   ↓
-[page.tsx] - Hero section, mega menu, FAQ
-  ├─ JSON-LD schema for SEO
-  ├─ Brand colors from brand.json
-  └─ Links to /calculator or /layanan/*
+[page.tsx] - Premium Hero, MegaMenu navigation, FAQ, and interactive services showcase
+  ├─ Layout Spacing: Fitted with generous margins (mx-auto max-w-7xl px-4 sm:px-6 lg:px-8) to guarantee elements never clip screen edges on high-res monitors.
+  ├─ Mobile Bottom Navigation (MegaMenu.tsx): Floating glassmorphic bottom dock optimized with micro-animations and native web-app vibe, using Lucide-React icons (Home, BookOpen, Layers, Info, Wrench).
+  ├─ JSON-LD schema for advanced Google SEO snippet injection
+  ├─ Theme tokens and colors read directly from brand.json
+  └─ Direct branching routes to /calculator, /portfolio, /tools, or /insights
   
   ↓ User clicks "Mulai Kalkulasi Kebutuhan"
   

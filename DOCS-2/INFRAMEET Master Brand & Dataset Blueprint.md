@@ -14,6 +14,7 @@ INFRAMEET dirancang untuk memancarkan **"Kejelasan & Kepercayaan" (Clarity & Tru
 
 * **Tagline Utama:** "Fondasi Presisi. Pertumbuhan Pasti."  
 * **Brand Archetype:** *The Competent Partner* & *The Architect*. Menyelesaikan masalah dengan struktur, logika, dan data.
+* **Anti-AI Stigma Guardrail (Human-Touch Focus):** Kami dengan ketat menghindari penggunaan kata "AI" secara agresif atau berlebihan di seluruh media publikasi dan antarmuka pengguna. Kami memahami bahwa AI memiliki stigma negatif bagi sebagian orang (dianggap malas, tidak orisinal, atau otomatisasi tanpa nyawa). Oleh karena itu, semua elemen kecerdasan platform dipasarkan dengan istilah teknis profesional seperti *"Curation Engine"*, *"Smart Lead Qualification"*, *"Dynamic Formatting Parser"*, atau *"Predictive Analytics Pipeline"*. Seluruh salinan teks (copywriting) berfokus pada hasil presisi, keahlian tim ahli (human-in-the-loop), serta kepatuhan metodologi.
 
 ### **1.2 User Persona (Siapa yang Kita Layani?)**
 
@@ -155,32 +156,25 @@ Matriks harga dirancang menggunakan psikologi *Anchor Pricing* dan strategi *Ups
 ### **7.1 B2B Enterprise & Growth Catalog (High-Ticket)**
 
 | **Kode Layanan** | **Kategori / Tier** | **Deskripsi Layanan & SLA** | **Harga Dasar (IDR)** |
-
+|------|------|------|------|
 | B2B-WEB-STT | **Web Starter** | Landing Page (1-3 Halaman), Next.js, SEO Basic, Form Leads. | 7.500.000 |
-
 | B2B-WEB-COR | **Web Core** | CMS Headless, SEO Ready, 5 Halaman Utama, Integrasi Analytics. | 15.000.000 |
-
-| B2B-WEB-PRO | **Web Enterprise** | Core \+ Payment Gateway (Xendit), Dashboard Admin, Auth System. | 35.000.000+ |
-
+| B2B-WEB-PRO | **Web Enterprise** | Core + Payment Gateway (Xendit), Dashboard Admin, Auth System. | 35.000.000+ |
+| B2B-HST-VPS | **Cloud VPS Hosting** | Modular deployment to any Cloud/VPS VPS provider (Hostinger, AWS, DigitalOcean). | Custom / Modular |
 | B2B-ADS-01 | **Ads Engine** | Setup Meta/Google Ads, Konversi Pixel/CAPI, 3 Materi Kreatif. | 4.500.000/Bln |
-
 | B2B-SEO-01 | **SEO Retainer** | 4 Artikel Pilar (GEO-ready), Tech SEO Audit, Laporan Bulanan. | 5.000.000/Bln |
-
 | B2B-MNT-01 | **Maintenance Pro** | SLA Respons 2 Jam, Backup Mingguan, 10 Jam Update Konten. | 2.500.000/Bln |
 
 ### **7.2 Academic & Research Support Catalog (Volume-Driven)**
 
 | **Kode Layanan** | **Kategori Layanan** | **Batasan Paket Dasar (Base)** | **Add-ons (Upsell)** | **Harga Dasar** |
-
-| ACD-LYT-P1 | **Layout Proposal** | Maks 30 Halaman, Sitasi Otomatis (Mendeley), Cek Typo. | \+150K (\>30 Hal) | 250.000 |
-
-| ACD-LYT-S1 | **Layout Skripsi/Tesis** | Maks 100 Halaman, Margin Standar Kampus, Daftar Isi Otomatis. | \+250K (Parafrasa Turntin \-10%) | 550.000 |
-
-| ACD-LYT-J1 | **Layout Jurnal (Sinta/Scopus)** | Format 2 Kolom, Standar IEEE/Harvard, Tabel Saintifik. | \+150K (Translate Abstrak Native) | 400.000 |
-
-| ACD-DTA-B1 | **Olah Data Kuantitatif** | Uji Asumsi Klasik, Regresi Linear Berganda (SPSS), Validitas. | \+300K (SEM-PLS / Path Analysis) | 600.000 |
-
-| ACD-SLD-P1 | **Slide Sidang Premium** | Maks 20 Slide, Template Profesional, Visualisasi Grafik Interaktif. | \+200K (Bantuan Script Presentasi) | 300.000 |
+|------|------|------|------|------|
+| ACD-LYT-P1 | **Layout Proposal** | Maks 30 Halaman, Sitasi Otomatis (Mendeley), Cek Typo. | +150K (>30 Hal) | 250.000 |
+| ACD-LYT-S1 | **Layout Skripsi/Tesis** | Maks 100 Halaman, Margin Standar Kampus, Daftar Isi Otomatis. | +250K (Parafrasa Turntin -10%) | 550.000 |
+| ACD-LYT-J1 | **Layout Jurnal (Sinta/Scopus)** | Format 2 Kolom, Standar IEEE/Harvard, Tabel Saintifik. | +150K (Translate Abstrak Native) | 400.000 |
+| ACD-DTA-B1 | **Olah Data Kuantitatif** | Uji Asumsi Klasik, Regresi Linear Berganda (SPSS), Validitas. | +300K (SEM-PLS / Path Analysis) | 600.000 |
+| ACD-SLD-P1 | **Slide Sidang Premium** | Maks 20 Slide, Template Profesional, Visualisasi Grafik Interaktif. | +200K (Bantuan Script Presentasi) | 300.000 |
+| ACD-TRN-P1 | **Turnitin Check & Report** | Comprehensive plagiarism analysis, digital integrity audit, S1-S3 standard. | +200K (Expedited delivery < 12h) | 250.000 |
 
 ## **BAGIAN 8: SKEMA JSON & DATASET AUTOMATION (READY-TO-USE)**
 
