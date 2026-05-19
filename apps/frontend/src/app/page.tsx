@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MegaMenu from "./components/MegaMenu";
+import Footer from "./components/Footer";
 import Breadcrumbs from "./components/Breadcrumbs";
 import { 
   Sparkles, 
@@ -684,84 +685,8 @@ export default async function Home() {
       </main>
 
       {/* 11. FAT FOOTER */}
-      <footer className="bg-[#020617] border-t border-slate-900 py-16">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-slate-900 pb-12">
-          {/* Logo and About */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-                <Sparkles className="w-4.5 h-4.5" />
-              </div>
-              <span className="font-extrabold text-lg text-slate-100">INFRAMEET</span>
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Arsitektur solusi infrastruktur digital B2B and asistensi riset ilmiah transparan didukung kecerdasan buatan.
-            </p>
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-              <Mail className="w-4 h-4 text-indigo-400" />
-              inframeet@emailforums.biz
-            </div>
-          </div>
-
-          {/* Silo B2B Links */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
-              Layanan Enterprise
-            </h4>
-            <ul className="space-y-2 text-xs font-semibold text-slate-400">
-              <li><Link href="/layanan/b2b" className="hover:text-indigo-400 transition-colors">Enterprise Web Apps</Link></li>
-              <li><Link href="/layanan/b2b" className="hover:text-indigo-400 transition-colors">SaaS &amp; Cloud Solutions</Link></li>
-              <li><Link href="/layanan/b2b" className="hover:text-indigo-400 transition-colors">Zero-Cost Cloud Deployment</Link></li>
-              <li><Link href="/layanan/b2b" className="hover:text-indigo-400 transition-colors">Speed &amp; SEO Optimizations</Link></li>
-            </ul>
-          </div>
-
-          {/* Silo Academic Links */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
-              Asistensi Akademik
-            </h4>
-            <ul className="space-y-2 text-xs font-semibold text-slate-400">
-              <li><Link href="/layanan/akademik" className="hover:text-emerald-400 transition-colors">Olah Data Kuantitatif SPSS</Link></li>
-              <li><Link href="/layanan/akademik" className="hover:text-emerald-400 transition-colors">Kepatuhan Turnitin Plagiasi</Link></li>
-              <li><Link href="/layanan/akademik" className="hover:text-emerald-400 transition-colors">Format Layouting Karya Ilmiah</Link></li>
-              <li><Link href="/layanan/akademik" className="hover:text-emerald-400 transition-colors">Sidang Deck Presentation</Link></li>
-            </ul>
-          </div>
-
-          {/* Directory Indexes */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
-              Direktori &amp; Sumber
-            </h4>
-            <ul className="space-y-2 text-xs font-semibold text-slate-400">
-              <li><Link href="/tools" className="hover:text-indigo-400 transition-colors">Hosting &amp; Cloud Directory</Link></li>
-              <li><Link href="/tools" className="hover:text-indigo-400 transition-colors">Academic Software Reviews</Link></li>
-              <li><Link href="/insights" className="hover:text-indigo-400 transition-colors">Analisis &amp; Ulasan Riset</Link></li>
-              <li><Link href="/calculator" className="hover:text-indigo-400 transition-colors">Kalkulator Harga Instan</Link></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 pt-12 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-slate-500">
-              © 2026 INFRAMEET. All rights reserved.
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4 text-xs font-semibold text-slate-500">
-            <Link href="/legal" className="hover:text-indigo-400 transition-colors">Syarat &amp; Ketentuan</Link>
-            <span>•</span>
-            <Link href="/legal" className="hover:text-indigo-400 transition-colors">Kebijakan Privasi</Link>
-            <span>•</span>
-            <span className="flex items-center gap-1.5 text-slate-500">
-              <ShieldCheck className="w-4 h-4 text-indigo-500" />
-              Secure RLS Sandbox Active
-            </span>
-          </div>
-        </div>
-      </footer>
+      <TrustBadges />
+      <Footer />
     </div>
   );
 }

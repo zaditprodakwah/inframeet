@@ -26,6 +26,7 @@ import {
 export default function MegaMenu() {
   const [isLayananOpen, setIsLayananOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-black/80 border-b border-slate-100 dark:border-zinc-900 transition-all">
@@ -43,7 +44,7 @@ export default function MegaMenu() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-5">
           <Link 
             href="/" 
             className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
@@ -172,12 +173,6 @@ export default function MegaMenu() {
           </div>
 
           <Link 
-            href="/tools" 
-            className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-          >
-            Tools Direktori
-          </Link>
-          <Link 
             href="/experts" 
             className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-bold text-indigo-600 dark:text-indigo-400"
           >
@@ -189,28 +184,36 @@ export default function MegaMenu() {
           >
             <ShieldCheck className="w-4 h-4 text-emerald-500" /> Verifikasi
           </Link>
-          <Link 
-            href="/insights" 
-            className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+
+          {/* Interactive Informasi Dropdown */}
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsInfoOpen(true)}
+            onMouseLeave={() => setIsInfoOpen(false)}
           >
-            Insights
-          </Link>
-          <Link 
-            href="/case-studies" 
-            className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-          >
-            Studi Kasus
-          </Link>
-          <Link 
-            href="/about" 
-            className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-          >
-            Tentang
-          </Link>
+            <button className="flex items-center gap-1.5 text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer py-2">
+              Informasi
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isInfoOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {isInfoOpen && (
+              <div className="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl shadow-xl p-3 space-y-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                <Link href="/insights" className="block px-4 py-2 text-xs font-bold text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-lg">
+                  Insights &amp; Edukasi
+                </Link>
+                <Link href="/case-studies" className="block px-4 py-2 text-xs font-bold text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-lg">
+                  Studi Kasus Proyek
+                </Link>
+                <Link href="/about" className="block px-4 py-2 text-xs font-bold text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-lg">
+                  Tentang &amp; Kepatuhan
+                </Link>
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* CTA Conversions Button */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <Link
             href="/calculator"
             className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold transition-all shadow-md shadow-indigo-600/10 flex items-center gap-2 cursor-pointer hover:shadow-indigo-500/20"
@@ -223,7 +226,7 @@ export default function MegaMenu() {
         {/* Mobile Hamburger Controls */}
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden w-10 h-10 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center justify-center text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900 cursor-pointer"
+          className="lg:hidden w-10 h-10 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center justify-center text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900 cursor-pointer"
         >
           {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -231,7 +234,7 @@ export default function MegaMenu() {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-100 dark:border-zinc-900 bg-white dark:bg-black p-6 space-y-4 animate-in slide-in-from-top-4 duration-200">
+        <div className="lg:hidden border-t border-slate-100 dark:border-zinc-900 bg-white dark:bg-black p-6 space-y-4 animate-in slide-in-from-top-4 duration-200">
           <Link 
             href="/" 
             onClick={() => setIsMobileMenuOpen(false)}
