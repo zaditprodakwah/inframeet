@@ -82,6 +82,79 @@ export default function CrowdSourcedSubmissionPage() {
     message: string;
   } | null>(null);
 
+  // Live PDDikti & DOI (Crossref) API Autocomplete Integration States
+  const [isFetchingLive, setIsFetchingLive] = useState(false);
+  const [doi, setDoi] = useState("");
+  const [isFetchingDoi, setIsFetchingDoi] = useState(false);
+
+  const handlePddiktiSearch = async () => {
+    if (!title.trim()) {
+      alert("Harap ketik nama kampus/sekolah terlebih dahulu di kolom Nama Resmi!");
+      return;
+    }
+    setIsFetchingLive(true);
+    try {
+      const res = await fetch(`https://api-frontend.kemdikbud.go.id/hit/${encodeURIComponent(title)}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.pt && data.pt.length > 0) {
+          const pt = data.pt[0];
+          const cleanName = pt.nama.replace(/<[^>]*>/g, ""); // strip tags
+          setTitle(cleanName);
+          setNpsn(pt.id.trim());
+          setCity(pt.singkatan || "Indonesia");
+          setProvince("Indonesia");
+          setAddress(`Kampus ${cleanName}`);
+          alert(`🎉 Data kampus terverifikasi ditemukan! Berhasil memuat NPSN/ID: ${pt.id.trim()}`);
+        } else {
+          alert("Kampus tidak ditemukan di pangkalan data PDDikti Kemendikbud. Anda dapat mengisi kolom secara manual.");
+        }
+      } else {
+        alert("Gagal terhubung ke server PDDikti Kemendikbud. Silakan isi secara manual.");
+      }
+    } catch (e) {
+      console.warn(e);
+      alert("API PDDikti sedang membatasi akses (CORS). Silakan isi detail kampus Anda secara manual.");
+    } finally {
+      setIsFetchingLive(false);
+    }
+  };
+
+  const handleDoiSearch = async () => {
+    if (!doi.trim()) {
+      alert("Harap masukkan nomor DOI (misal: 10.1016/j.chb.2020.106518)!");
+      return;
+    }
+    setIsFetchingDoi(true);
+    try {
+      const res = await fetch(`https://api.crossref.org/works/${encodeURIComponent(doi.trim())}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.message) {
+          const item = data.message;
+          const paperTitle = item.title ? item.title[0] : "Untitled Paper";
+          const paperJournal = item["container-title"] ? item["container-title"][0] : "Jurnal Ilmiah";
+          const paperYear = item.created ? new Date(item.created["date-time"]).getFullYear() : new Date().getFullYear();
+          const paperAuthors = item.author ? item.author.map((a: any) => `${a.given} ${a.family}`).join(", ") : "Peneliti";
+          
+          setTitle(paperTitle);
+          setPostSummary(`Diterbitkan pada ${paperJournal} (${paperYear}) oleh ${paperAuthors}.`);
+          setPostContent(`Judul Paper: ${paperTitle}\nPenulis: ${paperAuthors}\nJurnal: ${paperJournal}\nTahun: ${paperYear}\nDOI: ${doi}\n\nAbstrak / Catatan Analisis Ulasan:`);
+          alert(`🎉 Berhasil memuat data sitasi paper resmi dari Crossref!`);
+        } else {
+          alert("Data DOI tidak ditemukan di jaringan pangkalan Crossref.");
+        }
+      } else {
+        alert("Gagal terhubung ke API Crossref. Harap periksa kembali nomor DOI.");
+      }
+    } catch (e) {
+      console.warn(e);
+      alert("Tidak dapat menghubungi server Crossref. Silakan masukkan detail esai secara manual.");
+    } finally {
+      setIsFetchingDoi(false);
+    }
+  };
+
   const handleReset = () => {
     setTitle("");
     setNpsn("");
@@ -735,14 +808,24 @@ export default function CrowdSourcedSubmissionPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
                           <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Nama Resmi Institusi Pendidikan</label>
-                          <input
-                            type="text"
-                            required
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            placeholder="Universitas Gadjah Mada"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
-                          />
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              required
+                              value={title}
+                              onChange={(e) => setTitle(e.target.value)}
+                              placeholder="Universitas Gadjah Mada"
+                              className="flex-grow px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            />
+                            <button
+                              type="button"
+                              onClick={handlePddiktiSearch}
+                              disabled={isFetchingLive}
+                              className="px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-wider font-mono cursor-pointer transition-colors disabled:opacity-50 shrink-0"
+                            >
+                              {isFetchingLive ? "Mencari..." : "Cari PDDikti"}
+                            </button>
+                          </div>
                         </div>
                         <div className="space-y-1.5">
                           <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Kategori Institusi</label>
@@ -925,6 +1008,31 @@ export default function CrowdSourcedSubmissionPage() {
                   {/* INSIGHT UGC TAB */}
                   {activeFormTab === "post" && (
                     <div className="space-y-4">
+                      {/* DOI RESOLVER INPUT FOR INTEGRATION */}
+                      <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-wider text-indigo-400 font-mono block">Import Otomatis via DOI Paper (Opsional)</label>
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            value={doi}
+                            onChange={(e) => setDoi(e.target.value)}
+                            placeholder="Contoh: 10.1016/j.chb.2020.106518"
+                            className="flex-grow px-4 py-2.5 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 font-mono"
+                          />
+                          <button
+                            type="button"
+                            onClick={handleDoiSearch}
+                            disabled={isFetchingDoi}
+                            className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-wider font-mono cursor-pointer transition-colors disabled:opacity-50 shrink-0"
+                          >
+                            {isFetchingDoi ? "Mengimpor..." : "Impor Citasi"}
+                          </button>
+                        </div>
+                        <p className="text-[9px] text-slate-500 leading-relaxed">
+                          Masukkan kode DOI paper ilmiah resmi untuk menarik metadata (Judul, Jurnal, Penulis) secara langsung dari sistem DOI Resolver Crossref global.
+                        </p>
+                      </div>
+
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
                           <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Judul Esai / Artikel Riset</label>
