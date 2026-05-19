@@ -1,7 +1,7 @@
 # 🚀 INFRAMEET PLATFORM HUB - ARCHITECTURE & OPERATIONS MANUAL
 
 **For: Developers, Administrators, Integrators, and Advanced LLMs**
-**Version:** 6.5-Dynamic | **Last Updated:** May 18, 2026
+**Version:** 7.0-Dynamic | **Last Updated:** May 19, 2026
 **Purpose:** Semantic map and engineering handbook of the entire INFRAMEET architecture for rapid onboarding, deployment, and development.
 
 ---
@@ -98,6 +98,28 @@
 - Pricing engine (`pricingMath.ts`) reads `b2b_modular_components` + applies formulas
 - Quiz redirects to pricing tier selections based on service SKU
 - Invoices generated server-side using `services.json` (NOT client-submitted amounts)
+
+---
+
+## 🌟 RECENT ARCHITECTURAL ACCOMPLISHMENTS (May 19, 2026)
+
+### 1. Live PDDikti Kemendikbud Autocomplete Integration
+- **Objective:** Streamline and standardize the contribution portal for students, researchers, and campus representatives.
+- **Implementation:** Integrated an autocomplete search field in `tools/submission/page.tsx` and `tools/institusi/page.tsx` that directly hits the official Indonesian Ministry of Education API (`https://api-frontend.kemdikbud.go.id/hit/{query}`).
+- **Behavior:** Dynamically fetches school/campus names and automatically populates related fields (NPSN, city, province, and address) organically in the contribution database.
+
+### 2. Crossref DOI Metadata Auto-Fill
+- **Objective:** Eliminate manual data entry and formatting for scientific documents and academic paper contributions.
+- **Implementation:** Embedded the Crossref API resolver (`https://api.crossref.org/works/{doi}`) in the Contribution Submission Portal.
+- **Behavior:** Resolves any valid DOI query instantly, automatically populating the paper's title, journal, authors, publication year, and abstract to standardize submission records.
+
+### 3. Concurrent Scraper & Free-Tier Garbage Collection Engine
+- **Objective:** Keep the news, insights, and technological aggregators highly performant under Vercel and Supabase Free Tier constraints.
+- **Implementation:** Fully optimized `apps/frontend/src/app/api/cron/rss-scrape/route.ts`.
+- **Parallel Scrape Loop:** Uses `Promise.allSettled()` to fetch, validate, and scrape RSS feeds concurrently, eliminating sequential bottlenecks.
+- **10-Second Vercel Free-Tier Guardrail:** Implemented a smart rotation queue. In each run, the scraper fetches only the **3 oldest synced feeds** (ordered by `last_sync_at` ascending), ensuring the cron job finishes in under 5 seconds while rotating through all 12 feeds throughout the hour.
+- **Structured JSON Curation Prompts:** Instructs Groq LPU and Gemini Fallback REST APIs to curate summaries in strict JSON formats (Executive Summary TL;DR + Q&A FAQs) that automatically align with the frontend's dynamic rendering.
+- **500MB Supabase Free-Tier Storage Guardrail:** Integrated an append-only cleanup procedure that deletes older scraped feed items older than 14 days, protecting the database from exceeding free tier bounds.
 
 ---
 
