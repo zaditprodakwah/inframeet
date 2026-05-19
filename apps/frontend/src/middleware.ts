@@ -56,14 +56,15 @@ export async function middleware(req: NextRequest) {
         return res;
       }
 
-      // Check if user is an admin by querying the staff table
-      const { data: staff, error: staffError } = await supabase
-        .from("staff")
-        .select("role, is_active")
-        .eq("auth_user_id", user.id)
+      // Check if user is an admin by querying the user_roles table (replaces the legacy 'staff' table)
+      const { data: userRole, error: roleError } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
         .single();
 
-      if (staffError || !staff || staff.role !== "admin" || !staff.is_active) {
+      if (roleError || !userRole) {
         if (isAdminApiPath) {
           return NextResponse.json({ error: "Akses Ditolak: Peran Administrator tidak aktif (403 Forbidden)." }, { status: 403 });
         }
@@ -74,6 +75,7 @@ export async function middleware(req: NextRequest) {
       return unauthorizedResponse();
     }
   }
+
 
   return res;
 }

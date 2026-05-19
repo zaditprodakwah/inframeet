@@ -24,26 +24,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/layanan/b2b",
   ];
 
-  // Retrieve dynamic sitemap overrides from settings table if present
   let changeFrequency = "weekly";
   let priorityHome = 1.0;
   let priorityRoutes = 0.8;
-
-  try {
-    const { data: settings } = await supabase
-      .from("system_settings")
-      .select("value")
-      .eq("key", "sitemap_configurations")
-      .single();
-
-    if (settings && settings.value) {
-      changeFrequency = settings.value.change_frequency || "weekly";
-      priorityHome = settings.value.priority_home ?? 1.0;
-      priorityRoutes = settings.value.priority_routes ?? 0.8;
-    }
-  } catch (e) {
-    console.warn("Fallback to default sitemap priorities:", e);
-  }
 
   const sitemapEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
@@ -52,26 +35,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === "" ? priorityHome : priorityRoutes,
   }));
 
-  // Append dynamic insights articles from Supabase
+  // Append dynamic polymorphic storefront directories from omni_directory
   try {
-    const { data: insights } = await supabase
-      .from("rss_items")
-      .select("id, created_at")
-      .order("created_at", { ascending: false });
+    const { data: entities } = await supabase
+      .from("omni_directory")
+      .select("slug, updated_at")
+      .order("updated_at", { ascending: false });
 
-    if (insights && insights.length > 0) {
-      insights.forEach((item: any) => {
-        sitemapEntries.push({
-          url: `${baseUrl}/insights/${item.id}`,
-          lastModified: new Date(item.created_at || Date.now()),
-          changeFrequency: "daily",
-          priority: 0.6,
-        });
+    if (entities && entities.length > 0) {
+      entities.forEach((entity: any) => {
+        if (entity.slug) {
+          sitemapEntries.push({
+            url: `${baseUrl}/${entity.slug}`,
+            lastModified: new Date(entity.updated_at || Date.now()),
+            changeFrequency: "daily",
+            priority: 0.7,
+          });
+        }
       });
     }
   } catch (err) {
-    console.error("Failed to append dynamic insights entries to sitemap:", err);
+    console.error("Failed to append dynamic omni_directory entries to sitemap:", err);
   }
 
   return sitemapEntries;
 }
+

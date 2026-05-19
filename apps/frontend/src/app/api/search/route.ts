@@ -19,46 +19,46 @@ export async function GET(req: NextRequest) {
     }
 
     // 1. Parallel executions using Promise.all
-    const [matchedServices, toolsResult, insightsResult] = await Promise.all([
+    const [matchedServices, entitiesResult] = await Promise.all([
       // A. Local static services text matching
       searchLocalServices(query),
       
-      // B. PostgreSQL GIN Full-Text Search on tools_directory
+      // B. High-performance ILIKE Search on polymorphic omni_directory
       supabaseAdmin
-        .from("tools_directory")
-        .select("id, name, category, description, website_url, affiliate_url")
-        .textSearch("fts", query)
-        .limit(5),
-
-      // C. PostgreSQL GIN Full-Text Search on rss_items
-      supabaseAdmin
-        .from("rss_items")
-        .select("id, title, content_summary, published_at, source_url")
-        .textSearch("fts", query)
-        .limit(5)
+        .from("omni_directory")
+        .select("id, name, slug, entity_type, category, description, website_url, trust_score, is_featured")
+        .or(`name.ilike.%${query}%,category.ilike.%${query}%,description.ilike.%${query}%`)
+        .eq("is_public", true)
+        .order("is_featured", { ascending: false })
+        .order("trust_score", { ascending: false })
+        .limit(10)
     ]);
 
-    if (toolsResult.error) {
-      console.error("FTS tools lookup error:", toolsResult.error);
+    if (entitiesResult.error) {
+      console.error("Polymorphic omni_directory lookup error:", entitiesResult.error);
     }
-    if (insightsResult.error) {
-      console.error("FTS insights lookup error:", insightsResult.error);
-    }
+
+    const entities = entitiesResult.data || [];
+
+    // Filter tools for legacy UI component compatibility
+    const tools = entities.filter((e: any) => e.entity_type === "SAAS_PRODUCT" || e.category?.toLowerCase() === "saas" || e.category?.toLowerCase() === "tools");
 
     return NextResponse.json({
       services: matchedServices,
-      tools: toolsResult.data || [],
-      insights: insightsResult.data || []
+      entities: entities,
+      tools: tools,
+      insights: [] // Purged rss_items
     });
 
   } catch (error: any) {
-    console.error("Parallel search engine crashed:", error);
+    console.error("Polymorphic search engine crashed:", error);
     return NextResponse.json(
       { error: "Terjadi kesalahan internal pemrosesan pencarian." },
       { status: 500 }
     );
   }
 }
+
 
 // Custom simple text-match resolver for local static services dataset
 async function searchLocalServices(q: string) {

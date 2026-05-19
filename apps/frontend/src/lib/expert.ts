@@ -40,9 +40,15 @@ export async function submitExpertOnboarding(prevState: any, formData: FormData)
   }
 
   try {
+    // Authenticate the user submitting the form
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return { success: false, message: "Autentikasi gagal. Silakan masuk terlebih dahulu." };
+    }
+
     const rawData = Object.fromEntries(formData.entries());
     
-    // Parse tags from JSON string safely
+    // Parse tags safely
     let parsedTags: string[] = [];
     try {
       parsedTags = JSON.parse((rawData.tags as string) || "[]");
@@ -74,17 +80,27 @@ export async function submitExpertOnboarding(prevState: any, formData: FormData)
     }
 
     const baseSlug = slugify(validated.data.full_name);
-    // Add random 4 digit suffix to ensure URL uniqueness
     const uniqueSlug = `${baseSlug}-${Math.floor(1000 + Math.random() * 9000)}`;
 
+    // Insert as a personal entity inside polymorphic omni_directory
     const { data: expert, error } = await supabaseAdmin
-      .from("expert_directory")
+      .from("omni_directory")
       .insert({
-        ...validated.data,
+        owner_id: user.id,
+        entity_type: "personal",
+        name: validated.data.full_name,
         slug: uniqueSlug,
-        is_public: false,
-        profile_completion_score: 65, // Base completion score upon sign-up
-        expert_tier: "BRONZE",
+        website_url: validated.data.contact_routing.email,
+        logo_url: null,
+        description: `${validated.data.title}\n\n${validated.data.bio_summary}`,
+        verification_status: "unverified",
+        trust_score: 15.0,
+        category: "personal",
+        subcategory: validated.data.category,
+        tags: validated.data.tags,
+        email: validated.data.contact_routing.email,
+        phone: validated.data.contact_routing.whatsapp,
+        is_public: false
       })
       .select()
       .single();
@@ -96,10 +112,10 @@ export async function submitExpertOnboarding(prevState: any, formData: FormData)
 
     // Write to audit log
     await auditLog({
-      entity_type: "expert_directory",
+      entity_type: "omni_directory",
       entity_id: expert.id,
       action: "CREATE_PENDING",
-      changes: { status: "pending", full_name: expert.full_name },
+      changes: { status: "pending", name: expert.name },
       ip_address: "system-onboarding",
       user_agent: "onboarding-form",
     });
@@ -120,9 +136,8 @@ export async function submitExpertOnboarding(prevState: any, formData: FormData)
 
   } catch (err: any) {
     console.error("submitExpertOnboarding action failed:", err);
-    // Log crash in audit using NIL UUID
     await auditLog({
-      entity_type: "expert_directory",
+      entity_type: "omni_directory",
       entity_id: "00000000-0000-0000-0000-000000000000",
       action: "CREATE_FAILED",
       changes: { error: err.message },
@@ -149,40 +164,42 @@ export async function approveExpert(expertId: string) {
       return { success: false, message: "Autentikasi gagal. Silakan masuk terlebih dahulu." };
     }
 
-    // 2. Query staff table to verify admin or manager role
-    const { data: staff, error: staffError } = await supabaseAdmin
-      .from("staff")
-      .select("id, role")
-      .eq("auth_user_id", user.id)
+    // 2. Query user_roles table to verify admin or moderator role
+    const { data: userRole, error: roleError } = await supabaseAdmin
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", user.id)
+      .eq("role", "admin")
       .single();
 
-    if (staffError || !staff || !["admin", "manager"].includes(staff.role)) {
-      return { success: false, message: "Akses ditolak: Hanya Admin atau Manager yang diizinkan melakukan persetujuan." };
+    if (roleError || !userRole) {
+      return { success: false, message: "Akses ditolak: Hanya Admin yang diizinkan melakukan persetujuan." };
     }
 
-    // 3. Perform update of expert state to active/public
+    // 3. Perform update of expert state to active/public and basic_verified status
     const { data: expert, error: updateError } = await supabaseAdmin
-      .from("expert_directory")
+      .from("omni_directory")
       .update({
         is_public: true,
-        profile_completion_score: 100, // Score goes to 100% upon verification
+        verification_status: "basic_verified",
+        trust_score: 45.0, // Base approved score
+        trust_score_updated_at: new Date().toISOString()
       })
       .eq("id", expertId)
       .select()
       .single();
 
     if (updateError || !expert) {
-      console.error("Failed to approve expert record in database:", updateError);
-      return { success: false, message: `Gagal memperbarui status pakar: ${updateError?.message || "Tidak ditemukan"}` };
+      console.error("Failed to approve entity record in database:", updateError);
+      return { success: false, message: `Gagal memperbarui status: ${updateError?.message || "Tidak ditemukan"}` };
     }
 
-    // 4. Log actions to the audit trail
+    // 4. Log actions to the system_events audit trail
     await auditLog({
-      entity_type: "expert_directory",
+      entity_type: "omni_directory",
       entity_id: expert.id,
       action: "APPROVE_SUCCESS",
-      performed_by_staff_id: staff.id,
-      changes: { is_public: true, previous_status: "pending" },
+      changes: { is_public: true, previous_status: "unverified" },
       ip_address: "admin-console",
       user_agent: "admin-approvals-portal",
     });
@@ -197,11 +214,11 @@ export async function approveExpert(expertId: string) {
     // 6. Revalidate pages for immediate layout updates
     revalidatePath("/admin/expert-approvals");
     revalidatePath("/experts");
-    revalidatePath(`/experts/${expert.slug}`);
+    revalidatePath(`/${expert.slug}`);
 
     return { 
       success: true, 
-      message: `Sukses menyetujui dan mempublikasikan profil pakar ${expert.full_name}!` 
+      message: `Sukses menyetujui dan mempublikasikan profil pakar ${expert.name}!` 
     };
 
   } catch (err: any) {

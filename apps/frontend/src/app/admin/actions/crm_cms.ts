@@ -403,10 +403,24 @@ export async function moderateUgcSubmission(id: string, newStatus: "APPROVED" | 
       return { success: false, message: "Database offline." };
     }
 
+    const mappedStatus = validated.newStatus === "APPROVED" ? "PUBLISHED" : "REJECTED";
+
+    // 1. Get the submission details before updating
+    const { data: sub, error: fetchErr } = await supabaseAdmin
+      .from("content_submissions")
+      .select("*")
+      .eq("id", validated.id)
+      .single();
+
+    if (fetchErr || !sub) {
+      return { success: false, message: `Submission tidak ditemukan: ${fetchErr?.message}` };
+    }
+
+    // 2. Perform database update status
     const { error } = await supabaseAdmin
       .from("content_submissions")
       .update({
-        status: validated.newStatus,
+        status: mappedStatus,
         updated_at: new Date().toISOString()
       })
       .eq("id", validated.id);
@@ -416,14 +430,73 @@ export async function moderateUgcSubmission(id: string, newStatus: "APPROVED" | 
       return { success: false, message: error.message };
     }
 
+    // 3. If APPROVED (PUBLISHED), promote the content to active tables
+    if (mappedStatus === "PUBLISHED") {
+      if (sub.type === "insight") {
+        const { data: feed } = await supabaseAdmin.from("rss_feeds").select("id").limit(1).single();
+        const feedId = feed?.id || null;
+
+        const { error: insErr } = await supabaseAdmin
+          .from("rss_items")
+          .insert({
+            feed_id: feedId,
+            title: sub.title,
+            slug: sub.slug,
+            link: `/insights/${sub.slug}`,
+            summary: `**Executive Summary (TL;DR):**\n- ${sub.draft_data?.summary || sub.draft_data?.content || "Ringkasan Ulasan Kontribusi Publik."}\n\n**FAQ:**\n* **Q: Apa fokus bahasan esai kontribusi ini?**\n  A: Membahas topik seputar riset, teknologi, atau aspek bisnis yang diajukan oleh komunitas kami.`,
+            content_html: sub.draft_data?.content || "",
+            author: sub.draft_data?.contributed_by || "Kontributor Komunitas",
+            published_at: new Date().toISOString(),
+            is_published_to_index: true,
+            relevance_score: 0.95,
+            categories: sub.draft_data?.tags || ["General"]
+          });
+
+        if (insErr) {
+          console.error("Gagal mempromosikan insight ke rss_items:", insErr);
+        }
+      } else if (sub.type === "case_study") {
+        const { error: insErr } = await supabaseAdmin
+          .from("portfolio_cases")
+          .insert({
+            title: sub.title,
+            client_name: sub.draft_data?.contributor || "Klien Umum",
+            category: sub.draft_data?.category || "B2B Solutions",
+            technologies: sub.draft_data?.tags || [],
+            metrics_impact: sub.draft_data?.impact_metrics || "Hasil Terverifikasi",
+            is_published: true
+          });
+
+        if (insErr) {
+          console.error("Gagal mempromosikan case study ke portfolio_cases:", insErr);
+        }
+      } else if (sub.type === "tool") {
+        const { error: insErr } = await supabaseAdmin
+          .from("tools_directory")
+          .insert({
+            name: sub.title,
+            category: sub.draft_data?.category || "Utility",
+            description: sub.draft_data?.description || "",
+            website_url: sub.draft_data?.website_url || "",
+            pricing_info: sub.draft_data?.pricing_info || "Free",
+            tags: sub.draft_data?.tags || [],
+            team_uses: false
+          });
+
+        if (insErr) {
+          console.error("Gagal mempromosikan tool ke tools_directory:", insErr);
+        }
+      }
+    }
+
     // Record secure audit trail event
     await insertAuditLog(
       session.staffId,
       session.actorEmail,
       "content_submissions",
       validated.id,
-      `UGC_${validated.newStatus}`,
-      { status: validated.newStatus }
+      `UGC_${mappedStatus}`,
+      { status: mappedStatus, type: sub.type }
     );
 
     // Fire-and-Forget Omnichannel Webhook: trigger background integrations asynchronously (no blocking await)
@@ -431,13 +504,15 @@ export async function moderateUgcSubmission(id: string, newStatus: "APPROVED" | 
     fetch(`${webhookUrl}/api/admin/rss/curate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ submissionId: validated.id, action: validated.newStatus })
+      body: JSON.stringify({ submissionId: validated.id, action: mappedStatus })
     }).catch(err => {
       console.log("Omnichannel webhook background sync triggered (non-blocking).");
     });
 
     revalidatePath("/admin/ugc");
-    return { success: true, message: `Sukses memoderasi UGC menjadi ${validated.newStatus}!` };
+    revalidatePath("/insights");
+    revalidatePath("/case-studies");
+    return { success: true, message: `Sukses memoderasi UGC menjadi ${mappedStatus} dan mempublikasikannya!` };
   } catch (err: any) {
     console.error("Critical error in moderateUgcSubmission:", err);
     return { success: false, message: err?.message || "Internal UGC moderation failure." };

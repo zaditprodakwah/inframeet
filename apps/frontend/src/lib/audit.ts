@@ -34,20 +34,26 @@ export async function auditLog({
     }
 
     // Ensure entity_id is a valid UUID
-    const cleanEntityId = isValidUUID(entity_id) ? entity_id : NIL_UUID;
+    const cleanEntityId = isValidUUID(entity_id) ? entity_id : null;
 
-    const { error } = await supabaseAdmin.from("audit_log").insert({
-      entity_type,
-      entity_id: cleanEntityId,
-      action,
-      performed_by_staff_id,
+    // Clean IP Address to comply with Postgres INET (must be clean IPv4/IPv6, otherwise null)
+    const cleanIp = ip_address && /^[0-9a-fA-F.:]+$/.test(ip_address.split(",")[0].trim())
+      ? ip_address.split(",")[0].trim()
+      : null;
+
+    const { error } = await supabaseAdmin.from("system_events").insert({
+      event_type: action,
+      severity: "info",
+      target_entity_id: cleanEntityId,
+      target_table: entity_type,
+      description: `Action: ${action} performed on ${entity_type}`,
       changes: changes || {},
-      ip_address,
-      user_agent,
+      ip_address: cleanIp,
+      user_agent: user_agent === "system" ? null : user_agent,
     });
 
     if (error) {
-      console.error("Failed to write to audit_log table:", error);
+      console.error("Failed to write to system_events table:", error);
       return { success: false, error: error.message };
     }
 
@@ -57,3 +63,4 @@ export async function auditLog({
     return { success: false, error: err.message };
   }
 }
+

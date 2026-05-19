@@ -10,6 +10,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 // 1. Standard Client for user/client transactions (inherits RLS)
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabaseClient = supabase; // Compatibility alias
 
 // 2. Admin Client for bypasses and system operations (bypasses RLS)
 // Note: This must only be imported and executed in server-side environments (Server Components, API routes).
@@ -21,3 +22,4 @@ export const supabaseAdmin = supabaseServiceKey
       },
     })
   : null;
+
