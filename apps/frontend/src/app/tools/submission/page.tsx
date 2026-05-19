@@ -22,21 +22,32 @@ import {
   Lock,
   X,
   HelpCircle,
-  FileSignature
+  FileSignature,
+  Users,
+  Compass,
+  FileCode
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type DocTab = "kb" | "tor" | "tos" | "mou" | "policy";
+type FormTab = "expert" | "education" | "tool" | "post" | "case_study";
 
 export default function CrowdSourcedSubmissionPage() {
   const [activeDocTab, setActiveDocTab] = useState<DocTab>("kb");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeFormTab, setActiveFormTab] = useState<"education" | "tool" | "post">("education");
+  const [activeFormTab, setActiveFormTab] = useState<FormTab>("expert");
   
   // Universal Form States
   const [title, setTitle] = useState("");
   const [contributor, setContributor] = useState("");
   const [email, setEmail] = useState("");
+  
+  // Expert Profile States (Individu vs Organisasi)
+  const [expertType, setExpertType] = useState<"INDIVIDU" | "ORGANISASI">("INDIVIDU");
+  const [expertRole, setExpertRole] = useState("");
+  const [expertSkills, setExpertSkills] = useState("");
+  const [expertBio, setExpertBio] = useState("");
+  const [orgType, setOrgType] = useState("Kampus / Universitas");
   
   // Education States
   const [eduCategory, setEduCategory] = useState<"PERGURUAN_TINGGI" | "SEKOLAH">("PERGURUAN_TINGGI");
@@ -50,16 +61,19 @@ export default function CrowdSourcedSubmissionPage() {
   const [turnitinLimit, setTurnitinLimit] = useState("15%");
 
   // Tool States
-  const [toolCategory, setToolCategory] = useState("Research & Writing");
+  const [toolCategory, setToolCategory] = useState("Kalkulator Statistik & Riset");
   const [toolDescription, setToolDescription] = useState("");
   const [toolUrl, setToolUrl] = useState("");
   const [toolPricing, setToolPricing] = useState("Gratis / Freemium");
 
   // Post / Insight States
-  const [postType, setPostType] = useState<"insight" | "case_study">("insight");
   const [postContent, setPostContent] = useState("");
   const [postSummary, setPostSummary] = useState("");
   const [tags, setTags] = useState("");
+
+  // Case Study / Portfolio States
+  const [caseImpact, setCaseImpact] = useState("");
+  const [caseDescription, setCaseDescription] = useState("");
 
   // System States
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -79,6 +93,11 @@ export default function CrowdSourcedSubmissionPage() {
     setPostContent("");
     setPostSummary("");
     setTags("");
+    setExpertRole("");
+    setExpertSkills("");
+    setExpertBio("");
+    setCaseImpact("");
+    setCaseDescription("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -96,7 +115,22 @@ export default function CrowdSourcedSubmissionPage() {
       email,
     };
 
-    if (activeFormTab === "education") {
+    let typeToSubmit: "education" | "tool" | "insight" | "case_study" = "insight";
+
+    if (activeFormTab === "expert") {
+      typeToSubmit = "insight"; // Ahli/Lembaga dimoderasi dalam antrean insight
+      draftData = {
+        ...draftData,
+        submission_type: "EXPERT_PROFILE",
+        contributor_type: expertType,
+        org_type: expertType === "ORGANISASI" ? orgType : undefined,
+        role_or_focus: expertRole,
+        specialized_skills: expertSkills.split(",").map(s => s.trim()).filter(Boolean),
+        biography: expertBio,
+        tags: ["ahli", expertType.toLowerCase()]
+      };
+    } else if (activeFormTab === "education") {
+      typeToSubmit = "education";
       draftData = {
         ...draftData,
         category: eduCategory,
@@ -110,6 +144,7 @@ export default function CrowdSourcedSubmissionPage() {
         turnitin_limit: turnitinLimit,
       };
     } else if (activeFormTab === "tool") {
+      typeToSubmit = "tool";
       draftData = {
         ...draftData,
         category: toolCategory,
@@ -117,24 +152,36 @@ export default function CrowdSourcedSubmissionPage() {
         website_url: toolUrl,
         pricing_info: toolPricing,
       };
-    } else {
+    } else if (activeFormTab === "post") {
+      typeToSubmit = "insight";
       draftData = {
         ...draftData,
         summary: postSummary,
         content: postContent,
         tags: tags.split(",").map(t => t.trim()).filter(Boolean),
       };
+    } else if (activeFormTab === "case_study") {
+      typeToSubmit = "case_study";
+      draftData = {
+        ...draftData,
+        impact_metrics: caseImpact,
+        project_overview: caseDescription,
+        tags: tags.split(",").map(t => t.trim()).filter(Boolean),
+      };
     }
 
     try {
       const res = await submitPublicDirectoryOrPost({
-        type: activeFormTab === "education" ? "education" : activeFormTab === "tool" ? "tool" : postType,
+        type: typeToSubmit,
         title,
         draftData,
       });
 
       if (res.success) {
-        setSubmissionStatus({ success: true, message: res.message });
+        setSubmissionStatus({ 
+          success: true, 
+          message: `Pengajuan '${title}' berhasil terkirim! Tim Kurator kami akan memverifikasi kelengkapan informasi Anda dalam 1x24 jam.` 
+        });
         handleReset();
       } else {
         setSubmissionStatus({ success: false, message: res.message || "Terjadi kesalahan." });
@@ -160,17 +207,17 @@ export default function CrowdSourcedSubmissionPage() {
         {/* Section Header */}
         <section className="text-center space-y-4 relative z-10 max-w-3xl mx-auto">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            <Sparkles className="w-3.5 h-3.5" /> Jaringan Kontribusi Terpadu
+            <Sparkles className="w-3.5 h-3.5" /> Portal Kontribusi Komunitas
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
-            Portal Pengajuan Aset &amp; <br className="hidden md:inline" />
+            Bagikan Pengetahuan &amp; <br className="hidden md:inline" />
             <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent">
-              Integritas Akademik Nasional
+              Integritas Riset Nasional
             </span>
           </h1>
-          <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
-            Selamat datang di gerbang kolaborasi kurasi data pendidikan, perkakas penulisan ilmiah, 
-            dan pos kepakaran. Seluruh data diawasi ketat oleh kurator dan diamankan dengan ledger kriptografis.
+          <p className="text-xs md:text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto">
+            Selamat datang di hub kolaborasi terbuka INFRAMEET. Ajukan profil ahli, lembaga resmi, direktori pendidikan, 
+            perkakas bantu riset, hingga studi kasus teknologi Anda secara sukarela untuk mendukung keterbukaan pengetahuan publik.
           </p>
         </section>
 
@@ -180,16 +227,16 @@ export default function CrowdSourcedSubmissionPage() {
           {/* Sidebar Document Tabs */}
           <div className="lg:col-span-1 space-y-3">
             <h3 className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono px-3">
-              Dokumentasi &amp; Kepatuhan
+              Panduan &amp; Kebijakan Layanan
             </h3>
             
             <nav className="space-y-1">
               {[
-                { id: "kb", label: "Basis Pengetahuan", desc: "Alur kurasi & reputasi", icon: HelpCircle },
-                { id: "tor", label: "Kerangka Acuan (TOR)", desc: "Standar baku isi konten", icon: FileSpreadsheet },
-                { id: "tos", label: "Ketentuan Layanan (TOS)", desc: "Anti-joki & hak cipta", icon: Scale },
-                { id: "mou", label: "Nota Kesepahaman (MoU)", desc: "Kemitraan dua arah", icon: FileSignature },
-                { id: "policy", label: "Kebijakan Privasi (PDP)", desc: "Proteksi kontak aman", icon: Lock },
+                { id: "kb", label: "Panduan Pengguna", desc: "Alur kurasi & manfaat ahli", icon: HelpCircle },
+                { id: "tor", label: "Acuan Kualitas (TOR)", desc: "Standar baku isi konten", icon: FileSpreadsheet },
+                { id: "tos", label: "Kode Etik Riset (TOS)", desc: "Anti-joki & hak cipta", icon: Scale },
+                { id: "mou", label: "Kesepahaman (MoU)", desc: "Kemitraan sukarela komunitas", icon: FileSignature },
+                { id: "policy", label: "Privasi Data (PDP)", desc: "Jaminan keamanan kontak", icon: Lock },
               ].map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -230,7 +277,7 @@ export default function CrowdSourcedSubmissionPage() {
           <div className="lg:col-span-3 glass-panel p-8 md:p-10 rounded-3xl border border-slate-900 bg-slate-950/30 min-h-[450px] flex flex-col justify-between">
             <div className="space-y-6">
               
-              {/* Basis Pengetahuan (Knowledge Base) */}
+              {/* Panduan Pengguna (Knowledge Base) */}
               {activeDocTab === "kb" && (
                 <div className="space-y-5">
                   <div className="flex items-center gap-3 border-b border-slate-900 pb-4">
@@ -238,37 +285,38 @@ export default function CrowdSourcedSubmissionPage() {
                       <HelpCircle className="w-5 h-5" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-black text-white">Basis Pengetahuan Kontribusi Publik</h2>
-                      <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Knowledge Base Protocol</p>
+                      <h2 className="text-base font-black text-white">Panduan Pengguna &amp; Manfaat Kolaborasi</h2>
+                      <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Cetak Biru Pengetahuan Komunitas</p>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-450 leading-relaxed">
-                    Setiap data atau ulasan yang diajukan oleh komunitas merupakan mesin penggerak ekosistem akademis terintegrasi di platform INFRAMEET. Untuk menjaga mutu dan kredibilitas, kami memberlakukan alur penjaminan kualitas sebagai berikut:
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    INFRAMEET dirancang sebagai ekosistem digital terbuka yang menjembatani para peneliti, praktisi industri, sekolah, 
+                    dan instansi resmi untuk saling berbagi aset pengetahuan ilmiah terverifikasi. Berikut adalah bagaimana kolaborasi Anda bekerja:
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                     <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
                       <h4 className="text-xs font-bold text-slate-200 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" /> Tanda Tangan Kriptografis ES256
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" /> Sertifikasi Digital Terverifikasi
                       </h4>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Saat pengajuan disetujui kurator, metadata ulasan ditandatangani menggunakan kunci privat ECDSA ES256 untuk memvalidasi kepengarangan kontributor dan mencegah manipulasi data pihak ketiga.
+                        Saat pengajuan ulasan riset or data keahlian Anda disetujui, kami menerbitkan kode sertifikat digital unik yang menjamin orisinalitas kepengarangan Anda di hadapan publik.
                       </p>
                     </div>
                     <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
                       <h4 className="text-xs font-bold text-slate-200 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Dynamic Reputation Ledger
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Sistem Poin Reputasi Ahli
                       </h4>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Setiap direktori/perkakas riset yang terbit menambah <strong className="text-emerald-400">+10 reputasi</strong>, sedangkan publikasi artikel orisinal menyumbang <strong className="text-emerald-400">+25 reputasi</strong> ke identitas digital kontributor.
+                        Setiap profil pakar, profil instansi, perkakas, or artikel yang Anda bagikan secara aktif meningkatkan peringkat reputasi profil publik Anda di ekosistem platform.
                       </p>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Kerangka Acuan Kerja (TOR) */}
+              {/* Acuan Kualitas Konten (TOR) */}
               {activeDocTab === "tor" && (
                 <div className="space-y-5">
                   <div className="flex items-center gap-3 border-b border-slate-900 pb-4">
@@ -276,40 +324,40 @@ export default function CrowdSourcedSubmissionPage() {
                       <FileSpreadsheet className="w-5 h-5" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-black text-white">Kerangka Acuan Kerja Kontribusi</h2>
-                      <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Term of Reference (TOR)</p>
+                      <h2 className="text-base font-black text-white">Panduan Pengajuan &amp; Standar Kualitas</h2>
+                      <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Term of Reference (TOR)</p>
                     </div>
                   </div>
 
                   <p className="text-xs text-slate-450 leading-relaxed">
-                    Semua kontributor wajib menaati batas minimum kelayakan isi kontribusi sesuai sektor pengajuan demi mempertahankan standar mutu informasi:
+                    Guna menjaga kemurnian, keterbacaan, dan manfaat praktis direktori bagi masyarakat umum, kami menetapkan parameter mutu berikut:
                   </p>
 
                   <ul className="space-y-3.5 text-xs text-slate-400">
                     <li className="flex items-start gap-2.5">
                       <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-[10px] font-black font-mono flex items-center justify-center shrink-0 mt-0.5">1</span>
                       <div>
-                        <strong className="text-slate-200">Direktori Kampus &amp; Sekolah:</strong>
+                        <strong className="text-slate-200">Profil Orang / Lembaga Resmi:</strong>
                         <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
-                          Wajib melampirkan Nomor NPSN sekolah (apabila ada), status kepemilikan sektor (Negeri/Swasta), tingkat akreditasi resmi dari BAN-PT/Kementerian, panduan gaya penulisan daftar pustaka (APA/IEEE), serta batas plagiarisme Turnitin institusi.
+                          Terbuka untuk Pakar Perorangan (Akademisi, Konsultan, Peneliti) maupun Instansi Resmi (Kampus, Lab Riset, Perusahaan Teknologi). Wajib menulis biografi or latar belakang kontribusi minimal 50 kata.
                         </p>
                       </div>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-[10px] font-black font-mono flex items-center justify-center shrink-0 mt-0.5">2</span>
                       <div>
-                        <strong className="text-slate-200">Direktori Perkakas Digital (Research Software):</strong>
+                        <strong className="text-slate-200">Perkakas &amp; Platform Riset:</strong>
                         <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
-                          Wajib menyertakan tautan resmi berformat SSL/HTTPS, memilih skema harga yang akurat (Gratis/Freemium/Subscription), serta menjabarkan deskripsi fungsional perkakas minimal 50 kata yang logis dan obyektif.
+                          Menyertakan nama resmi platform digital, klasifikasi biaya (Gratis/Berlangganan), kegunaan spesifik bagi analisis ilmiah, serta tautan menuju situs resmi yang aman (HTTPS).
                         </p>
                       </div>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-[10px] font-black font-mono flex items-center justify-center shrink-0 mt-0.5">3</span>
                       <div>
-                        <strong className="text-slate-200">Artikel &amp; Insight Ilmiah (UGC):</strong>
+                        <strong className="text-slate-200">Studi Kasus &amp; Artikel Ilmiah:</strong>
                         <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
-                          Artikel riset, metodologi, or opini teknologi wajib berupa tulisan orisinal kontributor dengan panjang minimal 150 kata, menyertakan ringkasan abstrak yang mudah dicerna, serta label tagar keilmuan yang valid.
+                          Esai riset or studi kasus teknologi wajib merupakan buah pemikiran orisinal bebas plagiasi, memiliki ringkasan abstrak yang lugas, and menyertakan minimal 3 label kata kunci klasifikasi keilmuan.
                         </p>
                       </div>
                     </li>
@@ -317,7 +365,7 @@ export default function CrowdSourcedSubmissionPage() {
                 </div>
               )}
 
-              {/* Syarat & Ketentuan Layanan (TOS) */}
+              {/* Syarat Ketentuan Layanan (TOS) */}
               {activeDocTab === "tos" && (
                 <div className="space-y-5">
                   <div className="flex items-center gap-3 border-b border-slate-900 pb-4">
@@ -325,30 +373,23 @@ export default function CrowdSourcedSubmissionPage() {
                       <Scale className="w-5 h-5" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-black text-white">Syarat &amp; Ketentuan Layanan</h2>
-                      <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Term of Service (TOS)</p>
+                      <h2 className="text-base font-black text-white">Kode Etik Riset &amp; Ketentuan Penggunaan</h2>
+                      <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Ketentuan Penggunaan Publik</p>
                     </div>
                   </div>
 
                   <div className="space-y-4 text-xs text-slate-400 leading-relaxed">
                     <div className="space-y-1">
-                      <h4 className="font-bold text-slate-200">Pasal 1: Kebijakan Steril Anti-Joki Akademik</h4>
+                      <h4 className="font-bold text-slate-200">Kebijakan Anti-Jokian Tugas Akhir</h4>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
-                        INFRAMEET mendukung penuh gerakan moral antikorupsi ilmiah. Segala wujud pengajuan esai riset or modul penulisan yang mempromosikan jasa pembuatan tugas akhir, manipulasi sitasi, or bias ilegal perjokian akademik akan ditolak secara permanen dan akun/kontak kontributor akan diblacklist secara sepihak.
+                        INFRAMEET mendukung penuh gerakan etika akademis berkarakter. Kami menolak secara permanen setiap upaya pengajuan profil, perkakas, or materi tulisan yang mempromosikan pembuatan karya tulis ilmiah ilegal or manipulasi nilai riset.
                       </p>
                     </div>
 
                     <div className="space-y-1">
-                      <h4 className="font-bold text-slate-200">Pasal 2: Hak Cipta &amp; Kepemilikan Orisinalitas</h4>
+                      <h4 className="font-bold text-slate-200">Kepemilikan Hak Cipta</h4>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Seluruh hak atas tulisan, panduan, dan data direktori yang disetujui merupakan milik publik dan kontributor berhak atas pencantuman identitasnya. Kontributor menjamin bahwa materi yang diajukan bebas dari hak paten pihak ketiga yang dilindungi hukum.
-                      </p>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h4 className="font-bold text-slate-200">Pasal 3: Diskresi Kurasi Tim Verifikator</h4>
-                      <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Tim kurator memiliki diskresi mutlak untuk mengubah redaksi tata letak, menyensor kata kasar/tidak pantas, or menyunting data kuantitatif direktori sekolah demi menyesuaikan format baku platform INFRAMEET sebelum diterbitkan secara massal.
+                        Hak atas tulisan orisinal and kekayaan intelektual data profil tetap 100% milik pengirim. INFRAMEET hanya berhak menampilkan data tersebut pada portal direktori pencarian publik agar dapat dimanfaatkan oleh masyarakat luas.
                       </p>
                     </div>
                   </div>
@@ -363,21 +404,21 @@ export default function CrowdSourcedSubmissionPage() {
                       <FileSignature className="w-5 h-5" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-black text-white">Nota Kesepahaman Kemitraan Komunitas</h2>
-                      <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Memorandum of Understanding (MoU)</p>
+                      <h2 className="text-base font-black text-white">Nota Kesepahaman Kolaborasi Komunitas</h2>
+                      <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Memorandum of Understanding (MoU)</p>
                     </div>
                   </div>
 
                   <p className="text-xs text-slate-450 leading-relaxed">
-                    Nota kesepahaman ini dibuat secara sadar sebagai payung kolaborasi sukarela antara Kontributor Mandiri dengan Pengelola Infrastruktur INFRAMEET:
+                    Kolaborasi ini didirikan di atas konsensus saling percaya dan pengakuan atas kontribusi masing-masing pihak:
                   </p>
 
-                  <div className="p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/10 text-xs text-slate-400 leading-relaxed space-y-2 max-w-2xl">
+                  <div className="p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/10 text-xs text-slate-450 leading-relaxed space-y-2 max-w-2xl">
                     <p>
-                      <strong>1. Asas Kemitraan Non-Komersial:</strong> Kedua belah pihak sepakat bahwa pengajuan data direktori and ulasan riset dilakukan secara sukarela tanpa kompensasi finansial langsung, ditujukan murni sebagai sarana peningkatan literasi and akses data terbuka bagi masyarakat umum di Nusantara.
+                      <strong>1. Kontribusi Sukarela Terbuka:</strong> Kontributor sepakat membagikan data profil keahlian, direktori sekolah, or esai riset secara sukarela demi kemaslahatan literasi bangsa, tanpa kompensasi finansial langsung.
                     </p>
                     <p>
-                      <strong>2. Keuntungan Reputasi:</strong> INFRAMEET berkomitmen menyediakan halaman pencarian tersertifikasi kriptografis untuk memajang profil dan pencapaian kontributor secara profesional di hadapan jaringan mitra B2B/B2G nasional.
+                      <strong>2. Eksposur Profil &amp; Profesionalitas:</strong> INFRAMEET berkomitmen mempromosikan halaman keahlian terverifikasi Anda kepada jaringan mitra korporat and agensi bisnis kami untuk memperluas jejaring profesional Anda.
                     </p>
                   </div>
                 </div>
@@ -391,32 +432,32 @@ export default function CrowdSourcedSubmissionPage() {
                       <Lock className="w-5 h-5" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-black text-white">Kebijakan Privasi &amp; UU PDP Kontributor</h2>
-                      <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Privacy &amp; Data Protection Policy</p>
+                      <h2 className="text-base font-black text-white">Pelindungan Data Pribadi (UU PDP)</h2>
+                      <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Privacy &amp; Data Protection</p>
                     </div>
                   </div>
 
                   <p className="text-xs text-slate-455 leading-relaxed">
-                    Sesuai dengan ketentuan Undang-Undang Perlindungan Data Pribadi (UU PDP) Republik Indonesia, kami berkomitmen menjaga keamanan kontak Anda dengan protokol keamanan tinggi:
+                    Sesuai amanat Undang-Undang Pelindungan Data Pribadi (UU PDP) Republik Indonesia, kami berkomitmen penuh melindungi kerahasiaan informasi kontak Anda:
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                     <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
-                      <span className="text-[10px] font-black text-slate-500 tracking-wider font-mono uppercase">Enkripsi AES-256</span>
+                      <span className="text-[9px] font-black text-slate-500 tracking-wider font-mono uppercase">Enkripsi Kontak Aman</span>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Data WhatsApp and alamat email Anda dienkripsi secara penuh di tingkat kolom database dengan kunci rahasia server untuk mencegah kebocoran data.
+                        Data WhatsApp and email pribadi Anda dienkripsi penuh di database kami untuk mencegah akses ilegal pihak ketiga.
                       </p>
                     </div>
                     <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
-                      <span className="text-[10px] font-black text-slate-500 tracking-wider font-mono uppercase">Proteksi Spam</span>
+                      <span className="text-[9px] font-black text-slate-500 tracking-wider font-mono uppercase">Bebas Spam</span>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Kontak kontributor tidak akan pernah diungkapkan or diserahkan kepada pengakses luar. Hanya digunakan backend sebagai verifikasi administratif.
+                        Kami tidak akan pernah membagikan, menjual, or menyebarluaskan detail kontak Anda kepada pengiklan luar.
                       </p>
                     </div>
                     <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
-                      <span className="text-[10px] font-black text-slate-500 tracking-wider font-mono uppercase">Hak Penghapusan</span>
+                      <span className="text-[9px] font-black text-slate-500 tracking-wider font-mono uppercase">Kendali Akun Penuh</span>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Kontributor berhak mengajukan penarikan data pribadi dan penghapusan nama kontributor dari ulasan terkait kapan saja lewat kontak verifikasi.
+                        Anda berhak meminta pembaruan data or penghapusan profil publik Anda dari direktori kapan saja.
                       </p>
                     </div>
                   </div>
@@ -427,8 +468,8 @@ export default function CrowdSourcedSubmissionPage() {
 
             {/* Bottom Note */}
             <div className="pt-6 border-t border-slate-900/60 text-[10px] text-slate-600 flex items-center justify-between">
-              <span>* Dokumen di atas ditinjau berkala untuk mengikuti kepatuhan hukum Nusantara terbaru.</span>
-              <span className="font-mono text-indigo-400">Ver: 2.1.0-Active</span>
+              <span>* Seluruh panduan disusun secara user-friendly dan obyektif demi kemudahan akses komunitas.</span>
+              <span className="font-mono text-indigo-400">Ver: 2.2.0-Active</span>
             </div>
 
           </div>
@@ -455,8 +496,8 @@ export default function CrowdSourcedSubmissionPage() {
                     <Sparkles className="w-4.5 h-4.5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-black text-white">Formulir Pengajuan Kontribusi Komunitas</h3>
-                    <p className="text-[10px] text-slate-500 font-semibold">Harap isi detail pengajuan dengan benar dan obyektif</p>
+                    <h3 className="text-sm font-black text-white">Formulir Pengajuan Kontribusi</h3>
+                    <p className="text-[10px] text-slate-500 font-semibold">Berikan data kontribusi yang obyektif untuk kemaslahatan bersama</p>
                   </div>
                 </div>
                 <button
@@ -467,41 +508,63 @@ export default function CrowdSourcedSubmissionPage() {
                 </button>
               </div>
 
-              {/* Inner Tab Form Switcher */}
+              {/* Inner Tab Form Switcher (5 Categories) */}
               <div className="flex justify-center">
-                <div className="flex bg-slate-950 border border-slate-900 p-1 rounded-2xl gap-1 w-full max-w-md">
+                <div className="grid grid-cols-2 sm:grid-cols-5 bg-slate-950 border border-slate-900 p-1 rounded-2xl gap-1 w-full">
+                  <button
+                    type="button"
+                    onClick={() => { setActiveFormTab("expert"); setSubmissionStatus(null); }}
+                    className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                      activeFormTab === "expert"
+                        ? "bg-indigo-600 text-white shadow-md"
+                        : "text-slate-400 hover:text-slate-200"
+                    }`}
+                  >
+                    <Users className="w-3 h-3" /> Profil Ahli
+                  </button>
                   <button
                     type="button"
                     onClick={() => { setActiveFormTab("education"); setSubmissionStatus(null); }}
-                    className={`flex-1 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                    className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       activeFormTab === "education"
                         ? "bg-indigo-600 text-white shadow-md"
                         : "text-slate-400 hover:text-slate-200"
                     }`}
                   >
-                    <Building2 className="w-3.5 h-3.5" /> Pendidikan
+                    <Building2 className="w-3 h-3" /> Pendidikan
                   </button>
                   <button
                     type="button"
                     onClick={() => { setActiveFormTab("tool"); setSubmissionStatus(null); }}
-                    className={`flex-1 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                    className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       activeFormTab === "tool"
                         ? "bg-indigo-600 text-white shadow-md"
                         : "text-slate-400 hover:text-slate-200"
                     }`}
                   >
-                    <Wrench className="w-3.5 h-3.5" /> Perkakas
+                    <Wrench className="w-3 h-3" /> Perkakas
                   </button>
                   <button
                     type="button"
                     onClick={() => { setActiveFormTab("post"); setSubmissionStatus(null); }}
-                    className={`flex-1 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                    className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       activeFormTab === "post"
                         ? "bg-indigo-600 text-white shadow-md"
                         : "text-slate-400 hover:text-slate-200"
                     }`}
                   >
-                    <FileText className="w-3.5 h-3.5" /> Insight UGC
+                    <FileText className="w-3 h-3" /> Esai Ilmiah
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setActiveFormTab("case_study"); setSubmissionStatus(null); }}
+                    className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                      activeFormTab === "case_study"
+                        ? "bg-indigo-600 text-white shadow-md"
+                        : "text-slate-400 hover:text-slate-200"
+                    }`}
+                  >
+                    <Compass className="w-3 h-3" /> Studi Kasus
                   </button>
                 </div>
               </div>
@@ -519,7 +582,7 @@ export default function CrowdSourcedSubmissionPage() {
                     <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
                   )}
                   <div>
-                    <p className="font-bold">{submissionStatus.success ? "Pengajuan Terkirim!" : "Pengajuan Gagal!"}</p>
+                    <p className="font-bold">{submissionStatus.success ? "Pengajuan Berhasil!" : "Pengajuan Tertunda!"}</p>
                     <p className="opacity-80 mt-0.5 leading-relaxed">{submissionStatus.message}</p>
                   </div>
                 </div>
@@ -535,7 +598,7 @@ export default function CrowdSourcedSubmissionPage() {
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Nama Lengkap Kontributor</label>
+                      <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Nama Anda / Penanggung Jawab</label>
                       <input
                         type="text"
                         required
@@ -552,7 +615,7 @@ export default function CrowdSourcedSubmissionPage() {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="kontributor@akademis.id"
+                        placeholder="nama@institusi.ac.id"
                         className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                       />
                     </div>
@@ -562,18 +625,116 @@ export default function CrowdSourcedSubmissionPage() {
                 {/* Dynamic Form Content */}
                 <div className="space-y-4">
                   <h4 className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono flex items-center gap-2 border-b border-slate-900 pb-2">
-                    {activeFormTab === "education" && <Building2 className="w-3.5 h-3.5 text-indigo-400" />}
-                    {activeFormTab === "tool" && <Wrench className="w-3.5 h-3.5 text-indigo-400" />}
-                    {activeFormTab === "post" && <FileText className="w-3.5 h-3.5 text-indigo-400" />}
-                    Detail Materi Konten Pengajuan
+                    Detail Pengajuan Konten Aset
                   </h4>
+
+                  {/* EXPERT PROFILE TAB (Supports Individual vs Organisation) */}
+                  {activeFormTab === "expert" && (
+                    <div className="space-y-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Jenis Profil Kontributor</label>
+                        <div className="flex bg-slate-950 border border-slate-900 p-1 rounded-xl gap-1 w-full max-w-xs">
+                          <button
+                            type="button"
+                            onClick={() => setExpertType("INDIVIDU")}
+                            className={`flex-1 py-1.5 rounded-lg text-[9px] font-bold uppercase transition-all cursor-pointer ${
+                              expertType === "INDIVIDU"
+                                ? "bg-indigo-600 text-white"
+                                : "text-slate-400 hover:text-slate-200"
+                            }`}
+                          >
+                            Pakar Individu
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setExpertType("ORGANISASI")}
+                            className={`flex-1 py-1.5 rounded-lg text-[9px] font-bold uppercase transition-all cursor-pointer ${
+                              expertType === "ORGANISASI"
+                                ? "bg-indigo-600 text-white"
+                                : "text-slate-400 hover:text-slate-200"
+                            }`}
+                          >
+                            Organisasi / Instansi
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">
+                            {expertType === "INDIVIDU" ? "Nama Lengkap & Gelar Ahli" : "Nama Resmi Organisasi / Instansi"}
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder={expertType === "INDIVIDU" ? "Prof. Dr. Ahmad Riyadi, M.Kom" : "Pusat Penelitian Teknologi Nusantara"}
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                          />
+                        </div>
+
+                        {expertType === "ORGANISASI" ? (
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Tipe Lembaga / Instansi</label>
+                            <select
+                              value={orgType}
+                              onChange={(e) => setOrgType(e.target.value)}
+                              className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
+                            >
+                              <option value="Kampus / Universitas">Kampus / Universitas</option>
+                              <option value="Lembaga Riset / Litbang">Lembaga Riset / Litbang</option>
+                              <option value="Perusahaan Teknologi">Perusahaan Teknologi</option>
+                              <option value="Instansi Pemerintah">Instansi Pemerintah</option>
+                            </select>
+                          </div>
+                        ) : (
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Spesialisasi Fokus Utama</label>
+                            <input
+                              type="text"
+                              value={expertRole}
+                              onChange={(e) => setExpertRole(e.target.value)}
+                              placeholder="Dosen Senior Metodologi Penelitian Kuantitatif"
+                              className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">
+                          {expertType === "INDIVIDU" ? "Kata Kunci Bidang Keahlian (Pisahkan dengan koma)" : "Fokus Bidang Layanan & Riset Organisasi (Pisahkan dengan koma)"}
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={expertSkills}
+                          onChange={(e) => setExpertSkills(e.target.value)}
+                          placeholder="spss, statistika, structural equation modeling"
+                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Biografi / Portofolio Singkat</label>
+                        <textarea
+                          rows={4}
+                          value={expertBio}
+                          onChange={(e) => setExpertBio(e.target.value)}
+                          placeholder={expertType === "INDIVIDU" ? "Ceritakan secara singkat latar belakang penelitian, pencapaian ilmiah, or kepakaran Anda..." : "Jelaskan sejarah singkat, misi riset, and layanan unggulan yang disediakan oleh organisasi Anda..."}
+                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   {/* EDUCATION TAB */}
                   {activeFormTab === "education" && (
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Nama Resmi Institusi</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Nama Resmi Institusi Pendidikan</label>
                           <input
                             type="text"
                             required
@@ -598,7 +759,7 @@ export default function CrowdSourcedSubmissionPage() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Sektor Institusi</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Sektor Kampus/Sekolah</label>
                           <select
                             value={eduType}
                             onChange={(e) => setEduType(e.target.value)}
@@ -619,13 +780,13 @@ export default function CrowdSourcedSubmissionPage() {
                           />
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Akreditasi</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Status Akreditasi</label>
                           <select
                             value={akreditasi}
                             onChange={(e) => setAkreditasi(e.target.value)}
                             className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                           >
-                            <option value="Unggul">Unggul (PT)</option>
+                            <option value="Unggul">Unggul (Perguruan Tinggi)</option>
                             <option value="A">Akreditasi A</option>
                             <option value="B">Akreditasi B</option>
                           </select>
@@ -661,14 +822,14 @@ export default function CrowdSourcedSubmissionPage() {
                           type="text"
                           value={address}
                           onChange={(e) => setAddress(e.target.value)}
-                          placeholder="Jl. Pancasila, Bulaksumur, Yogyakarta"
+                          placeholder="Jl. Pancasila, Bulaksumur, Sleman, Yogyakarta"
                           className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                         />
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Sitasi Utama</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Gaya Penulisan Sitasi Dominan</label>
                           <select
                             value={citationStyle}
                             onChange={(e) => setCitationStyle(e.target.value)}
@@ -680,15 +841,15 @@ export default function CrowdSourcedSubmissionPage() {
                           </select>
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Toleransi Turnitin</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Toleransi Plagiarisme Kampus</label>
                           <select
                             value={turnitinLimit}
                             onChange={(e) => setTurnitinLimit(e.target.value)}
                             className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                           >
-                            <option value="10%">10% (Sangat Ketat)</option>
-                            <option value="15%">15% (Rata-rata)</option>
-                            <option value="20%">20% (Longgar)</option>
+                            <option value="10%">Maksimal 10% (Sangat Ketat)</option>
+                            <option value="15%">Maksimal 15% (Sedang)</option>
+                            <option value="20%">Maksimal 20% (Umum)</option>
                           </select>
                         </div>
                       </div>
@@ -700,40 +861,40 @@ export default function CrowdSourcedSubmissionPage() {
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Nama Perkakas Riset</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Nama Perkakas / Aplikasi Riset</label>
                           <input
                             type="text"
                             required
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            placeholder="Zotero / SmartPLS"
+                            placeholder="Zotero / SmartPLS / SPSS Helper"
                             className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Kategori Fungsional</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Kategori Fungsional Alat</label>
                           <select
                             value={toolCategory}
                             onChange={(e) => setToolCategory(e.target.value)}
                             className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                           >
-                            <option value="Research & Writing">Research &amp; Citation</option>
-                            <option value="Data Analytics">Data Science &amp; SPSS</option>
-                            <option value="AI Productivity">AI &amp; Productivity</option>
+                            <option value="Kalkulator Statistik & Riset">Analisis Data &amp; Statistik</option>
+                            <option value="Citation & Writing Assistant">Referensi &amp; Penulisan Sitasi</option>
+                            <option value="Productivity & AI Search">Produktivitas &amp; Riset AI</option>
                           </select>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Sistem Skema Harga</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Skema Skala Biaya Penggunaan</label>
                           <select
                             value={toolPricing}
                             onChange={(e) => setToolPricing(e.target.value)}
                             className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                           >
-                            <option value="Gratis / Freemium">Gratis / Freemium</option>
-                            <option value="Berbayar / Subscription">Berbayar / Subscription</option>
+                            <option value="Gratis / Freemium">Gratis / Open Source / Freemium</option>
+                            <option value="Berlangganan / Premium">Berbayar / Berlangganan Premium</option>
                           </select>
                         </div>
                         <div className="space-y-1.5">
@@ -749,13 +910,13 @@ export default function CrowdSourcedSubmissionPage() {
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Deskripsi Manfaat Perkakas</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Deskripsi Fungsi &amp; Manfaat Alat</label>
                         <textarea
                           rows={4}
                           value={toolDescription}
                           onChange={(e) => setToolDescription(e.target.value)}
-                          placeholder="Jelaskan secara detail spesifikasi, fungsionalitas, and kegunaan alat ini bagi peneliti..."
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none"
+                          placeholder="Jelaskan secara ringkas bagaimana alat ini mempermudah peneliti mengolah data or memformat naskah akademik secara etis..."
+                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
                         />
                       </div>
                     </div>
@@ -766,59 +927,99 @@ export default function CrowdSourcedSubmissionPage() {
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Judul Esai / Studi Kasus</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Judul Esai / Artikel Riset</label>
                           <input
                             type="text"
                             required
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            placeholder="Studi Deskriptif Metodologi Riset Kualitatif"
+                            placeholder="Metode Perbandingan Analisis Regresi SPSS vs SmartPLS"
                             className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Tipe Publikasi</label>
-                          <select
-                            value={postType}
-                            onChange={(e) => setPostType(e.target.value as any)}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
-                          >
-                            <option value="insight">Artikel Insight &amp; Esai Ilmiah</option>
-                            <option value="case_study">Portofolio &amp; Studi Kasus Teknologi</option>
-                          </select>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Label Kategori (Pisahkan dengan koma)</label>
+                          <input
+                            type="text"
+                            value={tags}
+                            onChange={(e) => setTags(e.target.value)}
+                            placeholder="metodologi, analisis data, statistika"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                          />
                         </div>
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Label Tagar (Pisahkan dengan koma)</label>
-                        <input
-                          type="text"
-                          value={tags}
-                          onChange={(e) => setTags(e.target.value)}
-                          placeholder="metodologi, spps, riset"
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
-                        />
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Abstrak Ringkas</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Abstrak Ringkas (Satu Kalimat Padat)</label>
                         <input
                           type="text"
                           value={postSummary}
                           onChange={(e) => setPostSummary(e.target.value)}
-                          placeholder="Ringkasan esai Anda dalam 1 kalimat padat..."
+                          placeholder="Ringkasan esensi dari esai ilmiah Anda dalam satu kalimat lugas..."
                           className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                         />
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Isi Konten Artikel Lengkap</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Isi Lengkap Esai / Opini Riset</label>
                         <textarea
                           rows={6}
                           required
                           value={postContent}
                           onChange={(e) => setPostContent(e.target.value)}
-                          placeholder="Tuliskan ulasan or esai riset mendalam Anda di sini..."
+                          placeholder="Tuliskan gagasan riset, metodologi ulasan, or analisis teori ilmiah Anda secara detail..."
+                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* CASE STUDY TAB */}
+                  {activeFormTab === "case_study" && (
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Judul Studi Kasus / Portofolio</label>
+                          <input
+                            type="text"
+                            required
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="Implementasi Migrasi Aset Cloud Serverless pada UMKM"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                          />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Label Kategori (Pisahkan dengan koma)</label>
+                          <input
+                            type="text"
+                            value={tags}
+                            onChange={(e) => setTags(e.target.value)}
+                            placeholder="migrasi cloud, serverless, efisiensi"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Dampak Nyata / Hasil Solusi Proyek</label>
+                        <input
+                          type="text"
+                          value={caseImpact}
+                          onChange={(e) => setCaseImpact(e.target.value)}
+                          placeholder="Contoh: Menghemat pengeluaran bulanan server hingga 80% dan loading web dipercepat 3x lipat..."
+                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Rincian Deskripsi Proyek</label>
+                        <textarea
+                          rows={6}
+                          required
+                          value={caseDescription}
+                          onChange={(e) => setCaseDescription(e.target.value)}
+                          placeholder="Jabarkan masalah awal yang dihadapi, solusi teknologi yang diimplementasikan, serta proses pengerjaannya secara obyektif..."
                           className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
                         />
                       </div>
@@ -832,9 +1033,9 @@ export default function CrowdSourcedSubmissionPage() {
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="px-6 py-3.5 border border-slate-900 text-slate-400 hover:text-white rounded-xl text-xs font-bold hover:bg-slate-950 cursor-pointer transition-all"
+                    className="px-6 py-3.5 border border-slate-900 text-slate-400 hover:text-white rounded-xl text-xs font-bold hover:bg-slate-950 cursor-pointer transition-all animate-pulse"
                   >
-                    Kosongkan Input
+                    Kosongkan Form
                   </button>
                   <button
                     type="submit"
@@ -844,11 +1045,11 @@ export default function CrowdSourcedSubmissionPage() {
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Mengirimkan Berkas Pengajuan...</span>
+                        <span>Mengirimkan Berkas Kontribusi...</span>
                       </>
                     ) : (
                       <>
-                        <span>Kirimkan Berkas Kontribusi</span>
+                        <span>Kirimkan Kontribusi</span>
                         <Send className="w-4 h-4" />
                       </>
                     )}
