@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/rss-scrape",
       "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/cron/keep-alive",
+      "schedule": "0 */4 * * *"
     }
   ]
 }

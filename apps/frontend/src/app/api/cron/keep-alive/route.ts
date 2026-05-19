@@ -10,7 +10,12 @@ export async function GET(request: NextRequest) {
     const token = searchParams.get("key");
     const expectedToken = process.env.UPTIMEROBOT_API_KEY || "u3510678-584d82de50f915d03ea25963";
 
-    if (!token || token !== expectedToken) {
+    const isVercelCron = request.headers.get("x-vercel-cron") === "1";
+    const isCronAuthHeader = request.headers.get("authorization")?.startsWith("Bearer ");
+
+    const isAuthorized = (token && token === expectedToken) || isVercelCron || isCronAuthHeader;
+
+    if (!isAuthorized) {
       return NextResponse.json(
         { success: false, error: "Unauthorized: Invalid or missing secret token key." },
         { status: 401 }
