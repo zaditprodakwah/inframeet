@@ -100,10 +100,10 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Column 5: Resources & Contribute */}
+        {/* Column 5: Resources & Portal */}
         <div className="space-y-3">
           <h4 className="text-xs font-black uppercase tracking-wider text-slate-200 font-mono">
-            Sumber Daya &amp; Legal
+            Sumber Daya &amp; Portal
           </h4>
           <ul className="space-y-2 text-[11px]">
             <li>
@@ -119,6 +119,16 @@ export default function Footer() {
             <li>
               <Link href="/about" className="hover:text-indigo-400 transition-colors">
                 Tentang &amp; Kepatuhan Hukum
+              </Link>
+            </li>
+            <li className="pt-2 border-t border-slate-900/60">
+              <Link href="/login" className="hover:text-indigo-400 transition-colors font-bold text-slate-350">
+                Masuk / Registrasi Akun
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin/god-mode" className="hover:text-indigo-400 transition-colors font-mono font-bold text-indigo-400 tracking-wider flex items-center gap-1">
+                👑 CEO COMMAND CONSOLE
               </Link>
             </li>
           </ul>

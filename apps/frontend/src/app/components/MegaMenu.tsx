@@ -213,10 +213,16 @@ export default function MegaMenu() {
         </nav>
 
         {/* CTA Conversions Button */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            href="/login"
+            className="px-4 py-2 text-xs font-bold text-slate-300 hover:text-white border border-slate-800 dark:border-zinc-800 hover:border-slate-700 rounded-xl transition-all cursor-pointer"
+          >
+            Masuk / Dasbor
+          </Link>
           <Link
             href="/calculator"
-            className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold transition-all shadow-md shadow-indigo-600/10 flex items-center gap-2 cursor-pointer hover:shadow-indigo-500/20"
+            className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-indigo-600/10 flex items-center gap-2 cursor-pointer hover:shadow-indigo-500/20"
           >
             <Sparkles className="w-4 h-4" />
             Formulator Solusi
