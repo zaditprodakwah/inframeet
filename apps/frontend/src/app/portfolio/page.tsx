@@ -174,33 +174,33 @@ export default function PortfolioPage() {
 
         {/* Tab Filters */}
         <section className="max-w-7xl mx-auto px-6 flex justify-center">
-          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-900 border border-slate-800">
+          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md">
             <button
               onClick={() => setActiveTab("all")}
-              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "all"
-                  ? "bg-indigo-600 text-white shadow-lg"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
+                  : "text-slate-400 hover:text-slate-200"
               }`}
             >
               Semua Proyek
             </button>
             <button
               onClick={() => setActiveTab("b2b")}
-              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "b2b"
-                  ? "bg-indigo-600 text-white shadow-lg"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
+                  : "text-slate-400 hover:text-slate-200"
               }`}
             >
               Enterprise B2B
             </button>
             <button
               onClick={() => setActiveTab("academic")}
-              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+              className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "academic"
-                  ? "bg-indigo-600 text-white shadow-lg"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
+                  : "text-slate-400 hover:text-slate-200"
               }`}
             >
               Akademik & Riset

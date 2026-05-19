@@ -442,7 +442,7 @@ export default function SchoolLookupPage() {
 
                 {/* Subtext info */}
                 <p className="text-[9px] text-slate-500 leading-relaxed text-center">
-                  *INFRAMEET mematuhi 100% Kebijakan Anti-Jokian Ilmiah nasional. Dukungan riset terbatas pada pengerjaan olah data dan perapian layout format template.
+                  *INFRAMEET mematuhi 100% Kebijakan Kepatuhan Integritas Riset Ilmiah nasional. Dukungan riset terbatas pada pengerjaan olah data dan perapian layout format template.
                 </p>
 
               </div>

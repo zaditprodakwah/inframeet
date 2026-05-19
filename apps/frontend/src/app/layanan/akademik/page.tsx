@@ -38,10 +38,10 @@ export default function AkademikPage() {
               </div>
               <div className="space-y-2">
                 <h4 className="text-lg font-bold text-white flex items-center gap-2">
-                  100% Anti-Ghostwriting &amp; Anti-Joki Guarantee
+                  100% Academic Integrity &amp; Ethical Research Protocol
                 </h4>
                 <p className="text-xs text-slate-300 leading-relaxed max-w-4xl">
-                  Berdasarkan Syarat Ketentuan Layanan INFRAMEET, seluruh substansi ide riset, data mentah, dan hak kekayaan intelektual (HKI) adalah milik Anda sepenuhnya secara absolut. Kami tidak menyediakan jasa joki pembuatan naskah dari nol. Layanan kami murni bersifat perbantuan teknis layouting, olah data statistik kuantitatif, parafrase sitasi, and bimbingan Turnitin agar riset Anda steril dari tuduhan pelanggaran akademik.
+                  Berdasarkan Syarat Ketentuan Layanan INFRAMEET, seluruh substansi ide riset, data mentah, dan hak kekayaan intelektual (HKI) adalah milik Anda sepenuhnya secara absolut. Kami berkomitmen penuh menolak segala bentuk perjokian substansi riset atau ghostwriting. Dukungan asistensi kami murni bersifat pendampingan teknis tata letak format, olah data statistik kuantitatif, parafrase sitasi, and bimbingan Turnitin agar riset Anda steril dari tuduhan pelanggaran akademik.
                 </p>
               </div>
             </div>

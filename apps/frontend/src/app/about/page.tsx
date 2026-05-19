@@ -3,7 +3,7 @@
 import MegaMenu from "../components/MegaMenu";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Link from "next/link";
-import { Sparkles, ArrowRight, ShieldCheck, Mail, Users, Cpu, FileText, HeartHandshake } from "lucide-react";
+import { Sparkles, ArrowRight, ShieldCheck, Mail, Users, Cpu, FileText, HeartHandshake, GraduationCap } from "lucide-react";
 
 const TEAM = [
   {
@@ -19,7 +19,7 @@ const TEAM = [
     name: "Dr. Farah Anindya",
     role: "Senior Academic Research Advisor",
     desc: "Penasihat metodologi kuantitatif dengan keahlian mendalam pada pemrosesan SEM (Structural Equation Modeling) dan standardisasi naskah terindeks Scopus/Sinta.",
-    avatar: "👩‍🔬",
+    avatar: "academic",
     links: []
   }
 ];
@@ -63,7 +63,7 @@ export default function AboutPage() {
             </div>
             <h3 className="text-xl font-bold text-white">Komitmen Mutlak Integritas Akademik</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Di segmen akademik, kami menjunjung tinggi kode etik ilmiah nasional. Kami menolak dengan tegas segala bentuk perjokian substansi riset (ghostwriting). Dukungan asistensi kami murni bersifat teknis tata letak format, olah data statistik kuantitatif, dan cek plagiasi.
+              Di segmen akademik, kami menjunjung tinggi kode etik ilmiah nasional. Kami menolak dengan tegas segala bentuk penulisan substansi riset oleh pihak ketiga (ghostwriting). Dukungan asistensi kami murni bersifat pendampingan teknis tata letak format, olah data statistik kuantitatif, dan audit orisinalitas plagiasi.
             </p>
           </div>
         </section>
@@ -76,9 +76,9 @@ export default function AboutPage() {
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div className="space-y-1.5">
-                <h4 className="text-lg font-bold text-white">100% Anti-Ghostwriting &amp; Academic Integrity Policy</h4>
+                <h4 className="text-lg font-bold text-white">100% Academic Integrity &amp; Ethical Research Policy</h4>
                 <p className="text-xs text-slate-400 leading-relaxed max-w-3xl">
-                  Berdasarkan Syarat Ketentuan Layanan kami di [**`legal.json`**](file:///Users/mac/Downloads/HUBPLATFORM/packages/config/legal.json), INFRAMEET hanya membantu pengerjaan teknis pengolahan data statistik numerik (SPSS/SmartPLS) dan layouting naskah. Hak kekayaan intelektual, orisinalitas ide, dan kepemilikan riset sepenuhnya berada di tangan Anda secara absolut. Kami menjaga reputasi ilmiah Anda agar steril dari tuduhan perjokian.
+                  Berdasarkan Syarat Ketentuan Layanan kami di [**`legal.json`**](file:///Users/mac/Downloads/HUBPLATFORM/packages/config/legal.json), INFRAMEET hanya membantu pendampingan teknis pengolahan data statistik numerik (SPSS/SmartPLS) dan layouting naskah. Hak kekayaan intelektual, orisinalitas ide, dan kepemilikan riset sepenuhnya berada di tangan Anda secara absolut. Kami menjaga reputasi ilmiah Anda agar steril dari tuduhan pelanggaran integritas riset.
                 </p>
               </div>
             </div>
@@ -97,11 +97,11 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {TEAM.map((member) => (
               <div key={member.name} className="glass-card p-6 rounded-3xl flex flex-col sm:flex-row items-start gap-5">
-                <div className="w-16 h-16 rounded-2xl bg-slate-950 border border-slate-850 flex items-center justify-center text-3xl shrink-0 overflow-hidden">
+                <div className="w-16 h-16 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 overflow-hidden">
                   {member.avatar.startsWith("/") ? (
-                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
                   ) : (
-                    member.avatar
+                    <GraduationCap className="w-8 h-8 text-emerald-450" />
                   )}
                 </div>
                 <div className="space-y-2">

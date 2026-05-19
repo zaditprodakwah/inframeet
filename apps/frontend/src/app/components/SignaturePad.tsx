@@ -203,7 +203,7 @@ export default function SignaturePad({ segment, onSave, isLoading = false }: Sig
             className="mt-0.5 accent-indigo-600 rounded cursor-pointer"
           />
           <span>
-            Saya menyetujui <strong className="text-slate-800 dark:text-zinc-200">Terms of Service (ToS)</strong> {segment === "academic" ? "dan memahami batasan integritas akademik (Anti-Joki) secara mutlak." : "dan ketentuan pengerjaan agensi."}
+            Saya menyetujui <strong className="text-slate-800 dark:text-zinc-200">Terms of Service (ToS)</strong> {segment === "academic" ? "dan memahami batasan integritas akademik (Academic Integrity Protocol) secara mutlak." : "dan ketentuan pengerjaan agensi."}
           </span>
         </label>
 

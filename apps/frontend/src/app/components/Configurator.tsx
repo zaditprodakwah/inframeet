@@ -608,10 +608,10 @@ export default function Configurator() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+          className="max-w-2xl mx-auto space-y-8"
         >
           {/* LEFT COLUMN: CONTROLS */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="space-y-8">
             <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 shadow-xl">
               {/* Header Mode Selector */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-slate-100 dark:border-zinc-800">
@@ -864,7 +864,7 @@ export default function Configurator() {
           </div>
 
           {/* RIGHT COLUMN: PRICING CARD & LEAD CAPTURE FORM */}
-          <div className="lg:col-span-5 space-y-8 sticky top-8">
+          <div className="space-y-8">
             <div className="bg-slate-900 text-white rounded-3xl p-8 shadow-2xl relative overflow-hidden">
               {/* Background Glow */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -1018,7 +1018,7 @@ export default function Configurator() {
                       "Mengamankan Spesifikasi..."
                     ) : (
                       <>
-                        Kunci Spesifikasi &amp; Buat Kontrak
+                        Buat Draf SOW &amp; Estimasi Anggaran
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}

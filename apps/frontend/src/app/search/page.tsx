@@ -353,7 +353,7 @@ function SearchResultsContent() {
             <Sparkles className="w-10 h-10 text-indigo-400 animate-bounce" />
             <h2 className="text-2xl font-bold text-slate-200">Bagaimana kami bisa membantu Anda hari ini?</h2>
             <p className="text-sm text-slate-400 leading-relaxed">
-              Temukan solusi cloud modular B2B enterprise tanpa biaya langganan, direktori server hosting and VPS afiliasi, atau perbantuan layouting dan olah data statistik riset akademik yang bebas joki.
+              Temukan solusi cloud modular B2B enterprise tanpa biaya langganan, direktori server hosting and VPS afiliasi, atau perbantuan layouting dan olah data statistik riset akademik dengan komitmen integritas akademik tinggi.
             </p>
           </div>
         )}

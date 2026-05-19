@@ -65,6 +65,38 @@ export async function POST(request: Request) {
       );
     }
 
+    // ==========================================================================
+    // 🛡️ CRYPTOGRAPHIC VERIFIABLE CREDENTIAL GENERATION (Trust-as-a-Service)
+    // ==========================================================================
+    try {
+      const { signData } = await import("@/lib/integrity");
+      const vcPayload = {
+        bastId: bast.id,
+        contractId: contractId,
+        projectId: projectId,
+        signatoryName: signatoryName,
+        clientSignatureIp: clientIp,
+        timestamp: currentTimestamp,
+        deliverables: bast.deliverables_summary,
+      };
+      
+      const { token, hash } = await signData(bast.id, "BAST", vcPayload);
+      
+      await supabaseAdmin
+        .from("verifiable_credentials")
+        .insert({
+          subject_id: bast.id,
+          subject_type: "BAST",
+          credential_type: "BAST_SIGNATURE_VERIFICATION",
+          payload: vcPayload,
+          signature: token,
+          hash: hash,
+          status: "VALID",
+        });
+    } catch (vcErr) {
+      console.error("Gagal men-generate Verifiable Credential BAST:", vcErr);
+    }
+
     // 3. Update Contract status to completed
     await supabaseAdmin
       .from("contracts")
@@ -152,6 +184,31 @@ export async function POST(request: Request) {
               total_withdrawn_idr: 0,
               updated_at: currentTimestamp,
             });
+        }
+
+        // ==========================================================================
+        // 🏅 INCREMENT REPUTATION SCORE FOR EXECUTOR EXPERT PROFILE (+10 PTS)
+        // ==========================================================================
+        try {
+          const { data: expertProfile } = await supabaseAdmin
+            .from("expert_directory")
+            .select("id, reputation_score")
+            .eq("user_id", ledger.user_id)
+            .single();
+
+          if (expertProfile) {
+            const currentScore = expertProfile.reputation_score || 100;
+            const newScore = Math.min(150, currentScore + 10);
+            await supabaseAdmin
+              .from("expert_directory")
+              .update({ 
+                reputation_score: newScore, 
+                updated_at: currentTimestamp 
+              })
+              .eq("id", expertProfile.id);
+          }
+        } catch (repErr) {
+          console.error("Gagal menaikkan reputasi pakar:", repErr);
         }
       }
     }
