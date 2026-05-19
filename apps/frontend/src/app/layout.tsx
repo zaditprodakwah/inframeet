@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import CommandMenu from "./components/CommandMenu";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import FloatingContactForm from "@/components/FloatingContactForm";
+import AccessibilityPanel from "./components/AccessibilityPanel";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -40,8 +41,10 @@ export default function RootLayout({
         {children}
         <MobileBottomNav />
         <FloatingContactForm />
+        <AccessibilityPanel />
         <CommandMenu />
       </body>
     </html>
   );
 }
+

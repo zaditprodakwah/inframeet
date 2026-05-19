@@ -124,3 +124,77 @@ body {
   transform: translateY(-2px);
 }
 
+/* 🌗 Light/Night Theme Overrides */
+body.light-mode {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card-bg: rgba(241, 245, 249, 0.85);
+  --border-color: rgba(203, 213, 225, 0.8);
+}
+body.light-mode ::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+body.light-mode ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border: 2px solid #f8fafc;
+}
+body.light-mode header,
+body.light-mode footer,
+body.light-mode nav,
+body.light-mode .glass-panel,
+body.light-mode .glass-card {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+  color: #0f172a !important;
+  border-color: rgba(203, 213, 225, 0.5) !important;
+}
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode label,
+body.light-mode .text-white {
+  color: #0f172a !important;
+}
+body.light-mode p,
+body.light-mode span,
+body.light-mode div {
+  color: #334155;
+}
+
+/* 👓 Accessibility Overrides */
+body.high-contrast {
+  --background: #000000 !important;
+  --foreground: #ffffff !important;
+  --card-bg: #000000 !important;
+  --border-color: #ffffff !important;
+}
+body.high-contrast * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.serif-font {
+  --font-sans: Georgia, Cambria, "Times New Roman", Times, serif !important;
+  font-family: var(--font-sans) !important;
+}
+
+/* 🔍 Custom Font Scaling Overrides */
+body.font-size-sm {
+  font-size: 0.875rem !important;
+}
+body.font-size-base {
+  font-size: 1rem !important;
+}
+body.font-size-md {
+  font-size: 1.125rem !important;
+}
+body.font-size-lg {
+  font-size: 1.25rem !important;
+}
+body.font-size-xl {
+  font-size: 1.375rem !important;
+}
+
+

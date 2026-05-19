@@ -98,6 +98,102 @@ const LOCAL_INSTITUTIONS = [
     popular_services: ["Olah Data SPSS Kuantitatif", "Turnitin & Parafrasa Manual", "Slide Sidang Premium"]
   },
   {
+    id: "unair",
+    name: "Universitas Airlangga (Unair)",
+    type: "Perguruan Tinggi",
+    sector: "Negeri",
+    location: "Surabaya, Jawa Timur",
+    accreditation: "Unggul",
+    citation_style: "APA 7th Edition",
+    turnitin_limit: "15%",
+    description: "Universitas bereputasi global dengan keunggulan riset bidang kesehatan, kedokteran, serta sosial humaniora nasional.",
+    popular_services: ["Olah Data Statistik Medis", "Parafrase Jurnal Kedokteran", "Turnitin & Anti Plagiarisme"]
+  },
+  {
+    id: "its",
+    name: "Institut Teknologi Sepuluh Nopember (ITS)",
+    type: "Perguruan Tinggi",
+    sector: "Negeri",
+    location: "Surabaya, Jawa Timur",
+    accreditation: "Unggul",
+    citation_style: "IEEE Style",
+    turnitin_limit: "10%",
+    description: "Institusi riset teknologi maritim and kecerdasan buatan terdepan di kawasan Indonesia Timur.",
+    popular_services: ["Analisis Data Data Science", "Layouting Jurnal IEEE", "Asistensi Skripsi Teknik"]
+  },
+  {
+    id: "undip",
+    name: "Universitas Diponegoro (Undip)",
+    type: "Perguruan Tinggi",
+    sector: "Negeri",
+    location: "Semarang, Jawa Tengah",
+    accreditation: "Unggul",
+    citation_style: "APA Style",
+    turnitin_limit: "15%",
+    description: "Pusat pendidikan kelautan tropis and hukum bisnis dengan tingkat produktivitas riset publikasi terakreditasi nasional.",
+    popular_services: ["Olah Data SPSS & EViews", "Turnitin & Cek Kesamaan", "Layouting Sinta 2"]
+  },
+  {
+    id: "ub",
+    name: "Universitas Brawijaya (UB)",
+    type: "Perguruan Tinggi",
+    sector: "Negeri",
+    location: "Malang, Jawa Timur",
+    accreditation: "Unggul",
+    citation_style: "Harvard Style",
+    turnitin_limit: "15%",
+    description: "Universitas multi-kampus dengan jumlah pengajuan paten riset and publikasi ilmiah terbesar di Indonesia.",
+    popular_services: ["Asistensi Metodologi Kualitatif", "Olah Data SmartPLS", "Slide Presentasi Premium"]
+  },
+  {
+    id: "uns",
+    name: "Universitas Sebelas Maret (UNS)",
+    type: "Perguruan Tinggi",
+    sector: "Negeri",
+    location: "Surakarta, Jawa Tengah",
+    accreditation: "Unggul",
+    citation_style: "APA 7th Edition",
+    turnitin_limit: "15%",
+    description: "Universitas riset dengan komitmen pelestarian kebudayaan nasional and teknologi ramah lingkungan terapan.",
+    popular_services: ["Olah Data SPSS & AMOS", "Turnitin & Parafrase Ulang", "Layouting Artikel Ilmiah"]
+  },
+  {
+    id: "unhas",
+    name: "Universitas Hasanuddin (Unhas)",
+    type: "Perguruan Tinggi",
+    sector: "Negeri",
+    location: "Makassar, Sulawesi Selatan",
+    accreditation: "Unggul",
+    citation_style: "APA Style",
+    turnitin_limit: "15%",
+    description: "Hub riset and pusat studi kawasan timur Indonesia dengan kontribusi paper kelautan, pertanian, and kedokteran unggulan.",
+    popular_services: ["Olah Data Statistik Kesehatan", "Cek Turnitin & Parafrase", "Asistensi Skripsi Hukum"]
+  },
+  {
+    id: "uny",
+    name: "Universitas Negeri Yogyakarta (UNY)",
+    type: "Perguruan Tinggi",
+    sector: "Negeri",
+    location: "Sleman, D.I. Yogyakarta",
+    accreditation: "Unggul",
+    citation_style: "APA 7th Edition",
+    turnitin_limit: "15%",
+    description: "Universitas kependidikan and ilmu olahraga terbaik nasional dengan ribuan riset pengembangan teknologi pembelajaran modern.",
+    popular_services: ["Olah Data SPSS Kualitatif/Kuantitatif", "Turnitin Karya Ilmiah", "Parafrase Terbimbing"]
+  },
+  {
+    id: "upi",
+    name: "Universitas Pendidikan Indonesia (UPI)",
+    type: "Perguruan Tinggi",
+    sector: "Negeri",
+    location: "Bandung, Jawa Barat",
+    accreditation: "Unggul",
+    citation_style: "APA Style",
+    turnitin_limit: "15%",
+    description: "Pelopor riset kurikulum pendidikan formal, teknologi pengajaran, and bimbingan belajar berbasis digital terakreditasi.",
+    popular_services: ["Analisis Data Skripsi Pendidikan", "Parafrase Cepat", "Formatting Jurnal Pendidikan"]
+  },
+  {
     id: "sman8",
     name: "SMA Negeri 8 Jakarta",
     type: "Sekolah Menengah",
@@ -120,6 +216,54 @@ const LOCAL_INSTITUTIONS = [
     turnitin_limit: "25%",
     description: "Sekolah menengah unggulan semi-militer dengan penekanan tinggi pada kepemimpinan dan integritas karya tulis.",
     popular_services: ["Bimbingan Karya Ilmiah", "Slide Presentasi Sidang", "Kalkulasi Data Dasar"]
+  },
+  {
+    id: "sman3bdg",
+    name: "SMA Negeri 3 Bandung",
+    type: "Sekolah Menengah",
+    sector: "Negeri",
+    location: "Bandung, Jawa Barat",
+    accreditation: "A",
+    citation_style: "APA Style",
+    turnitin_limit: "25%",
+    description: "Sekolah menengah historis legendaris di Kota Bandung dengan prestasi kompetisi sains and seni tingkat nasional.",
+    popular_services: ["Bimbingan Esai Karya Tulis", "Turnitin Karya Siswa", "Desain Slide Sidang"]
+  },
+  {
+    id: "sman1yk",
+    name: "SMA Negeri 1 Yogyakarta",
+    type: "Sekolah Menengah",
+    sector: "Negeri",
+    location: "Yogyakarta, D.I. Yogyakarta",
+    accreditation: "A",
+    citation_style: "APA Style",
+    turnitin_limit: "25%",
+    description: "Sekolah teladan di kota pendidikan Yogyakarta dengan kurikulum berbasis sains and riset ilmiah terapan siswa.",
+    popular_services: ["Asistensi Tugas Akhir Siswa", "Parafrase Karya Tulis", "Cek Turnitin KTI"]
+  },
+  {
+    id: "manic",
+    name: "MAN Insan Cendekia Serpong",
+    type: "Sekolah Menengah",
+    sector: "Negeri",
+    location: "Tangerang Selatan, Banten",
+    accreditation: "A",
+    citation_style: "APA Style",
+    turnitin_limit: "20%",
+    description: "Madrasah Aliyah Negeri unggulan nasional dengan peringkat rata-rata UTBK tertinggi di Indonesia secara konsisten.",
+    popular_services: ["Bimbingan Riset Olimpiade", "Parafrase Riset Ilmiah", "Slide Karya Tulis"]
+  },
+  {
+    id: "sman5sub",
+    name: "SMA Negeri 5 Surabaya",
+    type: "Sekolah Menengah",
+    sector: "Negeri",
+    location: "Surabaya, Jawa Timur",
+    accreditation: "A",
+    citation_style: "APA Style",
+    turnitin_limit: "25%",
+    description: "Sekolah menengah terkemuka di Jawa Timur yang mendidik calon pemimpin and ilmuwan masa depan bangsa.",
+    popular_services: ["Turnitin & Anti Plagiarisme KTI", "Visualisasi Slide Praktek", "Format Karya Tulis"]
   }
 ];
 

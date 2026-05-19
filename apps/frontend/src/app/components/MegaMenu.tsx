@@ -156,7 +156,7 @@ export default function MegaMenu() {
                         Pencarian pedoman format sitasi & Turnitin institusi Nusantara.
                       </p>
                     </Link>
-                    <Link href="/tools/submission" className="group block space-y-1 p-2 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-xl transition-all">
+                    <Link href="/submission" className="group block space-y-1 p-2 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-xl transition-all">
                       <div className="flex items-center gap-2 font-bold text-sm text-slate-900 dark:text-zinc-50 group-hover:text-emerald-600">
                         <Send className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
                         Kontribusi Konten & Direktori
@@ -173,13 +173,13 @@ export default function MegaMenu() {
           </div>
 
           <Link 
-            href="/experts" 
+            href="/submission?tab=experts" 
             className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-bold text-indigo-600 dark:text-indigo-400"
           >
             Jaringan Pakar
           </Link>
           <Link 
-            href="/verify" 
+            href="/submission?tab=verify" 
             className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1 text-emerald-600 dark:text-emerald-400"
           >
             <ShieldCheck className="w-4 h-4 text-emerald-500" /> Verifikasi
@@ -278,21 +278,21 @@ export default function MegaMenu() {
             ✦ Direktori Kampus & Sekolah
           </Link>
           <Link 
-            href="/tools/submission" 
+            href="/submission" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-sm font-bold text-indigo-600 dark:text-indigo-400 py-2 border-b border-slate-50 dark:border-zinc-900 pl-4"
           >
             ✦ Kontribusi Konten & Direktori
           </Link>
           <Link 
-            href="/experts" 
+            href="/submission?tab=experts" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-sm font-bold text-indigo-600 dark:text-indigo-400 py-2 border-b border-slate-50 dark:border-zinc-900"
           >
             Jaringan Pakar Terverifikasi
           </Link>
           <Link 
-            href="/verify" 
+            href="/submission?tab=verify" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-sm font-bold text-emerald-600 dark:text-emerald-400 py-2 border-b border-slate-50 dark:border-zinc-900"
           >

@@ -83,17 +83,17 @@ export default function Footer() {
           </h4>
           <ul className="space-y-2 text-[11px]">
             <li>
-              <Link href="/experts" className="hover:text-indigo-400 transition-colors font-bold text-indigo-400">
+              <Link href="/submission?tab=experts" className="hover:text-indigo-400 transition-colors font-bold text-indigo-400">
                 Jaringan Pakar Terverifikasi
               </Link>
             </li>
             <li>
-              <Link href="/verify" className="hover:text-emerald-400 transition-colors flex items-center gap-1 text-emerald-400">
+              <Link href="/submission?tab=verify" className="hover:text-emerald-400 transition-colors flex items-center gap-1 text-emerald-400">
                 <ShieldCheck className="w-3.5 h-3.5" /> Portal Verifikasi Kriptografis
               </Link>
             </li>
             <li>
-              <Link href="/join-expert" className="hover:text-indigo-400 transition-colors">
+              <Link href="/submission?tab=expert" className="hover:text-indigo-400 transition-colors">
                 Daftar Sebagai Pakar (Onboarding)
               </Link>
             </li>

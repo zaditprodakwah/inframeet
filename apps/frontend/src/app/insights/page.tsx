@@ -3,11 +3,28 @@
 import { useEffect, useState } from "react";
 import MegaMenu from "../components/MegaMenu";
 import Breadcrumbs from "../components/Breadcrumbs";
+import Footer from "../components/Footer";
 import Link from "next/link";
-import { Sparkles, ArrowRight, BookOpen, Cpu, Calendar, Tag, ChevronDown, RefreshCw, Search, Sparkle } from "lucide-react";
+import { 
+  Sparkles, 
+  ArrowRight, 
+  BookOpen, 
+  Cpu, 
+  Calendar, 
+  Tag, 
+  ChevronDown, 
+  RefreshCw, 
+  Search, 
+  BarChart3, 
+  ShieldCheck, 
+  Lock, 
+  FileText, 
+  Zap, 
+  Scale 
+} from "lucide-react";
 import InlineAffiliateRecommendation from "../components/InlineAffiliateRecommendation";
 
-// Curated high-fidelity fallback insights to prevent "Sindrom Etalase Kosong"
+// 8 Curated high-fidelity fallback insights to prevent "Sindrom Etalase Kosong"
 const DEFAULT_ARTICLES = [
   {
     id: "fallback-art-1",
@@ -25,7 +42,7 @@ const DEFAULT_ARTICLES = [
     categories: ["technology", "business"],
     relevance_score: 0.95,
     published_at: "2026-05-18T00:00:00.000Z",
-    image_url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",
+    image_url: "",
     rss_feeds: {
       feed_name: "INFRAMEET Expert Insights",
       source_category: "technology"
@@ -47,7 +64,139 @@ const DEFAULT_ARTICLES = [
     categories: ["ai"],
     relevance_score: 0.95,
     published_at: "2026-05-17T00:00:00.000Z",
-    image_url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop",
+    image_url: "",
+    rss_feeds: {
+      feed_name: "INFRAMEET Research Hub",
+      source_category: "ai"
+    }
+  },
+  {
+    id: "fallback-art-3",
+    title: "Optimasi Keamanan Supabase PostgreSQL dengan RLS Tingkat Lanjut",
+    content_summary: `**Executive Summary (TL;DR):**
+- Mengaktifkan Row Level Security (RLS) di semua tabel publik guna membatasi paparan data ilegal pihak luar.
+- Menggunakan policy PostgreSQL terenkripsi UUID untuk memverifikasi autentikasi token JWT klien Next.js secara instan.
+- Melindungi data sensitif escrow and kontrak tagihan menggunakan enkripsi pgcrypto internal PostgreSQL.
+
+**FAQ:**
+* **Q: Bagaimana RLS mencegah kebocoran data pengguna?**
+  A: RLS mengevaluasi query langsung di level database, mencegah user membaca baris yang bukan miliknya meskipun bypass API terjadi.
+* **Q: Apakah kebijakan RLS memengaruhi kecepatan baca database?**
+  A: Sangat minimal, terutama jika kolom relasi pengenal (seperti user_id) dipasangi indeks secara optimal.`,
+    categories: ["technology"],
+    relevance_score: 0.96,
+    published_at: "2026-05-16T00:00:00.000Z",
+    image_url: "",
+    rss_feeds: {
+      feed_name: "INFRAMEET Security Advisory",
+      source_category: "technology"
+    }
+  },
+  {
+    id: "fallback-art-4",
+    title: "Memahami Regulasi Pelindungan Data Pribadi (UU PDP) bagi Startups",
+    content_summary: `**Executive Summary (TL;DR):**
+- Startups digital wajib menerapkan enkripsi data pada kolom penyimpanan nomor kontak, email, and password pengguna.
+- Menunjuk Data Protection Officer (DPO) untuk mengawasi kepatuhan alur data internal sesuai amanat hukum resmi.
+- Memberikan transparansi persetujuan eksplisit kepada pelanggan sebelum melakukan pemrosesan data sensitif.
+
+**FAQ:**
+* **Q: Apa sanksi terberat dari ketidakpatuhan UU PDP?**
+  A: Sanksi administratif berupa denda hingga 2% dari pendapatan tahunan serta pembekuan izin operasional.
+* **Q: Apakah enkripsi database memengaruhi performa pencarian?**
+  A: Dengan pola blind index, pencarian query teks terenkripsi dapat tetap berlangsung cepat and efisien.`,
+    categories: ["business"],
+    relevance_score: 0.94,
+    published_at: "2026-05-15T00:00:00.000Z",
+    image_url: "",
+    rss_feeds: {
+      feed_name: "INFRAMEET Legal Review",
+      source_category: "business"
+    }
+  },
+  {
+    id: "fallback-art-5",
+    title: "Strategi Lolos Turnitin dengan Teknik Parafrase Ilmiah Terstruktur",
+    content_summary: `**Executive Summary (TL;DR):**
+- Menghindari plagiarisme tidak langsung dengan menstrukturkan ulang kalimat aktif menjadi pasif or sebaliknya tanpa mengubah pesan.
+- Menggunakan kamus kosakata ilmiah bersertifikat untuk mengganti frasa pengulangan yang lazim terdeteksi Turnitin.
+- Memastikan sitasi primer (seperti APA or IEEE) langsung diintegrasikan tepat setelah gagasan rujukan diletakkan.
+
+**FAQ:**
+* **Q: Bolehkah menggunakan robot AI parafrase instan?**
+  A: Sangat berisiko, karena algoritma pendeteksi AI saat ini dapat dengan mudah mengidentifikasi pola penulisan mesin non-manusia.
+* **Q: Mengapa sitasi yang benar bisa mengurangi kemiripan Turnitin?**
+  A: Turnitin mengecualikan daftar pustaka and kutipan langsung jika opsi filter exclusion diaktifkan oleh penguji jurnal.`,
+    categories: ["ai"],
+    relevance_score: 0.93,
+    published_at: "2026-05-14T00:00:00.000Z",
+    image_url: "",
+    rss_feeds: {
+      feed_name: "INFRAMEET Research Hub",
+      source_category: "ai"
+    }
+  },
+  {
+    id: "fallback-art-6",
+    title: "Implementasi Escrow Berbasis Invoice untuk Keamanan Transaksi Digital",
+    content_summary: `**Executive Summary (TL;DR):**
+- Menggunakan rekening penampung bersama (escrow) yang dikunci menggunakan tanda tangan kontrak invoice elektronik unik.
+- Dana project dilepaskan secara bertahap (milestone-based payment) setelah hasil pekerjaan terverifikasi secara fungsional.
+- Memberikan kepastian pembayaran bagi agensi and jaminan hasil pekerjaan yang steril and tuntas bagi klien enterprise.
+
+**FAQ:**
+* **Q: Bagaimana escrow melindungi freelancer dari gagal bayar?**
+  A: Klien diwajibkan menyetor dana penuh ke rekening escrow sebelum pengerjaan project dimulai.
+* **Q: Siapa yang memoderasi jika terjadi sengketa hasil kerja?**
+  A: Tim arbiter independen INFRAMEET akan mengaudit riwayat pekerjaan and spesifikasi PRD secara adil.`,
+    categories: ["business", "technology"],
+    relevance_score: 0.97,
+    published_at: "2026-05-13T00:00:00.000Z",
+    image_url: "",
+    rss_feeds: {
+      feed_name: "INFRAMEET Financial Tech",
+      source_category: "business"
+    }
+  },
+  {
+    id: "fallback-art-7",
+    title: "Audit Core Web Vitals untuk Meningkatkan Konversi Bisnis Enterprise",
+    content_summary: `**Executive Summary (TL;DR):**
+- Mempercepat First Input Delay (FID) and Largest Contentful Paint (LCP) di bawah 2.5 detik untuk kepuasan navigasi.
+- Menghilangkan pergeseran tata letak yang mengganggu pembaca (Cumulative Layout Shift) dengan menetapkan aspek rasio tetap.
+- Meningkatkan visibilitas peringkat SEO organik di mesin pencari Google hingga 80% melalui optimasi loading aset statis.
+
+**FAQ:**
+* **Q: Mengapa kecepatan load situs berdampak langsung ke omzet penjualan?**
+  A: Setiap penundaan 1 detik pada pemuatan halaman seluler dapat menurunkan rasio konversi pembeli hingga 20%.
+* **Q: Apakah framework Next.js 15 mendukung optimasi ini secara otomatis?**
+  A: Ya, melalui pemanfaatan Next.js Server Components and dynamic image optimization.`,
+    categories: ["technology"],
+    relevance_score: 0.95,
+    published_at: "2026-05-12T00:00:00.000Z",
+    image_url: "",
+    rss_feeds: {
+      feed_name: "INFRAMEET Engineering Advisory",
+      source_category: "technology"
+    }
+  },
+  {
+    id: "fallback-art-8",
+    title: "Pemanfaatan PLS-SEM dalam Riset Perilaku Konsumen Era AI",
+    content_summary: `**Executive Summary (TL;DR):**
+- Partial Least Squares Structural Equation Modeling (PLS-SEM) sangat andal untuk menguji model hubungan kausal kompleks dengan sampel kecil.
+- Mengidentifikasi variabel mediasi and moderasi guna memetakan adopsi teknologi asisten kecerdasan buatan.
+- Menyusun kuesioner berskala Likert yang valid secara statistik and reliabel sebelum pengolahan data multivariat.
+
+**FAQ:**
+* **Q: Kapan peneliti harus memilih PLS-SEM dibanding CB-SEM?**
+  A: Ketika tujuan riset bersifat eksploratif untuk mengembangkan teori baru, bukan sekadar konfirmasi teori yang sudah mapan.
+* **Q: Software apa yang paling direkomendasikan untuk uji PLS-SEM?**
+  A: SmartPLS 4 menawarkan antarmuka visual paling lengkap dengan algoritma kalkulasi bootstrapping tercepat saat ini.`,
+    categories: ["ai", "business"],
+    relevance_score: 0.94,
+    published_at: "2026-05-11T00:00:00.000Z",
+    image_url: "",
     rss_feeds: {
       feed_name: "INFRAMEET Research Hub",
       source_category: "ai"
@@ -131,9 +280,8 @@ export default function InsightsPage() {
   const handleManualSync = async () => {
     try {
       setSyncing(true);
-      // Step 1: Scrape new feeds
       const scrapeRes = await fetch("/api/cron/rss-scrape");
-      const scrapeData = await scrapeRes.json();
+      await scrapeRes.json();
 
       // Reload
       await loadArticles(true);
@@ -208,19 +356,37 @@ export default function InsightsPage() {
     };
   };
 
-  const getArticleImage = (art: any) => {
-    if (art.image_url && art.image_url.trim().length > 0) {
-      return art.image_url;
-    }
+  // Clean CSS layout helper that returns custom icon components per category
+  const renderCategoryIcon = (art: any) => {
     const category = art.rss_feeds?.source_category || (art.categories && art.categories[0]) || "ai";
     if (category === "ai" || category === "Riset & Metodologi") {
-      return "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop";
+      return (
+        <div className="w-full h-full bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent flex flex-col items-center justify-center space-y-2 border-b border-[#1e293b]">
+          <BookOpen className="w-12 h-12 text-indigo-400 drop-shadow-md" />
+          <span className="text-[9px] text-slate-500 tracking-widest font-mono uppercase font-black">Research Insight</span>
+        </div>
+      );
     } else if (category === "technology" || category === "Teknologi") {
-      return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop";
+      return (
+        <div className="w-full h-full bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-transparent flex flex-col items-center justify-center space-y-2 border-b border-[#1e293b]">
+          <Cpu className="w-12 h-12 text-blue-400 drop-shadow-md" />
+          <span className="text-[9px] text-slate-500 tracking-widest font-mono uppercase font-black">Tech Blueprint</span>
+        </div>
+      );
     } else if (category === "business" || category === "Bisnis") {
-      return "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop";
+      return (
+        <div className="w-full h-full bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-transparent flex flex-col items-center justify-center space-y-2 border-b border-[#1e293b]">
+          <BarChart3 className="w-12 h-12 text-emerald-400 drop-shadow-md" />
+          <span className="text-[9px] text-slate-500 tracking-widest font-mono uppercase font-black">Business Analytics</span>
+        </div>
+      );
     }
-    return "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop";
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-violet-500/10 via-fuchsia-500/5 to-transparent flex flex-col items-center justify-center space-y-2 border-b border-[#1e293b]">
+        <Zap className="w-12 h-12 text-violet-400 drop-shadow-md" />
+        <span className="text-[9px] text-slate-500 tracking-widest font-mono uppercase font-black">General Advisory</span>
+      </div>
+    );
   };
 
   const filteredArticles = articles.filter((art) => {
@@ -248,8 +414,6 @@ export default function InsightsPage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans transition-colors duration-300">
       <MegaMenu />
-
-      {/* Dynamic Breadcrumbs */}
       <Breadcrumbs />
 
       <main className="flex-1 py-12 space-y-16">
@@ -350,16 +514,12 @@ export default function InsightsPage() {
                     : "Mei 2026";
 
                   return (
-                    <div key={art.id} className="glass-card p-6 md:p-8 rounded-3xl border border-[#1e293b] flex flex-col justify-between space-y-6 hover:shadow-2xl hover:shadow-indigo-500/[0.02] transition duration-300 animate-fade-in">
+                    <div key={art.id} className="glass-card p-6 md:p-8 rounded-3xl border border-[#1e293b] flex flex-col justify-between space-y-6 hover:shadow-2xl hover:shadow-indigo-500/[0.02] transition duration-300 animate-fade-in overflow-hidden bg-slate-950/20">
                       <div className="space-y-4">
                         
-                        {/* Featured Image */}
-                        <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-slate-900 bg-slate-950">
-                          <img
-                            src={getArticleImage(art)}
-                            alt={art.title}
-                            className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
-                          />
+                        {/* Elegant Icon backdrop vector instead of featured image thumbnail */}
+                        <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden border border-slate-900 bg-slate-950">
+                          {renderCategoryIcon(art)}
                         </div>
 
                         {/* Top Header Tags */}
@@ -377,12 +537,12 @@ export default function InsightsPage() {
                           </span>
                         </div>
 
-                        {/* Title with link to dynamic detailed page */}
-                        <h3 className="text-xl font-bold text-white hover:text-amber-400 transition leading-snug">
+                        {/* Title with link to detailed page */}
+                        <h3 className="text-lg font-bold text-white hover:text-amber-400 transition leading-snug">
                           {isFallback ? (
-                            <a href={art.source_url} target="_blank" rel="noreferrer">
+                            <Link href={`/insights/${art.id}`}>
                               {highlightText(art.title, debouncedSearch)}
-                            </a>
+                            </Link>
                           ) : (
                             <Link href={`/insights/${art.slug || art.id}`}>
                               {highlightText(art.title, debouncedSearch)}
@@ -464,23 +624,12 @@ export default function InsightsPage() {
                           Source: {art.rss_feeds?.feed_name || "Expert Insights"}
                         </span>
                         
-                        {isFallback ? (
-                          <a
-                            href={art.source_url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-amber-400 hover:text-amber-300 font-extrabold flex items-center gap-1 transition"
-                          >
-                            Baca Asli <ArrowRight className="w-3 h-3" />
-                          </a>
-                        ) : (
-                          <Link
-                            href={`/insights/${art.slug || art.id}`}
-                            className="text-amber-400 hover:text-amber-300 font-extrabold flex items-center gap-1 transition animate-pulse"
-                          >
-                            Baca Ulasan Analis <ArrowRight className="w-3 h-3" />
-                          </Link>
-                        )}
+                        <Link
+                          href={`/insights/${art.slug || art.id}`}
+                          className="text-amber-400 hover:text-amber-300 font-extrabold flex items-center gap-1 transition animate-pulse"
+                        >
+                          Baca Ulasan Analis <ArrowRight className="w-3 h-3" />
+                        </Link>
                       </div>
                     </div>
                   );
@@ -525,9 +674,7 @@ export default function InsightsPage() {
         </section>
       </main>
 
-      <footer className="py-8 bg-[#0a0f1d] border-t border-[#1e293b] text-center text-xs text-slate-500">
-        © 2026 INFRAMEET. Seluruh hak cipta dilindungi undang-undang.
-      </footer>
+      <Footer />
     </div>
   );
 }

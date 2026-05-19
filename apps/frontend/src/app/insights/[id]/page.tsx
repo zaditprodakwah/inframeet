@@ -190,34 +190,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
           {article.title}
         </h1>
 
-        {/* 3. Featured Image */}
-        {(() => {
-          const getArticleImage = () => {
-            if (article.image_url && article.image_url.trim().length > 0) {
-              return article.image_url;
-            }
-            const category = article.rss_feeds?.source_category || (article.categories && article.categories[0]) || "ai";
-            if (category === "ai" || category === "Riset & Metodologi") {
-              return "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop";
-            } else if (category === "technology" || category === "Teknologi") {
-              return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop";
-            } else if (category === "business" || category === "Bisnis") {
-              return "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop";
-            }
-            return "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop";
-          };
-          return (
-            <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden mb-8 border border-slate-800/80 shadow-2xl no-print">
-              <img
-                src={getArticleImage()}
-                alt={article.title}
-                className="object-cover w-full h-full hover:scale-105 transition-transform duration-[6000ms] ease-out"
-              />
-              {/* Dark glassmorphic gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-80"></div>
-            </div>
-          );
-        })()}
+        <div className="h-[1px] w-full bg-slate-800/80 mb-8 no-print"></div>
 
         {/* 4. Executive TL;DR Abstract Box */}
         <div className="p-6 bg-amber-500/[0.02] border-l-4 border-amber-500/80 backdrop-blur-sm rounded-r-2xl mb-8 print-tldr">
@@ -307,15 +280,6 @@ export default async function InsightDetailPage({ params }: PageProps) {
                     key={item.id}
                     className="group flex flex-col p-4 bg-slate-950/40 border border-slate-900 hover:border-slate-800 rounded-2xl transition-all duration-300"
                   >
-                    {item.image_url && (
-                      <div className="aspect-[16/10] w-full rounded-xl overflow-hidden mb-3 border border-slate-900">
-                        <img
-                          src={item.image_url}
-                          alt={item.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                    )}
                     <div className="flex gap-2 items-center mb-2">
                       <span className={`px-2 py-0.5 text-[9px] font-bold uppercase rounded border ${relCategoryClass}`}>
                         {relCategoryLabel}
