@@ -121,6 +121,21 @@
 - **Structured JSON Curation Prompts:** Instructs Groq LPU and Gemini Fallback REST APIs to curate summaries in strict JSON formats (Executive Summary TL;DR + Q&A FAQs) that automatically align with the frontend's dynamic rendering.
 - **500MB Supabase Free-Tier Storage Guardrail:** Integrated an append-only cleanup procedure that deletes older scraped feed items older than 14 days, protecting the database from exceeding free tier bounds.
 
+### 4. Global Root Route Consolidation (/submission)
+- **Objective:** Establish a single, unified, high-integrity crowd-sourced contribution hub at `/submission` (relocated from `/tools/submission`).
+- **Implementation:** Created the `/submission` route featuring Profil Pakar (onboarding), Pendidikan (institusi), Perkakas (tools catalog), Esai Ilmiah (insights with Crossref DOI integration), and Studi Kasus (technical showcase).
+- **SEO & Backlink Integrity:** Leftover pathways (`/tools/submission`, `/join-expert`, `/experts`, `/verify`) dynamically perform client-side redirects to `/submission?tab=...` with full query search param persistence.
+- **Dynamic Experts Directory:** Leveraged custom JSON REST queries on the frontend to query `/api/experts` with live search query filters.
+
+### 5. Night Mode & Global Accessibility Personalization Panel
+- **Objective:** Enhance personal customization, user readability, and full contrast capability across the entire app workspace.
+- **Implementation:** Integrated a floating accessibility control panel at `/components/AccessibilityPanel.tsx` mounted universally in `layout.tsx`.
+- **Customizations:** Includes a persistent global light/night mode toggle (persisted via `localStorage` on `document.documentElement` class selectors), a fluid text resizer (A- / A+ / Normal scaling up to 130%), and a typography-serif font changer.
+
+### 6. Invisible SEO Asset & Metadata-Driven Injection
+- **Objective:** Maintain rich image previews for social feeds (OpenGraph, Twitter, GEO/AEO schemas) while maintaining 100% vector-only layouts for frontend grid speed.
+- **Implementation:** Injected high-resolution Unsplash images inside API data payloads (image_url) and OpenGraph headers, while replacing actual visual card containers with lightweight SVG/Lucide icons.
+
 ---
 
 ## 📊 DATABASE ENTITY RELATIONSHIPS (SUPABASE LOGIC)
