@@ -3,6 +3,28 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 import servicesDefault from "../../../../../../packages/config/services.json";
+import { validateAdminSession, insertAuditLog } from "./security";
+import { z } from "zod";
+
+const upsertCatalogItemSchema = z.object({
+  sku: z.string().min(2, "SKU minimal 2 karakter"),
+  category: z.string().min(2, "Kategori wajib diisi"),
+  name: z.string().min(2, "Nama wajib diisi"),
+  base_price_idr: z.number().nonnegative("Harga dasar tidak boleh negatif"),
+  description: z.string().nullable().optional(),
+  features_checklist: z.array(z.any()).nullable().optional(),
+  price_flat_idr: z.number().nullable().optional(),
+  price_per_unit_idr: z.number().nullable().optional(),
+  unit_label: z.string().nullable().optional(),
+  is_volume_based: z.boolean().nullable().optional(),
+  min_units: z.number().nullable().optional(),
+  max_units: z.number().nullable().optional(),
+  limit_description: z.string().nullable().optional()
+});
+
+const deleteCatalogItemSchema = z.object({
+  sku: z.string().min(2, "SKU tidak valid")
+});
 
 /**
  * Upserts a single item in the dynamic services catalog table
@@ -22,42 +44,60 @@ export async function upsertCatalogItem(item: {
   max_units?: number | null;
   limit_description?: string | null;
 }) {
-  if (!supabaseAdmin) {
-    return { success: false, message: "Database is offline." };
-  }
-
   try {
+    // 1. Zero-Trust check
+    const session = await validateAdminSession();
+
+    // 2. Schema parse input
+    const validated = upsertCatalogItemSchema.parse(item);
+
+    if (!supabaseAdmin) {
+      return { success: false, message: "Database is offline." };
+    }
+
+    // 3. Upsert execution
     const { error } = await supabaseAdmin
       .from("services_catalog")
       .upsert({
-        sku: item.sku,
-        category: item.category,
-        name: item.name,
-        base_price_idr: item.base_price_idr,
-        description: item.description || null,
-        features_checklist: item.features_checklist || [],
-        price_flat_idr: item.price_flat_idr || null,
-        price_per_unit_idr: item.price_per_unit_idr || null,
-        unit_label: item.unit_label || null,
-        is_volume_based: item.is_volume_based || false,
-        min_units: item.min_units || null,
-        max_units: item.max_units || null,
-        limit_description: item.limit_description || null,
+        sku: validated.sku,
+        category: validated.category,
+        name: validated.name,
+        base_price_idr: validated.base_price_idr,
+        description: validated.description || null,
+        features_checklist: validated.features_checklist || [],
+        price_flat_idr: validated.price_flat_idr || null,
+        price_per_unit_idr: validated.price_per_unit_idr || null,
+        unit_label: validated.unit_label || null,
+        is_volume_based: validated.is_volume_based || false,
+        min_units: validated.min_units || null,
+        max_units: validated.max_units || null,
+        limit_description: validated.limit_description || null,
         updated_at: new Date().toISOString()
       }, { onConflict: "sku" });
 
     if (error) {
-      console.error(`Gagal upsert catalog item '${item.sku}':`, error);
+      console.error(`Gagal upsert catalog item '${validated.sku}':`, error);
       return { success: false, message: error.message };
     }
+
+    // 4. Record secure audit trail event
+    await insertAuditLog(
+      session.staffId,
+      session.actorEmail,
+      "services_catalog",
+      "00000000-0000-0000-0000-000000000000",
+      "UPSERT_CATALOG_ITEM",
+      { sku: validated.sku, name: validated.name }
+    );
 
     revalidatePath("/admin/catalog");
     revalidatePath("/calculator");
     revalidatePath("/layanan/b2b");
     revalidatePath("/layanan/akademik");
 
-    return { success: true, message: `Sukses menyimpan catalog item ${item.sku}!` };
+    return { success: true, message: `Sukses menyimpan catalog item ${validated.sku}!` };
   } catch (err: any) {
+    console.error("Critical error in upsertCatalogItem Server Action:", err);
     return { success: false, message: err?.message || "Internal server error." };
   }
 }
@@ -66,26 +106,44 @@ export async function upsertCatalogItem(item: {
  * Deletes a catalog item by its SKU code
  */
 export async function deleteCatalogItem(sku: string) {
-  if (!supabaseAdmin) {
-    return { success: false, message: "Database is offline." };
-  }
-
   try {
+    // 1. Zero-Trust check
+    const session = await validateAdminSession();
+
+    // 2. Schema parse input
+    const validated = deleteCatalogItemSchema.parse({ sku });
+
+    if (!supabaseAdmin) {
+      return { success: false, message: "Database is offline." };
+    }
+
+    // 3. Delete execution
     const { error } = await supabaseAdmin
       .from("services_catalog")
       .delete()
-      .eq("sku", sku);
+      .eq("sku", validated.sku);
 
     if (error) {
-      console.error(`Gagal menghapus catalog item '${sku}':`, error);
+      console.error(`Gagal menghapus catalog item '${validated.sku}':`, error);
       return { success: false, message: error.message };
     }
+
+    // 4. Record secure audit trail event
+    await insertAuditLog(
+      session.staffId,
+      session.actorEmail,
+      "services_catalog",
+      "00000000-0000-0000-0000-000000000000",
+      "DELETE_CATALOG_ITEM",
+      { sku: validated.sku }
+    );
 
     revalidatePath("/admin/catalog");
     revalidatePath("/calculator");
 
-    return { success: true, message: `Sukses menghapus catalog item ${sku}!` };
+    return { success: true, message: `Sukses menghapus catalog item ${validated.sku}!` };
   } catch (err: any) {
+    console.error("Critical error in deleteCatalogItem Server Action:", err);
     return { success: false, message: err?.message || "Internal server error." };
   }
 }
@@ -94,12 +152,15 @@ export async function deleteCatalogItem(sku: string) {
  * Seeds or resets the DB catalog override table using static services.json
  */
 export async function resetCatalogToDefault() {
-  if (!supabaseAdmin) {
-    return { success: false, message: "Database is offline." };
-  }
-
   try {
-    // 1. Gather all items from the single-source-of-truth JSON
+    // 1. Zero-Trust check
+    const session = await validateAdminSession();
+
+    if (!supabaseAdmin) {
+      return { success: false, message: "Database is offline." };
+    }
+
+    // 2. Gather all items from the single-source-of-truth JSON
     const itemsToInsert: any[] = [];
 
     // B2B Services
@@ -175,24 +236,24 @@ export async function resetCatalogToDefault() {
           category: "hosting_options",
           name: s.name,
           base_price_idr: s.setup_price_idr || 0,
-          price_flat_idr: s.yearly_estimate_idr || 0, // yearly server estimate
+          price_flat_idr: s.yearly_estimate_idr || 0,
           description: s.description || null,
           features_checklist: s.features ? s.features.map((f: any) => ({ label: f, included: true })) : []
         });
       });
     }
 
-    // 2. Clear old database entries
+    // 3. Clear old database entries
     const { error: deleteErr } = await supabaseAdmin
       .from("services_catalog")
       .delete()
-      .neq("sku", "TRASH-EMPTY"); // delete all rows safely
+      .neq("sku", "TRASH-EMPTY");
 
     if (deleteErr) {
       throw deleteErr;
     }
 
-    // 3. Upsert initial batch
+    // 4. Upsert initial batch
     if (itemsToInsert.length > 0) {
       const { error: insertErr } = await supabaseAdmin
         .from("services_catalog")
@@ -202,6 +263,16 @@ export async function resetCatalogToDefault() {
         throw insertErr;
       }
     }
+
+    // 5. Record secure audit trail event
+    await insertAuditLog(
+      session.staffId,
+      session.actorEmail,
+      "services_catalog",
+      "00000000-0000-0000-0000-000000000000",
+      "RESET_CATALOG_TO_DEFAULT",
+      { itemsSynced: itemsToInsert.length }
+    );
 
     revalidatePath("/admin/catalog");
     revalidatePath("/calculator");

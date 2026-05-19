@@ -24,6 +24,7 @@ export default function AdminFinancePage() {
   const [escrows, setEscrows] = useState<any[]>([]);
   const [staffList, setStaffList] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [approvingIds, setApprovingIds] = useState<Record<string, boolean>>({});
 
   // Configurations
   const [nominalUnikMin, setNominalUnikMin] = useState(1);
@@ -98,9 +99,16 @@ export default function AdminFinancePage() {
   // Approval queue trigger
   const handleApprove = async (id: string) => {
     if (!confirm("Otorisasi pencairan dana eksekutor? Tindakan ini akan memotong saldo dompet and memicu disbursement otomatis Xendit.")) return;
-    const res = await approveWithdrawal(id);
-    alert(res.message);
-    fetchData();
+    setApprovingIds(prev => ({ ...prev, [id]: true }));
+    try {
+      const res = await approveWithdrawal(id);
+      alert(res.message);
+      await fetchData();
+    } catch (err: any) {
+      alert(`Error: ${err.message}`);
+    } finally {
+      setApprovingIds(prev => ({ ...prev, [id]: false }));
+    }
   };
 
   // Save Settings Overrides
@@ -401,9 +409,18 @@ export default function AdminFinancePage() {
                         <td className="py-3 text-right">
                           <button
                             onClick={() => handleApprove(pay.id)}
-                            className="px-3 py-1 bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/20 hover:border-emerald-500/40 rounded-lg text-[10px] font-bold cursor-pointer transition-all inline-flex items-center gap-1"
+                            disabled={approvingIds[pay.id]}
+                            className="px-3 py-1 bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/20 hover:border-emerald-500/40 rounded-lg text-[10px] font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all inline-flex items-center gap-1"
                           >
-                            <Check className="w-3 h-3" /> Setujui
+                            {approvingIds[pay.id] ? (
+                              <>
+                                <RefreshCw className="w-3 h-3 animate-spin" /> Memproses...
+                              </>
+                            ) : (
+                              <>
+                                <Check className="w-3 h-3" /> Setujui
+                              </>
+                            )}
                           </button>
                         </td>
                       </tr>

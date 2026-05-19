@@ -533,7 +533,7 @@ export default function ContractPortal() {
                 disabled={submittingBast}
                 className="w-100 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800 text-white font-extrabold text-sm rounded-lg transition"
               >
-                {submittingBast ? "Sedang Memproses Handover & Escrow..." : "Terima Pekerjaan & Tanda Tangani BAST"}
+                {submittingBast ? "Sedang Memproses Serah Terima & Penyelesaian..." : "Terima Pekerjaan & Tanda Tangani BAST"}
               </button>
             </div>
           </div>

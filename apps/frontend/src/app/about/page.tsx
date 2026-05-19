@@ -47,7 +47,7 @@ export default function AboutPage() {
 
         {/* Vision & Mission Row */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="rounded-3xl border border-slate-800/80 bg-slate-900/40 backdrop-blur-md p-8 space-y-4">
+          <div className="glass-panel p-8 rounded-3xl space-y-4">
             <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
               <Cpu className="w-5 h-5" />
             </div>
@@ -57,7 +57,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="rounded-3xl border border-slate-800/80 bg-slate-900/40 backdrop-blur-md p-8 space-y-4">
+          <div className="glass-panel p-8 rounded-3xl space-y-4">
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
               <HeartHandshake className="w-5 h-5" />
             </div>
@@ -96,7 +96,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {TEAM.map((member) => (
-              <div key={member.name} className="rounded-3xl border border-slate-800 bg-slate-900/50 p-6 flex flex-col sm:flex-row items-start gap-5 hover:border-indigo-500/10 transition-all">
+              <div key={member.name} className="glass-card p-6 rounded-3xl flex flex-col sm:flex-row items-start gap-5">
                 <div className="w-16 h-16 rounded-2xl bg-slate-950 border border-slate-850 flex items-center justify-center text-3xl shrink-0 overflow-hidden">
                   {member.avatar.startsWith("/") ? (
                     <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
@@ -171,7 +171,7 @@ export default function AboutPage() {
 
       </main>
 
-      <footer className="py-8 bg-[#0a0f1d] border-t border-[#1e293b] text-center text-xs text-slate-500">
+      <footer className="py-8 bg-[#020617] border-t border-slate-900 text-center text-xs text-slate-500">
         © 2026 INFRAMEET. Seluruh hak cipta dilindungi undang-undang.
       </footer>
     </div>

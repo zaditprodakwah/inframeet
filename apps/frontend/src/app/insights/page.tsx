@@ -25,6 +25,7 @@ const DEFAULT_ARTICLES = [
     categories: ["technology", "business"],
     relevance_score: 0.95,
     published_at: "2026-05-18T00:00:00.000Z",
+    image_url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",
     rss_feeds: {
       feed_name: "INFRAMEET Expert Insights",
       source_category: "technology"
@@ -46,6 +47,7 @@ const DEFAULT_ARTICLES = [
     categories: ["ai"],
     relevance_score: 0.95,
     published_at: "2026-05-17T00:00:00.000Z",
+    image_url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop",
     rss_feeds: {
       feed_name: "INFRAMEET Research Hub",
       source_category: "ai"
@@ -206,6 +208,43 @@ export default function InsightsPage() {
     };
   };
 
+  const getArticleImage = (art: any) => {
+    if (art.image_url && art.image_url.trim().length > 0) {
+      return art.image_url;
+    }
+    const category = art.rss_feeds?.source_category || (art.categories && art.categories[0]) || "ai";
+    if (category === "ai" || category === "Riset & Metodologi") {
+      return "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop";
+    } else if (category === "technology" || category === "Teknologi") {
+      return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop";
+    } else if (category === "business" || category === "Bisnis") {
+      return "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop";
+    }
+    return "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop";
+  };
+
+  const filteredArticles = articles.filter((art) => {
+    // 1. Search Query filter (matches title, content summary, or category tags)
+    if (debouncedSearch) {
+      const q = debouncedSearch.toLowerCase();
+      const matchesSearch = 
+        art.title?.toLowerCase().includes(q) || 
+        art.content_summary?.toLowerCase().includes(q) ||
+        (art.categories && art.categories.some((c: string) => c.toLowerCase().includes(q)));
+      if (!matchesSearch) return false;
+    }
+
+    // 2. Active Tab Category filter
+    if (activeTab === "all") return true;
+    
+    const sourceCat = art.rss_feeds?.source_category;
+    const isMatch = 
+      sourceCat === activeTab || 
+      (art.categories && art.categories.includes(activeTab));
+    
+    return isMatch;
+  });
+
   return (
     <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans transition-colors duration-300">
       <MegaMenu />
@@ -287,7 +326,7 @@ export default function InsightsPage() {
               <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
               <p className="text-slate-400 text-xs animate-pulse">Memuat Analisis Industri...</p>
             </div>
-          ) : articles.length === 0 ? (
+          ) : filteredArticles.length === 0 ? (
             <div className="text-center py-20 bg-[#0f172a] border border-[#334155] rounded-3xl p-8 max-w-md mx-auto space-y-3">
               <p className="text-slate-400 text-sm font-semibold">Belum ada artikel ulasan di tab ini.</p>
               <p className="text-slate-500 text-xs">Klik tombol "Perbarui Ulasan" di atas untuk memuat kurasi artikel pertama Anda.</p>
@@ -297,7 +336,7 @@ export default function InsightsPage() {
               
               {/* Articles Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {articles.map((art) => {
+                {filteredArticles.map((art) => {
                   const { summaryPoints, faqs } = parseCuratedContent(art.content_summary);
                   const isCurated = art.relevance_score >= 0.9;
                   const isFallback = art.id.startsWith("fallback");
@@ -311,19 +350,17 @@ export default function InsightsPage() {
                     : "Mei 2026";
 
                   return (
-                    <div key={art.id} className="glass-card p-6 md:p-8 rounded-3xl border border-[#1e293b] flex flex-col justify-between space-y-6 hover:shadow-2xl hover:shadow-indigo-500/[0.02] transition duration-300">
+                    <div key={art.id} className="glass-card p-6 md:p-8 rounded-3xl border border-[#1e293b] flex flex-col justify-between space-y-6 hover:shadow-2xl hover:shadow-indigo-500/[0.02] transition duration-300 animate-fade-in">
                       <div className="space-y-4">
                         
                         {/* Featured Image */}
-                        {art.image_url && (
-                          <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-slate-900 bg-slate-950">
-                            <img
-                              src={art.image_url}
-                              alt={art.title}
-                              className="object-cover w-full h-full"
-                            />
-                          </div>
-                        )}
+                        <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-slate-900 bg-slate-950">
+                          <img
+                            src={getArticleImage(art)}
+                            alt={art.title}
+                            className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
 
                         {/* Top Header Tags */}
                         <div className="flex justify-between items-center text-[10px] font-bold tracking-wider font-mono">

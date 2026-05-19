@@ -2,36 +2,67 @@
 
 import { supabaseAdmin } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
+import { validateAdminSession, insertAuditLog } from "./security";
+import { z } from "zod";
+
+const saveSystemSettingsSchema = z.object({
+  key: z.string().min(1, "Key wajib diisi"),
+  value: z.any(),
+  description: z.string().nullable().optional()
+});
+
+const testFonnteWhatsAppSchema = z.object({
+  targetPhone: z.string().min(5, "Nomor telepon terlalu pendek"),
+  testMessage: z.string().min(1, "Pesan wajib diisi")
+});
 
 /**
  * Saves dynamic environment configurations to the database overrides table
  */
 export async function saveSystemSettings(key: string, value: any, description?: string) {
-  if (!supabaseAdmin) {
-    return { success: false, message: "Database is offline." };
-  }
-
   try {
+    // 1. Zero-Trust Admin session check
+    const session = await validateAdminSession();
+
+    // 2. Strict Zod payload validation
+    const validated = saveSystemSettingsSchema.parse({ key, value, description });
+
+    if (!supabaseAdmin) {
+      return { success: false, message: "Database is offline." };
+    }
+
+    // 3. Upsert settings override record
     const { error } = await supabaseAdmin
       .from("system_settings")
       .upsert({
-        key,
-        value,
-        description: description || null,
+        key: validated.key,
+        value: validated.value,
+        description: validated.description || null,
         updated_at: new Date().toISOString()
       }, { onConflict: "key" });
 
     if (error) {
-      console.error(`Gagal menyimpan system settings '${key}':`, error);
+      console.error(`Gagal menyimpan system settings '${validated.key}':`, error);
       return { success: false, message: error.message };
     }
+
+    // 4. Record secure audit trail event
+    await insertAuditLog(
+      session.staffId,
+      session.actorEmail,
+      "system_settings",
+      "00000000-0000-0000-0000-000000000000",
+      "UPDATE_SYSTEM_SETTINGS",
+      { key: validated.key, value: validated.value }
+    );
 
     revalidatePath("/admin/settings");
     revalidatePath("/admin/finance");
 
-    return { success: true, message: `Sukses menyimpan konfigurasi '${key}'!` };
+    return { success: true, message: `Sukses menyimpan konfigurasi '${validated.key}'!` };
   } catch (err: any) {
-    return { success: false, message: err?.message || "Internal server settings update failure." };
+    console.error("Critical failure updating system settings:", err);
+    return { success: false, message: err?.message || "Otorisasi ditolak atau input tidak valid." };
   }
 }
 
@@ -39,21 +70,26 @@ export async function saveSystemSettings(key: string, value: any, description?: 
  * Dispatches a real-time test WhatsApp notification via Fonnte
  */
 export async function testFonnteWhatsApp(targetPhone: string, testMessage: string) {
-  const token = process.env.FONNTE_TOKEN;
-  
-  if (!token) {
-    return { 
-      success: false, 
-      message: "Gagal memicu: FONNTE_TOKEN tidak terdefinisi di environment variables (.env)." 
-    };
-  }
-
-  const cleanPhone = targetPhone.replace(/[^0-9]/g, "");
-  if (!cleanPhone) {
-    return { success: false, message: "Nomor handphone tidak valid." };
-  }
-
   try {
+    // 1. Zero-Trust Admin session check
+    const session = await validateAdminSession();
+
+    // 2. Strict Zod payload validation
+    const validated = testFonnteWhatsAppSchema.parse({ targetPhone, testMessage });
+
+    const token = process.env.FONNTE_TOKEN;
+    if (!token) {
+      return { 
+        success: false, 
+        message: "Gagal memicu: FONNTE_TOKEN tidak terdefinisi di environment variables (.env)." 
+      };
+    }
+
+    const cleanPhone = validated.targetPhone.replace(/[^0-9]/g, "");
+    if (!cleanPhone) {
+      return { success: false, message: "Nomor handphone tidak valid." };
+    }
+
     console.log(`Pemicuan WhatsApp test ke: ${cleanPhone}...`);
     
     const res = await fetch("https://api.fonnte.com/send", {
@@ -64,22 +100,22 @@ export async function testFonnteWhatsApp(targetPhone: string, testMessage: strin
       },
       body: JSON.stringify({
         target: cleanPhone,
-        message: testMessage || "🤖 God-Mode Test Alert: Konektivitas Fonnte WhatsApp Gateway INFRAMEET Aktif & Steril!"
+        message: validated.testMessage
       })
     });
 
     const result = await res.json();
     
     if (result.status) {
-      // Create a security audit log event
-      if (supabaseAdmin) {
-        await supabaseAdmin.from("audit_log").insert({
-          action_type: "INTEGRATION_TEST",
-          actor_email: "muhzadit@gmail.com",
-          ip_address: "127.0.0.1",
-          details: { service: "Fonnte WhatsApp", status: "Success", recipient: cleanPhone }
-        });
-      }
+      // 3. Record secure audit trail event via standard utility
+      await insertAuditLog(
+        session.staffId,
+        session.actorEmail,
+        "system_settings",
+        "00000000-0000-0000-0000-000000000000",
+        "INTEGRATION_TEST_FONNTE",
+        { service: "Fonnte WhatsApp", status: "Success", recipient: cleanPhone }
+      );
 
       return { 
         success: true, 
@@ -93,6 +129,6 @@ export async function testFonnteWhatsApp(targetPhone: string, testMessage: strin
     }
   } catch (err: any) {
     console.error("Critical failure during Fonnte WhatsApp integration test:", err);
-    return { success: false, message: err?.message || "Koneksi gateway terputus." };
+    return { success: false, message: err?.message || "Koneksi gateway terputus atau otorisasi ditolak." };
   }
 }

@@ -183,10 +183,6 @@ export default async function InsightDetailPage({ params }: PageProps) {
           <span className="flex items-center gap-1 text-xs text-slate-400 font-medium">
             <User className="w-3.5 h-3.5 text-slate-500" /> INFRAMEET Analyst Team
           </span>
-          <span className="h-3 w-[1px] bg-slate-800"></span>
-          <span className="flex items-center gap-1 text-xs text-amber-500/90 font-semibold bg-amber-500/5 px-2 py-0.5 rounded border border-amber-500/10">
-            <Award className="w-3.5 h-3.5" /> Skor Relevansi: {(article.relevance_score * 100).toFixed(0)}%
-          </span>
         </div>
 
         {/* 2. Article Title */}
@@ -195,17 +191,33 @@ export default async function InsightDetailPage({ params }: PageProps) {
         </h1>
 
         {/* 3. Featured Image */}
-        {article.image_url && (
-          <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden mb-8 border border-slate-800/80 shadow-2xl no-print">
-            <img
-              src={article.image_url}
-              alt={article.title}
-              className="object-cover w-full h-full hover:scale-105 transition-transform duration-[6000ms] ease-out"
-            />
-            {/* Dark glassmorphic gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-80"></div>
-          </div>
-        )}
+        {(() => {
+          const getArticleImage = () => {
+            if (article.image_url && article.image_url.trim().length > 0) {
+              return article.image_url;
+            }
+            const category = article.rss_feeds?.source_category || (article.categories && article.categories[0]) || "ai";
+            if (category === "ai" || category === "Riset & Metodologi") {
+              return "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop";
+            } else if (category === "technology" || category === "Teknologi") {
+              return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop";
+            } else if (category === "business" || category === "Bisnis") {
+              return "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop";
+            }
+            return "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop";
+          };
+          return (
+            <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden mb-8 border border-slate-800/80 shadow-2xl no-print">
+              <img
+                src={getArticleImage()}
+                alt={article.title}
+                className="object-cover w-full h-full hover:scale-105 transition-transform duration-[6000ms] ease-out"
+              />
+              {/* Dark glassmorphic gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-80"></div>
+            </div>
+          );
+        })()}
 
         {/* 4. Executive TL;DR Abstract Box */}
         <div className="p-6 bg-amber-500/[0.02] border-l-4 border-amber-500/80 backdrop-blur-sm rounded-r-2xl mb-8 print-tldr">

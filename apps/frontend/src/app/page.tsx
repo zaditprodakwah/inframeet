@@ -126,7 +126,7 @@ export default async function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-black font-sans transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-indigo-500/30">
       
       {/* 1. STICKY GLOBAL HEADER & MEGA MENU */}
       <MegaMenu />
@@ -137,9 +137,9 @@ export default async function Home() {
       <main className="flex-1 space-y-24 pb-24">
         
         {/* 2. DUAL HERO SECTION WITH LEADS CAPTURE */}
-        <section className="relative pt-24 pb-16 overflow-hidden">
+        <section className="relative pt-24 pb-16 overflow-hidden bg-gradient-to-b from-[#020617] via-[#090d1f]/30 to-[#020617]">
           {/* Decorative gradients */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
           
           <div className="max-w-7xl mx-auto px-6 text-center space-y-8 relative z-10">
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 border border-indigo-100/50 dark:border-indigo-900/30 shadow-sm animate-pulse">
@@ -197,7 +197,7 @@ export default async function Home() {
 
         {/* DYNAMIC TRUST INDICATOR BAR (UPGRADE 3.0) */}
         <section className="max-w-6xl mx-auto px-6 -mt-8 relative z-20 font-sans">
-          <div className="bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border border-slate-200 dark:border-zinc-800 rounded-3xl p-6 shadow-xl shadow-indigo-500/[0.02] flex flex-wrap justify-around items-center gap-6 text-center">
+          <div className="glass-panel rounded-3xl p-6 flex flex-wrap justify-around items-center gap-6 text-center">
             <div className="space-y-1">
               <p className="text-2xl font-black text-slate-900 dark:text-zinc-50 tracking-tight">1,200+</p>
               <p className="text-[9px] font-bold text-slate-400 dark:text-zinc-550 uppercase tracking-widest">Sinyal Riset Dipantau (SLA 24j)</p>
@@ -253,7 +253,7 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* CARD A: Enterprise B2B */}
-            <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 shadow-xl space-y-6 hover:shadow-2xl hover:border-indigo-500/30 transition-all duration-300 flex flex-col justify-between">
+            <div className="glass-card p-8 rounded-3xl space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
                   <Building className="w-6 h-6" />
@@ -289,7 +289,7 @@ export default async function Home() {
             </div>
 
             {/* CARD B: Academic Research */}
-            <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 shadow-xl space-y-6 hover:shadow-2xl hover:border-emerald-500/30 transition-all duration-300 flex flex-col justify-between">
+            <div className="glass-card p-8 rounded-3xl space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                   <GraduationCap className="w-6 h-6" />
@@ -340,7 +340,7 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Case 1: B2B Serverless */}
-            <div className="bg-white dark:bg-[#090d1f] border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+            <div className="glass-card p-6 rounded-2xl flex flex-col justify-between group">
               <div className="space-y-4">
                 <span className="px-2 py-0.5 text-[9px] font-bold bg-indigo-500/10 text-indigo-400 rounded border border-indigo-500/20">B2B CLOUD IMPLEMENTATION</span>
                 <h4 className="text-lg font-bold text-slate-900 dark:text-zinc-50 group-hover:text-indigo-400 transition-colors">
@@ -359,7 +359,7 @@ export default async function Home() {
             </div>
 
             {/* Case 2: Academic Statistics */}
-            <div className="bg-white dark:bg-[#090d1f] border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+            <div className="glass-card p-6 rounded-2xl flex flex-col justify-between group">
               <div className="space-y-4">
                 <span className="px-2 py-0.5 text-[9px] font-bold bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20">ACADEMIC RESEARCH MODELING</span>
                 <h4 className="text-lg font-bold text-slate-900 dark:text-zinc-50 group-hover:text-emerald-400 transition-colors">
@@ -378,7 +378,7 @@ export default async function Home() {
             </div>
 
             {/* Case 3: Academic Journal Layout */}
-            <div className="bg-white dark:bg-[#090d1f] border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
+            <div className="glass-card p-6 rounded-2xl flex flex-col justify-between group">
               <div className="space-y-4">
                 <span className="px-2 py-0.5 text-[9px] font-bold bg-amber-500/10 text-amber-400 rounded border border-amber-500/20">SCHOLARLY ARTICLE COMPLIANCE</span>
                 <h4 className="text-lg font-bold text-slate-900 dark:text-zinc-50 group-hover:text-amber-400 transition-colors">
@@ -401,7 +401,7 @@ export default async function Home() {
         {/* EXECUTIVE ARCHITECT PROFILE SECTION (FOUNDER'S CORNER) */}
         <section className="relative overflow-hidden py-12 max-w-7xl mx-auto px-6 font-sans">
           <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="bg-white/40 dark:bg-zinc-950/40 backdrop-blur-md border border-slate-200 dark:border-zinc-800 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-12 items-center">
+          <div className="glass-panel p-8 md:p-12 rounded-3xl flex flex-col md:flex-row gap-12 items-center">
             {/* Image Frame */}
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-3xl overflow-hidden border border-slate-200 dark:border-zinc-800 shadow-xl shrink-0 relative group">
               <img
@@ -418,10 +418,10 @@ export default async function Home() {
             <div className="space-y-6 flex-1">
               <span className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest font-mono">Principal Architect &amp; Founder</span>
               <h3 className="text-3xl font-extrabold text-slate-900 dark:text-zinc-50 tracking-tight leading-tight">
-                Membangun Sistem Pendapatan &amp; Infrastruktur Reputasi Tepercaya
+                Mendedikasikan Keahlian Teknis untuk Skalabilitas Bisnis and Kehormatan Ilmiah Anda
               </h3>
               <p className="text-sm text-slate-500 dark:text-zinc-400 leading-relaxed">
-                Di <strong>INFRAMEET</strong>, saya mengawasi desain arsitektur digital dan pemrosesan sains riset secara pribadi. Dengan latar belakang mendalam di bidang <em>Cloud Serverless Engineering</em> dan metodologi <em>Kuantitatif Olah Data</em>, filosofi kerja kami didasarkan pada <strong>Academic Harm Reduction</strong>—menghadirkan transparansi penuh, melindungi hak cipta ilmiah secara absolut, and menghilangkan biaya pemeliharaan infrastruktur server konvensional yang berlebih.
+                Di <strong>INFRAMEET</strong>, saya mengawasi desain arsitektur sistem digital dan analisis sains riset secara langsung. Komitmen utama kami adalah menyajikan transparansi penuh, melindungi hak kekayaan intelektual (HKI) riset Anda secara absolut, serta merancang infrastruktur cloud modern yang memangkas beban biaya operasional secara signifikan tanpa mengorbankan performa.
               </p>
               <div className="flex flex-wrap gap-4 pt-2">
                 <div className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-slate-200/50 dark:border-zinc-800 text-xs font-semibold text-slate-700 dark:text-zinc-300">
@@ -452,7 +452,7 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Tool 1 */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 flex flex-col justify-between shadow-sm hover:border-indigo-500/20 transition duration-300">
+            <div className="glass-card p-6 rounded-2xl flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm border border-slate-800">
@@ -476,7 +476,7 @@ export default async function Home() {
             </div>
 
             {/* Tool 2 */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 flex flex-col justify-between shadow-sm hover:border-indigo-500/20 transition duration-300">
+            <div className="glass-card p-6 rounded-2xl flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center font-bold text-sm border border-indigo-500/20">
@@ -500,7 +500,7 @@ export default async function Home() {
             </div>
 
             {/* Tool 3 */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 flex flex-col justify-between shadow-sm hover:border-indigo-500/20 transition duration-300">
+            <div className="glass-card p-6 rounded-2xl flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold text-sm border border-emerald-500/20">
@@ -563,7 +563,7 @@ export default async function Home() {
               const isFallback = art.id.startsWith("hom");
 
               return (
-                <div key={art.id} className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition duration-300">
+                <div key={art.id} className="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
                     <span className="text-[9px] uppercase font-mono font-extrabold px-2 py-0.5 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-full border border-indigo-500/20">
                       {art.categories?.[0] || "EXPERT ANALYSIS"}
@@ -615,7 +615,7 @@ export default async function Home() {
 
           <div className="space-y-4">
             {/* FAQ 1 */}
-            <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm space-y-3">
+            <div className="glass-card p-6 rounded-2xl space-y-3">
               <h4 className="font-bold text-base text-slate-900 dark:text-zinc-50">
                 Apa itu INFRAMEET?
               </h4>
@@ -625,7 +625,7 @@ export default async function Home() {
             </div>
 
             {/* FAQ 2 */}
-            <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm space-y-3">
+            <div className="glass-card p-6 rounded-2xl space-y-3">
               <h4 className="font-bold text-base text-slate-900 dark:text-zinc-50">
                 Apakah INFRAMEET menyediakan layanan Joki?
               </h4>
@@ -635,7 +635,7 @@ export default async function Home() {
             </div>
 
             {/* FAQ 3 */}
-            <div className="bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm space-y-3">
+            <div className="glass-card p-6 rounded-2xl space-y-3">
               <h4 className="font-bold text-base text-slate-900 dark:text-zinc-50">
                 Bagaimana cara melakukan estimasi harga proyek?
               </h4>
@@ -675,7 +675,7 @@ export default async function Home() {
       </main>
 
       {/* 11. FAT FOOTER */}
-      <footer className="bg-white dark:bg-zinc-950 border-t border-slate-200 dark:border-zinc-900 py-16 transition-colors">
+      <footer className="bg-[#020617] border-t border-slate-900 py-16">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-slate-100 dark:border-zinc-900 pb-12">
           {/* Logo and About */}
           <div className="space-y-4">
@@ -760,7 +760,7 @@ export default async function Home() {
 function TrustBadges() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-6 py-8">
-      <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-md flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition-all">
+      <div className="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
             <ShieldCheck className="w-5 h-5 text-indigo-500 shrink-0" />
@@ -772,7 +772,7 @@ function TrustBadges() {
         </p>
       </div>
 
-      <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-md flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition-all">
+      <div className="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
             <Sparkles className="w-5 h-5 text-indigo-500 shrink-0" />
@@ -784,7 +784,7 @@ function TrustBadges() {
         </p>
       </div>
 
-      <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-md flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition-all">
+      <div className="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0" />
@@ -796,7 +796,7 @@ function TrustBadges() {
         </p>
       </div>
 
-      <div className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800/80 backdrop-blur-md flex flex-col justify-between space-y-4 hover:border-indigo-500/20 transition-all">
+      <div className="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
             <TrendingUp className="w-5 h-5 text-indigo-500 shrink-0" />

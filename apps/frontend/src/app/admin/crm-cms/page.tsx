@@ -8,7 +8,8 @@ import {
   upsertPortfolioCase, 
   upsertDigitalTool,
   deletePortfolioCase,
-  deleteDigitalTool
+  deleteDigitalTool,
+  moderateRssItem
 } from "../actions/crm_cms";
 import { 
   Users, 
@@ -27,7 +28,7 @@ import {
 } from "lucide-react";
 
 export default function CrmCmsDashboardPage() {
-  const [activeTab, setActiveTab] = useState<"briefs" | "leads" | "portfolios" | "tools">("briefs");
+  const [activeTab, setActiveTab] = useState<"briefs" | "leads" | "portfolios" | "tools" | "dynamic-content">("briefs");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("ALL");
   
@@ -36,6 +37,7 @@ export default function CrmCmsDashboardPage() {
   const [leads, setLeads] = useState<any[]>([]);
   const [portfolios, setPortfolios] = useState<any[]>([]);
   const [tools, setTools] = useState<any[]>([]);
+  const [rssItems, setRssItems] = useState<any[]>([]);
   
   // Loading states
   const [loading, setLoading] = useState(true);
@@ -70,18 +72,21 @@ export default function CrmCmsDashboardPage() {
         { data: briefsData },
         { data: leadsData },
         { data: portfoliosData },
-        { data: toolsData }
+        { data: toolsData },
+        { data: rssData }
       ] = await Promise.all([
         supabase.from("briefs").select("*, clients(name, email), projects(name)").order("created_at", { ascending: false }),
         supabase.from("crm_leads").select("*").order("created_at", { ascending: false }),
         supabase.from("portfolio_cases").select("*").order("created_at", { ascending: false }),
-        supabase.from("tools_directory").select("*").order("name", { ascending: true })
+        supabase.from("tools_directory").select("*").order("name", { ascending: true }),
+        supabase.from("rss_items").select("*, rss_feeds(title, category)").order("published_at", { ascending: false })
       ]);
 
       setBriefs(briefsData || []);
       setLeads(leadsData || []);
       setPortfolios(portfoliosData || []);
       setTools(toolsData || []);
+      setRssItems(rssData || []);
     } catch (err) {
       console.error("Gagal memuat data CRM & CMS:", err);
     } finally {
@@ -119,6 +124,14 @@ export default function CrmCmsDashboardPage() {
           const matchQ = (t.name?.toLowerCase().includes(q) || t.category?.toLowerCase().includes(q) || t.description?.toLowerCase().includes(q));
           return matchQ;
         });
+      case "dynamic-content":
+        return rssItems.filter(item => {
+          const matchQ = (item.title?.toLowerCase().includes(q) || item.rss_feeds?.title?.toLowerCase().includes(q) || item.rss_feeds?.category?.toLowerCase().includes(q));
+          const matchS = filterStatus === "ALL" || 
+                         (filterStatus === "PENDING" && !item.is_published_to_index) || 
+                         (filterStatus === "APPROVED" && item.is_published_to_index);
+          return matchQ && matchS;
+        });
     }
   };
 
@@ -137,6 +150,16 @@ export default function CrmCmsDashboardPage() {
     const res = await updateLeadStatus(id, status, "Reviewed & Contacted");
     if (res.success) {
       setLeads(leads.map(l => l.id === id ? { ...l, status } : l));
+    } else {
+      alert(`Error: ${res.message}`);
+    }
+  };
+
+  // RSS Action Moderation Handler
+  const handleRssItemModerate = async (id: string, isPublished: boolean) => {
+    const res = await moderateRssItem(id, isPublished);
+    if (res.success) {
+      setRssItems(rssItems.map(item => item.id === id ? { ...item, is_published_to_index: isPublished } : item));
     } else {
       alert(`Error: ${res.message}`);
     }
@@ -298,6 +321,14 @@ export default function CrmCmsDashboardPage() {
           >
             Tools Directory ({tools.length})
           </button>
+          <button
+            onClick={() => { setActiveTab("dynamic-content"); setShowAddForm(false); setEditingId(null); setSearchQuery(""); }}
+            className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+              activeTab === "dynamic-content" ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/10" : "text-slate-400 hover:text-white"
+            }`}
+          >
+            RSS Curation ({rssItems.length})
+          </button>
         </div>
       </div>
 
@@ -318,7 +349,7 @@ export default function CrmCmsDashboardPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            {(activeTab === "briefs" || activeTab === "leads") && (
+            {(activeTab === "briefs" || activeTab === "leads" || activeTab === "dynamic-content") && (
               <div className="flex items-center gap-2">
                 <Filter className="w-3.5 h-3.5 text-slate-500" />
                 <select
@@ -599,6 +630,15 @@ export default function CrmCmsDashboardPage() {
                         <th className="p-4 text-right">Aksi</th>
                       </>
                     )}
+                    {activeTab === "dynamic-content" && (
+                      <>
+                        <th className="p-4">Judul Item RSS / Sumber Feed</th>
+                        <th className="p-4">Kategori Feed</th>
+                        <th className="p-4">Tanggal Rilis</th>
+                        <th className="p-4">Status Indeks AI</th>
+                        <th className="p-4 text-right">Aksi Cepat</th>
+                      </>
+                    )}
                   </tr>
                 </thead>
 
@@ -758,6 +798,59 @@ export default function CrmCmsDashboardPage() {
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
+                          </td>
+                        </>
+                      )}
+
+                      {/* Dynamic tab: Dynamic Content & RSS Curation */}
+                      {activeTab === "dynamic-content" && (
+                        <>
+                          <td className="p-4">
+                            <a 
+                              href={item.source_url || item.link} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="font-bold text-slate-200 hover:text-indigo-400 hover:underline block leading-snug cursor-pointer"
+                            >
+                              {item.title}
+                            </a>
+                            <span className="text-[10px] text-slate-500 block mt-1 font-mono">
+                              Feed: {item.rss_feeds?.title || "Situs Riset & Akademik"}
+                            </span>
+                          </td>
+                          <td className="p-4 font-semibold text-indigo-400 capitalize">
+                            {item.rss_feeds?.category?.toLowerCase() || "akademik"}
+                          </td>
+                          <td className="p-4 text-slate-500 font-mono text-[10px]">
+                            {item.published_at ? new Date(item.published_at).toLocaleString("id-ID") : "-"}
+                          </td>
+                          <td className="p-4">
+                            <span className={`px-2.5 py-0.5 rounded font-bold uppercase tracking-wider text-[8px] ${
+                              item.is_published_to_index
+                                ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/10"
+                                : "bg-amber-500/10 text-amber-400 border border-amber-500/10"
+                            }`}>
+                              {item.is_published_to_index ? "indexed" : "pending"}
+                            </span>
+                          </td>
+                          <td className="p-4 text-right">
+                            {!item.is_published_to_index ? (
+                              <button
+                                onClick={() => handleRssItemModerate(item.id, true)}
+                                className="p-1.5 rounded-lg bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/20 transition-all cursor-pointer inline-flex items-center"
+                                title="Setujui & Publikasikan ke Indeks"
+                              >
+                                <Check className="w-3.5 h-3.5" />
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleRssItemModerate(item.id, false)}
+                                className="p-1.5 rounded-lg bg-red-600/10 hover:bg-red-600/20 text-red-400 border border-red-500/20 transition-all cursor-pointer inline-flex items-center"
+                                title="Batalkan Publikasi"
+                              >
+                                <X className="w-3.5 h-3.5" />
+                              </button>
+                            )}
                           </td>
                         </>
                       )}

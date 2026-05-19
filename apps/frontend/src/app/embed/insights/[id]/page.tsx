@@ -81,9 +81,6 @@ export default async function InsightEmbedPage({ params }: EmbedProps) {
               <span className="flex items-center gap-1 text-[10px] text-slate-500 font-bold">
                 <Calendar className="w-3 h-3" /> {publishDate}
               </span>
-              <span className="flex items-center gap-0.5 text-[10px] text-amber-500 bg-amber-500/5 px-1.5 py-0.2 rounded border border-amber-500/10 font-bold">
-                <Award className="w-3 h-3" /> Skor: {(article.relevance_score * 100).toFixed(0)}%
-              </span>
             </div>
 
             {/* Title */}

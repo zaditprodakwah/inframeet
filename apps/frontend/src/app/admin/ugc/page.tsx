@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { Check, X, ShieldCheck, Sparkles, RefreshCw, Layers } from "lucide-react";
+import { moderateUgcSubmission } from "../actions/crm_cms";
 
 export default function UgcApprovalPage() {
   const [submissions, setSubmissions] = useState<any[]>([]);
@@ -49,13 +50,10 @@ export default function UgcApprovalPage() {
 
   const handleUpdateStatus = async (id: string, newStatus: "APPROVED" | "REJECTED") => {
     try {
-      const { error } = await supabase
-        .from("content_submissions")
-        .update({ status: newStatus, updated_at: new Date().toISOString() })
-        .eq("id", id);
+      const res = await moderateUgcSubmission(id, newStatus);
 
-      if (error) {
-        alert(`Gagal memperbarui status: ${error.message}`);
+      if (!res.success) {
+        alert(`Gagal memperbarui status: ${res.message}`);
       } else {
         // Optimistic UI update
         setSubmissions(submissions.map((sub) => (sub.id === id ? { ...sub, status: newStatus } : sub)));

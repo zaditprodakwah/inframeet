@@ -20,6 +20,7 @@ import {
   ArrowLeft,
   ExternalLink
 } from "lucide-react";
+import { EducationSelector } from "./tools/EducationSelector";
 
 // 1. REAL-TIME ROLLING PRICE COUNTER COMPONENT
 export function RealTimePriceCounter({ value }: { value: number }) {
@@ -74,6 +75,7 @@ export default function Configurator() {
   // Local state for custom consultative briefing
   const [customSubmitted, setCustomSubmitted] = useState(false);
   const [customNotes, setCustomNotes] = useState("");
+  const [eduCategory, setEduCategory] = useState<"PERGURUAN_TINGGI" | "SEKOLAH">("PERGURUAN_TINGGI");
 
   // Sync email from landing page hero query parameter
   useEffect(() => {
@@ -427,6 +429,45 @@ export default function Configurator() {
                             </div>
                           )}
 
+                          {segment === "academic" && (
+                            <div className="space-y-2">
+                              <div className="flex justify-between items-center">
+                                <label className="block text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
+                                  Asal Kampus / Sekolah Resmi
+                                </label>
+                                <div className="flex bg-slate-100 dark:bg-zinc-900 p-0.5 rounded-lg border border-slate-200 dark:border-zinc-800">
+                                  <button
+                                    type="button"
+                                    onClick={() => setEduCategory("PERGURUAN_TINGGI")}
+                                    className={`px-2 py-0.5 rounded text-[9px] font-extrabold transition-all cursor-pointer ${
+                                      eduCategory === "PERGURUAN_TINGGI"
+                                        ? "bg-white dark:bg-zinc-950 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                                        : "text-slate-500"
+                                    }`}
+                                  >
+                                    Kampus
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => setEduCategory("SEKOLAH")}
+                                    className={`px-2 py-0.5 rounded text-[9px] font-extrabold transition-all cursor-pointer ${
+                                      eduCategory === "SEKOLAH"
+                                        ? "bg-white dark:bg-zinc-950 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                                        : "text-slate-500"
+                                    }`}
+                                  >
+                                    Sekolah
+                                  </button>
+                                </div>
+                              </div>
+                              <EducationSelector
+                                category={eduCategory}
+                                onSelect={(name) => setCompanyName(name)}
+                                placeholder={`Cari nama ${eduCategory === "SEKOLAH" ? "sekolah" : "perguruan tinggi"}...`}
+                              />
+                            </div>
+                          )}
+
                           <div>
                             <label className="block text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
                               Jelaskan Kebutuhan Spesifik Anda
@@ -460,7 +501,7 @@ export default function Configurator() {
                           Brief Konsultasi Berhasil Disimpan!
                         </h2>
                         <p className="text-sm text-slate-600 dark:text-zinc-400 mb-8 leading-relaxed max-w-md mx-auto">
-                          Terima kasih, <strong>{clientName}</strong>. Data konsultasi kustom Anda telah terekam secara steril di database Supabase CRM kami. Silakan klik tombol di bawah untuk menjadwalkan sesi langsung.
+                          Terima kasih, <strong>{clientName}</strong>. Data kebutuhan konsultasi Anda telah tersimpan secara aman di sistem kami. Tim ahli kami segera menganalisis kebutuhan Anda untuk sesi diskusi langsung.
                         </p>
 
                         <button
@@ -906,7 +947,7 @@ export default function Configurator() {
                   />
                 </div>
 
-                {segment === "b2b" && (
+                 {segment === "b2b" && (
                   <div>
                     <label className="block text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
                       Nama Brand / Perusahaan (Opsional)
@@ -917,6 +958,45 @@ export default function Configurator() {
                       onChange={(e) => setCompanyName(e.target.value)}
                       placeholder="Contoh: Zadit Prodakwah Ltd"
                       className="w-full px-4 py-3 border border-slate-200 dark:border-zinc-800 rounded-xl bg-slate-50 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                    />
+                  </div>
+                )}
+
+                {segment === "academic" && (
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <label className="block text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
+                        Asal Kampus / Sekolah Resmi
+                      </label>
+                      <div className="flex bg-slate-100 dark:bg-zinc-900 p-0.5 rounded-lg border border-slate-200 dark:border-zinc-800">
+                        <button
+                          type="button"
+                          onClick={() => setEduCategory("PERGURUAN_TINGGI")}
+                          className={`px-2 py-0.5 rounded text-[9px] font-extrabold transition-all cursor-pointer ${
+                            eduCategory === "PERGURUAN_TINGGI"
+                              ? "bg-white dark:bg-zinc-950 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                              : "text-slate-500"
+                          }`}
+                        >
+                          Kampus
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEduCategory("SEKOLAH")}
+                          className={`px-2 py-0.5 rounded text-[9px] font-extrabold transition-all cursor-pointer ${
+                            eduCategory === "SEKOLAH"
+                              ? "bg-white dark:bg-zinc-950 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                              : "text-slate-500"
+                          }`}
+                        >
+                          Sekolah
+                        </button>
+                      </div>
+                    </div>
+                    <EducationSelector
+                      category={eduCategory}
+                      onSelect={(name) => setCompanyName(name)}
+                      placeholder={`Cari nama ${eduCategory === "SEKOLAH" ? "sekolah" : "perguruan tinggi"}...`}
                     />
                   </div>
                 )}
