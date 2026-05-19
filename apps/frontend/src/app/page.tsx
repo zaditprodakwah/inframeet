@@ -1,7 +1,10 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import MegaMenu from "./components/MegaMenu";
 import Footer from "./components/Footer";
 import Breadcrumbs from "./components/Breadcrumbs";
+import { supabaseAdmin } from "@/lib/supabase";
 import { 
   Sparkles, 
   ArrowRight, 
@@ -58,17 +61,21 @@ const HOMEPAGE_FALLBACK_ARTICLES = [
 
 export default async function Home() {
   
-  // Dynamic live insights fetching server-side
+  // Dynamic live insights fetching server-side directly from Supabase to bypass network fetches
   let liveArticles = [];
   try {
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inframeet.vercel.app";
-    const res = await fetch(`${siteUrl}/api/insights?limit=3`, {
-      next: { revalidate: 60 } // Revalidate static generation cache every 60s
-    });
-    if (res.ok) {
-      const json = await res.json();
-      if (json && json.data && json.data.length > 0) {
-        liveArticles = json.data;
+    if (supabaseAdmin) {
+      const { data, error } = await supabaseAdmin
+        .from("rss_items")
+        .select("*, rss_feeds(feed_name)")
+        .gte("relevance_score", 0.9)
+        .order("published_at", { ascending: false })
+        .limit(3);
+      
+      if (error) {
+        console.error("Supabase error fetching live insights:", error);
+      } else if (data && data.length > 0) {
+        liveArticles = data;
       }
     }
   } catch (err) {

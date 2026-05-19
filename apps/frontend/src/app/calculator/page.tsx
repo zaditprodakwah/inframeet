@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Configurator from "../components/Configurator";
+import MegaMenu from "../components/MegaMenu";
+import Footer from "../components/Footer";
 import { 
   Sparkles, 
   ArrowLeft, 
@@ -75,26 +77,9 @@ export default function CalculatorPage() {
       {/* Decorative background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none print:hidden" />
 
-      {/* Mini Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/70 border-b border-slate-900 print:hidden">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Kembali ke Beranda
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-              <Sparkles className="w-4 h-4 animate-pulse" />
-            </div>
-            <span className="font-extrabold text-sm tracking-tight text-white">
-              INFRA<span className="text-indigo-400">MEET</span>
-            </span>
-          </div>
-        </div>
-      </header>
+      <div className="print:hidden">
+        <MegaMenu />
+      </div>
 
       {/* Main Content */}
       <main className="flex-1 py-12 relative max-w-5xl mx-auto px-4 w-full">
@@ -309,11 +294,9 @@ export default function CalculatorPage() {
         )}
 
       </main>
-
-      {/* Mini Footer */}
-      <footer className="py-8 bg-slate-950 border-t border-slate-900 text-center text-xs text-slate-500 print:hidden">
-        © 2026 INFRAMEET. Seluruh hak cipta dilindungi undang-undang.
-      </footer>
+      <div className="print:hidden">
+        <Footer />
+      </div>
       
     </div>
   );

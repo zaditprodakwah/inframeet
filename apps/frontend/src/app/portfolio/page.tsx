@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import MegaMenu from "../components/MegaMenu";
+import Footer from "../components/Footer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Link from "next/link";
 import { Sparkles, ArrowRight, ShieldCheck, CheckCircle2, TrendingUp, Layers, Cpu, Award } from "lucide-react";
@@ -356,10 +357,7 @@ export default function PortfolioPage() {
         </section>
 
       </main>
-
-      <footer className="py-8 bg-[#0a0f1d] border-t border-[#1e293b] text-center text-xs text-slate-500">
-        © 2026 INFRAMEET. Seluruh hak cipta dilindungi undang-undang.
-      </footer>
+      <Footer />
     </div>
   );
 }

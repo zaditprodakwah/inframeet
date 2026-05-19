@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import MegaMenu from "../../components/MegaMenu";
+import Footer from "../../components/Footer";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Link from "next/link";
 import { 
@@ -200,10 +201,10 @@ const LOCAL_INSTITUTIONS = [
     sector: "Negeri",
     location: "Jakarta Selatan, DKI Jakarta",
     accreditation: "A",
-    citation_style: "APA Style",
-    turnitin_limit: "25%",
+    curriculum: "Kurikulum Merdeka",
+    focus: "Karya Tulis Ilmiah (KTI) & OSN",
     description: "Sekolah menengah atas negeri terbaik di DKI Jakarta dengan tingkat kelulusan SNMPTN/UTBK tertinggi nasional.",
-    popular_services: ["Visualisasi Google Sheets", "Desain Slide Praktek", "Bimbingan Karya Tulis Ilmiah"]
+    popular_services: ["Bimbingan Karya Tulis Remaja", "Desain Slide Sidang KTI", "Visualisasi Data Google Sheets"]
   },
   {
     id: "smantar",
@@ -212,10 +213,10 @@ const LOCAL_INSTITUTIONS = [
     sector: "Swasta",
     location: "Magelang, Jawa Tengah",
     accreditation: "A",
-    citation_style: "APA Style",
-    turnitin_limit: "25%",
+    curriculum: "Kurikulum Merdeka",
+    focus: "Kedisiplinan & Karya Ilmiah Remaja",
     description: "Sekolah menengah unggulan semi-militer dengan penekanan tinggi pada kepemimpinan dan integritas karya tulis.",
-    popular_services: ["Bimbingan Karya Ilmiah", "Slide Presentasi Sidang", "Kalkulasi Data Dasar"]
+    popular_services: ["Bimbingan Penulisan Esai KIR", "Layouting Laporan Praktikum", "Asistensi Presentasi Publik"]
   },
   {
     id: "sman3bdg",
@@ -224,10 +225,10 @@ const LOCAL_INSTITUTIONS = [
     sector: "Negeri",
     location: "Bandung, Jawa Barat",
     accreditation: "A",
-    citation_style: "APA Style",
-    turnitin_limit: "25%",
+    curriculum: "Kurikulum Merdeka",
+    focus: "Sains & Seni Tingkat Nasional",
     description: "Sekolah menengah historis legendaris di Kota Bandung dengan prestasi kompetisi sains and seni tingkat nasional.",
-    popular_services: ["Bimbingan Esai Karya Tulis", "Turnitin Karya Siswa", "Desain Slide Sidang"]
+    popular_services: ["Bimbingan Proposal Penelitian", "Desain Infografis Interaktif", "Koreksi Ejaan Bahasa Baku"]
   },
   {
     id: "sman1yk",
@@ -236,10 +237,10 @@ const LOCAL_INSTITUTIONS = [
     sector: "Negeri",
     location: "Yogyakarta, D.I. Yogyakarta",
     accreditation: "A",
-    citation_style: "APA Style",
-    turnitin_limit: "25%",
+    curriculum: "Kurikulum Merdeka",
+    focus: "Riset Ilmiah Terapan Siswa",
     description: "Sekolah teladan di kota pendidikan Yogyakarta dengan kurikulum berbasis sains and riset ilmiah terapan siswa.",
-    popular_services: ["Asistensi Tugas Akhir Siswa", "Parafrase Karya Tulis", "Cek Turnitin KTI"]
+    popular_services: ["Asistensi Tugas Akhir Siswa", "Visualisasi Slide Praktek", "Bimbingan Metodologi Dasar"]
   },
   {
     id: "manic",
@@ -248,10 +249,10 @@ const LOCAL_INSTITUTIONS = [
     sector: "Negeri",
     location: "Tangerang Selatan, Banten",
     accreditation: "A",
-    citation_style: "APA Style",
-    turnitin_limit: "20%",
+    curriculum: "Kurikulum Merdeka",
+    focus: "Olimpiade Riset & Keagamaan",
     description: "Madrasah Aliyah Negeri unggulan nasional dengan peringkat rata-rata UTBK tertinggi di Indonesia secara konsisten.",
-    popular_services: ["Bimbingan Riset Olimpiade", "Parafrase Riset Ilmiah", "Slide Karya Tulis"]
+    popular_services: ["Bimbingan Riset OSN", "Pemformatan Karya Ilmiah Remaja", "Slide Presentasi Premium"]
   },
   {
     id: "sman5sub",
@@ -260,17 +261,17 @@ const LOCAL_INSTITUTIONS = [
     sector: "Negeri",
     location: "Surabaya, Jawa Timur",
     accreditation: "A",
-    citation_style: "APA Style",
-    turnitin_limit: "25%",
+    curriculum: "Kurikulum Merdeka",
+    focus: "Sains Terapan & Kompetisi KIR",
     description: "Sekolah menengah terkemuka di Jawa Timur yang mendidik calon pemimpin and ilmuwan masa depan bangsa.",
-    popular_services: ["Turnitin & Anti Plagiarisme KTI", "Visualisasi Slide Praktek", "Format Karya Tulis"]
+    popular_services: ["Format Karya Tulis Remaja", "Bimbingan Riset Ekologi", "Visualisasi Grafis Presentasi"]
   }
 ];
 
 export default function SchoolLookupPage() {
   const [keyword, setKeyword] = useState("");
   const [filterType, setFilterType] = useState("all");
-  const [results, setResults] = useState<any[]>(LOCAL_INSTITUTIONS);
+  const [institutions, setInstitutions] = useState<any[]>(LOCAL_INSTITUTIONS);
   const [selectedInst, setSelectedInst] = useState<any>(LOCAL_INSTITUTIONS[0]);
   const [isFetchingLive, setIsFetchingLive] = useState(false);
 
@@ -291,15 +292,19 @@ export default function SchoolLookupPage() {
             sector: item.type || "Terdaftar",
             location: item.city || item.address || "Indonesia",
             accreditation: item.metadata?.akreditasi || "Terakreditasi",
-            citation_style: item.metadata?.citation_style || "APA Style",
-            turnitin_limit: item.metadata?.turnitin_limit || "15%",
+            citation_style: item.category !== "SEKOLAH" ? (item.metadata?.citation_style || "APA Style") : undefined,
+            turnitin_limit: item.category !== "SEKOLAH" ? (item.metadata?.turnitin_limit || "15%") : undefined,
+            curriculum: item.category === "SEKOLAH" ? (item.metadata?.curriculum || "Kurikulum Merdeka") : undefined,
+            focus: item.category === "SEKOLAH" ? (item.metadata?.focus || "Karya Tulis Ilmiah (KTI)") : undefined,
             description: `Data institusi terdaftar yang dikontribusikan oleh komunitas riset INFRAMEET.`,
-            popular_services: ["Parafrase Turnitin Skripsi", "Layouting Jurnal Sinta", "Olah Data SPSS/SmartPLS"]
+            popular_services: item.category === "SEKOLAH"
+              ? ["Format Karya Tulis Remaja", "Bimbingan Penulisan Esai KIR", "Visualisasi Slide Praktikum"]
+              : ["Parafrase Turnitin Skripsi", "Layouting Jurnal Sinta", "Olah Data SPSS/SmartPLS"]
           }));
 
           const combined = [...mapped, ...LOCAL_INSTITUTIONS];
           const unique = combined.filter((v, i, a) => a.findIndex(t => t.name === v.name) === i);
-          setResults(unique);
+          setInstitutions(unique);
         }
       } catch (err) {
         console.warn("Offline/DB fallback active:", err);
@@ -307,21 +312,6 @@ export default function SchoolLookupPage() {
     }
     loadDbInstitutions();
   }, []);
-
-  // Search filter logic combining local datasets
-  useEffect(() => {
-    const term = keyword.toLowerCase().trim();
-    if (!term) return; // avoid resetting on empty term
-
-    const filtered = results.filter(
-      (inst) => 
-        inst.name.toLowerCase().includes(term) ||
-        inst.location.toLowerCase().includes(term) ||
-        inst.citation_style.toLowerCase().includes(term)
-    );
-
-    setResults(filtered);
-  }, [keyword]);
 
   // Live PDDikti Autocomplete search and auto-saving crowd-source database upsert
   const handleLivePddiktiSearch = async () => {
@@ -375,9 +365,9 @@ export default function SchoolLookupPage() {
             }
           });
           
-          const combined = [...livePT, ...results];
+          const combined = [...livePT, ...institutions];
           const unique = combined.filter((v, i, a) => a.findIndex(t => t.name === v.name) === i);
-          setResults(unique);
+          setInstitutions(unique);
           if (livePT[0]) setSelectedInst(livePT[0]);
           alert(`🎉 Ditemukan ${livePT.length} universitas resmi dari PDDikti & tersimpan ke database!`);
         } else {
@@ -393,6 +383,23 @@ export default function SchoolLookupPage() {
       setIsFetchingLive(false);
     }
   };
+
+  // Derive the active displayed list based on filters on the fly to support backspacing & categories perfectly
+  const displayList = institutions.filter((inst) => {
+    // 1. Filter by category type
+    if (filterType === "campus" && inst.type !== "Perguruan Tinggi") return false;
+    if (filterType === "school" && inst.type !== "Sekolah Menengah") return false;
+
+    // 2. Filter by search keyword
+    const term = keyword.toLowerCase().trim();
+    if (!term) return true;
+    return (
+      inst.name.toLowerCase().includes(term) ||
+      inst.location.toLowerCase().includes(term) ||
+      (inst.citation_style && inst.citation_style.toLowerCase().includes(term)) ||
+      (inst.curriculum && inst.curriculum.toLowerCase().includes(term))
+    );
+  });
 
   return (
     <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans">
@@ -480,16 +487,16 @@ export default function SchoolLookupPage() {
 
             {/* Results List */}
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-              {results.length === 0 ? (
+              {displayList.length === 0 ? (
                 <div className="p-12 text-center rounded-3xl border border-slate-850 bg-slate-900/10 text-slate-500 text-sm">
                   Tidak ditemukan institusi dengan nama &quot;{keyword}&quot;. Silakan coba cari menggunakan data PDDikti di atas.
                 </div>
               ) : (
-                results.map((inst) => (
+                displayList.map((inst) => (
                   <div
                     key={inst.id}
                     onClick={() => setSelectedInst(inst)}
-                    className={`glass-card p-5 rounded-2xl flex items-center justify-between gap-4 ${
+                    className={`glass-card p-5 rounded-2xl flex items-center justify-between gap-4 cursor-pointer ${
                       selectedInst?.id === inst.id
                         ? "border-indigo-500 bg-indigo-500/5 shadow-lg shadow-indigo-500/5"
                         : "hover:border-indigo-500/20"
@@ -511,7 +518,7 @@ export default function SchoolLookupPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="px-2 py-0.5 rounded text-[8px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/10">
-                        {inst.citation_style}
+                        {inst.type === "Sekolah Menengah" ? inst.curriculum : inst.citation_style}
                       </span>
                     </div>
                   </div>
@@ -540,23 +547,44 @@ export default function SchoolLookupPage() {
                   <p className="text-xs text-slate-400 leading-relaxed">{selectedInst.description}</p>
                 </div>
 
-                {/* Academic guidelines (E-E-A-T values) */}
+                {/* Academic/School guidelines (E-E-A-T values) */}
                 <div className="space-y-4">
-                  <span className="text-[9px] uppercase font-bold tracking-widest text-slate-500">Pedoman Mutu Riset &amp; Sitasi</span>
+                  <span className="text-[9px] uppercase font-bold tracking-widest text-slate-500">
+                    {selectedInst.type === "Sekolah Menengah" ? "Pedoman Kurikulum & Fokus Siswa" : "Pedoman Mutu Riset & Sitasi"}
+                  </span>
                   
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-850 space-y-1">
-                      <span className="text-[9px] text-slate-500 font-medium block">Format Sitasi Wajib</span>
-                      <span className="text-xs font-bold text-slate-200 flex items-center gap-1">
-                        <BookOpen className="w-3.5 h-3.5 text-indigo-400" /> {selectedInst.citation_style}
-                      </span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-850 space-y-1">
-                      <span className="text-[9px] text-slate-500 font-medium block">Batas Maks Turnitin</span>
-                      <span className="text-xs font-bold text-slate-200 flex items-center gap-1">
-                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> {selectedInst.turnitin_limit}
-                      </span>
-                    </div>
+                    {selectedInst.type === "Sekolah Menengah" ? (
+                      <>
+                        <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-850 space-y-1">
+                          <span className="text-[9px] text-slate-500 font-medium block">Kurikulum Nasional</span>
+                          <span className="text-xs font-bold text-slate-200 flex items-center gap-1">
+                            <BookOpen className="w-3.5 h-3.5 text-indigo-400" /> {selectedInst.curriculum}
+                          </span>
+                        </div>
+                        <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-850 space-y-1">
+                          <span className="text-[9px] text-slate-500 font-medium block">Fokus Pembinaan</span>
+                          <span className="text-xs font-bold text-slate-200 flex items-center gap-1">
+                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> {selectedInst.focus}
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-850 space-y-1">
+                          <span className="text-[9px] text-slate-500 font-medium block">Format Sitasi Wajib</span>
+                          <span className="text-xs font-bold text-slate-200 flex items-center gap-1">
+                            <BookOpen className="w-3.5 h-3.5 text-indigo-400" /> {selectedInst.citation_style}
+                          </span>
+                        </div>
+                        <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-850 space-y-1">
+                          <span className="text-[9px] text-slate-500 font-medium block">Batas Maks Turnitin</span>
+                          <span className="text-xs font-bold text-slate-200 flex items-center gap-1">
+                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> {selectedInst.turnitin_limit}
+                          </span>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -576,7 +604,7 @@ export default function SchoolLookupPage() {
                   </div>
 
                   <Link
-                    href={`/calculator?segment=academic&institution=${encodeURIComponent(selectedInst.name)}`}
+                    href={`/calculator?segment=${selectedInst.type === "Sekolah Menengah" ? "academic-school" : "academic"}&institution=${encodeURIComponent(selectedInst.name)}`}
                     className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-indigo-600/10 flex items-center justify-center gap-1.5 cursor-pointer hover:shadow-indigo-500/20"
                   >
                     Kalkulasi Asistensi Khusus Kampus Ini
@@ -600,10 +628,7 @@ export default function SchoolLookupPage() {
         </div>
 
       </main>
-
-      <footer className="py-8 bg-[#020617] border-t border-slate-900 text-center text-xs text-slate-500">
-        © 2026 INFRAMEET. Seluruh hak cipta dilindungi undang-undang.
-      </footer>
+      <Footer />
     </div>
   );
 }

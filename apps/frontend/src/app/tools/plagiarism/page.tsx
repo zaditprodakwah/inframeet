@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import MegaMenu from "@/app/components/MegaMenu";
+import Footer from "@/app/components/Footer";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { supabase } from "@/lib/supabase";
 import { z } from "zod";
@@ -250,10 +251,7 @@ export default function PlagiarismCheckerPage() {
         </section>
 
       </main>
-
-      <footer className="py-8 bg-[#0a0f1d] border-t border-[#1e293b] text-center text-xs text-slate-500">
-        © 2026 INFRAMEET. Seluruh hak cipta dilindungi undang-undang.
-      </footer>
+      <Footer />
     </div>
   );
 }

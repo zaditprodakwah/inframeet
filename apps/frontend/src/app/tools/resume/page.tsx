@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import MegaMenu from "@/app/components/MegaMenu";
+import Footer from "@/app/components/Footer";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { Sparkles, Download, Plus, Trash2, Printer } from "lucide-react";
 
@@ -481,10 +482,9 @@ export default function ResumeBuilderPage() {
         </section>
 
       </main>
-
-      <footer className="py-8 bg-[#0a0f1d] border-t border-[#1e293b] text-center text-xs text-slate-500 print:hidden">
-        © 2026 INFRAMEET. Seluruh hak cipta dilindungi undang-undang.
-      </footer>
+      <div className="print:hidden">
+        <Footer />
+      </div>
     </div>
   );
 }
