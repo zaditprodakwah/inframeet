@@ -19,6 +19,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const query = supabaseAdmin.from("rss_items").select("title, content_summary, image_url, slug");
   const { data: article } = await (isUuid ? query.eq("id", id) : query.eq("slug", id)).single();
 
+  if (!article) return { title: "Ulasan Analis | INFRAMEET" };
+
   const ogImageUrl = `https://inframeet.vercel.app/api/og?title=${encodeURIComponent(article.title)}&desc=${encodeURIComponent((article.content_summary || "").substring(0, 200))}&slug=${encodeURIComponent(article.slug || id)}`;
 
   return {
