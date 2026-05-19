@@ -517,11 +517,6 @@ export default function InsightsPage() {
                     <div key={art.id} className="glass-card p-6 md:p-8 rounded-3xl border border-[#1e293b] flex flex-col justify-between space-y-6 hover:shadow-2xl hover:shadow-indigo-500/[0.02] transition duration-300 animate-fade-in overflow-hidden bg-slate-950/20">
                       <div className="space-y-4">
                         
-                        {/* Elegant Icon backdrop vector instead of featured image thumbnail */}
-                        <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden border border-slate-900 bg-slate-950">
-                          {renderCategoryIcon(art)}
-                        </div>
-
                         {/* Top Header Tags */}
                         <div className="flex justify-between items-center text-[10px] font-bold tracking-wider font-mono">
                           <span className={`px-2.5 py-0.5 rounded capitalize border ${

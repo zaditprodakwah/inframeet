@@ -128,9 +128,11 @@ body {
 body.light-mode {
   --background: #f8fafc;
   --foreground: #0f172a;
-  --card-bg: rgba(241, 245, 249, 0.85);
-  --border-color: rgba(203, 213, 225, 0.8);
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(203, 213, 225, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.7);
 }
+
 body.light-mode ::-webkit-scrollbar-track {
   background: #f8fafc;
 }
@@ -138,63 +140,109 @@ body.light-mode ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border: 2px solid #f8fafc;
 }
-body.light-mode header,
-body.light-mode footer,
-body.light-mode nav,
-body.light-mode .glass-panel,
-body.light-mode .glass-card {
-  background-color: rgba(241, 245, 249, 0.8) !important;
+
+/* 🎨 Non-destructive global overrides for light mode that prevent hardcoded dark elements from breaking design */
+body.light-mode .bg-\[\#020617\],
+body.light-mode .bg-\[\#030712\],
+body.light-mode .bg-\[\#090d16\],
+body.light-mode .bg-slate-950,
+body.light-mode .bg-zinc-950,
+body.light-mode .bg-black,
+body.light-mode .bg-slate-900,
+body.light-mode .bg-zinc-900 {
+  background-color: #f8fafc !important;
   color: #0f172a !important;
-  border-color: rgba(203, 213, 225, 0.5) !important;
 }
-body.light-mode h1,
-body.light-mode h2,
-body.light-mode h3,
-body.light-mode h4,
-body.light-mode label,
+
+body.light-mode .bg-slate-900\/50,
+body.light-mode .bg-slate-950\/50,
+body.light-mode .bg-zinc-900\/50,
+body.light-mode .bg-slate-900\/60,
+body.light-mode .bg-slate-950\/60,
+body.light-mode .bg-slate-900\/40,
+body.light-mode .bg-slate-950\/40,
+body.light-mode .bg-white\/5,
+body.light-mode .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.65) !important;
+}
+
+body.light-mode .text-slate-100,
+body.light-mode .text-slate-200,
+body.light-mode .text-slate-50,
+body.light-mode .text-zinc-100,
+body.light-mode .text-zinc-50,
 body.light-mode .text-white {
   color: #0f172a !important;
 }
-body.light-mode p,
-body.light-mode span,
-body.light-mode div {
-  color: #334155;
+
+body.light-mode .text-slate-400,
+body.light-mode .text-slate-350,
+body.light-mode .text-slate-300,
+body.light-mode .text-zinc-450,
+body.light-mode .text-zinc-400,
+body.light-mode .text-zinc-300 {
+  color: #334155 !important;
+}
+
+body.light-mode .text-slate-500,
+body.light-mode .text-zinc-500 {
+  color: #64748b !important;
+}
+
+body.light-mode .border-slate-800,
+body.light-mode .border-slate-850,
+body.light-mode .border-slate-900,
+body.light-mode .border-zinc-800,
+body.light-mode .border-zinc-900,
+body.light-mode .border-white\/10,
+body.light-mode .border-slate-700 {
+  border-color: rgba(203, 213, 225, 0.7) !important;
+}
+
+body.light-mode .shadow-2xl,
+body.light-mode .shadow-xl,
+body.light-mode .shadow-lg {
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* 👓 Accessibility Overrides */
-body.high-contrast {
+html.high-contrast,
+html.high-contrast body {
   --background: #000000 !important;
   --foreground: #ffffff !important;
   --card-bg: #000000 !important;
   --border-color: #ffffff !important;
 }
-body.high-contrast * {
+
+html.high-contrast * {
   background-color: #000000 !important;
   color: #ffffff !important;
   border-color: #ffffff !important;
   box-shadow: none !important;
+  text-shadow: none !important;
 }
 
-body.serif-font {
-  --font-sans: Georgia, Cambria, "Times New Roman", Times, serif !important;
-  font-family: var(--font-sans) !important;
+html.serif-font,
+html.serif-font body,
+html.serif-font * {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif !important;
 }
 
-/* 🔍 Custom Font Scaling Overrides */
-body.font-size-sm {
-  font-size: 0.875rem !important;
+/* 🔍 Custom Font Scaling Overrides - Target root html for relative rem scaling across all elements */
+html.font-size-sm {
+  font-size: 87.5% !important;
 }
-body.font-size-base {
-  font-size: 1rem !important;
+html.font-size-base {
+  font-size: 100% !important;
 }
-body.font-size-md {
-  font-size: 1.125rem !important;
+html.font-size-md {
+  font-size: 112.5% !important;
 }
-body.font-size-lg {
-  font-size: 1.25rem !important;
+html.font-size-lg {
+  font-size: 125% !important;
 }
-body.font-size-xl {
-  font-size: 1.375rem !important;
+html.font-size-xl {
+  font-size: 137.5% !important;
 }
 
 

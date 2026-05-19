@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const query = supabaseAdmin.from("rss_items").select("title, content_summary, image_url, slug");
   const { data: article } = await (isUuid ? query.eq("id", id) : query.eq("slug", id)).single();
 
-  if (!article) return { title: "Ulasan Analis | INFRAMEET" };
+  const ogImageUrl = `https://inframeet.vercel.app/api/og?title=${encodeURIComponent(article.title)}&desc=${encodeURIComponent((article.content_summary || "").substring(0, 200))}&slug=${encodeURIComponent(article.slug || id)}`;
 
   return {
     title: `${article.title} | Ulasan Analis INFRAMEET Hub`,
@@ -27,14 +27,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: article.title,
       description: article.content_summary || "Ulasan Analis Terkurasi",
-      images: article.image_url ? [{ url: article.image_url }] : [],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: article.title }],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.content_summary || "Ulasan Analis Terkurasi",
-      images: article.image_url ? [article.image_url] : [],
+      images: [ogImageUrl],
     }
   };
 }

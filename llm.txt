@@ -127,14 +127,16 @@
 - **SEO & Backlink Integrity:** Leftover pathways (`/tools/submission`, `/join-expert`, `/experts`, `/verify`) dynamically perform client-side redirects to `/submission?tab=...` with full query search param persistence.
 - **Dynamic Experts Directory:** Leveraged custom JSON REST queries on the frontend to query `/api/experts` with live search query filters.
 
-### 5. Night Mode & Global Accessibility Personalization Panel
-- **Objective:** Enhance personal customization, user readability, and full contrast capability across the entire app workspace.
-- **Implementation:** Integrated a floating accessibility control panel at `/components/AccessibilityPanel.tsx` mounted universally in `layout.tsx`.
-- **Customizations:** Includes a persistent global light/night mode toggle (persisted via `localStorage` on `document.documentElement` class selectors), a fluid text resizer (A- / A+ / Normal scaling up to 130%), and a typography-serif font changer.
+### 5. Unified "Pusat Bantuan & Kontrol" Console (Aksesibilitas & Bantuan)
+- **Objective:** Eliminate layout clutter, resolve duplicate bottom-right floating controls, and guarantee beautiful contrast for accessibility settings.
+- **Implementation:** Consolidated previously separate support forms and personalization drawers into a single, unified floating hub inside `FloatingContactForm.tsx` mounted universally in `layout.tsx` (AccessibilityPanel.tsx rendered to null).
+- **Text Scaling Optimization:** Replaced standard body text resizer with root `html` font-size scaling using relative `rem` overrides. This dynamically increases/decreases all layout typography proportionally and flawlessly across all pages.
+- **Non-Destructive Light Mode:** Engineered smart CSS rules in `globals.css` targeting body classes to naturally convert hardcoded dark background classes (`bg-[#020617]`, `bg-slate-950`, etc.) and slate/zinc text classes without breaking dynamic color highlights or Lucide SVGs.
 
-### 6. Invisible SEO Asset & Metadata-Driven Injection
-- **Objective:** Maintain rich image previews for social feeds (OpenGraph, Twitter, GEO/AEO schemas) while maintaining 100% vector-only layouts for frontend grid speed.
-- **Implementation:** Injected high-resolution Unsplash images inside API data payloads (image_url) and OpenGraph headers, while replacing actual visual card containers with lightweight SVG/Lucide icons.
+### 6. Dynamic Edge SVG OpenGraph Image Generation API (/api/og)
+- **Objective:** Maintain rich social preview cards for external scrapers (Discord, WhatsApp, Search Engines, Social Media) while rendering 100% vector-only, high-performance text-centric layouts on the frontend.
+- **Implementation:** Created a high-speed Edge-runtime API endpoint `/api/og/route.ts` that dynamically generates beautiful, customized SVG OpenGraph images (`1200x630` size) with custom titles, summaries, tags, and page slugs.
+- **Dynamic Meta Seeding:** Wired this custom SVG engine directly inside Next.js `generateMetadata` in insights details pages (`insights/[id]/page.tsx`), eliminating standard image assets from frontend layout rendering weights while optimizing for SEO/AEO/GEO indexability.
 
 ---
 

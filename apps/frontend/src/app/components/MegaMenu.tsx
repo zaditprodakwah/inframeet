@@ -29,25 +29,25 @@ export default function MegaMenu() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-black/80 border-b border-slate-100 dark:border-zinc-900 transition-all">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/75 dark:bg-zinc-950/75 border-b border-slate-800/40 dark:border-zinc-900/40 transition-all shadow-sm">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-600/30 group-hover:scale-105 transition-all">
-            <Sparkles className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-indigo-650 flex items-center justify-center text-white shadow-lg shadow-indigo-600/35 group-hover:scale-105 transition-all">
+            <Sparkles className="w-5 h-5 animate-pulse" />
           </div>
           <div>
-            <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-zinc-50">
-              INFRA<span className="text-indigo-600 dark:text-indigo-400">MEET</span>
+            <span className="font-black text-xl tracking-wider text-slate-100">
+              INFRA<span className="text-indigo-400">MEET</span>
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-5">
+        <nav className="hidden lg:flex items-center gap-6">
           <Link 
             href="/" 
-            className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            className="text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-indigo-400 transition-colors"
           >
             Beranda
           </Link>
@@ -58,9 +58,9 @@ export default function MegaMenu() {
             onMouseEnter={() => setIsLayananOpen(true)}
             onMouseLeave={() => setIsLayananOpen(false)}
           >
-            <button className="flex items-center gap-1.5 text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer py-2">
+            <button className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-indigo-400 transition-colors cursor-pointer py-2">
               Layanan Solusi
-              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isLayananOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isLayananOpen ? "rotate-180" : ""}`} />
             </button>
 
             {/* MEGA MENU DROPDOWN PANEL */}
@@ -174,15 +174,15 @@ export default function MegaMenu() {
 
           <Link 
             href="/submission?tab=experts" 
-            className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-bold text-indigo-600 dark:text-indigo-400"
+            className="text-xs font-bold uppercase tracking-wider text-slate-350 hover:text-indigo-400 transition-colors"
           >
             Jaringan Pakar
           </Link>
           <Link 
             href="/submission?tab=verify" 
-            className="text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1 text-emerald-600 dark:text-emerald-400"
+            className="text-xs font-bold uppercase tracking-wider text-slate-350 hover:text-emerald-450 transition-colors flex items-center gap-1.5"
           >
-            <ShieldCheck className="w-4 h-4 text-emerald-500" /> Verifikasi
+            <ShieldCheck className="w-4 h-4 text-emerald-500 animate-pulse" /> Verifikasi
           </Link>
 
           {/* Interactive Informasi Dropdown */}
@@ -191,20 +191,20 @@ export default function MegaMenu() {
             onMouseEnter={() => setIsInfoOpen(true)}
             onMouseLeave={() => setIsInfoOpen(false)}
           >
-            <button className="flex items-center gap-1.5 text-sm font-semibold text-slate-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer py-2">
+            <button className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-slate-350 hover:text-indigo-400 transition-colors cursor-pointer py-2">
               Informasi
               <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isInfoOpen ? "rotate-180" : ""}`} />
             </button>
 
             {isInfoOpen && (
-              <div className="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-2xl shadow-xl p-3 space-y-1 animate-in fade-in slide-in-from-top-1 duration-150">
-                <Link href="/insights" className="block px-4 py-2 text-xs font-bold text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-lg">
+              <div className="absolute top-full left-0 mt-1 w-48 bg-slate-900 border border-slate-800 rounded-2xl shadow-xl p-3 space-y-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                <Link href="/insights" className="block px-4 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
                   Insights &amp; Edukasi
                 </Link>
-                <Link href="/case-studies" className="block px-4 py-2 text-xs font-bold text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-lg">
+                <Link href="/case-studies" className="block px-4 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
                   Studi Kasus Proyek
                 </Link>
-                <Link href="/about" className="block px-4 py-2 text-xs font-bold text-slate-700 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-zinc-900/50 rounded-lg">
+                <Link href="/about" className="block px-4 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
                   Tentang &amp; Kepatuhan
                 </Link>
               </div>

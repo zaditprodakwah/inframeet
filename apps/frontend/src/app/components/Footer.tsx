@@ -93,7 +93,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/submission?tab=expert" className="hover:text-indigo-400 transition-colors">
+              <Link href="/submission?tab=onboarding" className="hover:text-indigo-400 transition-colors">
                 Daftar Sebagai Pakar (Onboarding)
               </Link>
             </li>
