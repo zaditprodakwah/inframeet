@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INFRAMEET | Project Intake Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(16, 20, 21, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .step-active {
+            color: #c0c1ff;
+            border-bottom: 2px solid #c0c1ff;
+        }
+        body {
+            background-color: #101415;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(192, 193, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(78, 222, 163, 0.05) 0%, transparent 40%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#323537",
+                      "error": "#ffb4ab",
+                      "secondary": "#bec6e0",
+                      "on-background": "#e0e3e5",
+                      "on-primary-fixed": "#07006c",
+                      "secondary-fixed": "#dae2fd",
+                      "tertiary-container": "#00885d",
+                      "tertiary-fixed": "#6ffbbe",
+                      "surface-tint": "#c0c1ff",
+                      "surface": "#101415",
+                      "primary-container": "#8083ff",
+                      "surface-container-highest": "#323537",
+                      "surface-dim": "#101415",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "outline": "#908fa0",
+                      "surface-container-low": "#191c1e",
+                      "on-secondary-container": "#adb4ce",
+                      "primary-fixed": "#e1e0ff",
+                      "secondary-container": "#3f465c",
+                      "on-tertiary": "#003824",
+                      "on-surface-variant": "#c7c4d7",
+                      "surface-container-high": "#272a2c",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "primary-fixed-dim": "#c0c1ff",
+                      "on-tertiary-container": "#000703",
+                      "surface-bright": "#363a3b",
+                      "primary": "#c0c1ff",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#131b2e",
+                      "background": "#101415",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#2f2ebe",
+                      "on-surface": "#e0e3e5",
+                      "surface-container-lowest": "#0b0f10",
+                      "inverse-on-surface": "#2d3133",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-primary-container": "#0d0096",
+                      "on-primary": "#1000a9",
+                      "tertiary": "#4edea3",
+                      "error-container": "#93000a",
+                      "inverse-primary": "#494bd6",
+                      "surface-container": "#1d2022",
+                      "inverse-surface": "#e0e3e5",
+                      "on-tertiary-fixed": "#002113",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "outline-variant": "#464554",
+                      "on-secondary": "#283044"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "unit": "8px",
+                      "container-max": "1440px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "technical-data": ["JetBrains Mono"],
+                      "label-caps": ["JetBrains Mono"],
+                      "headline-xl": ["Plus Jakarta Sans"],
+                      "headline-lg-mobile": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "technical-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface/40 dark:bg-surface/40 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10 shadow-[0_0_15px_rgba(192,193,255,0.1)]">
+<div class="flex justify-between items-center px-gutter h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">INFRAMEET</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-technical-data text-technical-data text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Infrastructure</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Research</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Integrity</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Compliance</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-95 transition-all">contrast</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-95 transition-all">format_size</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-95 transition-all">notifications</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-primary/20">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A futuristic, professional profile avatar of a tech executive. The style is clean, vector-based, with a subtle blue and indigo color scheme that matches a deep-space, high-integrity enterprise environment. The lighting is soft and professional, suggesting a secure digital identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7Vfscm8GGfBvJnkvpiY_EYfmVXhOKb3bpqt_OrgmAPmPiJSyZnmTVMStOKrMw7GCer8lkiKReZfNdPORnS72xXugOrdY2V6lg9DTSF0jn9GjhdsU6hUlujKC-58q9OPRItDW0uGjLCLOHPg9FJJl1QHFovYSm1xrsEd9BrzHezAAoltTQyEmwbUFXqlzFRVWbo_zqOu4C_uwox7jKZ1aC-oSBC2vBuf6AWSQBydiBukuuSubHL9Jne5AtE0dESqksOT1vZTnErcI"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-gutter max-w-container-max mx-auto">
+<!-- Hero Section -->
+<div class="mb-12">
+<h1 class="font-headline-xl text-headline-xl mb-4">Project Intake <span class="text-primary">Portal</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Initialize your infrastructure audit or academic research brief. Our system generates real-time cryptographic hashes for every document uploaded, ensuring maximum data integrity.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Main Intake Form Column -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Form Stepper -->
+<div class="flex items-center gap-8 mb-8">
+<div class="flex items-center gap-2 step-active pb-2">
+<span class="font-technical-data text-label-caps bg-primary/20 text-primary w-6 h-6 flex items-center justify-center rounded-full">01</span>
+<span class="font-label-caps text-label-caps">PATHWAY</span>
+</div>
+<div class="flex items-center gap-2 pb-2 text-outline">
+<span class="font-technical-data text-label-caps bg-surface-container-highest w-6 h-6 flex items-center justify-center rounded-full">02</span>
+<span class="font-label-caps text-label-caps">DETAILS</span>
+</div>
+<div class="flex items-center gap-2 pb-2 text-outline">
+<span class="font-technical-data text-label-caps bg-surface-container-highest w-6 h-6 flex items-center justify-center rounded-full">03</span>
+<span class="font-label-caps text-label-caps">VERIFICATION</span>
+</div>
+</div>
+<!-- Pathway Selection -->
+<div class="space-y-6" id="step-1">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<label class="glass-card p-6 rounded-xl cursor-pointer border-2 border-transparent hover:border-primary/40 transition-all group relative">
+<input class="hidden" name="pathway" type="radio" value="b2b"/>
+<span class="material-symbols-outlined text-4xl text-primary mb-4 block" data-weight="fill">domain</span>
+<h3 class="font-headline-md text-headline-md mb-2">B2B Infrastructure</h3>
+<p class="font-body-md text-on-surface-variant">Secure systems audit, cloud architecture verification, and enterprise-level risk mitigation strategies.</p>
+<div class="absolute top-4 right-4 opacity-0 group-has-[:checked]:opacity-100 text-primary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</label>
+<label class="glass-card p-6 rounded-xl cursor-pointer border-2 border-transparent hover:border-primary/40 transition-all group relative">
+<input class="hidden" name="pathway" type="radio" value="academic"/>
+<span class="material-symbols-outlined text-4xl text-tertiary mb-4 block" data-weight="fill">school</span>
+<h3 class="font-headline-md text-headline-md mb-2">Academic Research</h3>
+<p class="font-body-md text-on-surface-variant">Peer-reviewed dataset integrity checks, cryptographic citation verification, and collaborative research briefs.</p>
+<div class="absolute top-4 right-4 opacity-0 group-has-[:checked]:opacity-100 text-tertiary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</label>
+</div>
+<div class="glass-card p-8 rounded-xl space-y-6">
+<h4 class="font-headline-md text-headline-md">Brief Parameters</h4>
+<div class="space-y-4">
+<div>
+<label class="font-label-caps text-label-caps text-outline block mb-2 uppercase">Project Title</label>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-lg p-3 font-technical-data text-primary focus:ring-1 focus:ring-primary focus:outline-none placeholder:text-outline/50" placeholder="Enter high-level project identifier..." type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="font-label-caps text-label-caps text-outline block mb-2 uppercase">Priority Level</label>
+<select class="w-full bg-surface-container-low border border-white/10 rounded-lg p-3 font-technical-data text-on-surface focus:ring-1 focus:ring-primary focus:outline-none">
+<option>Standard (48h Intake)</option>
+<option>Elevated (24h Intake)</option>
+<option>Critical (System Downtime)</option>
+</select>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-outline block mb-2 uppercase">Data Sensitivity</label>
+<select class="w-full bg-surface-container-low border border-white/10 rounded-lg p-3 font-technical-data text-on-surface focus:ring-1 focus:ring-primary focus:outline-none">
+<option>Public / Open Access</option>
+<option>Internal Proprietary</option>
+<option>Restricted / Classified</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Document Upload Section -->
+<div class="glass-card p-8 rounded-xl">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-md text-headline-md">Secure Intake Manifest</h4>
+<span class="font-technical-data text-label-caps text-tertiary px-3 py-1 bg-tertiary/10 rounded-full">AES-256 ENCRYPTION ACTIVE</span>
+</div>
+<div class="border-2 border-dashed border-white/10 rounded-xl p-12 text-center hover:border-primary/50 transition-colors cursor-pointer group" id="drop-zone">
+<span class="material-symbols-outlined text-5xl text-outline mb-4 group-hover:text-primary transition-colors">cloud_upload</span>
+<p class="font-body-lg text-on-surface mb-2">Drag &amp; drop technical specifications or CSV datasets</p>
+<p class="font-technical-data text-label-caps text-outline">Supported: PDF, JSON, CSV, .INFRA (Max 500MB)</p>
+<input class="hidden" id="file-input" multiple="" type="file"/>
+</div>
+<div class="mt-6 space-y-3" id="file-list">
+<!-- Dynamic file list items -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-lg border border-white/5">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">description</span>
+<div>
+<p class="font-technical-data text-on-surface">system_architecture_v2.pdf</p>
+<p class="font-technical-data text-[10px] text-tertiary">HASH: 7F8A2B9C0D1E...A3</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-error cursor-pointer">delete</span>
+</div>
+</div>
+</div>
+<div class="flex justify-end gap-4">
+<button class="px-8 py-3 rounded-lg font-label-caps text-label-caps border border-white/10 text-on-surface hover:bg-white/5 transition-colors">Save Draft</button>
+<button class="px-8 py-3 rounded-lg font-label-caps text-label-caps bg-gradient-to-r from-primary-container to-primary text-on-primary-container font-bold hover:opacity-90 active:scale-95 transition-all" onclick="simulateSubmission()">Submit Secure Brief</button>
+</div>
+</div>
+<!-- Sidebar / ROI Summary Column -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- ROI Dynamic Summary -->
+<div class="glass-card p-6 rounded-xl border-l-4 border-l-primary">
+<h5 class="font-label-caps text-label-caps text-outline mb-4 uppercase">Dynamic Resource Estimate</h5>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Compute Cycles</span>
+<span class="font-technical-data text-primary">12.4 GH/s</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Storage Allocation</span>
+<span class="font-technical-data text-primary">1.2 TB</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Verification Nodes</span>
+<span class="font-technical-data text-primary">08</span>
+</div>
+<div class="pt-4 border-t border-white/10">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-caps text-[10px] text-outline uppercase">Projected ROI</p>
+<p class="font-headline-md text-headline-md text-tertiary">+14.2%</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-outline uppercase">Est. Credits</p>
+<p class="font-headline-md text-headline-md text-on-surface">4,250</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Security Pulse -->
+<div class="glass-card p-6 rounded-xl bg-surface-container-lowest">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<h5 class="font-label-caps text-label-caps text-on-surface uppercase">Audit Integrity Feed</h5>
+</div>
+<div class="space-y-3">
+<div class="p-3 bg-white/5 rounded border border-white/5">
+<p class="font-technical-data text-[11px] text-outline mb-1">12:04:22 UTC</p>
+<p class="font-technical-data text-[12px] text-on-surface-variant">Block verification initialized for node #229...</p>
+</div>
+<div class="p-3 bg-white/5 rounded border border-white/5">
+<p class="font-technical-data text-[11px] text-outline mb-1">11:58:45 UTC</p>
+<p class="font-technical-data text-[12px] text-on-surface-variant">SSL Certificate chain validated successfully.</p>
+</div>
+</div>
+</div>
+<!-- Abstract Decorative Image -->
+<div class="rounded-xl overflow-hidden aspect-square glass-card">
+<img class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700" data-alt="A macro-photographic rendering of complex crystalline structures that resemble a microscopic data grid or digital topography. The colors are deep obsidian blacks and electric indigo purples, with sharp points of light hitting the edges of the crystals. The image evokes a sense of cryptographic complexity and structural integrity, fitting for an advanced infrastructure design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKfi1IdGa1k6TvYKPpyLmBCOO6Qw1E446QR-06i1uTwSuzayCnBkpRBpr-p-5nkiOEzhCav7FnARnMZEjR8byMGmx7tQMNm4tN5OKkkK598XKBOPOK6yfLAR1xopcJ5hzmgRK1QVmE9j-f5doBwTAltXIKgLLlUQu-xo0LSy5vS-f9X7PY4vY21cOoYxHODP_cMiwjrArKXDTvSvv7M-0A8kHH_qztA_a7r_tJLm30FEvIg-BiiOn0RxtGsF9ooNqyqWSH6-ikxGs"/>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest w-full py-8 border-t border-white/5">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-gutter max-w-container-max mx-auto">
+<div class="col-span-1 lg:col-span-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface block mb-2">INFRAMEET</span>
+<p class="font-technical-data text-label-caps text-outline">SECURED SYSTEMS v.4.0.2</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface mb-4">SYSTEM STATUS</p>
+<ul class="space-y-2">
+<li><a class="font-technical-data text-technical-data text-outline hover:text-tertiary-fixed transition-colors" href="#">Nodes: Optimal</a></li>
+<li><a class="font-technical-data text-technical-data text-outline hover:text-tertiary-fixed transition-colors" href="#">Latency: 14ms</a></li>
+</ul>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface mb-4">COMPLIANCE</p>
+<ul class="space-y-2">
+<li><a class="font-technical-data text-technical-data text-outline hover:text-tertiary-fixed transition-colors" href="#">ISO 27001</a></li>
+<li><a class="font-technical-data text-technical-data text-outline hover:text-tertiary-fixed transition-colors" href="#">GDPR Secured</a></li>
+</ul>
+</div>
+<div class="text-right flex flex-col justify-end">
+<p class="font-technical-data text-[10px] text-outline mb-1">© 2024 INFRAMEET SECURED SYSTEMS</p>
+<p class="font-technical-data text-[10px] text-tertiary">HASH: 7F8A2B9C0D1E</p>
+</div>
+</div>
+</footer>
+<!-- Success Modal -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300" id="success-modal">
+<div class="glass-card max-w-md w-full p-8 rounded-2xl text-center border-t-4 border-t-tertiary">
+<span class="material-symbols-outlined text-6xl text-tertiary mb-4 block" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h2 class="font-headline-lg text-headline-lg mb-2">Submission Verified</h2>
+<p class="font-body-md text-on-surface-variant mb-6">Your project brief has been cryptographically signed and injected into the audit queue.</p>
+<div class="bg-surface-container-lowest p-4 rounded-lg mb-8 text-left border border-white/5">
+<p class="font-label-caps text-[10px] text-outline mb-1 uppercase">Unique Audit ID</p>
+<p class="font-technical-data text-primary select-all">INF-B2B-992-XRAY-4491-Z</p>
+</div>
+<button class="w-full py-4 rounded-xl bg-tertiary text-on-tertiary font-bold font-label-caps text-label-caps hover:brightness-110 active:scale-95 transition-all" onclick="toggleModal(false)">Return to Dashboard</button>
+</div>
+</div>
+<script>
+        // Interactive Logic
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+        const successModal = document.getElementById('success-modal');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between p-4 bg-surface-container rounded-lg border border-white/5 animate-pulse';
+                row.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <span class="material-symbols-outlined text-primary">description</span>
+                        <div>
+                            <p class="font-technical-data text-on-surface">${file.name}</p>
+                            <p class="font-technical-data text-[10px] text-tertiary">HASH GENERATING...</p>
+                        </div>
+                    </div>
+                `;
+                fileList.appendChild(row);
+
+                // Simulate hash generation
+                setTimeout(() => {
+                    const hash = Array.from({length:16}, () => Math.floor(Math.random() * 16).toString(16)).join('').toUpperCase();
+                    row.classList.remove('animate-pulse');
+                    row.querySelector('.text-tertiary').innerText = `HASH: ${hash}...SECURE`;
+                }, 1500);
+            });
+        }
+
+        function simulateSubmission() {
+            // Interaction: Button loading state
+            const btn = event.currentTarget;
+            const originalText = btn.innerText;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span>';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                toggleModal(true);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }
+
+        function toggleModal(show) {
+            if (show) {
+                successModal.classList.remove('hidden');
+                setTimeout(() => successModal.classList.add('opacity-100'), 10);
+            } else {
+                successModal.classList.remove('opacity-100');
+                setTimeout(() => successModal.classList.add('hidden'), 300);
+            }
+        }
+
+        // Drop zone highlight effect
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.add('border-primary'), false);
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.remove('border-primary'), false);
+        });
+    </script>
+</body></html>

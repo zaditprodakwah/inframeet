@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INFRAMEET | GOD-MODE COMMAND CENTER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#323537",
+                    "error": "#ffb4ab",
+                    "secondary": "#bec6e0",
+                    "on-background": "#e0e3e5",
+                    "on-primary-fixed": "#07006c",
+                    "secondary-fixed": "#dae2fd",
+                    "tertiary-container": "#00885d",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface-tint": "#c0c1ff",
+                    "surface": "#101415",
+                    "primary-container": "#8083ff",
+                    "surface-container-highest": "#323537",
+                    "surface-dim": "#101415",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "outline": "#908fa0",
+                    "surface-container-low": "#191c1e",
+                    "on-secondary-container": "#adb4ce",
+                    "primary-fixed": "#e1e0ff",
+                    "secondary-container": "#3f465c",
+                    "on-tertiary": "#003824",
+                    "on-surface-variant": "#c7c4d7",
+                    "surface-container-high": "#272a2c",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "primary-fixed-dim": "#c0c1ff",
+                    "on-tertiary-container": "#000703",
+                    "surface-bright": "#363a3b",
+                    "primary": "#c0c1ff",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#131b2e",
+                    "background": "#101415",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "on-surface": "#e0e3e5",
+                    "surface-container-lowest": "#0b0f10",
+                    "inverse-on-surface": "#2d3133",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-primary-container": "#0d0096",
+                    "on-primary": "#1000a9",
+                    "tertiary": "#4edea3",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#494bd6",
+                    "surface-container": "#1d2022",
+                    "inverse-surface": "#e0e3e5",
+                    "on-tertiary-fixed": "#002113",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "outline-variant": "#464554",
+                    "on-secondary": "#283044"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "unit": "8px",
+                    "container-max": "1440px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "technical-data": ["JetBrains Mono"],
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "technical-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(16, 20, 21, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .cyber-glow {
+            box-shadow: 0 0 15px rgba(192, 193, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #464554;
+            border-radius: 10px;
+        }
+        .terminal-text {
+            text-shadow: 0 0 5px rgba(192, 193, 255, 0.3);
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(192, 193, 255, 0.2), transparent);
+            animation: scanline 8s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/40 dark:bg-surface/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_15px_rgba(192,193,255,0.1)]">
+<div class="flex justify-between items-center px-gutter h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-6">
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">INFRAMEET</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-technical-data text-technical-data text-primary dark:text-primary border-b-2 border-primary pb-1 hover:text-primary transition-colors duration-200" href="#">Infrastructure</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Research</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Integrity</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Compliance</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/30">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-technical-data font-technical-data text-on-surface-variant placeholder:text-outline-variant" placeholder="SECURE_QUERY_NODES..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="contrast">contrast</span></button>
+<button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="format_size">format_size</span></button>
+<button class="p-2 text-outline hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full border border-primary/30 overflow-hidden ml-2 ring-2 ring-primary/10">
+<img alt="User profile avatar" data-alt="A close-up portrait of a professional systems administrator with subtle digital holographic overlays reflecting on their glasses. The lighting is cold and atmospheric, featuring deep navy and electric indigo highlights typical of a high-tech command center. The aesthetic is clean, sharp, and focused, emphasizing authority and technological expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ5hrTzn3J41Rlp34n9vb-7VyApCQciTL1Wm_iNIbpUE-UqN0_Ucor9i40KxSaGC5fEZ2mtc-Fqbi8m1vxVyOejkkOi5Q6tIA3TIeheSGa_JK7WRSn-b6WpUSimaW7EUyni5bt4WnnwJuyH8AaejMJUdZpQ_QUDG0nKCeY-SD5OP5uvfScu6DLbEFxqySCYK5k7CypqUuZCZrlinB4y782xER1JjMcVs4QQoyu-mvMtwr2CTyvgjiD0uph3nWdDFvgyfchrfBBj4E"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-gutter max-w-container-max mx-auto">
+<!-- Dashboard Header -->
+<div class="mb-8 flex flex-col md:flex-row justify-between items-end gap-4">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-error/20 text-error font-label-caps text-label-caps rounded border border-error/30">LEVEL 5 AUTHENTICATED</span>
+<span class="text-outline font-technical-data text-technical-data">TIMESTAMP: 2024-05-24 14:32:01 UTC</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">GOD-MODE <span class="text-primary">COMMAND</span></h1>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-surface-container-high border border-outline-variant px-4 py-2 rounded-lg font-technical-data text-technical-data hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="terminal">terminal</span>
+                    EXECUTE_SCRIPT
+                </button>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg font-technical-data text-technical-data font-bold hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="emergency_home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+                    SYSTEM_PURGE
+                </button>
+</div>
+</div>
+<!-- Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- 1. Global Node Management Map (Col 1-8, Row 1) -->
+<section class="md:col-span-8 glass-card rounded-xl p-6 h-[480px] flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">GLOBAL_NODE_CLUSTER</h2>
+<p class="font-technical-data text-technical-data text-outline">ACTIVE NODES: 14,802 | LATENCY: 24ms</p>
+</div>
+<div class="flex gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-tertiary">NETWORK_STABLE</span>
+</div>
+</div>
+<div class="relative flex-grow bg-surface-container-lowest/50 rounded-lg border border-white/5 overflow-hidden group">
+<img class="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A stylized 3D visualization of a global server network map appearing as glowing data clusters on a dark digital sphere. Thin, luminous lines of electric indigo and cyan connect major metropolitan hubs across a deep space blue background. The overall aesthetic is futuristic and technical, reminiscent of a high-end data center's control interface, with sharp digital clarity and a sense of immense scale." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjw46Y3tyS70_25s7f5eAGw9v3czbchOdyQKhVlKuAGOiVqQVcIZu68TCI5-sy-NBmtO2jHegAauR8jSzm0ChZKJRZO1_a9RJZIdQCGEjgqssn3C1suKB5rpXoxcTnHP33HfhWaSoZ4e7fsTX7UAKO1HW0uw2m2TuMzSwSdqfdQ6FiBwR5hJlyiNBZZ1rSM-F0ItZLN3G1jj9KvZK6JRIf-RX2zkmwtKiR0IuRVuCOyb_7oE_AiusdOnvCtU4CtON1kErIsDqD40M"/>
+<div class="absolute inset-0 pointer-events-none">
+<div class="scanline"></div>
+</div>
+<!-- Data Overlays -->
+<div class="absolute top-4 left-4 p-3 glass-card rounded-lg border-primary/20 backdrop-blur-md">
+<div class="text-label-caps text-primary mb-1">REGION_OVERSIGHT</div>
+<div class="font-technical-data text-technical-data">NA-EAST: <span class="text-tertiary">99.9%</span></div>
+<div class="font-technical-data text-technical-data">EU-CENTRAL: <span class="text-tertiary">98.4%</span></div>
+<div class="font-technical-data text-technical-data">AS-PACIFIC: <span class="text-error">82.1%</span></div>
+</div>
+</div>
+</section>
+<!-- 2. System Logs Terminal (Col 9-12, Row 1) -->
+<section class="md:col-span-4 glass-card rounded-xl p-6 h-[480px] flex flex-col bg-surface-container-lowest border-primary/10">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-label-caps text-label-caps text-primary tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="code">code</span>
+                        LIVE_TAIL.LOG
+                    </h2>
+<span class="text-outline font-technical-data text-[10px]">VER: 0.8.4-BETA</span>
+</div>
+<div class="flex-grow font-technical-data text-[12px] leading-relaxed text-on-surface-variant overflow-y-auto custom-scrollbar space-y-1 terminal-text" id="terminal-logs">
+<p class="text-tertiary">[14:32:01] AUTH_SUCCESS: USER_ID "ROOT_ADMIN_01"</p>
+<p>[14:32:05] FETCHING CLUSTER_METRICS FROM AWS_US_EAST_1...</p>
+<p>[14:32:08] HANDSHAKE_INIT: RSA_4096_SHA512_SECURE</p>
+<p class="text-primary">[14:32:10] SYNC_COMPLETE: 4,021 NODES RECONCILED</p>
+<p class="opacity-50">[14:32:15] CRON_JOB: CLEANUP_TEMP_STREAMS</p>
+<p class="text-error">[14:32:18] WARNING: PACKET_LOSS &gt; 5% IN "HK_TRANSIT_02"</p>
+<p>[14:32:22] REROUTING TRAFFIC TO "SG_BACKBONE_ALPHA"</p>
+<p>[14:32:25] RE-ESTABLISHING TUNNEL: 0xF8A2...0B1E</p>
+<p class="text-tertiary">[14:32:28] STATUS_RESOLVED: HK_TRANSIT_02 STABLE</p>
+<!-- More lines generated by JS -->
+</div>
+</section>
+<!-- 3. Escrow & Finance Audit (Col 1-4, Row 2) -->
+<section class="md:col-span-4 glass-card rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">FINANCE_AUDIT</h2>
+<span class="material-symbols-outlined text-tertiary" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-white/5 rounded-lg border border-white/5">
+<div class="font-label-caps text-label-caps text-outline mb-1">TOTAL ESCROW HOLDINGS</div>
+<div class="font-headline-lg text-headline-lg text-on-surface">$14,292,084.50</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-tertiary text-technical-data font-technical-data">+2.4%</span>
+<span class="text-outline font-technical-data text-technical-data">vs prev. hour</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-technical-data">
+<span class="text-on-surface-variant">Reconciliation Status</span>
+<span class="text-tertiary font-bold">100% VERIFIED</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-tertiary w-full"></div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<div class="text-center p-2 rounded bg-surface-container-low border border-outline-variant/20">
+<div class="font-label-caps text-label-caps text-outline mb-1">INCOMING</div>
+<div class="font-technical-data text-primary">+$420k</div>
+</div>
+<div class="text-center p-2 rounded bg-surface-container-low border border-outline-variant/20">
+<div class="font-label-caps text-label-caps text-outline mb-1">PENDING</div>
+<div class="font-technical-data text-secondary">$1.2M</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. CRM & Expert Approval Queue (Col 5-12, Row 2) -->
+<section class="md:col-span-8 glass-card rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">EXPERT_APPROVAL_QUEUE</h2>
+<span class="bg-primary/20 text-primary font-technical-data px-2 py-0.5 rounded text-[12px]">24 PENDING</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined" data-icon="filter_alt">filter_alt</span></button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined" data-icon="sort">sort</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-technical-data text-technical-data">
+<thead>
+<tr class="border-b border-white/10 text-outline uppercase tracking-wider">
+<th class="pb-3 font-label-caps">ID_HASH</th>
+<th class="pb-3 font-label-caps">NAME / ENTITY</th>
+<th class="pb-3 font-label-caps">DOMAIN_EXPERTISE</th>
+<th class="pb-3 font-label-caps">TRUST_SCORE</th>
+<th class="pb-3 font-label-caps text-right">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="py-4 font-technical-data text-primary">#7F8A2B</td>
+<td class="py-4">
+<div class="font-bold text-on-surface">Dr. Helena Vörös</div>
+<div class="text-[12px] text-outline">Quantum Computing Lab</div>
+</td>
+<td class="py-4">
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded">Cryptography</span>
+</td>
+<td class="py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[94%]"></div>
+</div>
+<span class="text-tertiary">94%</span>
+</div>
+</td>
+<td class="py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 rounded-lg text-tertiary hover:bg-tertiary/10"><span class="material-symbols-outlined" data-icon="check_circle">check_circle</span></button>
+<button class="p-1.5 rounded-lg text-error hover:bg-error/10"><span class="material-symbols-outlined" data-icon="cancel">cancel</span></button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="py-4 font-technical-data text-primary">#9C0D1E</td>
+<td class="py-4">
+<div class="font-bold text-on-surface">Prof. Marcus Thorne</div>
+<div class="text-[12px] text-outline">Bio-Sec Research</div>
+</td>
+<td class="py-4">
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded">Synthetic Biology</span>
+</td>
+<td class="py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[88%]"></div>
+</div>
+<span class="text-primary">88%</span>
+</div>
+</td>
+<td class="py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 rounded-lg text-tertiary hover:bg-tertiary/10"><span class="material-symbols-outlined" data-icon="check_circle">check_circle</span></button>
+<button class="p-1.5 rounded-lg text-error hover:bg-error/10"><span class="material-symbols-outlined" data-icon="cancel">cancel</span></button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="py-4 font-technical-data text-primary">#D1E5F4</td>
+<td class="py-4">
+<div class="font-bold text-on-surface">Cipher Solutions Inc.</div>
+<div class="text-[12px] text-outline">Corporate Entity</div>
+</td>
+<td class="py-4">
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded">Audit Systems</span>
+</td>
+<td class="py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-error w-[42%]"></div>
+</div>
+<span class="text-error">42%</span>
+</div>
+</td>
+<td class="py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 rounded-lg text-tertiary hover:bg-tertiary/10"><span class="material-symbols-outlined" data-icon="check_circle">check_circle</span></button>
+<button class="p-1.5 rounded-lg text-error hover:bg-error/10"><span class="material-symbols-outlined" data-icon="cancel">cancel</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 border-t border-white/5 bg-surface-container-lowest dark:bg-surface-container-lowest">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-gutter max-w-container-max mx-auto">
+<div class="space-y-4">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">INFRAMEET</span>
+<p class="font-technical-data text-technical-data text-outline">© 2024 INFRAMEET SECURED SYSTEMS.<br/>HASH: 7F8A2B9C0D1E</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label-caps text-label-caps text-on-surface mb-2">SYSTEM_OPERATIONS</span>
+<a class="font-technical-data text-technical-data text-outline hover:text-tertiary-fixed transition-colors" href="#">System Status</a>
+<a class="font-technical-data text-technical-data text-outline hover:text-tertiary-fixed transition-colors" href="#">Cryptographic Verify</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-label-caps text-label-caps text-on-surface mb-2">SECURITY_PROTOCOL</span>
+<a class="font-technical-data text-technical-data text-outline hover:text-tertiary-fixed transition-colors" href="#">Data Privacy</a>
+<a class="font-technical-data text-technical-data text-outline hover:text-tertiary-fixed transition-colors" href="#">ISO 27001</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label-caps text-label-caps text-on-surface mb-2">GLOBAL_TRAFFIC</span>
+<div class="h-20 w-full bg-surface-container-low rounded border border-white/5 overflow-hidden flex items-end gap-1 p-2">
+<div class="w-1 bg-primary/40 h-[40%]"></div>
+<div class="w-1 bg-primary/40 h-[60%]"></div>
+<div class="w-1 bg-primary/40 h-[45%]"></div>
+<div class="w-1 bg-primary h-[80%]"></div>
+<div class="w-1 bg-primary/40 h-[55%]"></div>
+<div class="w-1 bg-primary/40 h-[70%]"></div>
+<div class="w-1 bg-tertiary h-[100%]"></div>
+<div class="w-1 bg-primary/40 h-[65%]"></div>
+<div class="w-1 bg-primary/40 h-[50%]"></div>
+<div class="w-1 bg-primary/40 h-[40%]"></div>
+</div>
+</div>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+        // Terminal log generator
+        const terminal = document.getElementById('terminal-logs');
+        const logs = [
+            "THREAT_DETECTED: SQL_INJECTION_ATTEMPT_BLOCKED [IP: 192.168.1.42]",
+            "ENCRYPTION_ROTATED: NEW_SEED_GENERATED_0xBD2...",
+            "NODE_SCALING: 4 NEW INSTANCES IN AWS_US_WEST_2",
+            "SECURITY_AUDIT: ALL CERTIFICATES VALID",
+            "RECONCILIATION: ESCROW_ID_901_MATCHED",
+            "ALERT: TEMPERATURE_HIGH_DATACENTER_B_RACK_04",
+            "MEM_OPTIMIZATION: GC_COMPLETE_RECLAIMED_4GB",
+            "ADMIN_OVERRIDE: ROOT_ADMIN_01 ACCESSING LOGS"
+        ];
+        
+        function addLog() {
+            const p = document.createElement('p');
+            const now = new Date();
+            const time = `[${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}]`;
+            const message = logs[Math.floor(Math.random() * logs.length)];
+            
+            p.innerHTML = `${time} ${message}`;
+            if (message.includes('THREAT') || message.includes('ALERT')) p.className = 'text-error';
+            else if (message.includes('NODE') || message.includes('OPTIMIZATION')) p.className = 'text-primary';
+            else p.className = 'opacity-80';
+            
+            terminal.appendChild(p);
+            terminal.scrollTop = terminal.scrollHeight;
+            
+            if (terminal.children.length > 50) {
+                terminal.removeChild(terminal.firstChild);
+            }
+        }
+
+        setInterval(addLog, 3000);
+
+        // Hover scale effect for tables
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+                row.style.transition = 'all 0.2s ease';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body></html>

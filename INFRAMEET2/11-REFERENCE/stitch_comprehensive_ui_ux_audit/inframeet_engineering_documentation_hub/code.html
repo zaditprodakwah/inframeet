@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INFRAMEET | Technical Documentation Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-dim": "#101415",
+                "on-tertiary-container": "#000703",
+                "on-secondary-fixed-variant": "#3f465c",
+                "surface-variant": "#323537",
+                "surface-container-highest": "#323537",
+                "primary-fixed": "#e1e0ff",
+                "surface-container-low": "#191c1e",
+                "secondary": "#bec6e0",
+                "surface-container-lowest": "#0b0f10",
+                "surface-bright": "#363a3b",
+                "on-primary-fixed-variant": "#2f2ebe",
+                "on-primary-container": "#0d0096",
+                "on-surface": "#e0e3e5",
+                "on-primary-fixed": "#07006c",
+                "tertiary-fixed": "#6ffbbe",
+                "on-secondary-container": "#adb4ce",
+                "surface-tint": "#c0c1ff",
+                "on-tertiary-fixed-variant": "#005236",
+                "on-error": "#690005",
+                "on-tertiary-fixed": "#002113",
+                "background": "#101415",
+                "surface-container": "#1d2022",
+                "on-surface-variant": "#c7c4d7",
+                "tertiary-fixed-dim": "#4edea3",
+                "tertiary-container": "#00885d",
+                "primary-container": "#8083ff",
+                "error": "#ffb4ab",
+                "primary": "#c0c1ff",
+                "on-secondary-fixed": "#131b2e",
+                "tertiary": "#4edea3",
+                "outline-variant": "#464554",
+                "secondary-fixed-dim": "#bec6e0",
+                "primary-fixed-dim": "#c0c1ff",
+                "outline": "#908fa0",
+                "inverse-surface": "#e0e3e5",
+                "on-error-container": "#ffdad6",
+                "error-container": "#93000a",
+                "surface": "#101415",
+                "secondary-fixed": "#dae2fd",
+                "inverse-primary": "#494bd6",
+                "on-tertiary": "#003824",
+                "on-background": "#e0e3e5",
+                "secondary-container": "#3f465c",
+                "on-secondary": "#283044",
+                "surface-container-high": "#272a2c",
+                "on-primary": "#1000a9",
+                "inverse-on-surface": "#2d3133"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "unit": "8px",
+                "margin-desktop": "40px",
+                "margin-mobile": "16px",
+                "container-max": "1440px",
+                "gutter": "24px"
+            },
+            "fontFamily": {
+                "headline-md": ["Plus Jakarta Sans"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "body-lg": ["Inter"],
+                "label-caps": ["JetBrains Mono"],
+                "body-md": ["Inter"],
+                "headline-xl": ["Plus Jakarta Sans"],
+                "headline-lg-mobile": ["Plus Jakarta Sans"],
+                "technical-data": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                "technical-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #101415;
+            color: #e0e3e5;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(29, 32, 34, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(192, 193, 255, 0.3);
+            background: rgba(29, 32, 34, 0.6);
+        }
+        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        
+        .code-syntax-keyword { color: #c0c1ff; }
+        .code-syntax-string { color: #4edea3; }
+        .code-syntax-comment { color: #908fa0; }
+        .code-syntax-function { color: #dae2fd; }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; filter: blur(8px); }
+            50% { opacity: 0.8; filter: blur(12px); }
+        }
+        .active-glow {
+            position: relative;
+        }
+        .active-glow::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: 20%;
+            height: 60%;
+            width: 2px;
+            background: #c0c1ff;
+            box-shadow: 0 0 10px #c0c1ff;
+        }
+    </style>
+</head>
+<body class="dark font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-dim/70 dark:bg-surface-dim/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-primary/5">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md tracking-tighter text-on-surface dark:text-on-surface-variant">INFRAMEET</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-technical-data text-technical-data text-primary border-b-2 border-primary pb-1" href="#">Docs</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant hover:text-on-surface transition-colors" href="#">API</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant hover:text-on-surface transition-colors" href="#">Terminal</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant hover:text-on-surface transition-colors" href="#">Status</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-low border border-white/10 rounded-lg px-4 py-1.5 text-technical-data w-64 focus:outline-none focus:border-primary/50 transition-all" placeholder="Search infrastructure..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1.5 text-on-surface-variant text-body-md">search</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-white/5 transition-all duration-300 rounded-full active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">settings_ethernet</span>
+</button>
+<button class="p-2 hover:bg-white/5 transition-all duration-300 rounded-full active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">terminal</span>
+</button>
+<button class="p-2 hover:bg-white/5 transition-all duration-300 rounded-full active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen pt-20">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-container-low/40 dark:bg-surface-container-low/40 backdrop-blur-lg border-r border-white/10 flex flex-col h-full py-20 px-4">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-body-md">hub</span>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-primary">INFRA_HUB_V2</div>
+<div class="text-[10px] text-on-surface-variant/60 font-technical-data">v4.12.0-STABLE</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 sidebar-scroll overflow-y-auto">
+<div class="text-[10px] font-label-caps text-on-surface-variant/40 px-2 py-2">CORE SYSTEMS</div>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-container/20 text-primary border-r-2 border-primary group hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+<span class="font-technical-data text-technical-data">Architecture</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-white/5 group hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">api</span>
+<span class="font-technical-data text-technical-data">Endpoints</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-white/5 group hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">key</span>
+<span class="font-technical-data text-technical-data">Auth</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-white/5 group hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">webhook</span>
+<span class="font-technical-data text-technical-data">Webhooks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-white/5 group hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">error</span>
+<span class="font-technical-data text-technical-data">Errors</span>
+</a>
+<div class="text-[10px] font-label-caps text-on-surface-variant/40 px-2 py-4">SECURITY</div>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-white/5 group hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+<span class="font-technical-data text-technical-data">Protocols</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-white/5 group hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">security</span>
+<span class="font-technical-data text-technical-data">Encryption</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-white/5 space-y-1">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-2 rounded font-label-caps text-label-caps hover:bg-primary-container transition-colors mb-4">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+                    Open Terminal
+                </button>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+<span class="font-technical-data text-technical-data">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+<span class="font-technical-data text-technical-data">Security</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 p-margin-desktop max-w-7xl">
+<div class="mb-12">
+<div class="flex items-center gap-2 text-tertiary font-technical-data text-[12px] mb-2">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    SYSTEMS_ARCH_CERTIFIED
+                </div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">Infrastructure Architecture</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+                    High-density overview of the INFRAMEET core routing engine. Learn how to deploy, secure, and scale your nodes across our multi-cloud mesh network.
+                </p>
+</div>
+<!-- Bento Grid Quick Start -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-16">
+<!-- Large Feature Card -->
+<div class="md:col-span-2 glass-card p-8 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[60px] group-hover:bg-primary/20 transition-all"></div>
+<span class="material-symbols-outlined text-primary mb-4 text-[40px]">rocket_launch</span>
+<h3 class="font-headline-md text-headline-md mb-2">Quick Start Guide</h3>
+<p class="text-on-surface-variant mb-6">Initialize your first secure cluster in under 5 minutes using our CLI or ARM templates.</p>
+<div class="bg-surface-dim p-4 rounded-lg font-technical-data text-technical-data border border-white/5">
+<span class="text-tertiary">$</span> curl -sSL infm.io/install | bash
+                    </div>
+</div>
+<!-- Secondary Card -->
+<div class="md:col-span-1 glass-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-tertiary mb-3 text-[32px]">shield</span>
+<h4 class="font-headline-md text-[18px] mb-2">Security Mesh</h4>
+<p class="text-[14px] text-on-surface-variant">Zero-trust architecture by default with mTLS 1.3.</p>
+</div>
+<a class="text-primary font-label-caps text-[11px] flex items-center gap-1 mt-4" href="#">VIEW PROTOCOLS <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+</div>
+<!-- Secondary Card -->
+<div class="md:col-span-1 glass-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary mb-3 text-[32px]">monitoring</span>
+<h4 class="font-headline-md text-[18px] mb-2">Real-time Metrics</h4>
+<p class="text-[14px] text-on-surface-variant">Expose telemetry via Prometheus and Grafana.</p>
+</div>
+<a class="text-primary font-label-caps text-[11px] flex items-center gap-1 mt-4" href="#">INTEGRATIONS <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+</div>
+<!-- Wide Detailed Card -->
+<div class="md:col-span-4 glass-card p-8 rounded-xl flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md mb-2">Hybrid Cloud Topology</h3>
+<p class="text-on-surface-variant">Leverage our decentralized backbone to bridge AWS, Azure, and private data centers without compromising on latency or data sovereignty.</p>
+</div>
+<div class="w-full md:w-1/2 h-48 bg-surface-container-highest rounded-lg relative overflow-hidden border border-white/5">
+<img class="w-full h-full object-cover opacity-40 grayscale hover:grayscale-0 transition-all duration-700" data-alt="A high-tech digital schematic showing a complex network of nodes and servers connected by glowing purple data streams. The aesthetic is dark and sophisticated, featuring glassmorphic overlays and sharp, technical data visualization elements. Soft cyan and deep indigo lighting create a professional, secure atmosphere typical of a modern data center architecture diagram." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkdGCBpGKQwW-LHLl_QQB-XeASD2YjRT_UCH8T9GRCb_R_gSFQ63nbM2swqu8CmNBuCybe9MKQN51GXjhotvG-Ylws0P6KWm6tAu7w5kFTHm-5Cwd_9-0_iTOwIqX77qPvOnKGtXoldgkG6-Pu2r01vWU1AoRavc8tA0PeRuIptPLrdsjEC2O1FZ9LTOoni3AOGN_bm-JE7GEL1pDR1zoqMx_AhucFiYdf__75a5uAG_BbNiHd4pAENRFvCUYcY6Eec2kqPPTE2iw"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-dim to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- Technical Detail Section -->
+<section class="space-y-12">
+<div class="border-l-4 border-primary pl-8 py-2">
+<h2 class="font-headline-lg text-headline-lg mb-4">Core API Reference</h2>
+<p class="text-on-surface-variant">Every request to the INFRAMEET backbone must include a valid cryptographic token in the header.</p>
+</div>
+<!-- API Parameter Table -->
+<div class="overflow-hidden glass-card rounded-xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-white/5">
+<th class="p-4 font-label-caps text-label-caps text-on-surface-variant">PARAMETER</th>
+<th class="p-4 font-label-caps text-label-caps text-on-surface-variant">TYPE</th>
+<th class="p-4 font-label-caps text-label-caps text-on-surface-variant">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody class="font-technical-data text-technical-data">
+<tr class="border-t border-white/5">
+<td class="p-4 text-primary">cluster_id</td>
+<td class="p-4"><span class="bg-secondary-container/30 px-2 py-0.5 rounded text-[12px]">UUID_V4</span></td>
+<td class="p-4 text-on-surface-variant">The unique identifier for the target compute cluster.</td>
+</tr>
+<tr class="border-t border-white/5">
+<td class="p-4 text-primary">entropy_seed</td>
+<td class="p-4"><span class="bg-secondary-container/30 px-2 py-0.5 rounded text-[12px]">STRING_64</span></td>
+<td class="p-4 text-on-surface-variant">Seed for localized encryption layer generation.</td>
+</tr>
+<tr class="border-t border-white/5">
+<td class="p-4 text-primary">sync_mode</td>
+<td class="p-4"><span class="bg-secondary-container/30 px-2 py-0.5 rounded text-[12px]">ENUM</span></td>
+<td class="p-4 text-on-surface-variant">Options: [STRICT, PARTIAL, ASYNC]. Default is STRICT.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Code Snippet -->
+<div class="space-y-4">
+<div class="flex justify-between items-center px-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">INITIALIZATION_SCRIPT.TS</span>
+<span class="text-[10px] font-technical-data text-tertiary">Verified by SHA-256</span>
+</div>
+<div class="bg-[#0b0f10] p-6 rounded-xl border border-white/10 font-technical-data text-technical-data overflow-x-auto relative">
+<button class="absolute top-4 right-4 p-2 hover:bg-white/5 rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<pre><code><span class="code-syntax-keyword">import</span> { InfraMeet } <span class="code-syntax-keyword">from</span> <span class="code-syntax-string">'@inframeet/core'</span>;
+
+<span class="code-syntax-comment">// Initialize the secure gateway with cryptographic identity</span>
+<span class="code-syntax-keyword">const</span> hub = <span class="code-syntax-keyword">new</span> <span class="code-syntax-function">InfraMeet</span>({
+  apiKey: process.env.INFRA_KEY,
+  region: <span class="code-syntax-string">'eu-west-secure-1'</span>,
+  securityLevel: <span class="code-syntax-string">'fortress'</span>
+});
+
+<span class="code-syntax-keyword">async function</span> <span class="code-syntax-function">deployCluster</span>() {
+  <span class="code-syntax-keyword">const</span> node = <span class="code-syntax-keyword">await</span> hub.<span class="code-syntax-function">provision</span>({
+    capacity: <span class="code-syntax-string">'high_density'</span>,
+    encryption: <span class="code-syntax-string">'AES_256_GCM'</span>
+  });
+  console.<span class="code-syntax-function">log</span>(<span class="code-syntax-string">`Node deployed: ${node.id}`</span>);
+}</code></pre>
+</div>
+</div>
+<!-- Verification Hash -->
+<div class="glass-card p-4 rounded-lg flex flex-col md:flex-row items-center justify-between gap-4 border-l-4 border-tertiary">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div class="font-technical-data text-[12px] text-on-surface-variant">
+                            DOCUMENTATION INTEGRITY VERIFIED
+                        </div>
+</div>
+<div class="font-technical-data text-[12px] text-on-surface-variant bg-surface-container-lowest px-4 py-2 rounded border border-white/5">
+                        SHA-256: <span class="text-tertiary">8f2a1b3c9e7d6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1</span>
+</div>
+<div class="text-[10px] font-label-caps text-on-surface-variant/40">
+                        LAST UPDATED: 2024-10-24 14:32:01 UTC
+                    </div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-8 mt-auto bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-white/5">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-label-caps text-label-caps text-tertiary mb-1">INFRAMEET SECURE INFRASTRUCTURE</span>
+<span class="font-technical-data text-[11px] text-on-surface-variant opacity-80">© 2024 INFRAMEET SECURE INFRASTRUCTURE</span>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-technical-data text-technical-data uppercase text-on-surface-variant/60 hover:text-tertiary transition-colors" href="#">Privacy Policy</a>
+<a class="font-technical-data text-technical-data uppercase text-on-surface-variant/60 hover:text-tertiary transition-colors" href="#">Terms of Service</a>
+<a class="font-technical-data text-technical-data uppercase text-on-surface-variant/60 hover:text-tertiary transition-colors" href="#">Security Audit</a>
+<span class="font-technical-data text-technical-data uppercase text-primary">Hash: 8f2a1b3c9e</span>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Simple mock search focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

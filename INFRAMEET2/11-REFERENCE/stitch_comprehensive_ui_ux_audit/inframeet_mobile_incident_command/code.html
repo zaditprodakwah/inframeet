@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#c7c4d7",
+                        "inverse-primary": "#494bd6",
+                        "primary-fixed": "#e1e0ff",
+                        "primary-container": "#8083ff",
+                        "surface-container": "#1d2022",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-bright": "#363a3b",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-error": "#690005",
+                        "on-tertiary": "#003824",
+                        "outline-variant": "#464554",
+                        "surface-container-high": "#272a2c",
+                        "on-secondary-container": "#adb4ce",
+                        "surface-dim": "#101415",
+                        "secondary": "#bec6e0",
+                        "surface": "#101415",
+                        "on-primary": "#1000a9",
+                        "outline": "#908fa0",
+                        "surface-container-lowest": "#0b0f10",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "surface-tint": "#c0c1ff",
+                        "inverse-surface": "#e0e3e5",
+                        "inverse-on-surface": "#2d3133",
+                        "on-surface": "#e0e3e5",
+                        "primary": "#c0c1ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-tertiary-container": "#000703",
+                        "tertiary-container": "#00885d",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#07006c",
+                        "on-background": "#e0e3e5",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-secondary-fixed": "#131b2e",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#323537",
+                        "background": "#101415",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "on-primary-container": "#0d0096",
+                        "tertiary": "#4edea3",
+                        "surface-container-low": "#191c1e",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "surface-variant": "#323537",
+                        "secondary-fixed": "#dae2fd",
+                        "on-secondary": "#283044",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#3f465c",
+                        "ruby-alert": "#E0115F"
+                    },
+                    "fontFamily": {
+                        "technical-data": ["JetBrains Mono"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "technical-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(30, 32, 35, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .ruby-glow {
+            box-shadow: 0 0 15px rgba(224, 17, 95, 0.2);
+        }
+        .pulse {
+            animation: pulse-animation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-animation {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-surface/40 backdrop-blur-xl border-b border-white/10 z-50 flex justify-between items-center px-4 h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">INFRAMEET</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container/20 border border-primary/30 flex items-center justify-center overflow-hidden">
+<img alt="Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_NozpGugOSGg6y0CxNikuE41C86zoS5aP_sCWfOXNHRjLtx66g3Zzpg941Nwyf54pobCuMCUYHDQhTwrFtM64vLrxz0jQJIZjsEDHEAwvf1z4gqDY2m5fDm35MQUY_-wyLj4an55RuOmDTx8XluFhpnCtasT7y7efk0yvSMwxfo_PIPV5f37zYJF6A5mfm37S8NU2_Wxrh4GgzAvFdw_6NLTUU2Rzn1VPJZ08kfUJv33S1TOe_z0rxkPgFbt3IIu89V6KqUmARC0"/>
+</div>
+</header>
+<main class="pt-20 px-4 space-y-6">
+<!-- Active Incident Banner -->
+<section class="glass-card rounded-xl p-4 ruby-glow border-ruby-alert/30">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-ruby-alert pulse" data-icon="error" data-weight="fill" style="font-variation-settings: 'FILL' 1;">error</span>
+<span class="font-label-caps text-label-caps text-ruby-alert">ACTIVE CRITICAL INCIDENT</span>
+</div>
+<span class="font-technical-data text-technical-data text-on-surface-variant">ID: #INF-992-X</span>
+</div>
+<h2 class="font-headline-md text-headline-md mb-1 text-on-surface">Packet Loss Spike</h2>
+<p class="font-body-md text-on-surface-variant text-sm">Abnormal routing behavior detected in North Atlantic backbone.</p>
+</section>
+<!-- Bento Grid: Assessment & Metrics -->
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-card rounded-xl p-4 col-span-1">
+<div class="flex flex-col h-full justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-2">TRAFFIC DROP</span>
+<div>
+<span class="font-headline-md text-headline-md text-ruby-alert">12%</span>
+<p class="font-technical-data text-[12px] text-on-surface-variant">EU-West-1</p>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-xl p-4 col-span-1">
+<div class="flex flex-col h-full justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-2">LATENCY</span>
+<div>
+<span class="font-headline-md text-headline-md text-tertiary">+145ms</span>
+<p class="font-technical-data text-[12px] text-on-surface-variant">Global Avg</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Incident Timeline -->
+<section class="glass-card rounded-xl p-4">
+<h3 class="font-label-caps text-label-caps text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                INCIDENT TIMELINE
+            </h3>
+<div class="space-y-4 relative before:absolute before:left-[11px] before:top-2 before:bottom-0 before:w-px before:bg-white/10">
+<!-- Log 1 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-ruby-alert"></div>
+</div>
+<div class="flex justify-between items-start mb-1">
+<span class="font-technical-data text-technical-data text-on-surface">Route Leak Detected</span>
+<span class="font-technical-data text-[10px] text-on-surface-variant">14:22:01 UTC</span>
+</div>
+<div class="bg-black/20 p-2 rounded border border-white/5 font-technical-data text-[10px] text-on-surface-variant break-all">
+                        HASH: 8f2a1c...e39b <span class="text-tertiary">VERIFIED</span>
+</div>
+</div>
+<!-- Log 2 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div class="flex justify-between items-start mb-1">
+<span class="font-technical-data text-technical-data text-on-surface">Auto-Mitigation Fired</span>
+<span class="font-technical-data text-[10px] text-on-surface-variant">14:23:45 UTC</span>
+</div>
+<div class="bg-black/20 p-2 rounded border border-white/5 font-technical-data text-[10px] text-on-surface-variant break-all">
+                        SIG: ed25519_v1_...f002
+                    </div>
+</div>
+<!-- Log 3 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-on-surface-variant"></div>
+</div>
+<div class="flex justify-between items-start mb-1">
+<span class="font-technical-data text-technical-data text-on-surface">Manual Override Request</span>
+<span class="font-technical-data text-[10px] text-on-surface-variant">14:25:12 UTC</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Impact Map Placeholder -->
+<section class="glass-card rounded-xl h-48 relative flex items-center justify-center overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40" data-alt="A dark, stylized world map with glowing ruby-colored connection lines indicating network failures across the Atlantic Ocean. The visual style is professional, high-contrast, and technical, with data overlays and faint grid lines. The lighting is low and moody, emphasizing the glowing red data nodes in Europe and North America." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwh_PraC2afHQ8E8LGpiiAkLnn909VxZZxPHoIVM2u5-G2-lwj1CqCp2C0PtG86ft0nneW_CC66ZjOHK-W79e5xm1tUxQVXYrpqwSOa-Jn6UWk7QfnzBRxCcyqJeP8iOn7eaeAKhLUsoYeW13SBEj_cl-mll0E8Vd_5aUv_iwS6Qvk5eqG0PgBBgjwYxAKJxbEm4itdhRHIKQ-A5U07BkiBHMFJ6aOFtr5GIfpoiQD_lmEq3MWAVhNNXF0eYs8hV9DLWlJlA1jozw"/>
+<div class="relative z-10 text-center">
+<span class="font-label-caps text-label-caps bg-black/60 px-3 py-1 rounded-full border border-ruby-alert/50 text-ruby-alert">LIVE IMPACT VIEW</span>
+</div>
+</section>
+<!-- Resolution Team Selector -->
+<section class="glass-card rounded-xl p-4">
+<h3 class="font-label-caps text-label-caps text-primary mb-4">RESOLUTION TEAM ON-CALL</h3>
+<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+<!-- Expert 1 -->
+<div class="flex-shrink-0 flex flex-col items-center gap-2">
+<div class="w-14 h-14 rounded-full border-2 border-tertiary p-1">
+<img alt="Expert Sarah" class="w-full h-full rounded-full object-cover bg-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiAeSwtRnjM09v-cKzKhpKzhdf124rFeAzJf03hbN4v90d5GDZgZC4QT0mv7XrZSz21o_PVSM-t3jqG5jfurNbqX-rzD3OlIjuWJb6WYEQIWId6BhkJLkIFiprnJzNG7wfmn-o_AL14PciBdiU2YNbW4twzr5mrinkOD6vF1SLHNUyKSEaKEajXEfahksNDr45e8bLKqm3xCWQHR-VVJvUOhG_dSERl_P8pOSsKh4w3CAhRyj43AfXJFDjP9IqWR6ERYWz19KYyw"/>
+</div>
+<span class="font-technical-data text-[12px] text-on-surface">S. Chen</span>
+<span class="font-technical-data text-[10px] text-tertiary">Verified</span>
+</div>
+<!-- Expert 2 -->
+<div class="flex-shrink-0 flex flex-col items-center gap-2">
+<div class="w-14 h-14 rounded-full border-2 border-primary p-1">
+<img alt="Expert Marcus" class="w-full h-full rounded-full object-cover bg-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjD3c7agfEuOHcmmSuU8Ocdvbd9_-V7iNraOSXFYTvOpwrJKCjqukGTrjP6sX-PBWnInZiScNrB6ve1UMQLsKLxp9ToaeErOHOOeBMmwen4F9nTiEShcNG5h6ZtplV2UjzAod2YULuH4YjpOZBEDrCwCtojRERiZtBE4iL5EV_SlsajxFBDHFMhgI-CALUxUAwzDm2LQGZLRZdYy0gDsuEizxSw78ptSWC2CY_xlu-vb7WmO6d8f4meMe4CVhC5fsJRqWhE7aDKEA"/>
+</div>
+<span class="font-technical-data text-[12px] text-on-surface">M. Vane</span>
+<span class="font-technical-data text-[10px] text-primary">Lead</span>
+</div>
+<!-- Expert 3 -->
+<div class="flex-shrink-0 flex flex-col items-center gap-2">
+<div class="w-14 h-14 rounded-full border-2 border-on-surface-variant/30 p-1">
+<img alt="Expert Alex" class="w-full h-full rounded-full object-cover bg-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsTka-BUnfsVdKc5vu9MtWoYfkpaxxxKEKys7uYkbp1cffPqNU5AI9FHhN8dYD22F1LZxOa7HiuGVbP78SVuuScNi3Dyqd5rsdp4pf6O3rDhFDPvNKrtTZiMg_HS30jfID2GxcHve30UgAgvMF2TssYwzjILbjrQ64XlrqRdqXC4PGAV7liZ40cBI8BhacL8YW6FWoi_KIR1282VrYxRL0iLqOjtOfE6tY4WZbqsPIvNlcnX0ZyDlO65fuG-Z1sPgWCqdiJiq8ego"/>
+</div>
+<span class="font-technical-data text-[12px] text-on-surface">A. Sokol</span>
+<span class="font-technical-data text-[10px] text-on-surface-variant">Standby</span>
+</div>
+<!-- Expert 4 -->
+<div class="flex-shrink-0 flex flex-col items-center gap-2">
+<div class="w-14 h-14 rounded-full border-2 border-on-surface-variant/30 p-1">
+<img alt="Expert Elena" class="w-full h-full rounded-full object-cover bg-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0qRPupSb3uX4xd3Q7y6bwbAjSxjWlsThBqs8CdKK-B7lIYvr9Y0x3at1GstUSozQ2avt-DbBWgb6oCObxpVkv0mb9vGF68gJxUppeVzgUeHNC6JPgg3mx1FlsxXuW13Q2HoEyTWXLX5GDmI3YXkJPF48kCT75iLR_HkvZjOWBqKXe58XJAwu-YoxLQqTkJGNx5BMr3bLvXAn-tDSFfCOu3JhT4Gu3y40w7157NBFrEEKdctm2_0U2osw_nfvkWHJpdxbXvyzZr5k"/>
+</div>
+<span class="font-technical-data text-[12px] text-on-surface">E. Rossi</span>
+<span class="font-technical-data text-[10px] text-on-surface-variant">Standby</span>
+</div>
+</div>
+</section>
+<!-- Primary Action -->
+<button class="w-full py-5 rounded-xl bg-gradient-to-r from-ruby-alert to-[#8B0000] text-white font-headline-md text-headline-md active:scale-95 transition-transform ruby-glow flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+            Initialize Crisis Protocol
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container/70 backdrop-blur-2xl border-t border-white/10 rounded-t-xl shadow-2xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-[10px] uppercase mt-1">Control</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/30 text-primary rounded-xl px-3 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span class="font-label-caps text-[10px] uppercase mt-1">Incident</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-caps text-[10px] uppercase mt-1">Experts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-label-caps text-[10px] uppercase mt-1">Terminal</span>
+</a>
+</nav>
+<script>
+        // Simple ripple effect for the primary button
+        document.querySelector('button').addEventListener('click', function(e) {
+            const x = e.clientX - e.target.offsetLeft;
+            const y = e.clientY - e.target.offsetTop;
+            
+            const ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.width = '100px';
+            ripple.style.height = '100px';
+            ripple.style.background = 'rgba(255,255,255,0.3)';
+            ripple.style.borderRadius = '50%';
+            ripple.style.top = y + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.pointerEvents = 'none';
+            ripple.animate([
+                { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+                { transform: 'translate(-50%, -50%) scale(4)', opacity: 0 }
+            ], { duration: 500 });
+            
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 500);
+        });
+    </script>
+</body></html>

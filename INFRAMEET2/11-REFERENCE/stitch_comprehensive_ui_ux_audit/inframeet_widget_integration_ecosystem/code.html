@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INFRAMEET | Admin Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-card {
+            background: rgba(29, 32, 34, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .cyber-purple-glow {
+            box-shadow: 0 0 20px rgba(128, 131, 255, 0.2);
+        }
+        .terminal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: #464554;
+            border-radius: 2px;
+        }
+        .active-tab-glow {
+            box-shadow: 0 0 15px rgba(192, 193, 255, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#000703",
+                        "surface-container-highest": "#323537",
+                        "on-tertiary": "#003824",
+                        "on-surface": "#e0e3e5",
+                        "on-primary-fixed": "#07006c",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "primary-fixed": "#e1e0ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#283044",
+                        "on-primary-container": "#0d0096",
+                        "error-container": "#93000a",
+                        "background": "#101415",
+                        "surface-bright": "#363a3b",
+                        "on-primary": "#1000a9",
+                        "inverse-primary": "#494bd6",
+                        "surface-container-lowest": "#0b0f10",
+                        "inverse-on-surface": "#2d3133",
+                        "surface-container-low": "#191c1e",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "on-tertiary-fixed": "#002113",
+                        "outline": "#908fa0",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-dim": "#101415",
+                        "on-background": "#e0e3e5",
+                        "primary": "#c0c1ff",
+                        "on-secondary-container": "#adb4ce",
+                        "surface-container-high": "#272a2c",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "outline-variant": "#464554",
+                        "secondary-fixed": "#dae2fd",
+                        "surface-tint": "#c0c1ff",
+                        "surface": "#101415",
+                        "primary-container": "#8083ff",
+                        "secondary": "#bec6e0",
+                        "surface-variant": "#323537",
+                        "on-secondary-fixed": "#131b2e",
+                        "inverse-surface": "#e0e3e5",
+                        "secondary-container": "#3f465c",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-surface-variant": "#c7c4d7",
+                        "on-error": "#690005",
+                        "tertiary": "#4edea3",
+                        "tertiary-container": "#00885d",
+                        "surface-container": "#1d2022",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "cyber-purple": "#8083ff",
+                        "trust-blue": "#494bd6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "container-max": "1440px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "technical-data": ["JetBrains Mono"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 dark:border-outline/10 docked full-width top-0 z-50 sticky">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-xl text-headline-xl font-extrabold tracking-tight text-cyber-purple dark:text-primary uppercase">INFRAMEET</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Enterprise</a>
+<a class="text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Academic</a>
+<a class="text-cyber-purple font-bold border-b-2 border-cyber-purple pb-1" href="#">Insights</a>
+<a class="text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Directory</a>
+<a class="text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Calculators</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-high px-4 py-2 rounded-full flex items-center gap-2 border border-outline-variant/30">
+<span class="material-symbols-outlined text-on-surface-variant scale-75">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-technical-data font-technical-data text-body-md p-0 w-48" placeholder="Search commands..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-highest/50 p-2 rounded-full transition-all">light_mode</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-highest/50 p-2 rounded-full transition-all">text_fields</button>
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-highest/50 p-2 rounded-full transition-all">account_circle</button>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-12">
+<!-- Dashboard Header -->
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-cyber-purple" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span class="font-label-caps text-label-caps text-cyber-purple tracking-[0.2em]">SYSTEM_CORE_V4</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Widget Control Center</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-2 max-w-2xl">Manage your cryptographic trust badges, infrastructure calculators, and real-time verification modules across all external endpoints.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95 shadow-lg cyber-purple-glow">
+<span class="material-symbols-outlined">add_circle</span>
+<span>DEPLOY NEW WIDGET</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Main Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Live Analytics Module -->
+<div class="md:col-span-8 glass-card rounded-xl p-6">
+<div class="flex justify-between items-center mb-8">
+<div class="flex items-center gap-4">
+<div class="h-8 w-1 bg-cyber-purple rounded-full"></div>
+<h2 class="font-headline-md text-headline-md">Live Widget Impressions</h2>
+</div>
+<div class="flex gap-2">
+<span class="bg-tertiary/10 text-tertiary text-technical-data font-technical-data px-3 py-1 rounded border border-tertiary/20 flex items-center gap-2">
+<span class="w-2 h-2 bg-tertiary rounded-full animate-pulse"></span>
+                            LIVE FEED
+                        </span>
+</div>
+</div>
+<div class="h-[300px] w-full flex items-end justify-between gap-1 mb-6">
+<!-- Fake Graph Visualization -->
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 40%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 55%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 45%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 70%"></div>
+<div class="bg-cyber-purple/40 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 85%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 60%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 40%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 50%"></div>
+<div class="bg-cyber-purple/60 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 95%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 75%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 60%"></div>
+<div class="bg-cyber-purple/20 w-full rounded-t-sm hover:bg-cyber-purple transition-all duration-500 cursor-pointer" style="height: 45%"></div>
+</div>
+<div class="grid grid-cols-3 gap-6 pt-6 border-t border-outline-variant/20">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase">Total Requests</p>
+<p class="font-technical-data text-headline-md text-on-surface">1,429,082</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase">Avg. Latency</p>
+<p class="font-technical-data text-headline-md text-tertiary">12.4ms</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase">Conversion</p>
+<p class="font-technical-data text-headline-md text-primary">8.2%</p>
+</div>
+</div>
+</div>
+<!-- Integration Status Sidebar -->
+<div class="md:col-span-4 glass-card rounded-xl p-6 flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-6">Partner Integrity</h3>
+<div class="space-y-4 flex-grow terminal-scroll overflow-y-auto pr-2">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<img alt="Partner Logo" class="rounded w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsLlzuO7yEDePiJYB1ayIUlPzT2OFynJ-HtcBnSdOAVAz_K4LFbNt87rZgpw4QBrwALcEpg1bmTbAxY4j9GqNf5u1Hd2lBN_CvwRe0rUhIOvW-yA08b9yQ6RD_pwd0dN67zQIm_slrFr4gORxsj7PUKjT37JnSzCS6dlmXk03NAN7JFqxPM1U2IHuNbUwEfybFRQP9PAriZRqf7nurZddeRxx9yYO9-LlLaSP3iXphCBolemNYh2i4W93G67z-cqMVj2HAXReyzaM"/>
+<div>
+<p class="font-technical-data text-body-md leading-none">univ-zurich.edu</p>
+<span class="text-[10px] text-tertiary">CONNECTED</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<img alt="Partner Logo" class="rounded w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjPgIUmnLsVrOjdtE42jxPvC6wjl6I7qrADFMPzEBwjW-ncFX7JqouLs3M3dTuO4fDB5pd1i0PVOqmsFYx4mRr48Vs_nRpk3SA0tp3ApAx5fVYdxSBxeco5hej2fHz-3D94fg3Y3DjED1Rv7UZu_rLPsGvaWQk6eLpxYhkmhAbn4IBxK-oppXyfhuLcHTs9yntxOnAaIRF70UDtVCalgbM-aB_4mYn-y8Uxjdk471kN6ZwuCgYTRLC1i0q0aKW0f4-tdM4yOW3u0U"/>
+<div>
+<p class="font-technical-data text-body-md leading-none">gov.infra.stack</p>
+<span class="text-[10px] text-tertiary">CONNECTED</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<img alt="Partner Logo" class="rounded w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi8xAMgOKVsuEgdQWJXWASodk6o2kag2E2s1VB_xOX0zMNs8RuePBjVI_9IHlCj0yIe2NILTk7JC_8xZ08ArTvG3_VrJU7WzAEHBXgWnaLPCfh06iMOaKt34UP_HFSzPMIj2mGFORQPCjG0YMOwELziSLq2h-gH065PH7L_aXqEFj6ZoXfbZOnVFX7rkpZEc1LL9KDVyzt9jh5Td9Y3kh794uRQsV_Pi8oyaXKIq227ZQfcRzX3P7j73vkprc-_gcqDsC2pB65-ls"/>
+<div>
+<p class="font-technical-data text-body-md leading-none">tech.node-alpha</p>
+<span class="text-[10px] text-error">DISCONNECTED</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-error text-sm" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<img alt="Partner Logo" class="rounded w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOIq8aotn_0ET6tGPZuTPgk_P4tjUCs9Dq6JZYDLlHpr6WKZI4YUV3UgLuSlBnsD3d-0LhvJoflLSn9Lu2XMd1xNJCCng8bvPpJcIcPTAHVORLtP1_ZLrPnf53sfiNE6rMH5I53GWvLh9Kcp0XjTfIVIzrQur8SeAWKmCF-2dv5zfLbNfTsCrfFxOL5m-1OWR2PT8n1O3nXSK5ISkNHV_m1hgiEYzbYDT1c-yr5qDtSicSPuTOnnmrBEu8w53jj0ahKLm1YF3GSoA"/>
+<div>
+<p class="font-technical-data text-body-md leading-none">risk.metric.labs</p>
+<span class="text-[10px] text-tertiary">CONNECTED</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<button class="w-full mt-6 border border-outline-variant py-3 rounded text-label-caps text-label-caps font-bold hover:bg-surface-container-highest transition-colors">VIEW ALL PARTNERS</button>
+</div>
+<!-- Widget Catalog -->
+<div class="md:col-span-12 mt-4">
+<h3 class="font-headline-md text-headline-md mb-8">Active Widget Modules</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Widget 1: Trust Badge -->
+<div class="glass-card rounded-xl group">
+<div class="h-40 bg-surface-container-highest flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-cyber-purple/10 to-transparent"></div>
+<div class="z-10 bg-surface-container-lowest p-6 rounded-lg border border-primary/20 flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-2" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-technical-data text-label-caps text-[10px] text-primary">CRYPTOGRAPHICALLY VERIFIED</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-body-lg font-bold mb-2">Trust Badge v2.4</h4>
+<p class="text-on-surface-variant text-body-md mb-4">Real-time infrastructure integrity indicator for landing pages.</p>
+<div class="flex justify-between items-center">
+<span class="font-technical-data text-label-caps text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">JS / React</span>
+<button class="text-primary hover:underline font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    GET CODE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Widget 2: ROI Calculator -->
+<div class="glass-card rounded-xl group">
+<div class="h-40 bg-surface-container-highest flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary/10 to-transparent"></div>
+<div class="z-10 w-4/5 h-1/2 bg-surface-container-lowest border border-tertiary/20 rounded-lg p-3">
+<div class="flex justify-between mb-2">
+<div class="h-2 w-12 bg-surface-container-highest rounded"></div>
+<div class="h-2 w-4 bg-tertiary rounded"></div>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded relative mb-4">
+<div class="absolute left-0 top-0 h-1 w-2/3 bg-tertiary rounded"></div>
+<div class="absolute left-2/3 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 bg-on-surface rounded-full shadow-lg"></div>
+</div>
+<div class="h-3 w-full bg-surface-container-highest rounded-sm"></div>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-body-lg font-bold mb-2">Infrastructure ROI Embed</h4>
+<p class="text-on-surface-variant text-body-md mb-4">Dynamic slider-based calculator for projecting server cost reduction.</p>
+<div class="flex justify-between items-center">
+<span class="font-technical-data text-label-caps text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">IFrame / Next.js</span>
+<button class="text-primary hover:underline font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    GET CODE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Widget 3: Live Feed -->
+<div class="glass-card rounded-xl group">
+<div class="h-40 bg-surface-container-highest flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/10 to-transparent"></div>
+<div class="z-10 w-2/3 space-y-2">
+<div class="h-2 bg-surface-container-lowest rounded w-full flex items-center px-2">
+<div class="w-1 h-1 bg-tertiary rounded-full mr-2"></div>
+<div class="w-20 h-1 bg-surface-container-highest"></div>
+</div>
+<div class="h-2 bg-surface-container-lowest rounded w-full flex items-center px-2">
+<div class="w-1 h-1 bg-tertiary rounded-full mr-2"></div>
+<div class="w-16 h-1 bg-surface-container-highest"></div>
+</div>
+<div class="h-2 bg-surface-container-lowest rounded w-4/5 flex items-center px-2">
+<div class="w-1 h-1 bg-tertiary rounded-full mr-2"></div>
+<div class="w-12 h-1 bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-body-lg font-bold mb-2">Metrics Ticker</h4>
+<p class="text-on-surface-variant text-body-md mb-4">Horizontal scrolling ticker of latest verified infrastructure events.</p>
+<div class="flex justify-between items-center">
+<span class="font-technical-data text-label-caps text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">HTML/CSS</span>
+<button class="text-primary hover:underline font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    GET CODE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Snippet Generator -->
+<div class="md:col-span-12 glass-card rounded-xl overflow-hidden mt-4">
+<div class="grid grid-cols-1 md:grid-cols-2">
+<div class="p-8 border-r border-outline-variant/20">
+<h3 class="font-headline-md text-headline-md mb-4">Configuration Terminal</h3>
+<p class="text-on-surface-variant mb-6">Customize the deployment parameters for the Trust Badge v2.4.</p>
+<div class="space-y-6">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase">Target Environment</label>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-technical-data px-4 py-2 rounded text-technical-data active-tab-glow">React/Next.js</button>
+<button class="bg-surface-container-highest text-on-surface-variant font-technical-data px-4 py-2 rounded text-technical-data hover:text-on-surface transition-colors">Vanilla JS</button>
+<button class="bg-surface-container-highest text-on-surface-variant font-technical-data px-4 py-2 rounded text-technical-data hover:text-on-surface transition-colors">PHP/Laravel</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase">Primary Color</label>
+<div class="flex items-center gap-2 bg-surface-container-low p-2 rounded border border-outline-variant/30">
+<div class="w-6 h-6 rounded bg-cyber-purple"></div>
+<span class="font-technical-data text-technical-data">#8083FF</span>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase">Update Frequency</label>
+<div class="bg-surface-container-low p-2 rounded border border-outline-variant/30 text-technical-data flex justify-between">
+<span class="font-technical-data text-technical-data">60s (Real-time)</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input checked="" class="rounded bg-surface-container-highest border-outline text-primary focus:ring-primary ring-offset-background" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant">Enable analytics tracking for this embed</span>
+</div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-lowest flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Generated Snippet</span>
+<button class="text-primary font-technical-data text-technical-data flex items-center gap-2 hover:bg-primary/10 px-3 py-1 rounded transition-colors" onclick="copySnippet()">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+                                COPY_TO_CLIPBOARD
+                            </button>
+</div>
+<div class="bg-black/40 rounded p-6 font-technical-data text-technical-data text-on-surface border border-outline-variant/20 flex-grow relative overflow-hidden group">
+<code class="block text-primary/80 mb-2">import { TrustBadge } from '@inframeet/core';</code>
+<code class="block text-on-surface/90">
+                                const App = () =&gt; {<br/>
+                                  return (<br/>
+                                    &lt;TrustBadge <br/>
+                                      apiKey="INF_0x82...f9e2"<br/>
+                                      theme="cyber-dark"<br/>
+                                      glow={true}<br/>
+                                    /&gt;<br/>
+                                  );<br/>
+                                };
+                            </code>
+<div class="absolute inset-0 bg-cyber-purple/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+</div>
+<div class="mt-4 flex items-start gap-3 bg-primary/5 p-4 rounded border border-primary/20">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">Ensure you have the latest <span class="font-technical-data text-primary">@inframeet/core</span> package installed in your project to use this component structure.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/30 dark:border-outline/20 mt-24">
+<div class="w-full py-16 px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<span class="font-headline-lg text-headline-lg font-bold text-cyber-purple block mb-4">INFRAMEET</span>
+<p class="text-on-surface-variant font-body-md max-w-xs">The gold standard for infrastructure verification and academic data integrity management.</p>
+</div>
+<div>
+<h5 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 tracking-widest">Resources</h5>
+<ul class="space-y-4 font-technical-data text-data-mono">
+<li><a class="text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors" href="#">Technical Whitepapers</a></li>
+<li><a class="text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors" href="#">Security Portal</a></li>
+<li><a class="text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors" href="#">Infrastructure Directory</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 tracking-widest">Legal</h5>
+<ul class="space-y-4 font-technical-data text-data-mono">
+<li><a class="text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors" href="#">Compliance &amp; Regulatory</a></li>
+<li><a class="text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors" href="#">ISO 27001 Certification</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 tracking-widest">System Status</h5>
+<div class="flex items-center gap-3 bg-surface-container p-4 rounded-lg border border-outline-variant/20">
+<div class="w-3 h-3 bg-tertiary rounded-full animate-pulse shadow-[0_0_10px_rgba(78,222,163,0.5)]"></div>
+<div>
+<p class="font-technical-data text-body-md text-on-surface">ALL SYSTEMS OPERATIONAL</p>
+<p class="text-[10px] text-on-surface-variant">LAST UPDATED: 2 SEC AGO</p>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-8 border-t border-outline-variant/10 flex justify-between items-center">
+<p class="font-technical-data text-data-mono text-on-surface-variant text-sm">© 2024 INFRAMEET. Cryptographically Verified Infrastructure Solutions.</p>
+<div class="flex gap-4">
+<span class="w-1.5 h-1.5 bg-outline-variant rounded-full"></span>
+<span class="w-1.5 h-1.5 bg-outline-variant rounded-full"></span>
+<span class="w-1.5 h-1.5 bg-outline-variant rounded-full"></span>
+</div>
+</div>
+</footer>
+<script>
+        function copySnippet() {
+            // Toast logic
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<span class="material-symbols-outlined text-sm">check</span> COPIED!`;
+            btn.classList.add('text-tertiary');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('text-tertiary');
+            }, 2000);
+        }
+
+        // Atmospheric effect: Subtle cursor following glow on glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

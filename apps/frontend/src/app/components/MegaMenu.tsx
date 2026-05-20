@@ -122,11 +122,11 @@ export default function MegaMenu() {
                   </div>
                 </div>
 
-                {/* COLUMN 2: KOTA-KOTA TERATAS (DIREKTORI pSEO) */}
+                {/* COLUMN 2: KOTA-KOTA TERATAS (DIREKTORI REGIONAL) */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100 dark:border-slate-800/80">
                     <Building className="w-4 h-4 text-indigo-500" />
-                    Kota Teratas (pSEO)
+                    Wilayah Terpopuler
                   </div>
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     {["Jakarta Raya", "Bandung", "Surabaya", "Yogyakarta", "Medan", "Makassar"].map((city) => (

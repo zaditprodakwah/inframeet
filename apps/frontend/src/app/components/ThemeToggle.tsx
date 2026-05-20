@@ -22,17 +22,12 @@ export default function ThemeToggle() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <button
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-900/50 hover:bg-slate-200 dark:hover:bg-slate-900 text-slate-600 dark:text-indigo-400 border border-slate-200 dark:border-slate-850 hover:border-slate-300 dark:hover:border-slate-750 transition-all cursor-pointer shadow-sm"
-      aria-label="Toggle Theme"
-      title={isDark ? "Ganti ke Mode Terang" : "Ganti ke Mode Gelap"}
+    <div
+      className="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-900/50 text-indigo-400 border border-slate-850 transition-all shadow-sm cursor-default"
+      aria-label="Deep Space Theme Active"
+      title="Deep Space Modernity Aktif"
     >
-      {isDark ? (
-        <Sun className="w-4 h-4 text-amber-400" />
-      ) : (
-        <Moon className="w-4 h-4 text-indigo-650" />
-      )}
-    </button>
+      <Moon className="w-4 h-4 text-indigo-400 animate-pulse" />
+    </div>
   );
 }

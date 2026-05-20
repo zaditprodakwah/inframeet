@@ -36,6 +36,9 @@ export default function GodModeDashboard() {
   const [logs, setLogs] = useState<any[]>([]);
   const [subs, setSubs] = useState<any[]>([]);
   const [loadingSubs, setLoadingSubs] = useState(false);
+  const [telemetryCounts, setTelemetryCounts] = useState<any>({});
+  const [networkStatus, setNetworkStatus] = useState<any>({});
+  const [actionOutput, setActionOutput] = useState<string>("");
 
   const [message, setMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -81,6 +84,14 @@ export default function GodModeDashboard() {
 
       // 5. Fetch UGC submissions
       fetchSubmissions();
+
+      // 6. Fetch telemetry data
+      const telRes = await fetch("/api/admin/telemetry");
+      const telData = await telRes.json();
+      if (telData.success) {
+        setTelemetryCounts(telData.counts || {});
+        setNetworkStatus(telData.network || {});
+      }
     } catch (err: any) {
       console.error("[GOD MODE FETCH ERROR]:", err.message);
       setErrorMessage("Gagal menyinkronkan data dasbor pusat komando.");
@@ -122,6 +133,28 @@ export default function GodModeDashboard() {
       fetchDashboardData();
     } catch (err: any) {
       setErrorMessage(`Moderasi gagal: ${err.message}`);
+    }
+  };
+
+  const triggerOperationalTask = async (action: string) => {
+    setMessage(null);
+    setErrorMessage(null);
+    setActionOutput("Menjalankan tugas operasional: " + action + "...\n");
+    try {
+      const res = await fetch("/api/admin/telemetry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
+      setMessage(data.message);
+      setActionOutput(prev => prev + "[SUKSES] " + data.message + "\n");
+      fetchDashboardData();
+    } catch (err: any) {
+      setErrorMessage(`Operasi gagal: ${err.message}`);
+      setActionOutput(prev => prev + "[GAGAL] " + err.message + "\n");
     }
   };
 
@@ -476,6 +509,97 @@ export default function GodModeDashboard() {
         </section>
 
       </div>
+
+      {/* ========================================================== */}
+      {/* KUADRAN 5: LIVE TELEMETRY & SYSTEM ENGINE                  */}
+      {/* ========================================================== */}
+      <section className="glass-panel p-6 md:p-8 rounded-3xl space-y-6">
+        <div className="flex items-center justify-between pb-3 border-b border-white/5">
+          <div className="flex items-center gap-2">
+            <Activity className="w-5 h-5 text-[#8083ff]" />
+            <h3 className="text-sm font-extrabold text-white">Kuadran 5: Live Telemetry &amp; System Engine</h3>
+          </div>
+          <span className="px-2 py-0.5 rounded text-[8px] font-bold font-mono uppercase tracking-wider block bg-[#4edea3]/10 border border-[#4edea3]/20 text-[#4edea3]">
+            {networkStatus.activeNode || "Loading Node..."}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* STATS PANEL */}
+          <div className="space-y-4">
+            <div className="p-4 rounded-2xl border border-white/5 bg-[#101415]/40 grid grid-cols-2 gap-4 text-xs font-mono">
+              <div className="space-y-1">
+                <p className="text-slate-500 uppercase text-[9px] font-bold">Direktori Aktif</p>
+                <p className="text-[#8083ff] font-extrabold text-lg">{telemetryCounts.omni_directory || 0}</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-slate-500 uppercase text-[9px] font-bold">Edu Institusi</p>
+                <p className="text-white font-extrabold text-lg">{telemetryCounts.education_directory || 0}</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-slate-500 uppercase text-[9px] font-bold">Artikel RSS</p>
+                <p className="text-white font-extrabold text-lg">{telemetryCounts.rss_items || 0}</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-slate-500 uppercase text-[9px] font-bold">Log Sistem</p>
+                <p className="text-amber-400 font-extrabold text-lg">{telemetryCounts.admin_audit_logs || 0}</p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl border border-white/5 bg-[#101415]/40 text-xs font-mono space-y-2">
+              <div className="flex justify-between border-b border-white/5 pb-2">
+                <span className="text-slate-500 font-bold uppercase text-[9px]">Server Public IP</span>
+                <span className="text-[#4edea3] font-bold">{networkStatus.serverIp || "..."}</span>
+              </div>
+              <div className="flex justify-between pt-1">
+                <span className="text-slate-500 font-bold uppercase text-[9px]">SINTA API Status</span>
+                <span className={networkStatus.sintaStatus === "ONLINE" ? "text-[#4edea3] font-bold" : "text-rose-500 font-bold"}>
+                  {networkStatus.sintaStatus || "..."}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* ENGINE CONTROLS */}
+          <div className="space-y-3">
+            <button
+              onClick={() => triggerOperationalTask("cdn")}
+              className="w-full py-2.5 px-4 bg-[#8083ff]/10 hover:bg-[#8083ff]/20 text-[#c0c1ff] border border-[#8083ff]/20 rounded-xl font-mono text-[10px] font-bold transition-all flex items-center justify-between"
+            >
+              <span>📦 Eksekusi Kompilasi CDN Statis</span>
+              <RefreshCw className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => triggerOperationalTask("decay")}
+              className="w-full py-2.5 px-4 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 rounded-xl font-mono text-[10px] font-bold transition-all flex items-center justify-between"
+            >
+              <span>🏆 Terapkan Poin Keaktifan Harian (Decay)</span>
+              <Activity className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => triggerOperationalTask("rotate_logs")}
+              className="w-full py-2.5 px-4 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 rounded-xl font-mono text-[10px] font-bold transition-all flex items-center justify-between"
+            >
+              <span>🧹 Rotasi Log Sistem (&gt;30 Hari)</span>
+              <CheckCircle className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => triggerOperationalTask("ip_rotate")}
+              className="w-full py-2.5 px-4 bg-white/5 hover:bg-white/10 text-[#c7c4d7] border border-white/10 rounded-xl font-mono text-[10px] font-bold transition-all flex items-center justify-between"
+            >
+              <span>📡 Test Koneksi SINTA (Simulasi Rotasi IP)</span>
+              <ShieldAlert className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* TERMINAL CONSOLE */}
+        {actionOutput && (
+          <div className="mt-4 p-4 rounded-xl bg-black border border-white/10 overflow-x-auto">
+            <pre className="font-mono text-[9px] text-[#4edea3] whitespace-pre-wrap">{actionOutput}</pre>
+          </div>
+        )}
+      </section>
 
       {/* ========================================================== */}
       {/* PILAR 5: PUBLIC UGC SUBMISSIONS QUEUE */}

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INFRAMEET | Incident Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#101415",
+                    "on-tertiary-container": "#000703",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "surface-variant": "#323537",
+                    "surface-container-highest": "#323537",
+                    "primary-fixed": "#e1e0ff",
+                    "surface-container-low": "#191c1e",
+                    "secondary": "#bec6e0",
+                    "surface-container-lowest": "#0b0f10",
+                    "surface-bright": "#363a3b",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "on-primary-container": "#0d0096",
+                    "on-surface": "#e0e3e5",
+                    "on-primary-fixed": "#07006c",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-secondary-container": "#adb4ce",
+                    "surface-tint": "#c0c1ff",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed": "#002113",
+                    "background": "#101415",
+                    "surface-container": "#1d2022",
+                    "on-surface-variant": "#c7c4d7",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "tertiary-container": "#00885d",
+                    "primary-container": "#8083ff",
+                    "error": "#ffb4ab",
+                    "primary": "#c0c1ff",
+                    "on-secondary-fixed": "#131b2e",
+                    "tertiary": "#4edea3",
+                    "outline-variant": "#464554",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "primary-fixed-dim": "#c0c1ff",
+                    "outline": "#908fa0",
+                    "inverse-surface": "#e0e3e5",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "surface": "#101415",
+                    "secondary-fixed": "#dae2fd",
+                    "inverse-primary": "#494bd6",
+                    "on-tertiary": "#003824",
+                    "on-background": "#e0e3e5",
+                    "secondary-container": "#3f465c",
+                    "on-secondary": "#283044",
+                    "surface-container-high": "#272a2c",
+                    "on-primary": "#1000a9",
+                    "inverse-on-surface": "#2d3133"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "container-max": "1440px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "body-md": ["Inter"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "technical-data": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "technical-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(29, 32, 34, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(192, 193, 255, 0.1);
+            position: absolute;
+            top: 0;
+            animation: scan 4s linear infinite;
+        }
+        @keyframes scan {
+            from { top: 0; }
+            to { top: 100%; }
+        }
+        .terminal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .terminal-scroll::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: #4edea3;
+            border-radius: 2px;
+        }
+        .latency-bar {
+            transition: height 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface font-body-md overflow-x-hidden min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface-dim/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-primary/5">
+<nav class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md tracking-tighter text-on-surface">INFRAMEET</span>
+<div class="hidden md:flex gap-6">
+<a class="font-technical-data text-technical-data text-on-surface-variant hover:text-on-surface transition-colors" href="#">Docs</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant hover:text-on-surface transition-colors" href="#">API</a>
+<a class="font-technical-data text-technical-data text-on-surface-variant hover:text-on-surface transition-colors" href="#">Terminal</a>
+<a class="font-technical-data text-technical-data text-primary border-b-2 border-primary pb-1" href="#">Status</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-white/5 transition-all duration-300 rounded-lg active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="settings_ethernet">settings_ethernet</span>
+</button>
+<button class="p-2 hover:bg-white/5 transition-all duration-300 rounded-lg active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container/20 border border-primary/30 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</nav>
+</header>
+<!-- Sidebar Navigation (Technical Context) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-container-low/40 backdrop-blur-lg border-r border-white/10 py-20 px-4 hidden lg:flex flex-col gap-8">
+<div class="px-2">
+<p class="font-label-caps text-label-caps text-primary mb-1">INFRA_HUB_V2</p>
+<p class="font-technical-data text-technical-data text-on-surface-variant opacity-60">Technical Ecosystem</p>
+</div>
+<nav class="flex flex-col gap-1">
+<div class="group flex items-center gap-3 px-3 py-2 rounded-lg bg-primary-container/20 text-primary border-r-2 border-primary cursor-pointer">
+<span class="material-symbols-outlined text-md" data-icon="hub">hub</span>
+<span class="font-technical-data text-technical-data">Architecture</span>
+</div>
+<div class="group flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-white/5 hover:translate-x-1 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-md" data-icon="api">api</span>
+<span class="font-technical-data text-technical-data">Endpoints</span>
+</div>
+<div class="group flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-white/5 hover:translate-x-1 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-md" data-icon="key">key</span>
+<span class="font-technical-data text-technical-data">Auth</span>
+</div>
+<div class="group flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-white/5 hover:translate-x-1 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-md" data-icon="webhook">webhook</span>
+<span class="font-technical-data text-technical-data">Webhooks</span>
+</div>
+<div class="group flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-white/5 hover:translate-x-1 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-md" data-icon="error">error</span>
+<span class="font-technical-data text-technical-data">Errors</span>
+</div>
+</nav>
+<div class="mt-auto flex flex-col gap-4">
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-label-caps text-label-caps hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span>
+                Open Terminal
+            </button>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 px-3 py-1 text-on-surface-variant/60 hover:text-tertiary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="support_agent">support_agent</span>
+<span class="font-technical-data text-technical-data">Support</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 text-on-surface-variant/60 hover:text-tertiary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+<span class="font-technical-data text-technical-data">Security</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 mt-20 p-6 md:p-margin-desktop flex flex-col gap-gutter">
+<!-- Dashboard Header -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">System Health</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-2">Real-time infrastructure telemetry and cryptographic node verification status.</p>
+</div>
+<div class="flex gap-4">
+<div class="glass-card px-4 py-2 rounded-lg flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="font-technical-data text-technical-data uppercase">Network Status: Operational</span>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Health Metrics -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Latency Graph Card -->
+<div class="md:col-span-8 glass-card rounded-xl p-6 flex flex-col gap-6 h-[400px]">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="monitoring">monitoring</span>
+<h3 class="font-headline-md text-headline-md">Global Latency Matrix</h3>
+</div>
+<span class="font-technical-data text-technical-data text-primary">Avg: 24ms</span>
+</div>
+<div class="flex-1 flex items-end justify-between gap-1 md:gap-2 px-2" id="latency-container">
+<!-- Bars injected by JS -->
+</div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant/40 pt-4 border-t border-white/5">
+<span>00:00:00 UTC</span>
+<span>SESSION START</span>
+<span>REAL-TIME TELEMETRY</span>
+</div>
+</div>
+<!-- Node Status Column -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="glass-card rounded-xl p-6 flex-1 flex flex-col gap-4">
+<h3 class="font-label-caps text-label-caps text-tertiary">Cryptographic Nodes</h3>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="shield">shield</span>
+<span class="font-technical-data text-technical-data">NODE_EPSILON_9</span>
+</div>
+<span class="text-[10px] font-technical-data text-on-surface-variant/50">HASH: 0x8F...A2</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="lock">lock</span>
+<span class="font-technical-data text-technical-data">NODE_SIGMA_V2</span>
+</div>
+<span class="text-[10px] font-technical-data text-on-surface-variant/50">HASH: 0x2D...E5</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error text-lg" data-icon="warning">warning</span>
+<span class="font-technical-data text-technical-data">NODE_DELTA_X</span>
+</div>
+<span class="text-[10px] font-technical-data text-on-surface-variant/50">SYNC_ERROR</span>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-xl p-6 flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-primary-container">SLA Compliance</span>
+<div class="flex items-end justify-between">
+<span class="font-headline-xl text-headline-xl">99.98%</span>
+<span class="font-technical-data text-technical-data text-tertiary mb-2">TARGET: 99.9%</span>
+</div>
+<div class="w-full h-1 bg-white/10 rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-primary" style="width: 99.98%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Workspace: Terminal and Active Incidents -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-8">
+<!-- Terminal Interface -->
+<div class="md:col-span-2 glass-card rounded-xl border-t-4 border-t-primary-container overflow-hidden shadow-2xl">
+<div class="bg-surface-container-high/80 px-4 py-2 border-b border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error/40"></div>
+<div class="w-2 h-2 rounded-full bg-tertiary/40"></div>
+<div class="w-2 h-2 rounded-full bg-primary/40"></div>
+<span class="ml-4 font-technical-data text-technical-data text-on-surface-variant">terminal://support-initialization</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 text-sm" data-icon="close">close</span>
+</div>
+<div class="p-6 font-technical-data text-technical-data h-[400px] flex flex-col">
+<div class="flex-1 overflow-y-auto terminal-scroll space-y-2 pr-4" id="terminal-output">
+<p class="text-tertiary">&gt;&gt; SYSTEM BOOT SEQUENCE COMPLETE</p>
+<p class="text-on-surface-variant/60">&gt;&gt; AUTHENTICATING USER: ADMIN_INFRA_01</p>
+<p class="text-on-surface-variant/60">&gt;&gt; SESSION KEY: 4ae5-f712-99b3-ccc1</p>
+<p class="text-primary mt-4 animate-pulse">&gt;&gt; WAITING FOR INPUT...</p>
+</div>
+<div class="mt-6 pt-6 border-t border-white/5 flex flex-col md:flex-row gap-4 items-center">
+<input class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 font-technical-data text-technical-data focus:border-primary outline-none transition-all placeholder:text-on-surface-variant/20" placeholder="Enter support directive..." type="text"/>
+<button class="w-full md:w-auto px-8 py-3 bg-primary text-on-primary rounded-lg font-label-caps text-label-caps whitespace-nowrap active:scale-95 transition-transform" onclick="addLog()">Initialize Support Session</button>
+</div>
+</div>
+</div>
+<!-- Active Incidents Sidebar -->
+<div class="glass-card rounded-xl p-6 flex flex-col gap-6 relative">
+<div class="scanline"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="history">history</span>
+<h3 class="font-headline-md text-headline-md">Active Incidents</h3>
+</div>
+<div class="space-y-4">
+<!-- Incident 1 -->
+<div class="p-4 rounded-lg bg-surface-container-highest/40 border-l-2 border-l-error">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-[10px] text-error px-2 py-0.5 bg-error/10 rounded">CRITICAL</span>
+<span class="font-technical-data text-[10px] text-on-surface-variant">2m ago</span>
+</div>
+<p class="font-technical-data text-technical-data mb-2">Packet drop detected in Asia-East Region</p>
+<div class="flex items-center gap-4 text-xs font-technical-data text-on-surface-variant/50">
+<span>ID: #INC-901</span>
+<span>NODE: AE-04</span>
+</div>
+</div>
+<!-- Incident 2 -->
+<div class="p-4 rounded-lg bg-surface-container-highest/40 border-l-2 border-l-tertiary">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-[10px] text-tertiary px-2 py-0.5 bg-tertiary/10 rounded">RESOLVING</span>
+<span class="font-technical-data text-[10px] text-on-surface-variant">15m ago</span>
+</div>
+<p class="font-technical-data text-technical-data mb-2">SSL Certificate auto-renewal delay</p>
+<div class="flex items-center gap-4 text-xs font-technical-data text-on-surface-variant/50">
+<span>ID: #INC-895</span>
+<span>CERT-HUB</span>
+</div>
+</div>
+<!-- Empty State / More -->
+<button class="w-full py-2 text-on-surface-variant/60 font-label-caps text-label-caps border border-dashed border-white/10 rounded-lg hover:border-white/30 hover:text-on-surface transition-all">
+                        View All Archives
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Area -->
+<footer class="w-full py-8 mt-auto bg-surface-container-lowest border-t border-white/5 opacity-80 hover:opacity-100 transition-opacity">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-label-caps text-tertiary">INFRAMEET SECURE</span>
+<span class="font-technical-data text-technical-data text-on-surface-variant/60">© 2024</span>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-technical-data text-technical-data uppercase text-on-surface-variant/60 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-technical-data text-technical-data uppercase text-on-surface-variant/60 hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-technical-data text-technical-data uppercase text-on-surface-variant/60 hover:text-primary transition-colors" href="#">Security Audit</a>
+<span class="font-technical-data text-technical-data text-tertiary/40">Hash: 8f2a1b3c9e</span>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Random Latency Bars
+        function generateLatencyBars() {
+            const container = document.getElementById('latency-container');
+            const barCount = 40;
+            container.innerHTML = '';
+            
+            for (let i = 0; i < barCount; i++) {
+                const height = Math.floor(Math.random() * 80) + 10;
+                const bar = document.createElement('div');
+                bar.className = 'latency-bar w-1 md:w-2 bg-primary/20 rounded-t';
+                bar.style.height = `${height}%`;
+                
+                // Color variation for anomalies
+                if (height > 75) {
+                    bar.classList.replace('bg-primary/20', 'bg-error/60');
+                } else if (height < 25) {
+                    bar.classList.replace('bg-primary/20', 'bg-tertiary/40');
+                }
+
+                container.appendChild(bar);
+            }
+        }
+
+        // Live update simulation
+        setInterval(() => {
+            const bars = document.querySelectorAll('.latency-bar');
+            bars.forEach(bar => {
+                const currentHeight = parseInt(bar.style.height);
+                const variance = Math.floor(Math.random() * 10) - 5;
+                const newHeight = Math.max(10, Math.min(95, currentHeight + variance));
+                bar.style.height = `${newHeight}%`;
+                
+                if (newHeight > 75) {
+                    bar.className = 'latency-bar w-1 md:w-2 bg-error/60 rounded-t';
+                } else if (newHeight < 30) {
+                    bar.className = 'latency-bar w-1 md:w-2 bg-tertiary/40 rounded-t';
+                } else {
+                    bar.className = 'latency-bar w-1 md:w-2 bg-primary/20 rounded-t';
+                }
+            });
+        }, 2000);
+
+        // Terminal Log Interaction
+        function addLog() {
+            const terminalOutput = document.getElementById('terminal-output');
+            const messages = [
+                ">> HANDSHAKE INITIATED...",
+                ">> ALLOCATING SECURE TUNNEL...",
+                ">> ESTABLISHING WEBRTC LINK...",
+                ">> CONNECTION STATUS: SECURE",
+                ">> SUPPORT OPERATOR ASSIGNED: ID_0X99"
+            ];
+            
+            let i = 0;
+            const interval = setInterval(() => {
+                if(i < messages.length) {
+                    const p = document.createElement('p');
+                    p.className = 'text-tertiary animate-pulse';
+                    p.textContent = messages[i];
+                    terminalOutput.appendChild(p);
+                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 800);
+        }
+
+        window.onload = generateLatencyBars;
+    </script>
+</body></html>

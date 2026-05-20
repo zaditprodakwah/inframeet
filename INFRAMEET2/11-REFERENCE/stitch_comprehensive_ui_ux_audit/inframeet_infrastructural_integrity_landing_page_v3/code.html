@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INFRAMEET: Infrastructural Integrity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#4edea3",
+                        "surface": "#101415",
+                        "on-surface-variant": "#c7c4d7",
+                        "surface-container-low": "#191c1e",
+                        "surface-container-high": "#272a2c",
+                        "tertiary-container": "#00885d",
+                        "on-secondary": "#283044",
+                        "outline": "#908fa0",
+                        "on-tertiary-container": "#000703",
+                        "primary-fixed": "#e1e0ff",
+                        "error-container": "#93000a",
+                        "background": "#101415",
+                        "surface-dim": "#101415",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-secondary-container": "#adb4ce",
+                        "on-primary-container": "#0d0096",
+                        "secondary-fixed": "#dae2fd",
+                        "inverse-surface": "#e0e3e5",
+                        "on-surface": "#e0e3e5",
+                        "surface-container-highest": "#323537",
+                        "primary": "#c0c1ff",
+                        "surface-container": "#1d2022",
+                        "surface-variant": "#323537",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#002113",
+                        "on-background": "#e0e3e5",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-bright": "#363a3b",
+                        "primary-container": "#8083ff",
+                        "outline-variant": "#464554",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "inverse-on-surface": "#2d3133",
+                        "secondary": "#bec6e0",
+                        "on-tertiary": "#003824",
+                        "surface-container-lowest": "#0b0f10",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed": "#131b2e",
+                        "secondary-container": "#3f465c",
+                        "inverse-primary": "#494bd6",
+                        "on-primary-fixed": "#07006c",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-tint": "#c0c1ff",
+                        "error": "#ffb4ab",
+                        "on-primary": "#1000a9",
+                        "cyber-purple": "#8083ff",
+                        "trust-blue": "#c0c1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px",
+                        "margin-desktop": "40px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "technical-data": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "technical-data": ["14px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(44, 47, 60, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid;
+            border-image-source: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+            border-image-slice: 1;
+        }
+        
+        .hero-bg {
+            background: radial-gradient(circle at 50% -20%, rgba(128, 131, 255, 0.15) 0%, rgba(16, 20, 21, 1) 70%);
+        }
+
+        .animate-spring {
+            animation: springUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes springUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 dark:border-outline/10 docked full-width">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-xl text-headline-xl-mobile md:text-headline-xl font-extrabold tracking-tight text-cyber-purple dark:text-primary uppercase cursor-pointer hover:bg-surface-container-highest/50 transition-all duration-300">
+                INFRAMEET
+            </div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Enterprise</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Academic</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Insights</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Directory</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="#">Calculators</a>
+</nav>
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed">
+<button class="hover:bg-surface-container-highest/50 p-2 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+<button class="hover:bg-surface-container-highest/50 p-2 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined">text_fields</span>
+</button>
+<button class="hover:bg-surface-container-highest/50 p-2 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-16">
+<!-- Hero Section -->
+<section class="relative min-h-[716px] flex flex-col justify-center items-center px-margin-mobile md:px-margin-desktop hero-bg overflow-hidden">
+<div class="z-10 text-center max-w-4xl mx-auto animate-spring">
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-background mb-6">
+                    Infrastruktur Kepercayaan Berbasis Bukti
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
+                    Secure, scalable, and verifiable infrastructure solutions engineered for high-stakes enterprise and rigorous academic research environments.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-gradient-to-r from-cyber-purple to-trust-blue text-surface-container-lowest font-label-caps text-label-caps py-4 px-8 rounded-lg hover:opacity-90 transition-opacity">
+                        Mulai Eksplorasi
+                    </button>
+<button class="glass-panel text-on-surface font-label-caps text-label-caps py-4 px-8 rounded-lg hover:bg-surface-container-highest/30 transition-colors">
+                        Bimbingan Riset
+                    </button>
+</div>
+</div>
+<!-- Decorative Background Elements -->
+<div class="absolute top-1/4 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute bottom-1/4 right-10 w-48 h-48 bg-tertiary/10 rounded-full blur-3xl"></div>
+</section>
+<!-- Bento Grid Layout -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter auto-rows-[minmax(300px,auto)]">
+<!-- Enterprise B2B Growth -->
+<div class="md:col-span-8 glass-panel rounded-xl p-8 flex flex-col justify-between animate-spring delay-100 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary">rocket_launch</span>
+<span class="font-label-caps text-label-caps text-tertiary uppercase">Enterprise B2B Growth</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4 text-on-background">Zero-Cost Serverless Architecture</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                            Deploy high-performance nodes instantly. Our automated scaling ensures you only utilize verified resources during peak cryptographic operations.
+                        </p>
+</div>
+<div class="mt-8 relative z-10 flex gap-4">
+<div class="bg-surface-container/50 p-4 rounded-lg border border-outline-variant/30">
+<div class="font-technical-data text-technical-data text-on-surface-variant mb-1">P99 Latency</div>
+<div class="font-headline-md text-headline-md text-trust-blue">12ms</div>
+</div>
+<div class="bg-surface-container/50 p-4 rounded-lg border border-outline-variant/30">
+<div class="font-technical-data text-technical-data text-on-surface-variant mb-1">Uptime SLA</div>
+<div class="font-headline-md text-headline-md text-tertiary">99.999%</div>
+</div>
+</div>
+<div class="absolute right-0 bottom-0 w-2/3 h-full opacity-20 pointer-events-none transition-transform duration-700 group-hover:scale-105" data-alt="A macro shot of a sleek, illuminated server rack in a dark, high-tech data center. Neon blue and purple lights reflect off the metallic surfaces of the networking equipment. The scene conveys a sense of immense computing power, security, and advanced digital infrastructure in a modern, cyber-minimalist aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCs9yLwcnbvCkFPofOY0-SqaU2so3ExXYR9t90MC9lGLBvA16Zem170Dch5eE_pitP-UAFr7S_5akJf54mSDTuKiqnwpETXBRZ1uVYdQA_ONN73TSPIAsLA3BohkAgft-lWg1O5SZDKD0hkYc8qXLMmq7A5mNT2lZeAIztVlBkhJWKb3X_G7UkUGiLmXxjUkcnDwLGD_b1Qq0sLdl34Pb0DhDJxr1QgYmeAIWCzpwQjG6xi82G93swSEzzfTe5pNKtZ0J1Iiirhczg'); background-size: cover; background-position: right;">
+</div>
+</div>
+<!-- Academic & Research Support -->
+<div class="md:col-span-4 glass-panel rounded-xl p-8 flex flex-col animate-spring delay-200">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary-fixed">school</span>
+<span class="font-label-caps text-label-caps text-primary-fixed uppercase">Academic Support</span>
+</div>
+<h2 class="font-headline-md text-headline-md mb-4">Integrity &amp; Validation</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">
+                        Rigorous, Turnitin-safe processing environments ensuring statistical validity for high-tier journal submissions.
+                    </p>
+<ul class="space-y-3 mb-6">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+<span class="font-technical-data text-technical-data text-on-surface">Cryptographic Hashing</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+<span class="font-technical-data text-technical-data text-on-surface">Plagiarism Sandbox</span>
+</li>
+</ul>
+<button class="w-full bg-surface-container-highest hover:bg-outline-variant/50 border border-outline-variant/50 text-on-surface font-label-caps text-label-caps py-3 rounded transition-colors">
+                        Verify Dataset
+                    </button>
+</div>
+<!-- Live Integrity Dashboard -->
+<div class="md:col-span-12 glass-panel rounded-xl p-8 animate-spring delay-300">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-cyber-purple">monitoring</span>
+<span class="font-label-caps text-label-caps text-cyber-purple uppercase">Live Telemetry</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Global Verification Network</h2>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-full border border-outline-variant/30">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="font-technical-data text-technical-data">System Nominal</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- ROI Widget -->
+<div class="bg-surface-container-low rounded-lg p-6 border border-outline-variant/20">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-4">Server Savings ROI</h3>
+<div class="flex items-end gap-2 mb-4">
+<span class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-tertiary">+42%</span>
+<span class="font-technical-data text-technical-data text-on-surface-variant mb-2">MoM</span>
+</div>
+<!-- Faux Chart -->
+<div class="h-24 w-full flex items-end gap-1">
+<div class="w-full bg-surface-container h-1/4 rounded-t"></div>
+<div class="w-full bg-surface-container h-1/3 rounded-t"></div>
+<div class="w-full bg-surface-container h-1/2 rounded-t"></div>
+<div class="w-full bg-tertiary/20 h-2/3 rounded-t"></div>
+<div class="w-full bg-tertiary/50 h-[80%] rounded-t border-t-2 border-tertiary"></div>
+</div>
+</div>
+<!-- Heatmap Map Area -->
+<div class="md:col-span-2 bg-surface-container-low rounded-lg p-6 border border-outline-variant/20 relative overflow-hidden" data-alt="A dark, stylized digital world map representing global network connections. Glowing nodes in electric indigo and emerald green indicate high activity and security verification points across continents. The aesthetic is cyber-minimalist, resembling a high-tech orbital scanning system in a dark mode UI environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA0nrHVoqqrcW6gM9YZ1w_ayrR_AXIsc_76uOja7I5Owtw0jCQu4NF56OfPNRSPQhyXxUrqSnILIX0RV_-I65p8z4_ZSqIaBgnlYYwEHYqrUgekXi69qfX3--B9ESqkeQMwfNnYbgs7WHfwiNziteHp0djppYsIOGm2E5-fsv81whdWUf-0vn4jOB_oeW9StL1l2PV_sJKzPrM4M4P4rKQpzvMFCByig0yuuW_gVURClKOjE7Nkfuw9vE5bbaGd8HuQFMyu3SdFH7o'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-[2px]"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<h3 class="font-label-caps text-label-caps text-on-surface mb-2">Node Distribution Heatmap</h3>
+<div class="flex gap-4 mt-auto">
+<div class="bg-surface/90 border border-outline-variant/50 p-3 rounded font-technical-data text-technical-data">
+<div class="text-on-surface-variant text-xs mb-1">US East</div>
+<div class="text-trust-blue">Verified: 0x4F...</div>
+</div>
+<div class="bg-surface/90 border border-outline-variant/50 p-3 rounded font-technical-data text-technical-data">
+<div class="text-on-surface-variant text-xs mb-1">EU Central</div>
+<div class="text-tertiary">Verified: 0x9A...</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/30 dark:border-outline/20 full-width w-full py-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-12">
+<div>
+<div class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-cyber-purple mb-4">
+                    INFRAMEET
+                </div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                    Cryptographically Verified Infrastructure Solutions for high-trust environments.
+                </p>
+<div class="flex items-center gap-2 font-technical-data text-technical-data text-outline">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Status: Fully Encrypted</span>
+</div>
+</div>
+<div class="md:col-start-3 md:col-span-2">
+<h4 class="font-label-caps text-label-caps text-on-surface mb-6 uppercase">Directory</h4>
+<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors duration-200" href="#">Compliance &amp; Regulatory</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors duration-200" href="#">ISO 27001 Certification</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors duration-200" href="#">Technical Whitepapers</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors duration-200" href="#">Security Portal</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-cyber-purple underline decoration-cyber-purple/30 transition-colors duration-200" href="#">Infrastructure Directory</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/20 flex flex-col sm:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                © 2024 INFRAMEET. Cryptographically Verified Infrastructure Solutions.
+            </p>
+<div class="font-technical-data text-technical-data text-outline text-xs">
+                Hash: 8f4a3c2b...
+            </div>
+</div>
+</footer>
+</body></html>

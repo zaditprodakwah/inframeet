@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academic Integrity - INFRAMEET</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700;800&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#00885d",
+                      "surface-tint": "#c0c1ff",
+                      "on-secondary": "#283044",
+                      "on-error": "#690005",
+                      "on-surface-variant": "#c7c4d7",
+                      "surface-container-lowest": "#0b0f10",
+                      "primary": "#c0c1ff",
+                      "surface-container": "#1d2022",
+                      "on-tertiary": "#003824",
+                      "on-primary-container": "#0d0096",
+                      "inverse-primary": "#494bd6",
+                      "on-primary": "#1000a9",
+                      "on-tertiary-fixed": "#002113",
+                      "on-surface": "#e0e3e5",
+                      "surface-container-high": "#272a2c",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "primary-fixed": "#e1e0ff",
+                      "error-container": "#93000a",
+                      "on-background": "#e0e3e5",
+                      "surface-container-highest": "#323537",
+                      "secondary": "#bec6e0",
+                      "outline": "#908fa0",
+                      "on-primary-fixed-variant": "#2f2ebe",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "secondary-fixed": "#dae2fd",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "primary-fixed-dim": "#c0c1ff",
+                      "primary-container": "#8083ff",
+                      "on-secondary-container": "#adb4ce",
+                      "on-error-container": "#ffdad6",
+                      "secondary-container": "#3f465c",
+                      "background": "#101415",
+                      "on-tertiary-container": "#000703",
+                      "surface-bright": "#363a3b",
+                      "outline-variant": "#464554",
+                      "on-primary-fixed": "#07006c",
+                      "error": "#ffb4ab",
+                      "surface-variant": "#323537",
+                      "on-secondary-fixed": "#131b2e",
+                      "surface-dim": "#101415",
+                      "surface-container-low": "#191c1e",
+                      "inverse-surface": "#e0e3e5",
+                      "inverse-on-surface": "#2d3133",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "tertiary": "#4edea3",
+                      "surface": "#101415",
+                      "tertiary-fixed": "#6ffbbe"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "container-max": "1440px",
+                      "margin-mobile": "16px",
+                      "unit": "8px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-xl": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "technical-data": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "technical-data": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .glass-card {
+            background-color: rgba(39, 42, 44, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid transparent;
+            background-image: linear-gradient(rgba(39, 42, 44, 1), rgba(39, 42, 44, 1)), linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), transparent);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+        
+        .glow-pulse {
+            animation: pulse-glow 2s infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 10px rgba(192, 193, 255, 0.1); }
+            to { box-shadow: 0 0 25px rgba(192, 193, 255, 0.3); }
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(192,193,255,0.05)]">
+<div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto hidden md:flex">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">INFRAMEET</div>
+<div class="flex space-x-6 items-center">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Enterprise</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="#">Academic</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Research</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Security</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Compliance</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors">Network Status</button>
+<button class="bg-primary text-on-primary font-body-md px-4 py-2 rounded active:scale-95 transition-transform">Launch Console</button>
+<img alt="User profile for technical administrator" class="w-8 h-8 rounded-full border border-outline/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFo-Sl7WyXDUDTharSdMML6KgyP6dRu7dSvtB3NESnpTo9CXgdFvyxmyLY9J8khOpD6hOg7vFnn13_Yg87-gIuOYfI8tXpjmwBDu-YtT3pUSWbjqJw5TnIF5Qp3smb4-ZTo6H_yHLKML3da46vVJuBg_F0_y4Rs62w_NYkXr3A2fTr0hddkt2e0cy2NvNpSw3yZsv5toQrEgPNpDLAQXSxwQFsoqiv6pk4IWHEHkmS0L2URUFR3e5tNY3fQrou_3NK9HhU4liaAUc"/>
+</div>
+</div>
+<!-- Mobile Nav Placeholder -->
+<div class="md:hidden flex justify-between items-center h-16 px-margin-mobile w-full">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">INFRAMEET</div>
+<span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-12 px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto">
+<!-- Hero Section -->
+<section class="mb-16 relative">
+<div class="glass-card rounded-xl p-8 md:p-12 border border-outline-variant/30 flex flex-col md:flex-row items-center gap-8 overflow-hidden relative">
+<!-- Abstract BG Elements -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex-1 z-10">
+<div class="inline-flex items-center space-x-2 bg-surface-container-high border border-outline/20 px-3 py-1 rounded-full mb-6">
+<span class="material-symbols-outlined text-tertiary text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-caps text-label-caps text-tertiary uppercase">Anti-Joki Policy Enforced</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-on-surface mb-4">Academic &amp; Research Support</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-2xl">
+                        A strictly governed ecosystem designed to uphold the highest standards of academic integrity. We provide secure sandboxes for statistical modeling, plagiarism detection, and scholarly compliance.
+                    </p>
+<button class="bg-gradient-to-r from-inverse-primary to-primary-container text-white font-body-md px-6 py-3 rounded-lg shadow-lg hover:shadow-primary/20 transition-all flex items-center space-x-2 active:scale-95">
+<span class="material-symbols-outlined">security</span>
+<span>Initialize Secure Workspace</span>
+</button>
+</div>
+<!-- Hero Shield Graphic -->
+<div class="flex-shrink-0 relative w-48 h-48 md:w-64 md:h-64 z-10 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary-container/20 rounded-full blur-xl glow-pulse"></div>
+<svg class="w-full h-full drop-shadow-[0_0_15px_rgba(192,193,255,0.4)]" viewbox="0 0 100 100">
+<path d="M50 5 L90 20 L90 50 C90 75 50 95 50 95 C50 95 10 75 10 50 L10 20 Z" fill="none" stroke="#c0c1ff" stroke-width="2"></path>
+<path d="M50 15 L80 27 L80 50 C80 68 50 83 50 83 C50 83 20 68 20 50 L20 27 Z" fill="rgba(192, 193, 255, 0.1)" stroke="#8083ff" stroke-dasharray="2 2" stroke-width="1"></path>
+<text fill="#4edea3" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" text-anchor="middle" x="50" y="55">SHA-256</text>
+</svg>
+</div>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
+<!-- Module 1: Statistical Modeling -->
+<div class="glass-card rounded-xl border border-outline-variant/30 md:col-span-8 p-6 flex flex-col hover:border-primary/40 transition-colors group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Statistical Modeling Frameworks</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Isolated instances for SPSS and SmartPLS execution.</p>
+</div>
+<span class="font-technical-data text-technical-data text-tertiary bg-tertiary/10 px-2 py-1 rounded border border-tertiary/20">STATUS: ACTIVE</span>
+</div>
+<!-- Mock Data Visualization Area -->
+<div class="flex-grow bg-surface-container-lowest border border-outline/10 rounded-lg p-4 relative overflow-hidden flex flex-col justify-end min-h-[200px]">
+<!-- Grid Lines -->
+<div class="absolute inset-0 bg-[linear-gradient(to_right,#323537_1px,transparent_1px),linear-gradient(to_bottom,#323537_1px,transparent_1px)] bg-[size:20px_20px] opacity-20"></div>
+<div class="relative z-10 flex items-end justify-between h-32 px-4 gap-2">
+<div class="w-full bg-primary/40 hover:bg-primary/60 transition-colors h-[40%] rounded-t-sm border-t border-primary relative group/bar cursor-pointer">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-[10px] text-primary opacity-0 group-hover/bar:opacity-100">0.42</span>
+</div>
+<div class="w-full bg-secondary-container h-[70%] rounded-t-sm border-t border-secondary relative group/bar cursor-pointer">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-[10px] text-secondary opacity-0 group-hover/bar:opacity-100">0.71</span>
+</div>
+<div class="w-full bg-tertiary/40 hover:bg-tertiary/60 transition-colors h-[85%] rounded-t-sm border-t border-tertiary relative group/bar cursor-pointer">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-[10px] text-tertiary opacity-0 group-hover/bar:opacity-100">0.85</span>
+</div>
+<div class="w-full bg-primary-container h-[55%] rounded-t-sm border-t border-primary-fixed relative group/bar cursor-pointer">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-[10px] text-primary-fixed opacity-0 group-hover/bar:opacity-100">0.55</span>
+</div>
+<div class="w-full bg-error/40 h-[30%] rounded-t-sm border-t border-error relative group/bar cursor-pointer">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-[10px] text-error opacity-0 group-hover/bar:opacity-100">0.30</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Module 2: Plagiarism Sandbox -->
+<div class="glass-card rounded-xl border border-outline-variant/30 md:col-span-4 p-6 flex flex-col hover:border-primary/40 transition-colors">
+<div class="flex items-center space-x-2 mb-4">
+<span class="material-symbols-outlined text-primary">policy</span>
+<h2 class="font-headline-md text-headline-md text-on-surface text-lg">Plagiarism Sandbox</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 text-sm">Turnitin No-Repository pre-flight checks. Data is purged post-scan.</p>
+<!-- Heatmap Preview -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline/10 p-3 mt-auto">
+<div class="font-technical-data text-technical-data text-xs text-on-surface-variant mb-2">SIMILARITY INDEX</div>
+<div class="flex items-center space-x-3">
+<div class="text-3xl font-technical-data text-tertiary font-bold">12%</div>
+<div class="flex-grow h-2 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-tertiary w-[12%]"></div>
+</div>
+</div>
+<div class="mt-4 space-y-2">
+<div class="flex justify-between items-center bg-surface-container/50 px-2 py-1 rounded">
+<span class="font-technical-data text-[10px] text-on-surface-variant">INTERNET_SOURCES</span>
+<span class="font-technical-data text-[10px] text-primary">8%</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container/50 px-2 py-1 rounded">
+<span class="font-technical-data text-[10px] text-on-surface-variant">PUBLICATIONS</span>
+<span class="font-technical-data text-[10px] text-primary">4%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Module 3: Scholarly Article Compliance -->
+<div class="glass-card rounded-xl border border-outline-variant/30 md:col-span-12 p-6 hover:border-primary/40 transition-colors">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary">description</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Scholarly Article Compliance</h2>
+</div>
+<div class="flex space-x-2">
+<button class="px-3 py-1 bg-primary/10 border border-primary/30 rounded text-primary font-technical-data text-xs hover:bg-primary/20">IEEE</button>
+<button class="px-3 py-1 bg-surface-container border border-outline/20 rounded text-on-surface-variant font-technical-data text-xs hover:bg-surface-container-high">APA 7th</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline/10 flex items-start space-x-3">
+<span class="material-symbols-outlined text-tertiary mt-1 text-xl">check_circle</span>
+<div>
+<div class="font-technical-data text-sm text-on-surface mb-1">Citation Integrity</div>
+<div class="font-body-md text-xs text-on-surface-variant">Cross-referencing DOI metadata. Validating inline anchors.</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline/10 flex items-start space-x-3">
+<span class="material-symbols-outlined text-tertiary mt-1 text-xl">check_circle</span>
+<div>
+<div class="font-technical-data text-sm text-on-surface mb-1">Format Validation</div>
+<div class="font-body-md text-xs text-on-surface-variant">Margin, font-sizing, and structural hierarchy compliance.</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline/10 flex items-start space-x-3 border-l-2 border-l-secondary">
+<span class="material-symbols-outlined text-secondary mt-1 text-xl">pending_actions</span>
+<div>
+<div class="font-technical-data text-sm text-on-surface mb-1">Peer Review Pre-check</div>
+<div class="font-body-md text-xs text-on-surface-variant">Analyzing blinded manuscript requirements. Pending upload.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-white/5 relative bottom-0 w-full mt-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-gutter py-12 max-w-container-max mx-auto">
+<div class="col-span-2 md:col-span-1">
+<div class="font-headline-md text-headline-md text-on-surface mb-4">INFRAMEET</div>
+<p class="font-label-caps text-label-caps text-tertiary mb-2">© 2024 INFRAMEET. Secure Infrastructure &amp; Academic Integrity Systems. All Rights Reserved.</p>
+</div>
+<div class="flex flex-col space-y-3">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-tertiary transition-colors cursor-pointer" href="#">Network Architecture</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-tertiary transition-colors cursor-pointer" href="#">Hash Verification</a>
+</div>
+<div class="flex flex-col space-y-3">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-tertiary transition-colors cursor-pointer" href="#">Privacy Protocol</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-tertiary transition-colors cursor-pointer" href="#">SLA Terms</a>
+</div>
+<div class="flex flex-col space-y-3">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-tertiary transition-colors cursor-pointer" href="#">Status Page</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-tertiary transition-colors cursor-pointer" href="#">Open-Source Licensing</a>
+</div>
+</div>
+</footer>
+</body></html>

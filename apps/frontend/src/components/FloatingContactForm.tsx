@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { z } from "zod";
-import { useTheme } from "next-themes";
 import { 
   Sparkles, 
   Settings, 
@@ -45,7 +44,6 @@ export default function FloatingContactForm() {
   const [successMsg, setSuccessMsg] = useState("");
 
   // Accessibility States
-  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [fontSize, setFontSize] = useState<FontSize>("base");
   const [serifMode, setSerifMode] = useState(false);
@@ -75,10 +73,7 @@ export default function FloatingContactForm() {
   }, []);
 
   // 2. Personalization Actions
-  const toggleTheme = () => {
-    const isDark = resolvedTheme === "dark";
-    setTheme(isDark ? "light" : "dark");
-  };
+
 
   const changeFontSize = (direction: "up" | "down") => {
     const sizes: FontSize[] = ["sm", "base", "md", "lg", "xl"];
@@ -125,7 +120,6 @@ export default function FloatingContactForm() {
     document.documentElement.classList.remove(`font-size-${fontSize}`);
     document.documentElement.classList.add("font-size-base");
 
-    setTheme("dark");
     setFontSize("base");
     setSerifMode(false);
     setHighContrast(false);

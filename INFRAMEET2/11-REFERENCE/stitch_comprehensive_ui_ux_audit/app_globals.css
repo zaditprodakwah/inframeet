@@ -1,0 +1,79 @@
+/* app/globals.css - Tailwind v4 Tokens & Accessibility Root Variables */
+@import "tailwindcss";
+
+@theme {
+  --color-bg-base: #09090b;
+  --color-surface: rgba(24, 24, 27, 0.6);
+  --color-primary: #6366f1;
+  --color-accent-emerald: #10b981;
+  --color-accent-ruby: #ef4444;
+  
+  --font-plus-jakarta: "Plus Jakarta Sans", ui-sans-serif, system-ui;
+  --font-jetbrains-mono: "JetBrains Mono", ui-monospace, SFMono-Regular;
+}
+
+:root {
+  /* Accessibility State Sync - Managed by JS to update CSS Variables */
+  --base-font-size: 16px;
+  --font-size-multiplier: 1;
+  
+  /* Initial theme values (Light mode defaults, overridden by .dark) */
+  --bg-app: #ffffff;
+  --text-main: #09090b;
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+}
+
+.dark {
+  --bg-app: var(--color-bg-base);
+  --text-main: #fafafa;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --glass-bg: var(--color-surface);
+}
+
+html {
+  font-size: calc(var(--base-font-size) * var(--font-size-multiplier));
+  transition: font-size 0.2s ease-out;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-plus-jakarta);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono-technical {
+  font-family: var(--font-jetbrains-mono);
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism Utility */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INFRAMEET: Infrastructural Integrity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#410002",
+                        "tertiary": "#10b981",
+                        "surface": "#ffffff",
+                        "on-surface-variant": "#3f3f46",
+                        "surface-container-low": "#fafafa",
+                        "surface-container-high": "#e4e4e7",
+                        "tertiary-container": "#a7f3d0",
+                        "on-secondary": "#ffffff",
+                        "outline": "#a1a1aa",
+                        "on-tertiary-container": "#064e3b",
+                        "primary-fixed": "#e0e7ff",
+                        "error-container": "#ffdad6",
+                        "background": "#ffffff",
+                        "surface-dim": "#f4f4f5",
+                        "primary-fixed-dim": "#c7d2fe",
+                        "on-secondary-container": "#1e3a8a",
+                        "on-primary-container": "#312e81",
+                        "secondary-fixed": "#dbeafe",
+                        "inverse-surface": "#272a2c",
+                        "on-surface": "#09090b",
+                        "surface-container-highest": "#d4d4d8",
+                        "primary": "#4f46e5",
+                        "surface-container": "#f4f4f5",
+                        "surface-variant": "#e4e4e7",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#022c22",
+                        "on-background": "#09090b",
+                        "on-primary-fixed-variant": "#3730a3",
+                        "surface-bright": "#ffffff",
+                        "primary-container": "#e0e7ff",
+                        "outline-variant": "#d4d4d8",
+                        "on-tertiary-fixed-variant": "#047857",
+                        "secondary-fixed-dim": "#bfdbfe",
+                        "on-secondary-fixed-variant": "#1d4ed8",
+                        "inverse-on-surface": "#f4f4f5",
+                        "secondary": "#3b82f6",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#6ee7b7",
+                        "on-secondary-fixed": "#1e3a8a",
+                        "secondary-container": "#dbeafe",
+                        "inverse-primary": "#a5b4fc",
+                        "on-primary-fixed": "#312e81",
+                        "tertiary-fixed-dim": "#34d399",
+                        "surface-tint": "#4f46e5",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "cyber-purple": "#6366f1",
+                        "trust-blue": "#3b82f6",
+                        "deep-space-blue": "#f8fafc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px",
+                        "margin-desktop": "40px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "technical-data": ["JetBrains Mono"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "technical-data": ["14px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-bg {
+            background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, 0.15) 0%, rgba(255, 255, 255, 1) 70%);
+        }
+
+        .animate-spring {
+            animation: springUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes springUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        .mega-menu {
+            display: none;
+        }
+        .group:hover .mega-menu {
+            display: grid;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full bg-surface/80 backdrop-blur-xl border-b border-outline-variant/50 docked full-width">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto relative">
+<div class="font-headline-xl text-headline-xl-mobile md:text-headline-xl font-extrabold tracking-tight text-cyber-purple uppercase cursor-pointer hover:bg-surface-container-highest/50 transition-all duration-300">
+                INFRAMEET
+            </div>
+<nav class="hidden md:flex items-center gap-6">
+<!-- Enterprise Mega Menu -->
+<div class="group relative py-4">
+<button class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors flex items-center gap-1">
+                    Enterprise Cloud
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-surface-container-low border border-outline-variant/50 rounded-xl shadow-2xl p-6 grid-cols-2 gap-8 z-50">
+<div>
+<h3 class="font-label-caps text-label-caps text-tertiary mb-4">Core Services</h3>
+<ul class="space-y-4">
+<li><a class="block font-body-md text-on-surface hover:text-cyber-purple" href="/enterprise/b2b">B2B Infrastructure</a></li>
+<li><a class="block font-body-md text-on-surface hover:text-cyber-purple" href="/directory">Partner Directory</a></li>
+<li><a class="block font-body-md text-on-surface hover:text-cyber-purple" href="/enterprise/case-studies">Case Studies</a></li>
+</ul>
+</div>
+<div class="bg-surface-container/50 p-4 rounded-lg border border-outline-variant/50">
+<h4 class="font-technical-data text-technical-data text-on-surface mb-2">System Status</h4>
+<div class="flex items-center gap-2 mb-2">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="font-technical-data text-technical-data text-tertiary">All Systems Operational</span>
+</div>
+<div class="font-technical-data text-xs text-on-surface-variant">Uptime: 99.999%</div>
+</div>
+</div>
+</div>
+<!-- Academic Mega Menu -->
+<div class="group relative py-4">
+<button class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors flex items-center gap-1">
+                    Academic Integrity
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-surface-container-low border border-outline-variant/50 rounded-xl shadow-2xl p-6 grid-cols-2 gap-8 z-50">
+<div>
+<h3 class="font-label-caps text-label-caps text-primary mb-4">Research Support</h3>
+<ul class="space-y-4">
+<li><a class="block font-body-md text-on-surface hover:text-cyber-purple" href="/academic/experts">Consult With Experts</a></li>
+<li><a class="block font-body-md text-on-surface hover:text-cyber-purple" href="/tools/research">Research Tools</a></li>
+<li><a class="block font-body-md text-on-surface hover:text-cyber-purple" href="/academic/verification">Data Verification</a></li>
+</ul>
+</div>
+<div class="bg-surface-container/50 p-4 rounded-lg border border-outline-variant/50">
+<h4 class="font-technical-data text-technical-data text-on-surface mb-2">Latest Publication</h4>
+<div class="font-body-md text-on-surface-variant line-clamp-2">Cryptographic proofs in statistical sociology.</div>
+</div>
+</div>
+</div>
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="/insights">Insights</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="/calculators">Calculators</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:text-on-surface transition-colors" href="/about">About</a>
+</nav>
+<div class="flex items-center gap-4 text-primary">
+<button class="bg-surface-container-highest/50 hover:bg-surface-container-highest p-2 rounded-full transition-all duration-300" title="Toggle Theme">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+<button class="hover:bg-surface-container-highest/50 p-2 rounded-full transition-all duration-300" title="Adjust Font Size">
+<span class="material-symbols-outlined">text_fields</span>
+</button>
+<button class="hover:bg-surface-container-highest/50 p-2 rounded-full transition-all duration-300" title="Account">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-16">
+<!-- Hero Section -->
+<section class="relative min-h-[716px] flex flex-col justify-center items-center px-margin-mobile md:px-margin-desktop hero-bg overflow-hidden">
+<div class="z-10 text-center max-w-4xl mx-auto animate-spring">
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-background mb-6">
+                    Infrastruktur Kepercayaan Berbasis Bukti
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
+                    Secure, scalable, and verifiable infrastructure solutions engineered for high-stakes enterprise and rigorous academic research environments.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-gradient-to-r from-cyber-purple to-trust-blue text-white font-label-caps text-label-caps py-4 px-8 rounded-lg hover:opacity-90 transition-opacity">
+                        Mulai Eksplorasi
+                    </button>
+<button class="glass-panel text-on-surface font-label-caps text-label-caps py-4 px-8 rounded-lg hover:bg-surface-container-highest/30 transition-colors">
+                        Bimbingan Riset
+                    </button>
+</div>
+</div>
+<!-- Decorative Background Elements -->
+<div class="absolute top-1/4 left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl"></div>
+<div class="absolute bottom-1/4 right-10 w-48 h-48 bg-tertiary/20 rounded-full blur-3xl"></div>
+</section>
+<!-- Layanan Utama: Split Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Layanan Utama</h2>
+<p class="font-body-md text-on-surface-variant">Dual-pillar infrastructure for distinct operational needs.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Enterprise B2B -->
+<div class="glass-panel rounded-xl p-8 flex flex-col justify-between animate-spring delay-100 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary">rocket_launch</span>
+<span class="font-label-caps text-label-caps text-tertiary uppercase">Enterprise B2B Growth</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-4 text-on-background">Zero-Cost Serverless Architecture</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Deploy high-performance nodes instantly. Our automated scaling ensures you only utilize verified resources during peak cryptographic operations.
+                        </p>
+<div class="flex gap-4">
+<div class="bg-surface-container/50 p-4 rounded-lg border border-outline-variant/50 flex-1">
+<div class="font-technical-data text-technical-data text-on-surface-variant mb-1">P99 Latency</div>
+<div class="font-headline-md text-headline-md text-trust-blue">12ms</div>
+</div>
+<div class="bg-surface-container/50 p-4 rounded-lg border border-outline-variant/50 flex-1">
+<div class="font-technical-data text-technical-data text-on-surface-variant mb-1">Uptime SLA</div>
+<div class="font-headline-md text-headline-md text-tertiary">99.999%</div>
+</div>
+</div>
+</div>
+<div class="absolute right-0 bottom-0 w-2/3 h-full opacity-10 pointer-events-none transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCs9yLwcnbvCkFPofOY0-SqaU2so3ExXYR9t90MC9lGLBvA16Zem170Dch5eE_pitP-UAFr7S_5akJf54mSDTuKiqnwpETXBRZ1uVYdQA_ONN73TSPIAsLA3BohkAgft-lWg1O5SZDKD0hkYc8qXLMmq7A5mNT2lZeAIztVlBkhJWKb3X_G7UkUGiLmXxjUkcnDwLGD_b1Qq0sLdl34Pb0DhDJxr1QgYmeAIWCzpwQjG6xi82G93swSEzzfTe5pNKtZ0J1Iiirhczg'); background-size: cover; background-position: right;">
+</div>
+</div>
+<!-- Academic Support -->
+<div class="glass-panel rounded-xl p-8 flex flex-col justify-between animate-spring delay-200">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">school</span>
+<span class="font-label-caps text-label-caps text-primary uppercase">Academic Support</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-4 text-on-background">Integrity &amp; Validation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        Rigorous, Turnitin-safe processing environments ensuring statistical validity for high-tier journal submissions.
+                    </p>
+<ul class="space-y-3 mb-8">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+<span class="font-technical-data text-technical-data text-on-surface">Cryptographic Hashing</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+<span class="font-technical-data text-technical-data text-on-surface">Plagiarism Sandbox</span>
+</li>
+</ul>
+</div>
+<button class="w-full bg-surface-container-highest hover:bg-outline-variant/50 border border-outline-variant/50 text-on-surface font-label-caps text-label-caps py-3 rounded transition-colors mt-auto">
+                    Verify Dataset
+                </button>
+</div>
+</div>
+</section>
+<!-- Directory Preview -->
+<section class="bg-surface-container-lowest py-16">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Omni-Storefront Directory</h2>
+<p class="font-body-md text-on-surface-variant">Verified infrastructure providers and tools.</p>
+</div>
+<a class="font-label-caps text-cyber-purple hover:text-trust-blue transition-colors flex items-center gap-1" href="/directory">View Full Directory <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Provider Card -->
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-xl p-6 hover:border-cyber-purple/50 transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-cyber-purple/10 rounded-full flex items-center justify-center mb-4 text-cyber-purple">
+<span class="material-symbols-outlined">dns</span>
+</div>
+<h4 class="font-headline-md text-lg text-on-surface mb-2">Aether Nodes</h4>
+<p class="font-technical-data text-sm text-on-surface-variant mb-4">High-throughput verification servers.</p>
+<div class="flex justify-between items-center text-xs font-technical-data">
+<span class="text-tertiary flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> Certified</span>
+<span class="text-outline">Tier 1</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-xl p-6 hover:border-cyber-purple/50 transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">security</span>
+</div>
+<h4 class="font-headline-md text-lg text-on-surface mb-2">CipherShield</h4>
+<p class="font-technical-data text-sm text-on-surface-variant mb-4">End-to-end cryptographic layers.</p>
+<div class="flex justify-between items-center text-xs font-technical-data">
+<span class="text-tertiary flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> Certified</span>
+<span class="text-outline">Tier 2</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-xl p-6 hover:border-cyber-purple/50 transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-tertiary/10 rounded-full flex items-center justify-center mb-4 text-tertiary">
+<span class="material-symbols-outlined">dataset</span>
+</div>
+<h4 class="font-headline-md text-lg text-on-surface mb-2">StatVault</h4>
+<p class="font-technical-data text-sm text-on-surface-variant mb-4">Immutable academic datasets.</p>
+<div class="flex justify-between items-center text-xs font-technical-data">
+<span class="text-tertiary flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> Certified</span>
+<span class="text-outline">Academic</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-xl p-6 hover:border-cyber-purple/50 transition-colors cursor-pointer flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-2">add_circle</span>
+<span class="font-label-caps text-on-surface-variant">List Your Service</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Studi Kasus & Portofolio -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Studi Kasus &amp; Portofolio</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer">
+<div class="h-48 bg-surface-container-highest relative overflow-hidden">
+<div class="absolute inset-0 bg-cyber-purple/10 group-hover:bg-cyber-purple/20 transition-colors"></div>
+<div class="absolute bottom-4 left-4 font-technical-data text-cyber-purple">FINTECH SEC</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-lg mb-2 text-on-surface">Payment Gateway X</h4>
+<p class="font-body-md text-sm text-on-surface-variant mb-4">Reduced transaction latency by 40% while maintaining PCI-DSS Level 1 compliance using our edge nodes.</p>
+<div class="font-technical-data text-xs text-outline border-t border-outline-variant/50 pt-4 mt-4 flex justify-between">
+<span>Latency: -40%</span>
+<span>Compliance: Passed</span>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer">
+<div class="h-48 bg-surface-container-highest relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors"></div>
+<div class="absolute bottom-4 left-4 font-technical-data text-primary">ACADEMIC RESEARCH</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-lg mb-2 text-on-surface">Universitas Y Dataset</h4>
+<p class="font-body-md text-sm text-on-surface-variant mb-4">Cryptographically verified 10TB of sociological survey data, securing publication in Nature.</p>
+<div class="font-technical-data text-xs text-outline border-t border-outline-variant/50 pt-4 mt-4 flex justify-between">
+<span>Volume: 10TB</span>
+<span>Status: Verified</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Knowledge Hub & Interactive Hub (Bento Grid) -->
+<section class="bg-surface-container-lowest py-16 border-t border-outline-variant/50">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Knowledge Hub -->
+<div class="lg:col-span-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-cyber-purple">feed</span>
+                        Knowledge Hub
+                    </h2>
+<div class="space-y-4">
+<a class="block glass-panel p-6 rounded-xl hover:bg-surface-container-highest/30 transition-colors" href="/insights/post-1">
+<div class="flex items-center gap-3 mb-2 font-technical-data text-xs">
+<span class="text-tertiary border border-tertiary/30 px-2 py-1 rounded">Update</span>
+<span class="text-outline">Oct 24, 2024</span>
+</div>
+<h3 class="font-headline-md text-xl mb-2 text-on-surface">Zero-Knowledge Proofs in Enterprise Cloud</h3>
+<p class="font-body-md text-on-surface-variant text-sm line-clamp-2">Implementing advanced cryptographic primitives to ensure data privacy without sacrificing computational performance.</p>
+</a>
+<a class="block glass-panel p-6 rounded-xl hover:bg-surface-container-highest/30 transition-colors" href="/insights/post-2">
+<div class="flex items-center gap-3 mb-2 font-technical-data text-xs">
+<span class="text-primary border border-primary/30 px-2 py-1 rounded">Research</span>
+<span class="text-outline">Oct 18, 2024</span>
+</div>
+<h3 class="font-headline-md text-xl mb-2 text-on-surface">Statistical Validity in Modern Cryptography</h3>
+<p class="font-body-md text-on-surface-variant text-sm line-clamp-2">A comprehensive review of methodologies for validating high-stakes datasets.</p>
+</a>
+</div>
+</div>
+<!-- Interactive Hub -->
+<div class="lg:col-span-4">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-trust-blue">widgets</span>
+                        Interactive Tools
+                    </h2>
+<div class="grid grid-cols-2 gap-4">
+<a class="bg-surface-container p-6 rounded-xl border border-outline-variant/50 hover:border-cyber-purple flex flex-col items-center text-center transition-colors" href="/tools/citation">
+<span class="material-symbols-outlined text-3xl text-cyber-purple mb-3">format_quote</span>
+<span class="font-label-caps text-on-surface">Citation<br/>Builder</span>
+</a>
+<a class="bg-surface-container p-6 rounded-xl border border-outline-variant/50 hover:border-tertiary flex flex-col items-center text-center transition-colors" href="/tools/pagespeed">
+<span class="material-symbols-outlined text-3xl text-tertiary mb-3">speed</span>
+<span class="font-label-caps text-on-surface">PageSpeed<br/>Audit</span>
+</a>
+<a class="bg-surface-container p-6 rounded-xl border border-outline-variant/50 hover:border-primary flex flex-col items-center text-center transition-colors" href="/tools/plagiarism">
+<span class="material-symbols-outlined text-3xl text-primary mb-3">plagiarism</span>
+<span class="font-label-caps text-on-surface">Plagiarism<br/>Check</span>
+</a>
+<a class="bg-surface-container p-6 rounded-xl border border-outline-variant/50 hover:border-outline flex flex-col items-center text-center transition-colors" href="/calculators/roi">
+<span class="material-symbols-outlined text-3xl text-outline mb-3">calculate</span>
+<span class="font-label-caps text-on-surface">ROI<br/>Calculator</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Founder Profile -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 border-t border-outline-variant/50">
+<div class="glass-panel rounded-xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+<div class="w-32 h-32 md:w-48 md:h-48 rounded-full bg-surface-container-highest border-2 border-cyber-purple/50 flex-shrink-0 flex items-center justify-center overflow-hidden">
+<!-- Placeholder for Founder Image -->
+<span class="material-symbols-outlined text-6xl text-outline-variant">person</span>
+</div>
+<div>
+<div class="font-label-caps text-cyber-purple mb-2">Technical Leadership</div>
+<h2 class="font-headline-lg text-headline-lg mb-4 text-on-surface">Muhammad Zadit</h2>
+<p class="font-body-md text-on-surface-variant mb-4 max-w-2xl">
+                    Principal Infrastructure Architect leading the development of verifiable computational environments. Focused on bridging the gap between rigorous academic standards and high-performance enterprise scalability.
+                </p>
+<div class="flex gap-4 font-technical-data text-sm">
+<a class="text-tertiary hover:underline" href="#">View Research Profile</a>
+<a class="text-trust-blue hover:underline" href="#">GitHub Repository</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-deep-space-blue border-t border-outline-variant/50 full-width w-full py-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-12">
+<div class="md:col-span-1">
+<div class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-cyber-purple mb-4">
+                    INFRAMEET
+                </div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                    Cryptographically Verified Infrastructure Solutions for high-trust environments.
+                </p>
+<div class="flex items-center gap-2 font-technical-data text-technical-data text-outline">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Status: Fully Encrypted</span>
+</div>
+</div>
+<div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-8">
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface mb-6 uppercase">Enterprise</h4>
+<ul class="space-y-3">
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/enterprise/b2b">B2B Solutions</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/directory">Infrastructure Directory</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/enterprise/case-studies">Case Studies</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface mb-6 uppercase">Academic</h4>
+<ul class="space-y-3">
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/academic/experts">Consult Experts</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/tools/research">Research Tools</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/academic/verification">Verification</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface mb-6 uppercase">Resources &amp; Tools</h4>
+<ul class="space-y-3">
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/insights">Insights &amp; Knowledge</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/tools/citation">Citation Builder</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/calculators">Calculators Hub</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-cyber-purple transition-colors" href="/about">About Us</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                © 2024 INFRAMEET. Cryptographically Verified Infrastructure Solutions.
+            </p>
+<div class="font-technical-data text-technical-data text-outline text-xs">
+                Hash: 8f4a3c2b...
+            </div>
+</div>
+</footer>
+</body></html>
