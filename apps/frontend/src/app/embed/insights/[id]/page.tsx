@@ -21,7 +21,7 @@ export default async function InsightEmbedPage({ params }: EmbedProps) {
   // Load article bypassing RLS
   const { data: article } = await supabaseAdmin
     .from("rss_items")
-    .select("*, rss_feeds(feed_name, source_category)")
+    .select("*, rss_feeds(feed_name:title, source_category:category)")
     .eq("id", id)
     .single();
 
