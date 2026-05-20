@@ -73,7 +73,7 @@ export default function AdminWidgetsPage() {
                     className={`py-2 px-4 text-sm font-semibold rounded-xl border transition-all ${
                       theme === "light"
                         ? "bg-slate-900 text-white border-slate-950 shadow-sm"
-                        : "bg-white text-slate-600 border-slate-200 hover:border-slate-350"
+                        : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
                     }`}
                   >
                     Light Mode
@@ -83,7 +83,7 @@ export default function AdminWidgetsPage() {
                     className={`py-2 px-4 text-sm font-semibold rounded-xl border transition-all ${
                       theme === "dark"
                         ? "bg-slate-900 text-white border-slate-950 shadow-sm"
-                        : "bg-white text-slate-600 border-slate-200 hover:border-slate-350"
+                        : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
                     }`}
                   >
                     Dark Mode

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import MegaMenu from "../components/MegaMenu";
+import Footer from "../components/Footer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { 
   Sparkles, 
@@ -106,24 +107,24 @@ function SearchResultsContent() {
   const totalResults = results.services.length + results.tools.length + results.insights.length;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-[#070a0b] text-[#c7c4d7] flex flex-col selection:bg-indigo-500 selection:text-white">
       <MegaMenu />
       
       <main className="flex-grow max-w-7xl w-full mx-auto px-4 md:px-8 py-8 space-y-8">
         {/* Dynamic Breadcrumbs */}
         <Breadcrumbs />
-
+ 
         {/* Global Large Search Bar */}
         <form onSubmit={handleFormSubmit} className="relative w-full max-w-3xl mx-auto group">
           <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur group-hover:opacity-40 transition duration-500" />
-          <div className="relative flex items-center bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl pl-5 pr-3 py-1">
+          <div className="relative flex items-center bg-[#0b0f10] border dark:border-white/5 rounded-2xl overflow-hidden shadow-2xl pl-5 pr-3 py-1">
             <Search className="w-5 h-5 text-slate-400 mr-3 shrink-0" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Cari solusi SaaS B2B, hosting terbaik, riset akademik..."
-              className="flex-1 bg-transparent border-none outline-none py-4 text-slate-200 placeholder-slate-500 text-sm md:text-base"
+              className="flex-1 bg-transparent border-none outline-none py-4 text-white placeholder-[#908fa0] text-sm md:text-base"
             />
             <button
               type="submit"
@@ -141,13 +142,13 @@ function SearchResultsContent() {
             </button>
           </div>
         </form>
-
+ 
         {query.trim() && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
             
             {/* LEFT COLUMN: Filters & Stats (3/12 cols) */}
             <div className="lg:col-span-3 space-y-6">
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+              <div className="bg-[#0b0f10] border dark:border-white/5 rounded-2xl p-5 space-y-4">
                 <h4 className="text-sm font-bold text-slate-300 uppercase tracking-wider">Filter Kategori</h4>
                 
                 <div className="flex flex-col gap-2">
@@ -163,12 +164,12 @@ function SearchResultsContent() {
                       className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold cursor-pointer transition-all ${
                         activeTab === tab.id
                           ? "bg-indigo-600 text-white shadow-lg"
-                          : "bg-slate-950 hover:bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-950 hover:border-slate-800"
+                          : "bg-[#070a0b] hover:bg-[#101415] text-[#908fa0] hover:text-white border dark:border-white/5"
                       }`}
                     >
                       <span>{tab.label}</span>
                       <span className={`px-2 py-0.5 rounded-full text-[10px] ${
-                        activeTab === tab.id ? "bg-indigo-700 text-white" : "bg-slate-900 text-slate-500"
+                        activeTab === tab.id ? "bg-indigo-700 text-white" : "bg-black text-slate-450"
                       }`}>
                         {tab.count}
                       </span>
@@ -176,27 +177,27 @@ function SearchResultsContent() {
                   ))}
                 </div>
               </div>
-
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Didukung Oleh</h4>
-                <div className="flex items-center gap-2 text-xs text-indigo-400 font-semibold bg-indigo-950/20 border border-indigo-900/50 p-3 rounded-xl">
+ 
+              <div className="bg-[#0b0f10] border dark:border-white/5 rounded-2xl p-5 space-y-3">
+                <h4 className="text-xs font-bold text-[#908fa0] uppercase tracking-wider">Keamanan &amp; Layanan</h4>
+                <div className="flex items-center gap-2 text-xs text-indigo-400 font-semibold bg-indigo-950/10 border dark:border-indigo-500/20 p-3 rounded-xl">
                   <Cpu className="w-4 h-4 text-indigo-400" />
-                  Groq Llama 3 (70B) LLM
+                  Analisis Cepat AI
                 </div>
-                <div className="flex items-center gap-2 text-xs text-emerald-400 font-semibold bg-emerald-950/20 border border-emerald-900/50 p-3 rounded-xl">
+                <div className="flex items-center gap-2 text-xs text-emerald-400 font-semibold bg-emerald-950/10 border dark:border-emerald-500/20 p-3 rounded-xl">
                   <Database className="w-4 h-4 text-emerald-400" />
-                  PostgreSQL GIN FTS
+                  Pencarian Terenkripsi
                 </div>
               </div>
             </div>
-
+ 
             {/* RIGHT COLUMN: AI Snapshot & Relational Results (9/12 cols) */}
             <div className="lg:col-span-9 space-y-8">
               
               {/* Groq Real-time Streaming AI Snapshot Card */}
               <div className="relative group">
                 <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-600 to-emerald-500 opacity-20 blur group-hover:opacity-35 transition duration-500" />
-                <div className="relative bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-5 shadow-2xl overflow-hidden">
+                <div className="relative bg-[#0b0f10] border dark:border-white/5 rounded-2xl p-6 md:p-8 space-y-5 shadow-2xl overflow-hidden">
                   
                   {/* Subtle pulsing background glow */}
                   <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -208,10 +209,10 @@ function SearchResultsContent() {
                     </span>
                     <span className="text-[10px] text-slate-500 font-mono flex items-center gap-1">
                       <Cpu className="w-3 h-3 text-indigo-500" />
-                      TTFT &lt; 20ms
+                      Respon Instan
                     </span>
                   </div>
-
+ 
                   <div className="text-sm md:text-base text-slate-300 leading-relaxed font-normal whitespace-pre-wrap">
                     {aiText ? (
                       aiText
@@ -226,7 +227,7 @@ function SearchResultsContent() {
                       </div>
                     )}
                   </div>
-
+ 
                   {aiStreaming && (
                     <div className="pt-2 flex justify-end">
                       <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-indigo-400 bg-indigo-950/20 border border-indigo-900/40 px-2.5 py-1 rounded-full animate-bounce">
@@ -236,7 +237,7 @@ function SearchResultsContent() {
                   )}
                 </div>
               </div>
-
+ 
               {/* Relational Results Sections */}
               <div className="space-y-8">
                 
@@ -251,7 +252,7 @@ function SearchResultsContent() {
                       {results.services.map((item) => (
                         <div 
                           key={item.id}
-                          className="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-indigo-500/50 shadow transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:translate-x-1"
+                          className="bg-[#0b0f10] border dark:border-white/5 rounded-2xl p-5 hover:border-indigo-500/50 shadow transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:translate-x-1"
                         >
                           <div className="space-y-1.5">
                             <span className={`inline-block px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase ${
@@ -264,7 +265,7 @@ function SearchResultsContent() {
                           </div>
                           <button
                             onClick={() => router.push("/calculator")}
-                            className="bg-slate-950 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white font-bold text-xs px-5 py-3 rounded-xl whitespace-nowrap cursor-pointer transition shadow flex items-center gap-2"
+                            className="bg-[#070a0b] hover:bg-indigo-600 border dark:border-white/5 hover:border-indigo-500 text-slate-300 hover:text-white font-bold text-xs px-5 py-3 rounded-xl whitespace-nowrap cursor-pointer transition shadow flex items-center gap-2"
                           >
                             <span>{item.price_label}</span>
                             <ArrowRight className="w-3.5 h-3.5" />
@@ -274,7 +275,7 @@ function SearchResultsContent() {
                     </div>
                   </div>
                 )}
-
+ 
                 {/* 2. Direktori Tools */}
                 {showTools && results.tools.length > 0 && (
                   <div className="space-y-4">
@@ -286,7 +287,7 @@ function SearchResultsContent() {
                       {results.tools.map((item) => (
                         <div 
                           key={item.id}
-                          className="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-emerald-500/50 shadow transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:translate-x-1"
+                          className="bg-[#0b0f10] border dark:border-white/5 rounded-2xl p-5 hover:border-emerald-500/50 shadow transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:translate-x-1"
                         >
                           <div className="space-y-1">
                             <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase bg-emerald-950/50 text-emerald-400 border border-emerald-900/40">
@@ -297,7 +298,7 @@ function SearchResultsContent() {
                           </div>
                           <button
                             onClick={() => router.push(item.website_url)}
-                            className="bg-slate-950 hover:bg-emerald-600 border border-slate-800 hover:border-emerald-500 text-slate-300 hover:text-white font-bold text-xs px-5 py-3 rounded-xl whitespace-nowrap cursor-pointer transition shadow flex items-center gap-2"
+                            className="bg-[#070a0b] hover:bg-emerald-600 border dark:border-white/5 hover:border-emerald-500 text-slate-300 hover:text-white font-bold text-xs px-5 py-3 rounded-xl whitespace-nowrap cursor-pointer transition shadow flex items-center gap-2"
                           >
                             Detail Ulasan
                             <ArrowRight className="w-3.5 h-3.5" />
@@ -307,7 +308,7 @@ function SearchResultsContent() {
                     </div>
                   </div>
                 )}
-
+ 
                 {/* 3. Insights & Riset */}
                 {showInsights && results.insights.length > 0 && (
                   <div className="space-y-4">
@@ -319,7 +320,7 @@ function SearchResultsContent() {
                       {results.insights.map((item) => (
                         <div 
                           key={item.id}
-                          className="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-pink-500/50 shadow transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:translate-x-1"
+                          className="bg-[#0b0f10] border dark:border-white/5 rounded-2xl p-5 hover:border-pink-500/50 shadow transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:translate-x-1"
                         >
                           <div className="space-y-1.5">
                             <span className="inline-block text-[10px] text-slate-500">
@@ -330,7 +331,7 @@ function SearchResultsContent() {
                           </div>
                           <button
                             onClick={() => router.push("/insights")}
-                            className="bg-slate-950 hover:bg-pink-600 border border-slate-800 hover:border-pink-500 text-slate-300 hover:text-white font-bold text-xs px-5 py-3 rounded-xl whitespace-nowrap cursor-pointer transition shadow flex items-center gap-2"
+                            className="bg-[#070a0b] hover:bg-pink-600 border dark:border-white/5 hover:border-pink-500 text-slate-300 hover:text-white font-bold text-xs px-5 py-3 rounded-xl whitespace-nowrap cursor-pointer transition shadow flex items-center gap-2"
                           >
                             Baca Selengkapnya
                             <ArrowRight className="w-3.5 h-3.5" />
@@ -340,14 +341,14 @@ function SearchResultsContent() {
                     </div>
                   </div>
                 )}
-
+ 
               </div>
-
+ 
             </div>
-
+ 
           </div>
         )}
-
+ 
         {!query.trim() && (
           <div className="flex flex-col items-center justify-center p-16 space-y-4 max-w-xl mx-auto text-center">
             <Sparkles className="w-10 h-10 text-indigo-400 animate-bounce" />
@@ -357,13 +358,10 @@ function SearchResultsContent() {
             </p>
           </div>
         )}
-
+ 
       </main>
       
-      {/* Footer */}
-      <footer className="border-t border-slate-900 py-8 bg-slate-950 text-slate-500 text-center text-xs">
-        &copy; {new Date().getFullYear()} INFRAMEET. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 }

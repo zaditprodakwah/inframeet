@@ -40,7 +40,7 @@ export default async function ExpertEmbedPage({ params }: EmbedProps) {
       tierColor = "text-yellow-400 border-yellow-500/20 bg-yellow-500/10";
       break;
     case "SILVER":
-      tierColor = "text-slate-350 border-slate-750 bg-slate-900/60";
+      tierColor = "text-slate-300 border-slate-700 bg-slate-900/60";
       break;
   }
 

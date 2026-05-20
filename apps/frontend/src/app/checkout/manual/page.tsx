@@ -132,7 +132,7 @@ function ManualCheckoutContent() {
             </svg>
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-white mt-1">Gerbang Pembayaran Hibrida</h1>
-          <p className="text-xs text-slate-450">Sistem pembayaran manual terproteksi dengan rekonsiliasi instan berbasis kode unik.</p>
+          <p className="text-xs text-slate-400">Sistem pembayaran manual terproteksi dengan rekonsiliasi instan berbasis kode unik.</p>
         </div>
 
         {/* Invoice details card */}
@@ -140,7 +140,7 @@ function ManualCheckoutContent() {
           <div className="flex items-center justify-between border-b border-slate-850 pb-4">
             <div className="flex flex-col">
               <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Nomor Invoice</span>
-              <span className="text-sm font-semibold text-slate-350">{invoiceNumber}</span>
+              <span className="text-sm font-semibold text-slate-300">{invoiceNumber}</span>
             </div>
             <div className="flex flex-col text-right">
               <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Status Tagihan</span>
@@ -150,7 +150,7 @@ function ManualCheckoutContent() {
 
           {/* Amount Display */}
           <div className="bg-slate-950/60 border border-slate-850 p-6 rounded-xl flex flex-col items-center text-center gap-3">
-            <span className="text-xs text-slate-450 uppercase tracking-wider font-semibold">JUMLAH YANG WAJIB DITRANSFER</span>
+            <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">JUMLAH YANG WAJIB DITRANSFER</span>
             <div className="text-3xl font-extrabold tracking-tight text-white flex items-baseline gap-1">
               {formatRupiah(amount)}
             </div>
@@ -161,12 +161,12 @@ function ManualCheckoutContent() {
 
           {/* Transfer Accounts */}
           <div className="flex flex-col gap-4">
-            <span className="text-xs font-bold text-slate-350 uppercase tracking-wider">Rekening Penerima Resmi:</span>
+            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Rekening Penerima Resmi:</span>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Jago Utama */}
               <div className="p-4 rounded-xl bg-slate-950/40 border border-slate-850/80 flex flex-col gap-2 relative group hover:border-slate-750 transition-colors">
-                <span className="text-[10px] font-bold text-slate-550 uppercase tracking-widest">BANK JAGO (UTAMA)</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">BANK JAGO (UTAMA)</span>
                 <span className="text-xs text-slate-400">Nama Resmi: Muhammad Khoiruzzadittaqwa</span>
                 <div className="flex items-center justify-between bg-slate-950/80 p-2.5 rounded-lg border border-slate-900 mt-1">
                   <span className="text-sm font-bold text-indigo-400 font-mono tracking-wider">1070-2076-2228</span>
@@ -181,7 +181,7 @@ function ManualCheckoutContent() {
 
               {/* DANA */}
               <div className="p-4 rounded-xl bg-slate-950/40 border border-slate-850/80 flex flex-col gap-2 relative group hover:border-slate-750 transition-colors">
-                <span className="text-[10px] font-bold text-slate-550 uppercase tracking-widest">E-WALLET DANA</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">E-WALLET DANA</span>
                 <span className="text-xs text-slate-400">Nama Resmi: Muhammad Khoiruzzadittaqwa</span>
                 <div className="flex items-center justify-between bg-slate-950/80 p-2.5 rounded-lg border border-slate-900 mt-1">
                   <span className="text-sm font-bold text-indigo-400 font-mono tracking-wider">0823-1636-3177</span>
@@ -197,7 +197,7 @@ function ManualCheckoutContent() {
               {/* Jago Kantong (Full Card Option) */}
               <div className="p-4 rounded-xl bg-slate-950/40 border border-slate-850/80 flex flex-col gap-2 md:col-span-2 hover:border-slate-750 transition-colors">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold text-slate-550 uppercase tracking-widest">BANK JAGO (KANTONG / NOMOR KARTU)</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">BANK JAGO (KANTONG / NOMOR KARTU)</span>
                   <span className="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full font-mono">JAGO ID: muhzadit</span>
                 </div>
                 <span className="text-xs text-slate-400">Nama Resmi: Muhammad Khoiruzzadittaqwa</span>
@@ -242,11 +242,11 @@ function ManualCheckoutContent() {
                 onChange={handleFileChange}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
-              <svg className="w-8 h-8 text-slate-550" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
               </svg>
               <div className="text-center">
-                <span className="text-xs font-semibold text-slate-350">
+                <span className="text-xs font-semibold text-slate-300">
                   {file ? `Terpilih: ${file.name}` : "Pilih atau Seret Bukti Transfer ke Sini"}
                 </span>
                 <p className="text-[10px] text-slate-500 mt-1">Mendukung format JPG, PNG, atau PDF (Maks. 5MB)</p>

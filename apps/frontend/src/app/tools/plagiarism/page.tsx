@@ -61,7 +61,7 @@ export default function PlagiarismCheckerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300 font-sans">
+    <div className="min-h-screen bg-[#070a0b] text-[#c7c4d7] transition-colors duration-300 font-sans">
       <MegaMenu />
       <Breadcrumbs />
 
@@ -70,20 +70,20 @@ export default function PlagiarismCheckerPage() {
         {/* Banner Section */}
         <section className="text-center space-y-3">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            <Sparkles className="w-3.5 h-3.5" /> Client-Side Heuristics Engine
+            <Sparkles className="w-3.5 h-3.5" /> Analisis Mandiri
           </span>
           <h1 className="text-3xl font-extrabold text-white tracking-tight leading-tight">
-            Penelaah Plagiarisme & Sitasi Karya Tulis
+            Penelaah Plagiarisme &amp; Sitasi Karya Tulis
           </h1>
-          <p className="text-xs text-slate-455 max-w-xl mx-auto">
-            Audit orisinalitas naskah akademik, tesis, or esai Anda secara instan and steril tanpa risiko data bocor ke sistem publik.
+          <p className="text-xs text-slate-400 max-w-xl mx-auto">
+            Audit orisinalitas naskah akademik, tesis, atau esai Anda secara instan dan steril tanpa risiko data bocor ke sistem publik.
           </p>
         </section>
 
         {/* Audit Form & Result Container */}
         <section className="grid grid-cols-1 gap-8">
           
-          <div className="p-6 rounded-2xl bg-white/70 dark:bg-slate-100 bg-slate-900/40 border border-slate-200 border-slate-800 backdrop-blur-md space-y-6">
+          <div className="p-6 rounded-2xl bg-[#0b0f10]/80 border dark:border-white/5 backdrop-blur-md space-y-6">
             <form onSubmit={handleScan} className="space-y-4">
               
               {/* Text Input Block */}
@@ -97,19 +97,19 @@ export default function PlagiarismCheckerPage() {
                   maxLength={10000}
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  placeholder="Tempel dokumen tesis, esai, or artikel ilmiah Anda di sini untuk memulai pemindaian steril..."
-                  className="w-full px-3 py-2.5 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-xl text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500 resize-none font-sans leading-relaxed"
+                  placeholder="Tempel dokumen tesis, esai, atau artikel ilmiah Anda di sini untuk memulai pemindaian steril..."
+                  className="w-full px-3 py-2.5 bg-slate-950 border dark:border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500 resize-none font-sans leading-relaxed"
                 />
                 <div className="flex justify-between items-center text-[10px] text-slate-500 mt-1 font-mono">
                   <span>Karakter: {text.length}/10.000</span>
                   <span>Kata: {text.split(/\s+/).filter(Boolean).length}</span>
                 </div>
               </div>
- 
+
               {/* Email capture to unlock details */}
-              <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850/80 font-sans">
+              <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-slate-950/60 border dark:border-white/5 font-sans">
                 <label htmlFor="plagiarism-email" className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider cursor-pointer">Kirimkan Hasil Laporan Ke Email (Opsional)</label>
-                <p className="text-[10px] text-slate-450 leading-relaxed">
+                <p className="text-[10px] text-slate-400 leading-relaxed">
                   Masukkan email Anda jika ingin laporan lengkap beserta panduan rekonsiliasi format sitasi (APA/MLA) dikirimkan otomatis ke kotak masuk Anda.
                 </p>
                 <input
@@ -120,7 +120,7 @@ export default function PlagiarismCheckerPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="email@domain.com"
-                  className="w-full px-3 py-2 bg-slate-100 bg-slate-900 border border-slate-200 border-slate-800 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3 py-2 bg-slate-900 border dark:border-white/10 rounded-lg text-xs text-white focus:outline-none focus:border-indigo-500"
                 />
               </div>
 
@@ -140,7 +140,7 @@ export default function PlagiarismCheckerPage() {
                 {isScanning ? (
                   <>
                     <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Memindai & Menganalisis Database...
+                    Memindai &amp; Menganalisis Database...
                   </>
                 ) : (
                   <>
@@ -155,14 +155,14 @@ export default function PlagiarismCheckerPage() {
 
           {/* Results Panel */}
           {scanResult && (
-            <div className="p-6 rounded-2xl bg-white/80 dark:bg-slate-100 bg-slate-900/60 border border-slate-200 border-slate-800 backdrop-blur-md space-y-6 animate-fade-in-up">
+            <div className="p-6 rounded-2xl bg-[#0b0f10]/80 border dark:border-white/5 backdrop-blur-md space-y-6 animate-fade-in-up">
               
-              <h3 className="text-xs font-bold text-slate-350 uppercase tracking-widest border-b border-slate-200 dark:border-slate-850 pb-2">HASIL PEMINDAIAN DOKUMEN</h3>
+              <h3 className="text-xs font-bold text-[#908fa0] uppercase tracking-widest border-b dark:border-white/5 pb-2">HASIL PEMINDAIAN DOKUMEN</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 
                 {/* Visual Score */}
-                <div className="flex flex-col items-center justify-center text-center p-6 bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 rounded-xl gap-2">
+                <div className="flex flex-col items-center justify-center text-center p-6 bg-slate-950/60 border dark:border-white/5 rounded-xl gap-2">
                   <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">INDEKS KEMIRIPAN (PLAGIARISME)</span>
                   <div className={`text-4xl font-extrabold tracking-tight ${
                     scanResult.score > 50 ? "text-red-400" : scanResult.score > 15 ? "text-amber-400" : "text-emerald-400"
@@ -184,7 +184,7 @@ export default function PlagiarismCheckerPage() {
                       <div className="flex gap-2.5 items-start bg-red-500/5 border border-red-500/15 p-3 rounded-lg text-xs text-red-300">
                         <ShieldAlert className="w-4 h-4 shrink-0 mt-0.5" />
                         <div>
-                          <strong>Indeks kemiripan sangat tinggi!</strong> Ditemukan kecocokan beruntun pada paragraf utama. Disarankan untuk memparafrase ulang secara menyeluruh and membagi naskah menjadi beberapa bagian dengan kutipan baru.
+                          <strong>Indeks kemiripan sangat tinggi!</strong> Ditemukan kecocokan beruntun pada paragraf utama. Disarankan untuk memparafrase ulang secara menyeluruh dan membagi naskah menjadi beberapa bagian dengan kutipan baru.
                         </div>
                       </div>
                     ) : scanResult.score > 15 ? (
@@ -202,7 +202,7 @@ export default function PlagiarismCheckerPage() {
                         </div>
                       </div>
                     )}
-
+ 
                     {/* CTA to Paraphrase Tool */}
                     {(scanResult.status === "WARNING" || scanResult.status === "HIGH_RISK") && (
                       <Link
@@ -215,7 +215,7 @@ export default function PlagiarismCheckerPage() {
                     )}
                   </div>
                 </div>
-
+ 
                 {/* Matched Sentences Panel */}
                 {scanResult.matches && scanResult.matches.length > 0 && (
                   <div className="mt-4 space-y-2">
@@ -226,7 +226,7 @@ export default function PlagiarismCheckerPage() {
                       {scanResult.matches.map((match, idx: number) => (
                         <div
                           key={idx}
-                          className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 space-y-1"
+                          className="p-2.5 rounded-lg bg-slate-950/60 border dark:border-white/5 space-y-1"
                         >
                           <div className="flex items-center justify-between">
                             <span className="text-[10px] font-bold text-amber-400">
@@ -237,7 +237,7 @@ export default function PlagiarismCheckerPage() {
                             &quot;{match.sentence}&quot;
                           </p>
                           {match.matchedSource && (
-                            <p className="text-[9px] text-slate-600 font-mono">
+                            <p className="text-[9px] text-slate-650 font-mono">
                               ↳ Cocok: {match.matchedSource}
                             </p>
                           )}

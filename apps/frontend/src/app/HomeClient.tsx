@@ -114,7 +114,7 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
             <div className="max-w-md mx-auto pt-2">
               <form
                 action={`/calculator?email=${encodeURIComponent(emailInput)}`}
-                className="flex items-center gap-2 p-1.5 rounded-xl bg-slate-100/85 bg-[#101415]/80 border border-[#464554]/40 focus-within:border-[#6366f1] focus-within:ring-1 focus-within:ring-[#6366f1]/30 transition-all duration-300"
+                className="flex items-center gap-2 p-1.5 rounded-xl bg-[#101415]/80 border border-[#464554]/40 focus-within:border-[#6366f1] focus-within:ring-1 focus-within:ring-[#6366f1]/30 transition-all duration-300"
               >
                 <input
                   type="email"
@@ -165,12 +165,12 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
               </div>
 
               <div className="mt-8 relative z-10 flex gap-4">
-                <div className="bg-slate-100/60 bg-[#1d2022]/60 p-4 rounded-xl border border-slate-200 border-white/5">
-                  <div className="font-mono text-xs text-slate-500 text-[#c7c4d7] mb-1">P99 Latency</div>
-                  <div className="text-xl md:text-2xl font-bold text-[#6366f1] text-[#c0c1ff] font-mono-technical">12ms</div>
+                <div className="bg-[#1d2022]/60 p-4 rounded-xl border border-white/5">
+                  <div className="font-mono text-xs text-[#c7c4d7] mb-1">P99 Latency</div>
+                  <div className="text-xl md:text-2xl font-bold text-[#c0c1ff] font-mono-technical">12ms</div>
                 </div>
-                <div className="bg-slate-100/60 bg-[#1d2022]/60 p-4 rounded-xl border border-slate-200 border-white/5">
-                  <div className="font-mono text-xs text-slate-500 text-[#c7c4d7] mb-1">Uptime SLA</div>
+                <div className="bg-[#1d2022]/60 p-4 rounded-xl border border-white/5">
+                  <div className="font-mono text-xs text-[#c7c4d7] mb-1">Uptime SLA</div>
                   <div className="text-xl md:text-2xl font-bold text-[#4edea3] font-mono-technical">99.999%</div>
                 </div>
               </div>
@@ -210,7 +210,7 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
 
               <Link 
                 href="/tools/institusi"
-                className="w-full bg-slate-200 hover:bg-slate-300 bg-[#323537] hover:bg-[#464554] border border-slate-300 border-[#464554]/80 text-white font-mono text-xs py-3.5 rounded-lg transition-colors text-center uppercase tracking-wider cursor-pointer"
+                className="w-full bg-[#323537] hover:bg-[#464554] border border-[#464554]/80 text-white font-mono text-xs py-3.5 rounded-lg transition-colors text-center uppercase tracking-wider cursor-pointer"
               >
                 Verify Dataset
               </Link>
@@ -230,7 +230,7 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
                   <h2 className="text-2xl font-extrabold text-white">Global Verification Network</h2>
                 </div>
                 
-                <div className="flex items-center gap-2 bg-slate-100 bg-[#0b0f10] px-4 py-2 rounded-full border border-slate-200 border-white/5 font-mono text-xs text-slate-750 text-slate-300">
+                <div className="flex items-center gap-2 bg-[#0b0f10] px-4 py-2 rounded-full border border-white/5 font-mono text-xs text-slate-300">
                   <div className="w-2 h-2 rounded-full bg-[#4edea3] animate-pulse" />
                   <span>System Nominal: 0x8f2a...</span>
                 </div>
@@ -243,23 +243,23 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
                 </div>
 
                 {/* Node Heatmap Area */}
-                <div className="lg:col-span-6 bg-slate-100/90 bg-[#0b0f10]/80 rounded-2xl p-6 border border-slate-200 border-white/5 relative overflow-hidden flex flex-col justify-between group min-h-[300px]">
+                <div className="lg:col-span-6 bg-[#0b0f10]/80 rounded-2xl p-6 border border-white/5 relative overflow-hidden flex flex-col justify-between group min-h-[300px]">
                   {/* Glowing Map Overlay */}
                   <div className="absolute inset-0 opacity-40 pointer-events-none transition-transform duration-1000 group-hover:scale-105 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuA0nrHVoqqrcW6gM9YZ1w_ayrR_AXIsc_76uOja7I5Owtw0jCQu4NF56OfPNRSPQhyXxUrqSnILIX0RV_-I65p8z4_ZSqIaBgnlYYwEHYqrUgekXi69qfX3--B9ESqkeQMwfNnYbgs7WHfwiNziteHp0djppYsIOGm2E5-fsv81whdWUf-0vn4jOB_oeW9StL1l2PV_sJKzPrM4M4P4rKQpzvMFCByig0yuuW_gVURClKOjE7Nkfuw9vE5bbaGd8HuQFMyu3SdFH7o')] bg-cover bg-center" />
                   
                   <div className="relative z-10">
                     <h3 className="font-mono text-xs text-white uppercase tracking-wider mb-2">Node Distribution Heatmap</h3>
-                    <p className="text-xs text-[#c7c4d7]">Global active verification instances with live SHA-256 signatures.</p>
+                    <p className="text-xs text-[#c7c4d7]">Distribusi mitra pakar dan jaringan kerja aktif di berbagai wilayah.</p>
                   </div>
 
                   <div className="relative z-10 flex gap-4 mt-auto">
-                    <div className="bg-slate-200/95 bg-[#101415]/95 border border-slate-300 border-white/10 p-4 rounded-xl flex-1">
-                      <div className="text-[10px] text-slate-500 text-[#c7c4d7] mb-1 font-mono">Region: US East</div>
-                      <div className="text-xs font-bold text-[#6366f1] text-[#c0c1ff] font-mono-technical">Verified: 0x4F8a...</div>
+                    <div className="bg-[#101415]/95 border border-white/10 p-4 rounded-xl flex-1">
+                      <div className="text-[10px] text-[#c7c4d7] mb-1 font-mono">Region: US East</div>
+                      <div className="text-xs font-bold text-[#c0c1ff] font-mono-technical">Verified: 0x4F8a...</div>
                     </div>
-                    <div className="bg-slate-200/95 bg-[#101415]/95 border border-slate-300 border-white/10 p-4 rounded-xl flex-1">
-                      <div className="text-[10px] text-slate-500 text-[#c7c4d7] mb-1 font-mono">Region: EU Central</div>
-                      <div className="text-xs font-bold text-[#4edea3] font-mono-technical">Verified: 0x9Acc...</div>
+                    <div className="bg-[#101415]/95 border border-white/10 p-4 rounded-xl flex-1">
+                      <div className="text-[10px] text-[#c7c4d7] mb-1 font-mono">Region: EU Central</div>
+                      <div className="text-xs font-bold text-emerald-400 font-mono-technical">Verified: 0x9Acc...</div>
                     </div>
                   </div>
                 </div>
@@ -371,10 +371,10 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
               </div>
 
               {/* Fake UI Dashboard */}
-              <div className="bg-slate-50 bg-[#0b0f10] border border-slate-200 border-white/10 rounded-2xl p-4 space-y-4 relative z-10">
-                <div className="flex justify-between items-center pb-3 border-b border-slate-200 border-white/10">
+              <div className="bg-[#0b0f10] border border-white/10 rounded-2xl p-4 space-y-4 relative z-10">
+                <div className="flex justify-between items-center pb-3 border-b border-white/10">
                   <div>
-                    <p className="text-[10px] font-mono uppercase text-slate-500">Total Transaksi Escrow</p>
+                    <p className="text-[10px] font-mono uppercase text-[#908fa0]">Total Transaksi Escrow</p>
                     <p className="font-extrabold text-white text-xl">Rp 120.500.000</p>
                   </div>
                   <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center">
@@ -383,16 +383,16 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
                 </div>
                 
                 <div className="space-y-2">
-                  <p className="text-[10px] font-mono uppercase text-slate-500 font-bold">Kinerja Entitas Direktori Top</p>
+                  <p className="text-[10px] font-mono uppercase text-[#908fa0] font-bold">Kinerja Entitas Direktori Top</p>
                   {topDirectories.length > 0 ? (
                     topDirectories.slice(0, 2).map((dir: any) => (
-                      <div key={dir.id} className="flex justify-between items-center p-2.5 rounded-lg bg-white bg-[#101415] border border-slate-200 border-white/5">
+                      <div key={dir.id} className="flex justify-between items-center p-2.5 rounded-lg bg-[#101415] border border-white/5">
                         <span className="text-xs font-bold text-white">{dir.name}</span>
                         <span className="text-[10px] font-mono text-[#6366f1] bg-[#6366f1]/10 px-2 py-0.5 rounded font-bold">{dir.trust_score}% Trust</span>
                       </div>
                     ))
                   ) : (
-                    <div className="text-xs text-slate-500 italic p-2">Memuat performa node...</div>
+                    <div className="text-xs text-[#908fa0] italic p-2">Memuat profil dan performa direktori...</div>
                   )}
                 </div>
               </div>
@@ -409,25 +409,25 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
               </div>
 
               {/* Fake UI Widget Export */}
-              <div className="bg-slate-50 bg-[#0b0f10] border border-slate-200 border-white/10 rounded-2xl p-4 space-y-4 relative z-10 flex flex-col justify-between min-h-[220px]">
+              <div className="bg-[#0b0f10] border border-white/10 rounded-2xl p-4 space-y-4 relative z-10 flex flex-col justify-between min-h-[220px]">
                 <div className="flex items-center justify-center py-4">
                   {/* Fake Badge */}
-                  <div className="px-4 py-2 bg-[#151a1d] border border-slate-200 border-white/10 shadow-lg rounded-xl flex items-center gap-3 w-max mx-auto transform transition-transform group-hover:scale-105">
+                  <div className="px-4 py-2 bg-[#151a1d] border border-white/10 shadow-lg rounded-xl flex items-center gap-3 w-max mx-auto transform transition-transform group-hover:scale-105">
                     <ShieldCheck className="w-6 h-6 text-emerald-500" />
                     <div className="text-left">
-                      <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest leading-none">VERIFIED PARTNER</div>
+                      <div className="text-[9px] font-bold text-[#908fa0] uppercase tracking-widest leading-none">VERIFIED PARTNER</div>
                       <div className="font-black text-sm text-white leading-tight">INFRAMEET</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <p className="text-[10px] font-mono uppercase text-slate-500 font-bold">Salin Kode HTML (iFrame/Script)</p>
-                  <div className="p-3 rounded-lg bg-slate-900 bg-black font-mono text-[9px] text-[#4edea3] overflow-hidden whitespace-nowrap overflow-ellipsis">
+                  <p className="text-[10px] font-mono uppercase text-[#908fa0] font-bold">Salin Kode HTML (iFrame/Script)</p>
+                  <div className="p-3 rounded-lg bg-black font-mono text-[9px] text-[#4edea3] overflow-hidden whitespace-nowrap overflow-ellipsis">
                     {`<script src="https://inframeet.com/widgets/telemetry.js"></script><div class="inframeet-badge" data-id="8f2a1"></div>`}
                   </div>
-                  <p className="text-[9px] text-slate-500 italic mt-1 flex items-center gap-1">
-                    <Activity className="w-3 h-3" /> Telemetri hit akan dikirim ke /api/widgets/track
+                  <p className="text-[9px] text-[#908fa0] italic mt-1 flex items-center gap-1">
+                    <Activity className="w-3 h-3" /> Lencana dinamis yang otomatis terhubung ke sistem verifikasi kami.
                   </p>
                 </div>
               </div>
@@ -439,7 +439,7 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
         <section className="max-w-7xl mx-auto px-4 md:px-10 py-16">
           <div className="glass-panel p-8 md:p-12 rounded-2xl flex flex-col md:flex-row gap-10 md:gap-12 items-center">
             {/* Founder Photo Frame */}
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border border-slate-200 border-white/10 shadow-lg shrink-0 relative group">
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border border-white/10 shadow-lg shrink-0 relative group">
               <img
                 src="/assets/img/photo.jpg"
                 alt="Muhammad Zadit - Founder & Principal Architect INFRAMEET"
@@ -454,20 +454,20 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
             <div className="space-y-6 flex-1 text-center md:text-left">
               <span className="text-xs font-mono text-[#6366f1] uppercase tracking-wider">Principal Architect &amp; Founder</span>
               <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
-                Mendedikasikan Keahlian Teknis untuk Skalabilitas Bisnis and Kehormatan Ilmiah Anda
+                Mendedikasikan Keahlian Teknis untuk Skalabilitas Bisnis dan Kredibilitas Ilmiah Anda
               </h3>
               <p className="text-sm text-[#c7c4d7] leading-relaxed">
                 Di <strong>INFRAMEET</strong>, saya mengawasi desain arsitektur sistem digital dan analisis sains riset secara langsung. Komitmen utama kami adalah menyajikan transparansi penuh, melindungi hak kekayaan intelektual (HKI) riset Anda secara absolut, serta merancang infrastruktur cloud modern yang memangkas beban biaya operasional secara signifikan tanpa mengorbankan performa.
               </p>
               
               <div className="flex flex-wrap justify-center md:justify-start gap-3 pt-2">
-                <div className="px-3.5 py-2 rounded-lg bg-slate-100 bg-[#0b0f10] border border-slate-200 border-white/5 text-xs text-slate-700 text-[#c7c4d7] font-mono-technical flex items-center gap-1.5">
+                <div className="px-3.5 py-2 rounded-lg bg-[#0b0f10] border border-white/5 text-xs text-[#c7c4d7] font-mono-technical flex items-center gap-1.5">
                   <Cpu className="w-4 h-4 text-[#6366f1] shrink-0" /> Cloud Native Systems
                 </div>
-                <div className="px-3.5 py-2 rounded-lg bg-slate-100 bg-[#0b0f10] border border-slate-200 border-white/5 text-xs text-slate-700 text-[#c7c4d7] font-mono-technical flex items-center gap-1.5">
+                <div className="px-3.5 py-2 rounded-lg bg-[#0b0f10] border border-white/5 text-xs text-[#c7c4d7] font-mono-technical flex items-center gap-1.5">
                   <TrendingUp className="w-4 h-4 text-[#4edea3] shrink-0" /> SEM-PLS Statistics
                 </div>
-                <div className="px-3.5 py-2 rounded-lg bg-slate-100 bg-[#0b0f10] border border-slate-200 border-white/5 text-xs text-slate-700 text-[#c7c4d7] font-mono-technical flex items-center gap-1.5">
+                <div className="px-3.5 py-2 rounded-lg bg-[#0b0f10] border border-white/5 text-xs text-[#c7c4d7] font-mono-technical flex items-center gap-1.5">
                   <Award className="w-4 h-4 text-[#8083ff] shrink-0" /> E-E-A-T Auditing
                 </div>
               </div>
@@ -508,10 +508,10 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
               >
                 <button
                   onClick={() => toggleFaq(i)}
-                  className="w-full px-6 py-5 text-left flex justify-between items-center text-white font-bold text-sm md:text-base cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
+                  className="w-full px-6 py-5 text-left flex justify-between items-center text-white font-bold text-sm md:text-base cursor-pointer hover:bg-white/5 transition-colors"
                 >
                   <span>{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 text-slate-500 text-[#908fa0] transition-transform duration-300 ${activeFaq === i ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-4 h-4 text-[#908fa0] transition-transform duration-300 ${activeFaq === i ? 'rotate-180' : ''}`} />
                 </button>
                 
                 <AnimatePresence initial={false}>
@@ -522,7 +522,7 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: 'easeInOut' }}
                     >
-                      <div className="px-6 pb-6 text-sm text-[#c7c4d7] leading-relaxed border-t border-slate-200 border-white/5 pt-4">
+                      <div className="px-6 pb-6 text-sm text-[#c7c4d7] leading-relaxed border-t border-white/5 pt-4">
                         {faq.a}
                       </div>
                     </motion.div>
@@ -556,7 +556,7 @@ export default function HomeClient({ articles, topDirectories = [], topExperts =
       </main>
 
       {/* FOOTER W/ SHA-256 HASH VERIFICATION ANCHOR */}
-      <div className="border-t border-slate-200 border-white/5 bg-slate-50 bg-[#0b0f10]/80">
+      <div className="border-t border-white/5 bg-[#0b0f10]/80">
         {/* Verification Seals grid */}
         <div className="max-w-7xl mx-auto px-4 md:px-10 py-6 grid grid-cols-2 md:grid-cols-4 gap-6 font-mono text-[10px] text-slate-500 text-[#908fa0]">
           <div className="flex items-center gap-2">

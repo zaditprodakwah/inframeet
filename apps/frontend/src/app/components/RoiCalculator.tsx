@@ -39,11 +39,11 @@ export default function RoiCalculator() {
   };
 
   return (
-    <div className="w-full glass-panel rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/5">
-      <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-200 dark:divide-white/10">
+    <div className="w-full glass-panel rounded-3xl overflow-hidden shadow-2xl border dark:border-white/5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x dark:divide-white/10">
         
         {/* Left Side: Controls */}
-        <div className="lg:col-span-5 p-8 lg:p-12 bg-slate-50/50 dark:bg-[#1d2022]/20 flex flex-col justify-between gap-10">
+        <div className="lg:col-span-5 p-8 lg:p-12 dark:bg-[#1d2022]/20 flex flex-col justify-between gap-10">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#6366f1]/10 text-[#6366f1] dark:text-[#c0c1ff] border border-[#6366f1]/20">
               <Sparkles className="w-3.5 h-3.5" />
@@ -52,7 +52,7 @@ export default function RoiCalculator() {
             <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white">
               The Formulator
             </h3>
-            <p className="text-xs text-slate-550 dark:text-[#c7c4d7] leading-relaxed">
+            <p className="text-xs dark:text-[#c7c4d7] leading-relaxed">
               Kalkulasi potensi pengurangan biaya overhead operasional server bulanan Anda.
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function RoiCalculator() {
             {/* Slider 1: Active Nodes */}
             <div className="space-y-4">
               <div className="flex justify-between items-end">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-[#c7c4d7] font-mono">
+                <label className="text-[10px] font-bold uppercase tracking-wider dark:text-[#c7c4d7] font-mono">
                   ACTIVE SYSTEM NODES
                 </label>
                 <span className="text-lg font-mono font-bold text-[#6366f1] dark:text-[#c0c1ff]">{nodes} Units</span>
@@ -72,14 +72,14 @@ export default function RoiCalculator() {
                 max="50"
                 value={nodes}
                 onChange={(e) => setNodes(Number(e.target.value))}
-                className="w-full h-1.5 bg-slate-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#6366f1]"
+                className="w-full h-1.5 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#6366f1]"
               />
             </div>
 
             {/* Slider 2: Traffic Volume */}
             <div className="space-y-4">
               <div className="flex justify-between items-end">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-[#c7c4d7] font-mono">
+                <label className="text-[10px] font-bold uppercase tracking-wider dark:text-[#c7c4d7] font-mono">
                   MONTHLY REQUEST VOLUME
                 </label>
                 <span className="text-lg font-mono font-bold text-[#6366f1] dark:text-[#c0c1ff]">{traffic}M Requests</span>
@@ -91,13 +91,13 @@ export default function RoiCalculator() {
                 step="10"
                 value={traffic}
                 onChange={(e) => setTraffic(Number(e.target.value))}
-                className="w-full h-1.5 bg-slate-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#6366f1]"
+                className="w-full h-1.5 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#6366f1]"
               />
             </div>
           </div>
 
-          <div className="pt-6 border-t border-slate-200 dark:border-white/10 space-y-2">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-zinc-500 block">
+          <div className="pt-6 border-t dark:border-white/10 space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-widest dark:text-zinc-500 block">
               ESTIMATED MONTHLY SAVINGS
             </label>
             <motion.div
@@ -115,7 +115,7 @@ export default function RoiCalculator() {
         <div className="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-between gap-6 min-h-[400px]">
           <div className="flex justify-between items-start">
             <div>
-              <span className="text-[10px] font-bold font-mono uppercase tracking-wider text-slate-400 dark:text-zinc-500">
+              <span className="text-[10px] font-bold font-mono uppercase tracking-wider dark:text-zinc-500">
                 SAVINGS PROJECTION NODE:
               </span>
               <span className="ml-1 text-[10px] font-bold font-mono text-[#4edea3] bg-[#4edea3]/10 px-2 py-0.5 rounded border border-[#4edea3]/20 uppercase">

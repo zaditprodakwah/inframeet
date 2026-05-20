@@ -88,7 +88,7 @@ export default function MegaMenu() {
             onMouseEnter={() => setIsLayananOpen(true)}
             onMouseLeave={() => setIsLayananOpen(false)}
           >
-            <button className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-slate-655 dark:text-slate-350 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer py-2 bg-transparent border-0">
+            <button className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer py-2 bg-transparent border-0">
               Layanan Solusi
               <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isLayananOpen ? "rotate-180" : ""}`} />
             </button>
@@ -117,7 +117,7 @@ export default function MegaMenu() {
                         href={item.href}
                         className="px-3 py-1.5 hover:bg-slate-950/50 rounded-xl text-xs font-bold text-slate-400 hover:text-indigo-400 transition-all flex items-center gap-2"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 bg-slate-700 shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-700 shrink-0" />
                         {item.label}
                       </Link>
                     ))}
@@ -126,7 +126,7 @@ export default function MegaMenu() {
 
                 {/* COLUMN 2: TOOLS & INTERACTIVE HUB */}
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100 border-slate-800/80">
+                  <div className="flex items-center gap-2 text-indigo-650 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-800/80">
                     <Wrench className="w-4 h-4 text-indigo-500" />
                     Hub Alat & Utilitas
                   </div>
@@ -154,7 +154,7 @@ export default function MegaMenu() {
                 {/* COLUMN 3: TRUST VERIFICATION HIGHLIGHT */}
                 <div className="space-y-4 bg-slate-950/40 p-4 rounded-2xl border border-slate-850/60 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-[10px] uppercase tracking-wider pb-2">
+                    <div className="flex items-center gap-2 text-indigo-650 dark:text-indigo-400 font-bold text-[10px] uppercase tracking-wider pb-2">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
                       Infrastruktur Kepercayaan
                     </div>
@@ -162,14 +162,14 @@ export default function MegaMenu() {
                       <h4 className="text-xs font-black text-white leading-tight">
                         InfraMeet Registry Verified
                       </h4>
-                      <p className="text-[10px] text-slate-450 leading-relaxed font-medium">
-                        Kredensial institusi, pakar independen, dan hasil olah data divalidasi menggunakan tanda tangan kriptografis ECDSA ES256 untuk jaminan integritas.
+                      <p className="text-[10px] text-slate-400 leading-relaxed font-medium">
+                        Kredensial institusi, profil pakar, dan hasil validasi data dijamin keasliannya melalui sistem verifikasi digital yang aman dan transparan.
                       </p>
                     </div>
                   </div>
                   <Link 
                     href="/submission?tab=verify" 
-                    className="inline-flex items-center gap-1 text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors pt-2"
+                    className="inline-flex items-center gap-1 text-[10px] font-bold text-indigo-650 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors pt-2"
                   >
                     Pelajari Verifikasi &rarr;
                   </Link>
@@ -290,7 +290,7 @@ export default function MegaMenu() {
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-sm font-bold text-emerald-400 py-2 border-b border-slate-900/50"
           >
-            🛡️ Verifikasi Kriptografis
+            🛡️ Verifikasi Digital
           </Link>
           <Link 
             href="/insights" 

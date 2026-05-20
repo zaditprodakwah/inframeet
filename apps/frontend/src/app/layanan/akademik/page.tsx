@@ -18,9 +18,9 @@ export default function AkademikPage() {
       <main className="flex-grow pt-8 pb-16 max-w-7xl mx-auto px-4 md:px-10 space-y-16">
         {/* Hero Section */}
         <section className="relative">
-          <div className="glass-panel rounded-2xl p-8 md:p-12 border border-slate-200 dark:border-white/5 flex flex-col md:flex-row items-center gap-8 overflow-hidden relative">
+          <div className="glass-panel rounded-2xl p-8 md:p-12 border dark:border-white/5 flex flex-col md:flex-row items-center gap-8 overflow-hidden relative">
             <div className="flex-1 z-10 space-y-6">
-              <div className="inline-flex items-center gap-2 bg-slate-100 dark:bg-[#1d2022]/60 border border-slate-200 dark:border-white/10 px-3 py-1 rounded-full">
+              <div className="inline-flex items-center gap-2 dark:bg-[#1d2022]/60 border dark:border-white/10 px-3 py-1 rounded-full">
                 <ShieldCheck className="w-4 h-4 text-[#4edea3]" />
                 <span className="font-mono text-xs text-[#4edea3] uppercase tracking-wider">Anti-Joki Policy Enforced</span>
               </div>
@@ -29,7 +29,7 @@ export default function AkademikPage() {
                 Academic &amp; Research Support
               </h1>
               
-              <p className="text-sm md:text-base text-slate-650 dark:text-[#c7c4d7] leading-relaxed max-w-2xl">
+              <p className="text-sm md:text-base dark:text-[#c7c4d7] leading-relaxed max-w-2xl">
                 A strictly governed ecosystem designed to uphold the highest standards of academic integrity. We provide secure sandboxes for statistical modeling, plagiarism detection, and scholarly compliance.
               </p>
               
@@ -55,7 +55,7 @@ export default function AkademikPage() {
         </section>
 
         {/* Policy Statement Differentiator */}
-        <section className="glass-panel rounded-2xl p-8 border border-slate-200 dark:border-white/5 bg-slate-50/50 dark:bg-[#1d2022]/20">
+        <section className="glass-panel rounded-2xl p-8 border dark:border-white/5 dark:bg-[#1d2022]/20">
           <div className="flex flex-col md:flex-row items-start gap-4">
             <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
               <ShieldCheck className="w-6 h-6" />
@@ -64,7 +64,7 @@ export default function AkademikPage() {
               <h4 className="text-lg font-bold text-white">
                 100% Academic Integrity &amp; Ethical Research Protocol
               </h4>
-              <p className="text-xs md:text-sm text-slate-600 dark:text-[#c7c4d7] leading-relaxed">
+              <p className="text-xs md:text-sm dark:text-[#c7c4d7] leading-relaxed">
                 Berdasarkan Syarat Ketentuan Layanan INFRAMEET, seluruh substansi ide riset, data mentah, dan hak kekayaan intelektual (HKI) adalah milik Anda secara absolut. Kami berkomitmen penuh menolak segala bentuk perjokian substansi riset atau ghostwriting. Dukungan asistensi kami murni bersifat pendampingan teknis tata letak format, olah data statistik kuantitatif, parafrase sitasi, dan bimbingan Turnitin agar riset Anda steril dari tuduhan pelanggaran akademik.
               </p>
             </div>
@@ -81,7 +81,7 @@ export default function AkademikPage() {
                   <BarChart3 className="w-5 h-5 text-[#6366f1] dark:text-[#c0c1ff]" />
                   <h2 className="text-xl font-bold text-white">Statistical Modeling Frameworks</h2>
                 </div>
-                <p className="text-sm text-slate-600 dark:text-[#c7c4d7]">Isolated instances for SPSS and SmartPLS execution.</p>
+                <p className="text-sm dark:text-[#c7c4d7]">Isolated instances for SPSS and SmartPLS execution.</p>
               </div>
               <span className="font-mono text-xs text-[#4edea3] bg-[#4edea3]/10 px-2 py-1 rounded border border-[#4edea3]/20 uppercase tracking-wider">
                 STATUS: ACTIVE
@@ -89,8 +89,8 @@ export default function AkademikPage() {
             </div>
 
             {/* Mock Data Visualization Area */}
-            <div className="flex-grow bg-slate-100 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/10 rounded-xl p-4 relative overflow-hidden flex flex-col justify-end min-h-[150px]">
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#323537_1px,transparent_1px),linear-gradient(to_bottom,#323537_1px,transparent_1px)] bg-[size:20px_20px] opacity-20"></div>
+            <div className="flex-grow dark:bg-[#0b0f10]/80 border dark:border-white/10 rounded-xl p-4 relative overflow-hidden flex flex-col justify-end min-h-[150px]">
+              <div className="absolute inset-0 dark:bg-[linear-gradient(to_right,#323537_1px,transparent_1px),linear-gradient(to_bottom,#323537_1px,transparent_1px)] bg-[size:20px_20px] opacity-20"></div>
               
               <div className="relative z-10 flex items-end justify-between h-32 px-4 gap-2">
                 <div className="w-full bg-[#6366f1]/40 hover:bg-[#6366f1]/60 transition-colors h-[40%] rounded-t border-t border-[#6366f1] relative group/bar cursor-pointer">
@@ -119,28 +119,28 @@ export default function AkademikPage() {
                 <FileText className="w-5 h-5 text-[#6366f1] dark:text-[#c0c1ff]" />
                 <h2 className="text-xl font-bold text-white">Plagiarism Sandbox</h2>
               </div>
-              <p className="text-sm text-slate-650 dark:text-[#c7c4d7] mb-4">
+              <p className="text-sm dark:text-[#c7c4d7] mb-4">
                 Turnitin No-Repository pre-flight checks. Data is purged immediately post-scan.
               </p>
             </div>
 
             {/* Heatmap Preview */}
-            <div className="bg-slate-100 dark:bg-[#0b0f10]/80 rounded-xl border border-slate-200 dark:border-white/10 p-4 mt-auto">
-              <div className="font-mono text-xs text-slate-500 dark:text-[#c7c4d7] mb-2 uppercase tracking-wider">SIMILARITY INDEX</div>
+            <div className="dark:bg-[#0b0f10]/80 rounded-xl border dark:border-white/10 p-4 mt-auto">
+              <div className="font-mono text-xs dark:text-[#c7c4d7] mb-2 uppercase tracking-wider">SIMILARITY INDEX</div>
               <div className="flex items-center gap-3">
                 <div className="text-3xl font-mono text-[#4edea3] font-bold">12%</div>
-                <div className="flex-grow h-2 bg-slate-200 dark:bg-[#1d2022] rounded-full overflow-hidden flex">
+                <div className="flex-grow h-2 dark:bg-[#1d2022] rounded-full overflow-hidden flex">
                   <div className="h-full bg-[#4edea3] w-[12%]"></div>
                 </div>
               </div>
               <div className="mt-4 space-y-2">
-                <div className="flex justify-between items-center bg-slate-200/50 dark:bg-[#1d2022]/50 px-2 py-1 rounded">
-                  <span className="font-mono text-[10px] text-slate-600 dark:text-[#c7c4d7]">INTERNET_SOURCES</span>
-                  <span className="font-mono text-[10px] text-[#6366f1] dark:text-[#c0c1ff]">8%</span>
+                <div className="flex justify-between items-center dark:bg-[#1d2022]/50 px-2 py-1 rounded">
+                  <span className="font-mono text-[10px] dark:text-[#c7c4d7]">INTERNET_SOURCES</span>
+                  <span className="font-mono text-[10px] dark:text-[#c0c1ff]">8%</span>
                 </div>
-                <div className="flex justify-between items-center bg-slate-200/50 dark:bg-[#1d2022]/50 px-2 py-1 rounded">
-                  <span className="font-mono text-[10px] text-slate-600 dark:text-[#c7c4d7]">PUBLICATIONS</span>
-                  <span className="font-mono text-[10px] text-[#6366f1] dark:text-[#c0c1ff]">4%</span>
+                <div className="flex justify-between items-center dark:bg-[#1d2022]/50 px-2 py-1 rounded">
+                  <span className="font-mono text-[10px] dark:text-[#c7c4d7]">PUBLICATIONS</span>
+                  <span className="font-mono text-[10px] dark:text-[#c0c1ff]">4%</span>
                 </div>
               </div>
             </div>
@@ -157,32 +157,32 @@ export default function AkademikPage() {
                 <button className="px-3 py-1 bg-[#6366f1]/10 border border-[#6366f1]/30 rounded text-[#6366f1] dark:text-[#c0c1ff] font-mono text-xs hover:bg-[#6366f1]/20">
                   IEEE
                 </button>
-                <button className="px-3 py-1 bg-slate-100 dark:bg-[#1d2022] border border-slate-200 dark:border-white/10 rounded text-slate-650 dark:text-[#c7c4d7] font-mono text-xs hover:bg-slate-200 dark:hover:bg-[#323537]">
+                <button className="px-3 py-1 dark:bg-[#1d2022] border dark:border-white/10 rounded dark:text-[#c7c4d7] font-mono text-xs hover:bg-[#323537]">
                   APA 7th
                 </button>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-slate-100 dark:bg-[#0b0f10]/80 p-4 rounded-xl border border-slate-200 dark:border-white/10 flex items-start gap-3">
+              <div className="dark:bg-[#0b0f10]/80 p-4 rounded-xl border dark:border-white/10 flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-[#4edea3] mt-0.5 shrink-0" />
                 <div>
                   <div className="font-mono text-sm text-white mb-1">Citation Integrity</div>
-                  <div className="text-xs text-slate-600 dark:text-[#c7c4d7]">Cross-referencing DOI metadata. Validating inline anchors.</div>
+                  <div className="text-xs dark:text-[#c7c4d7]">Cross-referencing DOI metadata. Validating inline anchors.</div>
                 </div>
               </div>
-              <div className="bg-slate-100 dark:bg-[#0b0f10]/80 p-4 rounded-xl border border-slate-200 dark:border-white/10 flex items-start gap-3">
+              <div className="dark:bg-[#0b0f10]/80 p-4 rounded-xl border dark:border-white/10 flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-[#4edea3] mt-0.5 shrink-0" />
                 <div>
                   <div className="font-mono text-sm text-white mb-1">Format Validation</div>
-                  <div className="text-xs text-slate-600 dark:text-[#c7c4d7]">Margin, font-sizing, and structural hierarchy compliance.</div>
+                  <div className="text-xs dark:text-[#c7c4d7]">Margin, font-sizing, and structural hierarchy compliance.</div>
                 </div>
               </div>
-              <div className="bg-slate-100 dark:bg-[#0b0f10]/80 p-4 rounded-xl border border-slate-200 dark:border-white/10 border-l-2 border-l-[#8083ff] flex items-start gap-3">
+              <div className="dark:bg-[#0b0f10]/80 p-4 rounded-xl border dark:border-white/10 border-l-2 border-l-[#8083ff] flex items-start gap-3">
                 <Layers className="w-5 h-5 text-[#8083ff] mt-0.5 shrink-0" />
                 <div>
                   <div className="font-mono text-sm text-white mb-1">Peer Review Pre-check</div>
-                  <div className="text-xs text-slate-600 dark:text-[#c7c4d7]">Analyzing blinded manuscript requirements. Pending upload.</div>
+                  <div className="text-xs dark:text-[#c7c4d7]">Analyzing blinded manuscript requirements. Pending upload.</div>
                 </div>
               </div>
             </div>
@@ -195,7 +195,7 @@ export default function AkademikPage() {
             <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight">
               Ingin Menghitung Estimasi Biaya Asistensi Riset Anda?
             </h3>
-            <p className="text-sm text-slate-650 dark:text-[#c7c4d7] max-w-xl mx-auto leading-relaxed">
+            <p className="text-sm dark:text-[#c7c4d7] max-w-xl mx-auto leading-relaxed">
               Gunakan configurator harga akademik instan kami untuk menyusun item perbaikan layout, sitasi, dan analisis modular secara transparan.
             </p>
             <div className="pt-2">

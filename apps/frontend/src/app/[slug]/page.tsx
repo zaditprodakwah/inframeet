@@ -273,7 +273,7 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
 
   if (loading) {
     return (
-      <div className="flex flex-col min-h-screen bg-slate-50 text-slate-800 font-sans">
+      <div className="flex flex-col min-h-screen bg-[#070a0b] text-[#c7c4d7] font-sans">
         <MegaMenu />
         <main className="flex-1 flex flex-col items-center justify-center py-24 space-y-3">
           <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
@@ -286,12 +286,12 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
 
   if (!entity) {
     return (
-      <div className="flex flex-col min-h-screen bg-slate-50 text-slate-800 font-sans">
+      <div className="flex flex-col min-h-screen bg-[#070a0b] text-[#c7c4d7] font-sans">
         <MegaMenu />
         <main className="flex-1 max-w-md mx-auto py-24 px-6 text-center space-y-4">
-          <div className="w-16 h-16 bg-indigo-50 text-indigo-600 border border-indigo-150 rounded-full flex items-center justify-center mx-auto text-xl font-bold">404</div>
-          <h2 className="text-xl font-black text-slate-900">Entitas Tidak Ditemukan</h2>
-          <p className="text-xs text-slate-500 leading-relaxed">Profil dengan slug &quot;{slug}&quot; tidak terdaftar di direktori universal kami. Pastikan penulisan URL sudah benar.</p>
+          <div className="w-16 h-16 bg-indigo-950/40 text-indigo-400 border dark:border-indigo-500/20 rounded-full flex items-center justify-center mx-auto text-xl font-bold">404</div>
+          <h2 className="text-xl font-black text-white">Entitas Tidak Ditemukan</h2>
+          <p className="text-xs text-slate-400 leading-relaxed">Profil dengan slug &quot;{slug}&quot; tidak terdaftar di direktori universal kami. Pastikan penulisan URL sudah benar.</p>
           <Link href="/directory" className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition-all shadow-md">
             Kembali ke Direktori <ChevronRight className="w-4 h-4" />
           </Link>
@@ -305,60 +305,60 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
   const starCount = Math.round((entity.trust_score / 20) * 10) / 10;
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-800 font-sans antialiased">
+    <div className="flex flex-col min-h-screen bg-[#070a0b] text-[#c7c4d7] font-sans antialiased">
       <MegaMenu />
       <Breadcrumbs />
 
       <main className="flex-1 max-w-7xl mx-auto px-6 py-12 space-y-12 w-full">
         
         {/* Dynamic Header Hero Panel */}
-        <section className="bg-white rounded-3xl border border-slate-200/80 p-6 md:p-10 shadow-sm shadow-slate-100 flex flex-col md:flex-row items-start justify-between gap-6 relative overflow-hidden">
+        <section className="bg-[#0b0f10]/80 rounded-3xl border dark:border-white/5 p-6 md:p-10 shadow-sm flex flex-col md:flex-row items-start justify-between gap-6 relative overflow-hidden">
           
           <div className="space-y-4 max-w-3xl">
             {/* Identity row */}
             <div className="flex flex-wrap items-center gap-2">
               <span className={`px-2.5 py-1 rounded text-[9px] font-black uppercase tracking-widest border ${
                 entity.entity_type === "institution"
-                  ? "bg-emerald-50 text-emerald-700 border-emerald-100"
-                  : "bg-indigo-50 text-indigo-700 border-indigo-100"
+                  ? "bg-emerald-950/40 text-emerald-400 border-emerald-900/50"
+                  : "bg-indigo-950/40 text-indigo-400 border-indigo-900/50"
               }`}>
                 {entity.subcategory || entity.entity_type}
               </span>
               
               {isVerified && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-indigo-50 text-indigo-700 border border-indigo-100 text-[9px] font-extrabold uppercase">
-                  <CheckCircle className="w-3.5 h-3.5 fill-indigo-50" /> Terverifikasi Kepatuhan
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-indigo-950/40 text-indigo-400 border border-indigo-900/50 text-[9px] font-extrabold uppercase">
+                  <CheckCircle className="w-3.5 h-3.5 fill-indigo-950/40" /> Terverifikasi Kepatuhan
                 </span>
               )}
             </div>
 
             {/* Title / Name */}
             <div className="space-y-2">
-              <h1 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight flex items-center gap-2">
+              <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight leading-tight flex items-center gap-2">
                 {entity.name}
               </h1>
 
               {/* Geographic placement */}
               {entity.city && (
-                <p className="text-xs text-slate-500 font-bold flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-slate-400" />
+                <p className="text-xs text-slate-400 font-bold flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-slate-500" />
                   {entity.city}, {entity.country === "ID" ? "Indonesia" : entity.country || "ID"}
                 </p>
               )}
             </div>
 
             {/* Description */}
-            <p className="text-xs md:text-sm text-slate-600 leading-relaxed max-w-2xl pt-1">
+            <p className="text-xs md:text-sm text-slate-400 leading-relaxed max-w-2xl pt-1">
               {entity.description || "Profil terverifikasi di dalam Pangkalan Data dan Infrastruktur Kredibilitas Universal INFRAMEET."}
             </p>
           </div>
 
           {/* Trust Aggregator Block */}
-          <div className="w-full md:w-auto shrink-0 bg-slate-50/60 border border-slate-200/80 rounded-3xl p-6 flex flex-col items-center justify-center space-y-3 md:min-w-[200px]">
-            <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Trust Score</span>
+          <div className="w-full md:w-auto shrink-0 bg-slate-950/60 border dark:border-white/5 rounded-3xl p-6 flex flex-col items-center justify-center space-y-3 md:min-w-[200px]">
+            <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">Trust Score</span>
             <div className="text-center">
-              <div className="text-3xl md:text-5xl font-black text-slate-900 font-mono tracking-tight">{entity.trust_score.toFixed(0)}</div>
-              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest block">Out of 100 points</span>
+              <div className="text-3xl md:text-5xl font-black text-white font-mono tracking-tight">{entity.trust_score.toFixed(0)}</div>
+              <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest block">Out of 100 points</span>
             </div>
 
             {/* Star visual representation */}
@@ -369,7 +369,7 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
                   className={`w-3.5 h-3.5 ${
                     i < Math.floor(starCount) 
                       ? "fill-amber-400 stroke-amber-400" 
-                      : "stroke-slate-300 fill-none"
+                      : "stroke-slate-650 fill-none"
                   }`}
                 />
               ))}
@@ -385,10 +385,10 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
           <div className="lg:col-span-2 space-y-8">
             
             {/* SECTION A: Polymorphic Parameters Grid */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 md:p-8 shadow-sm space-y-6">
-              <h3 className="text-sm font-black uppercase tracking-wider text-slate-800 pb-3 border-b border-slate-100 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-indigo-600" />
-                Parameter Mutu & Kredensial Polimorfik
+            <div className="bg-[#0b0f10]/80 rounded-3xl border dark:border-white/5 p-6 md:p-8 shadow-sm space-y-6">
+              <h3 className="text-sm font-black uppercase tracking-wider text-white pb-3 border-b dark:border-white/5 flex items-center gap-2">
+                <Layers className="w-4 h-4 text-indigo-400" />
+                Parameter Mutu &amp; Kredensial Polimorfik
               </h3>
 
               {entity.entity_type === "institution" ? (
@@ -396,53 +396,53 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {entity.subcategory === "Sekolah Menengah" ? (
                     <>
-                      <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                        <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Kurikulum Nasional</span>
-                        <p className="text-xs font-black text-slate-800">{entity.metadata?.curriculum || "Kurikulum Merdeka"}</p>
+                      <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                        <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Kurikulum Nasional</span>
+                        <p className="text-xs font-black text-slate-200">{entity.metadata?.curriculum || "Kurikulum Merdeka"}</p>
                       </div>
-                      <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                        <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Fokus Pembinaan Riset</span>
-                        <p className="text-xs font-black text-slate-800">{entity.metadata?.focus || "Karya Tulis Ilmiah KIR"}</p>
+                      <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                        <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Fokus Pembinaan Riset</span>
+                        <p className="text-xs font-black text-slate-200">{entity.metadata?.focus || "Karya Tulis Ilmiah KIR"}</p>
                       </div>
                     </>
                   ) : (
                     <>
-                      <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                        <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Format Sitasi Wajib</span>
-                        <p className="text-xs font-black text-slate-800">{entity.metadata?.citation_style || "APA 7th Edition"}</p>
+                      <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                        <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Format Sitasi Wajib</span>
+                        <p className="text-xs font-black text-slate-200">{entity.metadata?.citation_style || "APA 7th Edition"}</p>
                       </div>
-                      <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                        <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Batas Plagiarisme Turnitin</span>
-                        <p className="text-xs font-black text-slate-800">{entity.metadata?.turnitin_limit || "15% Max"}</p>
+                      <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                        <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Batas Plagiarisme Turnitin</span>
+                        <p className="text-xs font-black text-slate-200">{entity.metadata?.turnitin_limit || "15% Max"}</p>
                       </div>
                     </>
                   )}
                   
-                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                    <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Status Sektor</span>
-                    <p className="text-xs font-black text-slate-800">{entity.metadata?.sector || "Negeri"}</p>
+                  <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                    <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Status Sektor</span>
+                    <p className="text-xs font-black text-slate-200">{entity.metadata?.sector || "Negeri"}</p>
                   </div>
-                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                    <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Akreditasi Mutu</span>
-                    <p className="text-xs font-black text-slate-800">{entity.metadata?.akreditasi || "Terakreditasi"}</p>
+                  <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                    <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Akreditasi Mutu</span>
+                    <p className="text-xs font-black text-slate-200">{entity.metadata?.akreditasi || "Terakreditasi"}</p>
                   </div>
                 </div>
               ) : entity.entity_type === "personal" ? (
                 /* Expert Professional Grid variables */
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                    <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Pengalaman Praktis</span>
-                    <p className="text-xs font-black text-slate-800">{entity.metadata?.years_experience || "5+ Tahun"}</p>
+                  <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                    <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Pengalaman Praktis</span>
+                    <p className="text-xs font-black text-slate-200">{entity.metadata?.years_experience || "5+ Tahun"}</p>
                   </div>
-                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                    <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Sertifikasi Keahlian</span>
-                    <p className="text-xs font-black text-slate-800">{entity.metadata?.accreditation || "Pakar Terakreditasi"}</p>
+                  <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                    <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Sertifikasi Keahlian</span>
+                    <p className="text-xs font-black text-slate-200">{entity.metadata?.accreditation || "Pakar Terakreditasi"}</p>
                   </div>
-                  <div className="sm:col-span-2 p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-                    <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider block">Keahlian Utama (Skills Tags)</span>
+                  <div className="sm:col-span-2 p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-2">
+                    <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider block">Keahlian Utama (Skills Tags)</span>
                     <div className="flex flex-wrap gap-2">
                       {entity.tags?.map((tag: string) => (
-                        <span key={tag} className="px-2.5 py-1 rounded bg-indigo-50 border border-indigo-100 text-indigo-700 text-[10.5px] font-extrabold uppercase">
+                        <span key={tag} className="px-2.5 py-1 rounded bg-indigo-950/40 border dark:border-indigo-500/20 text-indigo-400 text-[10.5px] font-extrabold uppercase">
                           {tag}
                         </span>
                       ))}
@@ -452,19 +452,19 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
               ) : (
                 /* Startup / SaaS Product Grid variables */
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                    <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Pricing Info</span>
-                    <p className="text-xs font-black text-slate-800 truncate">{entity.metadata?.pricing_info || "Free / Freemium Model"}</p>
+                  <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                    <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Pricing Info</span>
+                    <p className="text-xs font-black text-slate-200 truncate">{entity.metadata?.pricing_info || "Free / Freemium Model"}</p>
                   </div>
-                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
-                    <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider">Kategori Layanan</span>
-                    <p className="text-xs font-black text-slate-800">{entity.category || "Technology"}</p>
+                  <div className="p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-1">
+                    <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider">Kategori Layanan</span>
+                    <p className="text-xs font-black text-slate-205">{entity.category || "Technology"}</p>
                   </div>
-                  <div className="sm:col-span-2 p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-                    <span className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wider block">Tags Komparasi</span>
+                  <div className="sm:col-span-2 p-4 rounded-2xl bg-slate-950/60 border dark:border-white/5 space-y-2">
+                    <span className="text-[9.5px] uppercase font-bold text-slate-500 tracking-wider block">Tags Komparasi</span>
                     <div className="flex flex-wrap gap-2">
                       {entity.tags?.map((tag: string) => (
-                        <span key={tag} className="px-2.5 py-1 rounded bg-slate-150 border border-slate-200 text-slate-700 text-[10.5px] font-bold">
+                        <span key={tag} className="px-2.5 py-1 rounded bg-slate-950 border dark:border-white/10 text-slate-400 text-[10.5px] font-bold">
                           #{tag}
                         </span>
                       ))}
@@ -475,43 +475,43 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
             </div>
 
             {/* SECTION B: Trust Proofs Verification Ledger */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 md:p-8 shadow-sm space-y-6">
-              <div className="pb-3 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <h3 className="text-sm font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                  <FileCheck2 className="w-4 h-4 text-indigo-600 animate-pulse" />
+            <div className="bg-[#0b0f10]/80 rounded-3xl border dark:border-white/5 p-6 md:p-8 shadow-sm space-y-6">
+              <div className="pb-3 border-b dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <h3 className="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
+                  <FileCheck2 className="w-4 h-4 text-indigo-400 animate-pulse" />
                   Buku Besar Bukti Kredibilitas (Trust Proofs Ledger)
                 </h3>
-                <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 border border-emerald-100 rounded uppercase">
+                <span className="text-[10px] font-black text-emerald-400 bg-emerald-950/40 px-2 py-0.5 border border-emerald-900/50 rounded uppercase">
                   {proofs.length} Approved Proofs
                 </span>
               </div>
 
               {proofs.length === 0 ? (
-                <div className="p-8 text-center text-xs text-slate-400 italic">
+                <div className="p-8 text-center text-xs text-slate-500 italic">
                   Belum ada bukti kredibilitas fisik yang diajukan oleh pemilik akun.
                 </div>
               ) : (
                 <div className="space-y-4">
                   {proofs.map((proof) => (
-                    <div key={proof.id} className="p-5 rounded-2xl border border-slate-150 bg-slate-50/40 hover:bg-slate-50 transition-all flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                    <div key={proof.id} className="p-5 rounded-2xl border dark:border-white/5 bg-slate-950/40 hover:bg-slate-950 transition-all flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                       <div className="space-y-2 flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="px-2.5 py-0.5 rounded text-[8.5px] font-extrabold uppercase bg-emerald-50 text-emerald-700 border border-emerald-100 font-mono tracking-wider">
+                          <span className="px-2.5 py-0.5 rounded text-[8.5px] font-extrabold uppercase bg-emerald-950/40 text-emerald-400 border border-emerald-900/50 font-mono tracking-wider">
                             {proof.proof_type.replace(/_/g, " ")}
                           </span>
-                          <span className="text-[10px] font-black text-slate-600 font-mono">+{proof.trust_points || 15} pts</span>
+                          <span className="text-[10px] font-black text-slate-400 font-mono">+{proof.trust_points || 15} pts</span>
                         </div>
-                        <p className="text-xs text-slate-600 leading-relaxed font-semibold">{proof.description}</p>
+                        <p className="text-xs text-slate-300 leading-relaxed font-semibold">{proof.description}</p>
                         
                         {proof.verification_notes && (
-                          <div className="p-2.5 rounded-lg bg-indigo-50/50 border border-indigo-100 text-[10.5px] text-slate-600 leading-relaxed">
-                            <span className="font-extrabold text-indigo-700">Moderator Audit:</span> {proof.verification_notes}
+                          <div className="p-2.5 rounded-lg bg-indigo-950/20 border dark:border-indigo-500/20 text-[10.5px] text-slate-400 leading-relaxed">
+                            <span className="font-extrabold text-indigo-400">Moderator Audit:</span> {proof.verification_notes}
                           </div>
                         )}
                       </div>
 
                       <div className="shrink-0 flex sm:flex-col items-start sm:items-end justify-between sm:justify-start gap-2 text-[10px]">
-                        <span className="text-slate-400 flex items-center gap-1 font-mono text-[9px]">
+                        <span className="text-slate-550 flex items-center gap-1 font-mono text-[9px]">
                           <Calendar className="w-3 h-3" />
                           {new Date(proof.approved_at).toLocaleDateString("id-ID", { year: "numeric", month: "short", day: "numeric" })}
                         </span>
@@ -519,7 +519,7 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
                           href={proof.document_url} 
                           target="_blank" 
                           rel="noreferrer"
-                          className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-indigo-600 hover:text-indigo-500 font-bold hover:border-slate-350 transition-all"
+                          className="px-3 py-1.5 rounded-lg bg-slate-950 border dark:border-white/10 text-indigo-400 hover:text-indigo-300 font-bold transition-all"
                         >
                           Lihat Berkas
                         </a>
@@ -536,51 +536,51 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
           <div className="space-y-8">
             
             {/* Widget Embed configurations */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm space-y-5">
-              <h4 className="text-[10.5px] font-black uppercase tracking-widest text-slate-400">Widget Kepercayaan</h4>
-              <p className="text-xs text-slate-500 leading-relaxed">Tampilkan lencana verifikasi trust score steril INFRAMEET langsung pada footer situs resmi Anda.</p>
+            <div className="bg-[#0b0f10]/80 rounded-3xl border dark:border-white/5 p-6 shadow-sm space-y-5">
+              <h4 className="text-[10.5px] font-black uppercase tracking-widest text-slate-500">Widget Kepercayaan</h4>
+              <p className="text-xs text-slate-400 leading-relaxed">Tampilkan lencana verifikasi trust score steril INFRAMEET langsung pada footer situs resmi Anda.</p>
               
               {/* Badge Preview Panel */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-150 flex flex-col items-center justify-center space-y-3">
-                <span className="text-[9px] uppercase font-bold text-slate-400">Live Preview Lencana</span>
+              <div className="p-4 rounded-2xl bg-slate-950 border dark:border-white/5 flex flex-col items-center justify-center space-y-3">
+                <span className="text-[9px] uppercase font-bold text-slate-500">Live Preview Lencana</span>
                 
                 {/* Simulated Badge Embed */}
-                <div className="bg-white px-4 py-3 rounded-xl border border-indigo-100 shadow-sm flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-                    <ShieldCheck className="w-5 h-5 text-indigo-600 animate-float" />
+                <div className="bg-slate-900 px-4 py-3 rounded-xl border dark:border-indigo-500/20 shadow-sm flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-indigo-950/20 border dark:border-indigo-500/20 flex items-center justify-center">
+                    <ShieldCheck className="w-5 h-5 text-indigo-400 animate-float" />
                   </div>
                   <div>
-                    <div className="text-[11px] font-black text-slate-900 leading-none">INFRAMEET VERIFIED</div>
-                    <div className="text-[9px] text-slate-400 font-extrabold uppercase mt-0.5 tracking-wider font-mono">Score: {entity.trust_score.toFixed(0)} points</div>
+                    <div className="text-[11px] font-black text-white leading-none">INFRAMEET VERIFIED</div>
+                    <div className="text-[9px] text-[#908fa0] font-extrabold uppercase mt-0.5 tracking-wider font-mono">Score: {entity.trust_score.toFixed(0)} points</div>
                   </div>
                 </div>
               </div>
 
               <button
                 onClick={() => setActiveBadgeModal(entity.name)}
-                className="w-full py-3 border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 bg-slate-50 font-black rounded-xl text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5"
+                className="w-full py-3 border dark:border-white/10 hover:border-slate-700 text-slate-300 hover:text-white bg-slate-950 font-black rounded-xl text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-1.5"
               >
-                <ShieldCheck className="w-4 h-4 text-indigo-600" />
+                <ShieldCheck className="w-4 h-4 text-indigo-400" />
                 Ambil Kode Embed
               </button>
             </div>
 
             {/* Contact Inquiry form */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm space-y-5">
-              <h4 className="text-[10.5px] font-black uppercase tracking-widest text-indigo-600 flex items-center gap-1">
+            <div className="bg-[#0b0f10]/80 rounded-3xl border dark:border-white/5 p-6 shadow-sm space-y-5">
+              <h4 className="text-[10.5px] font-black uppercase tracking-widest text-indigo-400 flex items-center gap-1">
                 <MessageSquare className="w-4 h-4" />
                 Hubungi {entity.name.split(" (")[0]}
               </h4>
-              <p className="text-xs text-slate-500 leading-relaxed">Ajukan pertanyaan khusus kustomisasi, integrasi solusi, atau permohonan kemitraan langsung.</p>
+              <p className="text-xs text-slate-400 leading-relaxed">Ajukan pertanyaan khusus kustomisasi, integrasi solusi, atau permohonan kemitraan langsung.</p>
 
               {inquirySuccess ? (
-                <div className="p-6 rounded-2xl border border-emerald-100 bg-emerald-50 text-center space-y-2">
-                  <CheckCircle className="w-8 h-8 text-emerald-600 mx-auto" />
-                  <h5 className="text-xs font-black text-slate-800">Inquiry Terkirim!</h5>
+                <div className="p-6 rounded-2xl border dark:border-emerald-500/20 bg-emerald-950/20 text-center space-y-2">
+                  <CheckCircle className="w-8 h-8 text-emerald-400 mx-auto" />
+                  <h5 className="text-xs font-black text-white">Inquiry Terkirim!</h5>
                   <p className="text-[10px] text-slate-500 leading-relaxed">Pesan Anda berhasil diteruskan ke antrean inbox pemilik profil.</p>
                   <button 
                     onClick={() => setInquirySuccess(false)}
-                    className="text-[10px] font-bold text-indigo-600 hover:underline pt-2 block mx-auto"
+                    className="text-[10px] font-bold text-indigo-400 hover:underline pt-2 block mx-auto"
                   >
                     Kirim pesan lain
                   </button>
@@ -588,33 +588,33 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
               ) : (
                 <form onSubmit={handleSendInquiry} className="space-y-4 text-xs font-bold">
                   <div className="space-y-1">
-                    <label className="text-[10px] uppercase font-bold text-slate-400">Nama Lengkap</label>
+                    <label className="text-[10px] uppercase font-bold text-slate-500">Nama Lengkap</label>
                     <input 
                       type="text" 
                       value={inquiryName}
                       onChange={(e) => setInquiryName(e.target.value)}
                       placeholder="Masukkan nama Anda..."
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border dark:border-white/10 rounded-xl font-semibold placeholder:text-slate-650 text-white focus:outline-none focus:border-indigo-500 transition-all"
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] uppercase font-bold text-slate-400">Alamat Email</label>
+                    <label className="text-[10px] uppercase font-bold text-slate-500">Alamat Email</label>
                     <input 
                       type="email" 
                       value={inquiryEmail}
                       onChange={(e) => setInquiryEmail(e.target.value)}
                       placeholder="email@perusahaan.com"
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border dark:border-white/10 rounded-xl font-semibold placeholder:text-slate-650 text-white focus:outline-none focus:border-indigo-500 transition-all"
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] uppercase font-bold text-slate-400">Isi Pesan / Inquiry</label>
+                    <label className="text-[10px] uppercase font-bold text-slate-550">Isi Pesan / Inquiry</label>
                     <textarea 
                       rows={4}
                       value={inquiryMsg}
                       onChange={(e) => setInquiryMsg(e.target.value)}
                       placeholder="Deskripsikan kebutuhan integrasi kustom Anda..."
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all resize-none"
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border dark:border-white/10 rounded-xl font-semibold placeholder:text-slate-650 text-white focus:outline-none focus:border-indigo-500 transition-all resize-none"
                     />
                   </div>
 

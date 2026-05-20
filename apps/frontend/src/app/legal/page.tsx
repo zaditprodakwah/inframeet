@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import MegaMenu from "../components/MegaMenu";
+import Footer from "../components/Footer";
 import { 
   ShieldCheck, 
   GraduationCap, 
@@ -41,15 +43,16 @@ export default function LegalPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 pb-20">
-      <main className="max-w-7xl mx-auto px-6 py-12">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
+      <MegaMenu />
+      <main className="flex-grow max-w-7xl mx-auto px-6 py-12 w-full pt-24 lg:pt-32">
         {/* Hero Section */}
         <section className="mb-16">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">
             <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-4">
                 <ShieldCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                <span className="text-xs font-mono text-indigo-600 dark:text-indigo-400 uppercase tracking-widest font-bold">
+                <span className="text-xs font-mono text-indigo-400 uppercase tracking-widest font-bold">
                   Transparency Protocol v4.2.0
                 </span>
               </div>
@@ -61,13 +64,13 @@ export default function LegalPage() {
               </p>
             </div>
             
-            <div className="glass-panel p-6 rounded-2xl flex flex-col gap-2 min-w-[280px] bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-xl">
+            <div className="glass-panel p-6 rounded-2xl flex flex-col gap-2 min-w-[280px] bg-white/5 border dark:border-white/10 shadow-xl">
               <div className="flex justify-between items-center">
-                <span className="text-[10px] font-mono text-slate-500 uppercase font-bold">Global Integrity Status</span>
+                <span className="text-[10px] font-mono text-[#908fa0] uppercase font-bold">Global Integrity Status</span>
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
-              <div className="font-mono text-3xl font-black text-emerald-500 dark:text-emerald-400">99.999%</div>
-              <div className="w-full bg-slate-200 bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
+              <div className="font-mono text-3xl font-black text-emerald-400">99.999%</div>
+              <div className="w-full dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
                 <div className="bg-emerald-500 h-full w-[99.9%]"></div>
               </div>
               <span className="text-[10px] font-mono text-slate-400 mt-1">HASH: 0x82f...a9c2</span>
@@ -81,18 +84,18 @@ export default function LegalPage() {
           {/* Sticky Sidebar Navigation */}
           <aside className="hidden lg:block w-72 sticky top-32 h-max">
             <nav className="flex flex-col gap-2">
-              <h3 className="text-xs font-mono text-slate-500 mb-4 px-4 font-bold tracking-wider">DOCUMENT SECTIONS</h3>
+              <h3 className="text-xs font-mono text-[#908fa0] mb-4 px-4 font-bold tracking-wider">DOCUMENT SECTIONS</h3>
               
               <a 
                 href="#academic-protocol"
                 className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all border-l-2 ${
                   activeSection === "academic-protocol" 
-                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10" 
-                    : "border-transparent hover:bg-slate-100 dark:hover:bg-white/5 hover:border-slate-300 dark:hover:border-slate-700"
+                    ? "border-indigo-500 bg-indigo-50/10 dark:bg-indigo-500/10" 
+                    : "border-transparent hover:bg-white/5 hover:border-slate-700"
                 }`}
               >
-                <GraduationCap className={`w-5 h-5 ${activeSection === "academic-protocol" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
-                <span className={`font-bold text-sm ${activeSection === "academic-protocol" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-400"}`}>
+                <GraduationCap className={`w-5 h-5 ${activeSection === "academic-protocol" ? "text-indigo-400" : "text-slate-500"}`} />
+                <span className={`font-bold text-sm ${activeSection === "academic-protocol" ? "text-indigo-300" : "text-[#908fa0]"}`}>
                   Academic Integrity
                 </span>
               </a>
@@ -101,12 +104,12 @@ export default function LegalPage() {
                 href="#compliance"
                 className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all border-l-2 ${
                   activeSection === "compliance" 
-                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10" 
-                    : "border-transparent hover:bg-slate-100 dark:hover:bg-white/5 hover:border-slate-300 dark:hover:border-slate-700"
+                    ? "border-indigo-500 bg-indigo-50/10 dark:bg-indigo-500/10" 
+                    : "border-transparent hover:bg-white/5 hover:border-slate-700"
                 }`}
               >
-                <Scale className={`w-5 h-5 ${activeSection === "compliance" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
-                <span className={`font-bold text-sm ${activeSection === "compliance" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-400"}`}>
+                <Scale className={`w-5 h-5 ${activeSection === "compliance" ? "text-indigo-400" : "text-slate-500"}`} />
+                <span className={`font-bold text-sm ${activeSection === "compliance" ? "text-indigo-300" : "text-[#908fa0]"}`}>
                   UU PDP Compliance
                 </span>
               </a>
@@ -115,12 +118,12 @@ export default function LegalPage() {
                 href="#sla-guarantee"
                 className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all border-l-2 ${
                   activeSection === "sla-guarantee" 
-                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10" 
-                    : "border-transparent hover:bg-slate-100 dark:hover:bg-white/5 hover:border-slate-300 dark:hover:border-slate-700"
+                    ? "border-indigo-500 bg-indigo-50/10 dark:bg-indigo-500/10" 
+                    : "border-transparent hover:bg-white/5 hover:border-slate-700"
                 }`}
               >
-                <Server className={`w-5 h-5 ${activeSection === "sla-guarantee" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
-                <span className={`font-bold text-sm ${activeSection === "sla-guarantee" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-400"}`}>
+                <Server className={`w-5 h-5 ${activeSection === "sla-guarantee" ? "text-indigo-400" : "text-slate-500"}`} />
+                <span className={`font-bold text-sm ${activeSection === "sla-guarantee" ? "text-indigo-300" : "text-[#908fa0]"}`}>
                   SLA 99.999%
                 </span>
               </a>
@@ -129,22 +132,22 @@ export default function LegalPage() {
                 href="#privacy-encryption"
                 className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all border-l-2 ${
                   activeSection === "privacy-encryption" 
-                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10" 
-                    : "border-transparent hover:bg-slate-100 dark:hover:bg-white/5 hover:border-slate-300 dark:hover:border-slate-700"
+                    ? "border-indigo-500 bg-indigo-50/10 dark:bg-indigo-500/10" 
+                    : "border-transparent hover:bg-white/5 hover:border-slate-700"
                 }`}
               >
-                <Lock className={`w-5 h-5 ${activeSection === "privacy-encryption" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
-                <span className={`font-bold text-sm ${activeSection === "privacy-encryption" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-400"}`}>
+                <Lock className={`w-5 h-5 ${activeSection === "privacy-encryption" ? "text-indigo-400" : "text-slate-500"}`} />
+                <span className={`font-bold text-sm ${activeSection === "privacy-encryption" ? "text-indigo-300" : "text-[#908fa0]"}`}>
                   Data Sovereignty
                 </span>
               </a>
 
-              <div className="mt-8 px-4 py-6 border-t border-slate-200 dark:border-white/10">
-                <div className="text-xs font-mono text-slate-500 mb-3 font-bold">QUICK DOWNLOADS</div>
-                <button className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:underline font-mono text-xs py-1.5 font-bold">
+              <div className="mt-8 px-4 py-6 border-t dark:border-white/10">
+                <div className="text-xs font-mono text-[#908fa0] mb-3 font-bold">QUICK DOWNLOADS</div>
+                <button className="flex items-center gap-2 text-indigo-400 hover:underline font-mono text-xs py-1.5 font-bold">
                   <Download className="w-4 h-4" /> Full PDF Protocol
                 </button>
-                <button className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:underline font-mono text-xs py-1.5 font-bold">
+                <button className="flex items-center gap-2 text-indigo-400 hover:underline font-mono text-xs py-1.5 font-bold">
                   <History className="w-4 h-4" /> Version History (JSON)
                 </button>
               </div>
@@ -155,12 +158,12 @@ export default function LegalPage() {
           <div className="flex-1 space-y-16">
             
             {/* Section: Academic Integrity */}
-            <article id="academic-protocol" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+            <article id="academic-protocol" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 dark:bg-[#0b0f10]/80 border dark:border-white/5 shadow-xl">
               <div className="flex flex-col xl:flex-row gap-10">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-6">
-                    <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 font-mono text-[10px] rounded-lg border border-indigo-200 dark:border-indigo-500/20 font-bold">DOCUMENT_ID: AC-77</span>
-                    <span className="font-mono text-[10px] text-slate-500 font-bold">STAMP: 2024-11-20T09:44:12Z</span>
+                    <span className="px-3 py-1 dark:bg-indigo-500/10 dark:text-indigo-400 font-mono text-[10px] rounded-lg border dark:border-indigo-500/20 font-bold">DOCUMENT_ID: AC-77</span>
+                    <span className="font-mono text-[10px] text-[#908fa0] font-bold">STAMP: 2024-11-20T09:44:12Z</span>
                   </div>
                   <h2 className="text-2xl lg:text-3xl font-extrabold mb-6 text-white">Academic Integrity Protocol</h2>
                   
@@ -168,10 +171,10 @@ export default function LegalPage() {
                     <p>
                       Protokol ini mengatur semua interaksi akademik di dalam ekosistem INFRAMEET. Kami menggunakan verifikasi kriptografis otomatis untuk memastikan bahwa data riset dan verifikasi institusi tetap absolut (immutable) mulai dari titik pengumpulan (*capture*) hingga publikasi.
                     </p>
-                    <div className="border-l-4 border-indigo-500 pl-6 py-4 bg-slate-100 bg-slate-900/50 rounded-r-xl">
+                    <div className="border-l-4 border-indigo-500 pl-6 py-4 bg-slate-900/50 rounded-r-xl">
                       <h4 className="font-mono text-xs text-white mb-2 font-black">CLAUSE 1.4: PROOF OF ORIGIN</h4>
                       <p className="font-mono text-sm italic text-slate-400">
-                        "Setiap paket data yang ditransmisikan melintasi *node* akademik INFRAMEET harus memuat *anchor* sertifikat X.509 yang valid, dipetakan ke identitas institusi terverifikasi."
+                        "Setiap paket data yang ditransmisikan melintasi *node* akademik INFRAMEET harus memuat *anchor* sertifikat X.509 yang valid, dipetakan to identitas institusi terverifikasi."
                       </p>
                     </div>
                     <p>
@@ -183,14 +186,14 @@ export default function LegalPage() {
             </article>
 
             {/* Section: UU PDP Compliance */}
-            <article id="compliance" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+            <article id="compliance" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 dark:bg-[#0b0f10]/80 border dark:border-white/5 shadow-xl">
               <div className="flex items-center gap-4 mb-8">
-                <div className="p-4 bg-emerald-100 dark:bg-emerald-500/20 rounded-2xl">
-                  <Scale className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                <div className="p-4 dark:bg-emerald-500/20 rounded-2xl">
+                  <Scale className="w-6 h-6 text-emerald-400" />
                 </div>
                 <div>
                   <h2 className="text-2xl lg:text-3xl font-extrabold text-white">Universal Data Privacy (UU PDP)</h2>
-                  <p className="font-mono text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-widest font-bold mt-1">Compliance Status: ACTIVE</p>
+                  <p className="font-mono text-xs text-emerald-400 uppercase tracking-widest font-bold mt-1">Compliance Status: ACTIVE</p>
                 </div>
               </div>
 
@@ -212,25 +215,25 @@ export default function LegalPage() {
                   </ul>
                 </div>
                 
-                <div className="bg-slate-100 dark:bg-black/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10">
+                <div className="dark:bg-black/50 p-6 rounded-2xl border dark:border-white/10">
                   <div className="flex justify-between items-center mb-6">
-                    <span className="font-mono text-xs font-black tracking-widest">AUDIT LOG</span>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold text-xs">SUCCESS</span>
+                    <span className="font-mono text-xs font-black tracking-widest text-[#908fa0]">AUDIT LOG</span>
+                    <span className="text-emerald-400 font-mono font-bold text-xs">SUCCESS</span>
                   </div>
                   <div className="font-mono text-xs space-y-2 text-slate-400">
-                    <p className="text-slate-800 text-slate-200 font-bold">2026.05.20 08:00:01 - Audit Started</p>
+                    <p className="text-slate-200 font-bold">2026.05.20 08:00:01 - Audit Started</p>
                     <p className="pl-4">&gt; Checking UU-PDP-Compliance-V3</p>
                     <p className="pl-4">&gt; Verifying Encryption Layers... [OK]</p>
                     <p className="pl-4">&gt; Key Rotation Verified... [OK]</p>
                     <p className="pl-4">&gt; Resident Sovereignty... [OK]</p>
-                    <p className="text-emerald-600 dark:text-emerald-400 font-bold mt-4 pt-2 border-t border-slate-200 dark:border-white/10">2026.05.20 08:00:14 - All Nodes Compliant</p>
+                    <p className="text-emerald-400 font-bold mt-4 pt-2 border-t dark:border-white/10">2026.05.20 08:00:14 - All Nodes Compliant</p>
                   </div>
                 </div>
               </div>
             </article>
 
             {/* Section: SLA Guarantee */}
-            <article id="sla-guarantee" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl relative overflow-hidden">
+            <article id="sla-guarantee" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 dark:bg-[#0b0f10]/80 border dark:border-white/5 shadow-xl relative overflow-hidden">
               {/* Background Glow */}
               <div className="absolute -right-20 -top-20 w-64 h-64 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
               
@@ -241,37 +244,37 @@ export default function LegalPage() {
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                  <div className="bg-slate-50 bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
-                    <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
-                      <Gauge className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                  <div className="bg-slate-900/50 p-6 rounded-2xl border dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                    <div className="w-12 h-12 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
+                      <Gauge className="w-5 h-5 text-indigo-400" />
                     </div>
                     <div className="text-2xl font-black text-white mb-1">5.2ms</div>
-                    <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Global Latency Avg</div>
+                    <div className="font-mono text-[10px] text-[#908fa0] font-bold uppercase tracking-widest">Global Latency Avg</div>
                   </div>
                   
-                  <div className="bg-slate-50 bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
-                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-500/10 rounded-full flex items-center justify-center mb-4">
-                      <RefreshCw className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                  <div className="bg-slate-900/50 p-6 rounded-2xl border dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                    <div className="w-12 h-12 dark:bg-emerald-500/10 rounded-full flex items-center justify-center mb-4">
+                      <RefreshCw className="w-5 h-5 text-emerald-400" />
                     </div>
                     <div className="text-2xl font-black text-white mb-1">&lt; 30s</div>
-                    <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Failover Transition</div>
+                    <div className="font-mono text-[10px] text-[#908fa0] font-bold uppercase tracking-widest">Failover Transition</div>
                   </div>
                   
-                  <div className="bg-slate-50 bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
-                    <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
-                      <Shield className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                  <div className="bg-slate-900/50 p-6 rounded-2xl border dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                    <div className="w-12 h-12 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
+                      <Shield className="w-5 h-5 text-indigo-400" />
                     </div>
                     <div className="text-2xl font-black text-white mb-1">0</div>
-                    <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Critical Violations</div>
+                    <div className="font-mono text-[10px] text-[#908fa0] font-bold uppercase tracking-widest">Critical Violations</div>
                   </div>
                 </div>
 
-                <div className="mt-10 p-6 bg-indigo-50 dark:bg-indigo-950/20 rounded-2xl border border-indigo-100 dark:border-indigo-500/20">
+                <div className="mt-10 p-6 dark:bg-indigo-950/20 rounded-2xl border dark:border-indigo-500/20">
                   <div className="flex items-center gap-2 mb-3">
-                    <Info className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                    <span className="font-mono text-xs font-black text-indigo-900 dark:text-indigo-200">REBATE CLAUSE (SECTION 5)</span>
+                    <Info className="w-5 h-5 text-indigo-400" />
+                    <span className="font-mono text-xs font-black dark:text-indigo-200">REBATE CLAUSE (SECTION 5)</span>
                   </div>
-                  <p className="font-mono text-sm text-indigo-800/80 dark:text-indigo-300/80 leading-relaxed">
+                  <p className="font-mono text-sm dark:text-indigo-300/80 leading-relaxed">
                     Dalam hal infrastruktur mengalami *downtime* melebihi 0.001% per bulan kalender, kredit layanan dicairkan secara otomatis melalui *smart contract* ke akun terdampak. Mekanisme ini tidak memerlukan klaim manual.
                   </p>
                 </div>
@@ -279,13 +282,13 @@ export default function LegalPage() {
             </article>
 
             {/* Section: Data Sovereignty & Encryption */}
-            <article id="privacy-encryption" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+            <article id="privacy-encryption" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 dark:bg-[#0b0f10]/80 border dark:border-white/5 shadow-xl">
               <h2 className="text-2xl lg:text-3xl font-extrabold mb-8 text-white">Protocol Encryption Standards</h2>
               
               <div className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
-                  <div className="font-mono text-xs font-bold text-slate-500 tracking-widest uppercase">TRANSPORT LAYER</div>
-                  <div className="md:col-span-3 h-px bg-slate-200 dark:bg-white/10"></div>
+                  <div className="font-mono text-xs font-bold text-[#908fa0] tracking-widest uppercase">TRANSPORT LAYER</div>
+                  <div className="md:col-span-3 h-px dark:bg-white/10"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -303,7 +306,7 @@ export default function LegalPage() {
                   </div>
                 </div>
 
-                <div className="mt-10 p-8 rounded-2xl bg-slate-900 dark:bg-black border border-slate-800 relative overflow-hidden">
+                <div className="mt-10 p-8 rounded-2xl dark:bg-black border border-slate-800 relative overflow-hidden">
                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
                   <div className="relative z-10 max-w-lg">
                     <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
@@ -321,6 +324,7 @@ export default function LegalPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -315,7 +315,7 @@ export default async function AdminDashboardPage() {
 
           <Link
             href="/admin/crm-cms"
-            className="w-full py-2.5 bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-350 hover:text-white rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1 cursor-pointer"
+            className="w-full py-2.5 bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1 cursor-pointer"
           >
             Buka Command CRM & CMS Hub <ArrowRight className="w-3.5 h-3.5" />
           </Link>
@@ -391,7 +391,7 @@ export default async function AdminDashboardPage() {
                   <th className="py-2.5 text-right">Signed Date</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-850/40 text-xs text-slate-350">
+              <tbody className="divide-y divide-slate-850/40 text-xs text-slate-400">
                 {latestVCs && latestVCs.length > 0 ? (
                   latestVCs.map((vc: any) => (
                     <tr key={vc.id} className="hover:bg-slate-850/10 transition-colors">

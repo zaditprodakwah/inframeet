@@ -454,7 +454,7 @@ export default function InsightsPage() {
               placeholder="Cari riset, ulasan bisnis, software, atau kata kunci metodologi..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-6 py-4 rounded-2xl bg-[#090d1f] border border-slate-200 border-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-sm text-slate-800 text-slate-200 outline-none transition duration-200"
+              className="w-full pl-12 pr-6 py-4 rounded-2xl bg-[#0b0f10] border dark:border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-sm text-slate-200 outline-none transition duration-200"
             />
             {searchQuery && (
               <button
@@ -474,8 +474,8 @@ export default function InsightsPage() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-2.5 text-xs font-bold rounded-lg uppercase tracking-wider border transition-all cursor-pointer ${
                   activeTab === tab
-                    ? "bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-600/10"
-                    : "bg-[#090d1f] border-slate-200 border-slate-800 text-slate-400 hover:text-white"
+                    ? "bg-indigo-600 border-indigo-550 text-white shadow-lg shadow-indigo-600/10"
+                    : "bg-[#0b0f10]/80 border dark:border-white/5 text-slate-400 hover:text-white"
                 }`}
               >
                 {tab === "all" ? "Semua" : tab === "ai" ? "Riset & Metodologi" : tab === "technology" ? "Teknologi" : "Bisnis"}
@@ -515,7 +515,7 @@ export default function InsightsPage() {
                     : "Mei 2026";
 
                   return (
-                    <div key={art.id} className="glass-card p-6 md:p-8 rounded-3xl border border-[#1e293b] flex flex-col justify-between space-y-6 hover:shadow-2xl hover:shadow-indigo-500/[0.02] transition duration-300 animate-fade-in overflow-hidden bg-white dark:bg-slate-950/20">
+                    <div key={art.id} className="glass-card p-6 md:p-8 rounded-3xl border dark:border-white/5 flex flex-col justify-between space-y-6 hover:shadow-2xl hover:shadow-indigo-500/[0.02] transition duration-300 animate-fade-in overflow-hidden bg-[#0b0f10]/80">
                       <div className="space-y-4">
                         
                         {/* Top Header Tags */}
@@ -523,7 +523,7 @@ export default function InsightsPage() {
                           <span className={`px-2.5 py-0.5 rounded capitalize border ${
                             isCurated 
                               ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
-                              : "bg-slate-500/10 text-slate-400 border-slate-200 border-slate-800"
+                              : "bg-slate-500/10 text-slate-400 dark:border-white/5"
                           }`}>
                             {isCurated ? "🟢 EXPERT ANALYSIS" : "BERITA SEKTOR"}
                           </span>
@@ -532,7 +532,7 @@ export default function InsightsPage() {
                             {formattedDate}
                           </span>
                         </div>
-
+ 
                         {/* Title with link to detailed page */}
                         <h3 className="text-lg font-bold text-white hover:text-amber-400 transition leading-snug">
                           {isFallback ? (
@@ -545,7 +545,7 @@ export default function InsightsPage() {
                             </Link>
                           )}
                         </h3>
-
+ 
                         {/* Dynamic Hashtag Pills */}
                         {art.categories && art.categories.length > 0 && (
                           <div className="flex flex-wrap gap-1.5 pt-1">
@@ -555,7 +555,7 @@ export default function InsightsPage() {
                                 <button
                                   key={tag}
                                   onClick={() => setSearchQuery(tag)}
-                                  className="px-2 py-0.5 text-[10px] font-bold bg-[#090d1f] hover:bg-indigo-600/20 text-slate-400 hover:text-indigo-400 rounded border border-slate-200 border-slate-800 transition"
+                                  className="px-2 py-0.5 text-[10px] font-bold bg-[#070a0b] hover:bg-indigo-600/20 text-slate-400 hover:text-indigo-400 rounded border dark:border-white/5 transition"
                                 >
                                   #{tag}
                                 </button>
@@ -638,7 +638,7 @@ export default function InsightsPage() {
                   <button
                     onClick={() => loadArticles(false)}
                     disabled={loadingMore}
-                    className="inline-flex items-center gap-2 px-6 py-3 border border-slate-200 border-slate-800 hover:border-slate-700 bg-white dark:bg-slate-950/40 text-xs font-black tracking-widest uppercase rounded-xl text-amber-400 hover:text-amber-300 hover:scale-105 active:scale-95 disabled:opacity-50 transition cursor-pointer"
+                    className="inline-flex items-center gap-2 px-6 py-3 border dark:border-white/5 bg-[#0b0f10]/80 hover:bg-[#070a0b] text-xs font-black tracking-widest uppercase rounded-xl text-amber-400 hover:text-amber-300 hover:scale-105 active:scale-95 disabled:opacity-50 transition cursor-pointer"
                   >
                     {loadingMore ? "Memuat..." : "Tampilkan Lebih Banyak"}
                   </button>

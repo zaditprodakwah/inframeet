@@ -386,23 +386,23 @@ export default function DirectoryCatalogPage() {
         
         {/* Banner Section */}
         <section className="max-w-4xl mx-auto text-center space-y-5">
-          <div className="inline-flex items-center gap-2 bg-slate-105 dark:bg-[#1d2022]/60 border border-slate-200 dark:border-white/10 px-3 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 dark:bg-[#1d2022]/60 border dark:border-white/10 px-3 py-1 rounded-full">
             <Sparkles className="w-4 h-4 text-[#8083ff]" />
             <span className="font-mono text-xs text-[#8083ff] uppercase tracking-wider">
-              Polymorphic Trust &amp; Credibility Directory
+              Direktori Kredibilitas &amp; Kepercayaan Publik
             </span>
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Proof-of-Authority Index
+            Indeks Kepatuhan &amp; Keaslian
           </h1>
-          <p className="text-sm md:text-base text-slate-650 dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">
-            A cryptographically verified directory of certified infrastructure architects, academic integrity analysts, and security engineers. All credentials are cross-referenced against the global ledger.
+          <p className="text-sm md:text-base dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">
+            Direktori terverifikasi untuk memvalidasi reputasi institusi pendidikan, profil pakar riset, dan keandalan sistem teknologi secara terpadu.
           </p>
         </section>
 
         {/* Dynamic Filters & Search Command Bar */}
         <section className="space-y-6">
-          <div className="flex flex-col gap-6 p-6 rounded-3xl bg-slate-50/50 dark:bg-[#1d2022]/40 border border-slate-200 dark:border-white/5 shadow-sm">
+          <div className="flex flex-col gap-6 p-6 rounded-3xl dark:bg-[#1d2022]/40 border dark:border-white/5 shadow-sm">
             
             {/* Search Input Box & Main Type Filters */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
@@ -413,7 +413,7 @@ export default function DirectoryCatalogPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Cari universitas, sekolah, expert, saas..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#6366f1] transition-all font-semibold"
+                  className="w-full pl-10 pr-4 py-2.5 dark:bg-[#101415] border dark:border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#6366f1] transition-all font-semibold"
                 />
               </div>
 
@@ -436,7 +436,7 @@ export default function DirectoryCatalogPage() {
                     className={`px-4 py-2 rounded-xl text-[10px] font-bold font-mono uppercase tracking-wider transition-all border whitespace-nowrap cursor-pointer ${
                       entityTypeFilter === item.id
                         ? "bg-[#6366f1] border-[#6366f1] text-white shadow-md shadow-[#6366f1]/10"
-                        : "bg-white dark:bg-[#101415] border-slate-200 dark:border-white/10 text-slate-500 hover:text-slate-900 dark:hover:text-white"
+                        : "dark:bg-[#101415] dark:border-white/10 text-slate-400 hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -446,16 +446,16 @@ export default function DirectoryCatalogPage() {
             </div>
 
             {/* Specialized Sub-Filters Row */}
-            <div className="pt-4 border-t border-slate-250 dark:border-white/10 flex flex-wrap gap-4 items-center text-xs">
-              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase tracking-widest">QUERY PARAMETERS:</span>
+            <div className="pt-4 border-t dark:border-white/10 flex flex-wrap gap-4 items-center text-xs">
+              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase tracking-widest">PARAMETER FILTER:</span>
               
               {/* Sector Filter */}
               <div className="flex items-center gap-1.5">
-                <label className="text-[11px] font-bold text-slate-550">Sektor:</label>
+                <label className="text-[11px] font-bold text-slate-400">Sektor:</label>
                 <select
                   value={sectorFilter}
                   onChange={(e) => setSectorFilter(e.target.value)}
-                  className="bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-lg text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
+                  className="dark:bg-[#101415] border dark:border-white/10 rounded-lg text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
                 >
                   <option value="all">Semua Sektor</option>
                   <option value="Negeri">Negeri</option>
@@ -465,11 +465,11 @@ export default function DirectoryCatalogPage() {
 
               {/* Accreditation Filter */}
               <div className="flex items-center gap-1.5">
-                <label className="text-[11px] font-bold text-slate-550">Kredensial:</label>
+                <label className="text-[11px] font-bold text-slate-400">Kredensial:</label>
                 <select
                   value={accreditationFilter}
                   onChange={(e) => setAccreditationFilter(e.target.value)}
-                  className="bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-lg text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
+                  className="dark:bg-[#101415] border dark:border-white/10 rounded-lg text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
                 >
                   <option value="all">Tier A &amp; B</option>
                   <option value="tier_a">Tier A (Global)</option>
@@ -489,10 +489,10 @@ export default function DirectoryCatalogPage() {
               <p className="text-slate-500 font-mono text-[10px] uppercase tracking-wider animate-pulse">Menghubungkan ke Direktori Polimorfik...</p>
             </div>
           ) : filteredEntities.length === 0 ? (
-            <div className="text-center py-20 bg-slate-50/50 dark:bg-[#1d2022]/40 border border-slate-200 dark:border-white/5 rounded-3xl p-8 max-w-md mx-auto space-y-3">
+            <div className="text-center py-20 dark:bg-[#1d2022]/40 border dark:border-white/5 rounded-3xl p-8 max-w-md mx-auto space-y-3">
               <BadgeAlert className="w-8 h-8 text-[#6366f1] mx-auto" />
               <p className="text-white text-sm font-extrabold">Tidak menemukan entitas yang cocok.</p>
-              <p className="text-slate-450 dark:text-[#c7c4d7] text-xs font-medium">Cobalah menyetel ulang filter atau ganti kata kunci pencarian Anda.</p>
+              <p className="text-slate-400 dark:text-[#c7c4d7] text-xs font-medium">Cobalah menyetel ulang filter atau ganti kata kunci pencarian Anda.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -511,10 +511,10 @@ export default function DirectoryCatalogPage() {
         <div className="flex justify-center mt-8">
           <button 
             onClick={loadDirectories}
-            className="bg-slate-50 dark:bg-[#1d2022] hover:bg-slate-100 dark:hover:bg-[#323537] border border-slate-250 dark:border-white/10 text-slate-700 text-white font-mono text-[10px] px-8 py-3 rounded-xl transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+            className="dark:bg-[#1d2022] dark:hover:bg-[#323537] border dark:border-white/10 text-white font-mono text-[10px] px-8 py-3 rounded-xl transition-all flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <RefreshCw className="w-3.5 h-3.5" />
-            <span>Load Additional Hashes</span>
+            <span>Muat Lebih Banyak</span>
           </button>
         </div>
 

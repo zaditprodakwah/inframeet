@@ -140,7 +140,7 @@ export function B2BCalculator() {
 
       <div className="space-y-4 text-xs font-bold">
         <div className="space-y-2">
-          <div className="flex justify-between text-slate-350">
+          <div className="flex justify-between text-slate-400">
             <span>Jam Kerja Bulanan</span>
             <span className="text-white">{hours} jam</span>
           </div>
@@ -155,7 +155,7 @@ export function B2BCalculator() {
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between text-slate-350">
+          <div className="flex justify-between text-slate-400">
             <span>Tarif Layanan (Rp/jam)</span>
             <span className="text-white">Rp {rate.toLocaleString("id-ID")}</span>
           </div>
@@ -257,7 +257,7 @@ export function CitationFormatter() {
 
       <form onSubmit={handleFormat} className="space-y-4 font-bold text-xs">
         <div className="space-y-1.5">
-          <label className="text-slate-350 text-[10px]">DOI Publikasi (e.g. 10.1038/s41586-020-2012-7)</label>
+          <label className="text-slate-400 text-[10px]">DOI Publikasi (e.g. 10.1038/s41586-020-2012-7)</label>
           <input
             type="text"
             required
@@ -269,7 +269,7 @@ export function CitationFormatter() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-slate-350 text-[10px]">Kirim Hasil ke Email Anda</label>
+          <label className="text-slate-400 text-[10px]">Kirim Hasil ke Email Anda</label>
           <input
             type="email"
             required

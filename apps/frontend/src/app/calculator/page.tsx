@@ -30,7 +30,7 @@ export default function CalculatorPage() {
         
         {/* Title and descriptions (hide during print) */}
         <div className="text-center space-y-4 mb-8 print:hidden">
-          <div className="inline-flex items-center gap-2 bg-slate-105 dark:bg-[#1d2022]/60 border border-slate-200 dark:border-white/10 px-3 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 dark:bg-[#1d2022]/60 border dark:border-white/10 px-3 py-1 rounded-full">
             <Sparkles className="w-4 h-4 text-[#8083ff]" />
             <span className="font-mono text-xs text-[#8083ff] uppercase tracking-wider">
               Kalkulator Instan v6.8-ROI Enabled
@@ -39,19 +39,19 @@ export default function CalculatorPage() {
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Pricing Configurator &amp; ROI Optimizer
           </h1>
-          <p className="text-sm md:text-base text-slate-650 dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-base dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">
             Simulasikan biaya kustom asistensi akademik secara transparan, atau hitung proyeksi penghematan anggaran infrastruktur server B2B Anda.
           </p>
 
           {/* Toggle Switcher tabs */}
           <div className="flex justify-center pt-6">
-            <div className="flex bg-slate-100 dark:bg-[#1d2022] border border-slate-200 dark:border-white/10 p-1.5 rounded-2xl gap-1 shadow-inner">
+            <div className="flex dark:bg-[#1d2022] border dark:border-white/10 p-1.5 rounded-2xl gap-1 shadow-inner">
               <button
                 onClick={() => setActiveTab("intake")}
                 className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                   activeTab === "intake"
                     ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/20"
-                    : "text-slate-500 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-white"
+                    : "text-slate-400 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-white"
                 }`}
               >
                 <FileText className="w-4 h-4" /> 
@@ -62,7 +62,7 @@ export default function CalculatorPage() {
                 className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                   activeTab === "roi"
                     ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/20"
-                    : "text-slate-500 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-white"
+                    : "text-slate-400 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-white"
                 }`}
               >
                 <Calculator className="w-4 h-4" /> 
