@@ -1,30 +1,39 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { sendEmail } from "@/lib/mail";
+import { inquirySubmitSchema } from "@/lib/apiSchemas";
+import { apiSuccess, apiError } from "@/lib/apiEnvelope";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { directoryId, senderEmail, senderName, senderPhone, subject, message, captchaToken } = body;
 
-    if (!directoryId || !senderEmail || !message) {
-      return NextResponse.json(
-        { error: "directoryId, senderEmail, and message are required fields" },
-        { status: 400 }
+    // 1. Zod contract validation
+    const parsed = inquirySubmitSchema.safeParse(body);
+    if (!parsed.success) {
+      return apiError(
+        "VALIDATION_ERROR",
+        "Data payload tidak valid.",
+        parsed.error.flatten().fieldErrors,
+        400
       );
     }
 
+    const { directoryId, senderEmail, senderName, senderPhone, subject, message, captchaToken } = parsed.data;
+
     if (!supabaseAdmin) {
-      return NextResponse.json(
-        { error: "Supabase Admin client not configured on server" },
-        { status: 500 }
+      return apiError(
+        "INTERNAL_ERROR",
+        "Supabase Admin client not configured on server",
+        {},
+        500
       );
     }
 
     const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
     const userAgent = req.headers.get("user-agent") || "";
 
-    // 1. Enforce STRICT Cloudflare Turnstile token validation
+    // 2. Enforce STRICT Cloudflare Turnstile token validation
     if (captchaToken) {
       const turnstileSecret = process.env.TURNSTILE_SECRET_KEY || "1x0000000000000000000000000000000AA"; // Default testing secret key
       try {
@@ -37,9 +46,11 @@ export async function POST(req: NextRequest) {
         const turnstileData = await turnstileRes.json();
         if (!turnstileData.success) {
           console.warn("[TURNSTILE VALIDATION FAILED]:", turnstileData["error-codes"]);
-          return NextResponse.json(
-            { error: "Verifikasi Turnstile CAPTCHA gagal. Harap coba lagi." },
-            { status: 400 }
+          return apiError(
+            "CAPTCHA_FAILED",
+            "Verifikasi Turnstile CAPTCHA gagal. Harap coba lagi.",
+            {},
+            400
           );
         }
       } catch (err: any) {
@@ -47,10 +58,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 2. Enforce Postgres-level IP-based Rate Limiter (Max 5 inquiries per 24 hours)
+    // 3. Enforce Postgres-level IP-based Rate Limiter (Max 5 inquiries per 24 hours)
     const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
     
-    // In PostgreSQL, INET columns require direct type matching or text matching
     const { count, error: countErr } = await supabaseAdmin
       .from("entity_inquiries")
       .select("id", { count: "exact", head: true })
@@ -60,13 +70,15 @@ export async function POST(req: NextRequest) {
     if (countErr) {
       console.warn("[RATE LIMIT CHECK WARNING] DB Query failed:", countErr.message);
     } else if (count !== null && count >= 5) {
-      return NextResponse.json(
-        { error: "Batas pengiriman pesan terlampaui. Anda hanya dapat mengirim maksimal 5 pesan per 24 jam." },
-        { status: 429 }
+      return apiError(
+        "RATE_LIMITED",
+        "Batas pengiriman pesan terlampaui. Anda hanya dapat mengirim maksimal 5 pesan per 24 jam.",
+        {},
+        429
       );
     }
 
-    // 3. Insert record into entity_inquiries table
+    // 4. Insert record into entity_inquiries table
     const { data: inquiry, error: insertErr } = await supabaseAdmin
       .from("entity_inquiries")
       .insert({
@@ -86,13 +98,15 @@ export async function POST(req: NextRequest) {
 
     if (insertErr || !inquiry) {
       console.error("[INQUIRY INSERT ERROR]:", insertErr?.message);
-      return NextResponse.json(
-        { error: `Gagal mengirimkan pesan Anda: ${insertErr?.message}` },
-        { status: 500 }
+      return apiError(
+        "INTERNAL_ERROR",
+        `Gagal mengirimkan pesan Anda: ${insertErr?.message || "Unknown error"}`,
+        {},
+        500
       );
     }
 
-    // 4. Fetch owner of the directory to send SMTP notification email
+    // 5. Fetch owner of the directory to send SMTP notification email
     const { data: directory } = await supabaseAdmin
       .from("omni_directory")
       .select("name, owner_id")
@@ -134,15 +148,17 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({
+    return apiSuccess({
       success: true,
       message: "Pesan Anda berhasil terkirim ke pemilik profil! Silakan periksa email Anda berkala."
     });
   } catch (error: any) {
     console.error("[INQUIRY GENERAL ERROR]:", error.message);
-    return NextResponse.json(
-      { error: "Internal server error submitting inquiry" },
-      { status: 500 }
+    return apiError(
+      "INTERNAL_ERROR",
+      "Internal server error submitting inquiry",
+      {},
+      500
     );
   }
 }

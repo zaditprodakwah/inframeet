@@ -50,9 +50,9 @@ CREATE POLICY expert_public_read ON expert_directory
 CREATE POLICY expert_admin_all ON expert_directory
     FOR ALL USING (
         EXISTS (
-            SELECT 1 FROM staff 
-            WHERE auth_user_id = auth.uid() 
-            AND role IN ('admin', 'manager')
+            SELECT 1 FROM user_roles 
+            WHERE user_id = auth.uid() 
+            AND role = 'admin'
         )
     );
 
@@ -65,8 +65,8 @@ CREATE POLICY achievements_public_read ON user_achievements
 CREATE POLICY achievements_admin_all ON user_achievements
     FOR ALL USING (
         EXISTS (
-            SELECT 1 FROM staff 
-            WHERE auth_user_id = auth.uid() 
-            AND role IN ('admin', 'manager')
+            SELECT 1 FROM user_roles 
+            WHERE user_id = auth.uid() 
+            AND role = 'admin'
         )
     );

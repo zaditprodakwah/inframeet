@@ -61,6 +61,29 @@ async function run() {
     await client.query(ddlContent);
     console.log("Master schema definition executed successfully!");
 
+    // 3b. Read and execute the dynamic content engine and advanced migrations sequentially
+    const migrationsDir = path.join(__dirname, "..", "..", "..", "supabase", "migrations");
+    const migrationFiles = [
+      "20260519000020_dynamic_content_engine.sql",
+      "20260519000030_expert_directory.sql",
+      "20260519000040_verifiable_credentials.sql",
+      "20260519000050_utility_tools_engine.sql",
+      "20260520000010_addendum_01_god_mode.sql"
+    ];
+
+    for (const file of migrationFiles) {
+      const migPath = path.join(migrationsDir, file);
+      console.log(`Reading Migration DDL from: ${migPath}`);
+      if (fs.existsSync(migPath)) {
+        const migContent = fs.readFileSync(migPath, "utf8");
+        console.log(`Executing migration batch: ${file}...`);
+        await client.query(migContent);
+        console.log(`Migration ${file} executed successfully!`);
+      } else {
+        console.warn(`Migration file not found at ${migPath}, skipping.`);
+      }
+    }
+
     // 4. Verify tables setup
     const verificationRes = await client.query(`
       SELECT table_name 

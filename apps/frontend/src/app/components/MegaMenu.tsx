@@ -28,11 +28,37 @@ export default function MegaMenu() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
+  const [clickCount, setClickCount] = useState(0);
+  const [clickTimer, setClickTimer] = useState<any>(null);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (clickTimer) clearTimeout(clickTimer);
+
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+
+    if (newCount >= 5) {
+      setClickCount(0);
+      window.location.href = "/login";
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      window.location.href = "/";
+      setClickCount(0);
+    }, 300);
+    setClickTimer(timer);
+  };
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/75 dark:bg-zinc-950/75 border-b border-slate-800/40 dark:border-zinc-900/40 transition-all shadow-sm">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
+        {/* Brand Logo with magic click handler */}
+        <div 
+          onClick={handleLogoClick}
+          className="flex items-center gap-3 group cursor-pointer"
+        >
           <div className="w-10 h-10 rounded-xl bg-indigo-650 flex items-center justify-center text-white shadow-lg shadow-indigo-600/35 group-hover:scale-105 transition-all">
             <Sparkles className="w-5 h-5 animate-pulse" />
           </div>
@@ -41,7 +67,7 @@ export default function MegaMenu() {
               INFRA<span className="text-indigo-400">MEET</span>
             </span>
           </div>
-        </Link>
+        </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-6">
@@ -215,16 +241,10 @@ export default function MegaMenu() {
         {/* CTA Conversions Button */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
-            href="/login"
-            className="px-4 py-2 text-xs font-bold text-slate-300 hover:text-white border border-slate-800 dark:border-zinc-800 hover:border-slate-700 rounded-xl transition-all cursor-pointer"
-          >
-            Masuk / Dasbor
-          </Link>
-          <Link
             href="/calculator"
             className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-indigo-600/10 flex items-center gap-2 cursor-pointer hover:shadow-indigo-500/20"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4.5 h-4.5" />
             Formulator Solusi
           </Link>
         </div>

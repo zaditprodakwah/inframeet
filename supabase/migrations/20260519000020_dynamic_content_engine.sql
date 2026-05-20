@@ -72,7 +72,7 @@ CREATE POLICY "Publik dapat menyisipkan direktori pendidikan baru" ON education_
 CREATE POLICY "Publik dapat memperbarui direktori pendidikan" ON education_directory FOR UPDATE USING (true);
 
 -- Admin Override Policy
-CREATE POLICY "Admin full CRUD on edu_dir" ON education_directory FOR ALL USING (EXISTS (SELECT 1 FROM staff WHERE auth_user_id = auth.uid() AND role = 'admin'));
-CREATE POLICY "Admin full CRUD on cached_ref" ON cached_references FOR ALL USING (EXISTS (SELECT 1 FROM staff WHERE auth_user_id = auth.uid() AND role = 'admin'));
-CREATE POLICY "Admin full CRUD on rss_feeds" ON rss_feeds FOR ALL USING (EXISTS (SELECT 1 FROM staff WHERE auth_user_id = auth.uid() AND role = 'admin'));
-CREATE POLICY "Admin full CRUD on rss_items" ON rss_items FOR ALL USING (EXISTS (SELECT 1 FROM staff WHERE auth_user_id = auth.uid() AND role = 'admin'));
+CREATE POLICY "Admin full CRUD on edu_dir" ON education_directory FOR ALL USING (EXISTS (SELECT 1 FROM user_roles WHERE user_id = auth.uid() AND role::text = 'admin'));
+CREATE POLICY "Admin full CRUD on cached_ref" ON cached_references FOR ALL USING (EXISTS (SELECT 1 FROM user_roles WHERE user_id = auth.uid() AND role::text = 'admin'));
+CREATE POLICY "Admin full CRUD on rss_feeds" ON rss_feeds FOR ALL USING (EXISTS (SELECT 1 FROM user_roles WHERE user_id = auth.uid() AND role::text = 'admin'));
+CREATE POLICY "Admin full CRUD on rss_items" ON rss_items FOR ALL USING (EXISTS (SELECT 1 FROM user_roles WHERE user_id = auth.uid() AND role::text = 'admin'));

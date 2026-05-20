@@ -18,21 +18,26 @@ export async function GET(request: Request) {
     const search = searchParams.get("search")?.trim() || "";
     const category = searchParams.get("category")?.trim() || "";
 
-    // Load items where relevance score >= 0.9 (Curation bar)
+    // Load items where is_published_to_index is true
     let query = supabaseAdmin
       .from("rss_items")
-      .select("*, rss_feeds!inner(feed_name, source_category)", { count: "exact" })
-      .gte("relevance_score", 0.9)
+      .select("*, content_summary:summary, rss_feeds!inner(feed_name:title, source_category:category)", { count: "exact" })
+      .eq("is_published_to_index", true)
       .order("published_at", { ascending: false });
 
     // Category Filter
     if (category && category !== "all") {
-      query = query.eq("rss_feeds.source_category", category);
+      let dbCategory = category;
+      if (category.toLowerCase() === "academic") dbCategory = "ACADEMIC_JOURNAL";
+      else if (category.toLowerCase() === "tech" || category.toLowerCase() === "technology") dbCategory = "TECH_NEWS";
+      else if (category.toLowerCase() === "business") dbCategory = "B2B_INSIGHTS";
+      
+      query = query.eq("rss_feeds.category", dbCategory);
     }
 
     // Search Query (using ilike across titles and content)
     if (search) {
-      query = query.or(`title.ilike.%${search}%,content_summary.ilike.%${search}%`);
+      query = query.or(`title.ilike.%${search}%,summary.ilike.%${search}%`);
     }
 
     // Pagination boundary limits

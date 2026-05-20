@@ -1,24 +1,50 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Sparkles, ShieldCheck } from "lucide-react";
 
 export default function Footer() {
+  const [clickCount, setClickCount] = useState(0);
+  const [clickTimer, setClickTimer] = useState<any>(null);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (clickTimer) clearTimeout(clickTimer);
+
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+
+    if (newCount >= 5) {
+      setClickCount(0);
+      window.location.href = "/login";
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      window.location.href = "/";
+      setClickCount(0);
+    }, 300);
+    setClickTimer(timer);
+  };
+
   return (
     <footer className="bg-slate-950 border-t border-slate-900 text-slate-400 select-none py-16">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
         
         {/* Column 1: Brand Pitch */}
         <div className="space-y-4 lg:col-span-1">
-          <Link href="/" className="flex items-center gap-3 group">
+          <div 
+            onClick={handleLogoClick}
+            className="flex items-center gap-3 group cursor-pointer"
+          >
             <div className="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-600/20 group-hover:scale-105 transition-all">
               <Sparkles className="w-4.5 h-4.5" />
             </div>
             <span className="font-extrabold text-sm tracking-tight text-white">
               INFRA<span className="text-indigo-400">MEET</span>
             </span>
-          </Link>
+          </div>
           <p className="text-[11px] leading-relaxed text-slate-500">
             Infrastruktur Integritas &amp; Verifikasi Kredensial Kriptografis Terakreditasi pertama di Nusantara. Bebas beban perjokian akademik dengan standar ketaatan ilmiah tertinggi.
           </p>
@@ -100,10 +126,10 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Column 5: Resources & Portal */}
+        {/* Column 5: Sumber Daya & Legal */}
         <div className="space-y-3">
           <h4 className="text-xs font-black uppercase tracking-wider text-slate-200 font-mono">
-            Sumber Daya &amp; Portal
+            Sumber Daya &amp; Legal
           </h4>
           <ul className="space-y-2 text-[11px]">
             <li>
@@ -119,16 +145,6 @@ export default function Footer() {
             <li>
               <Link href="/about" className="hover:text-indigo-400 transition-colors">
                 Tentang &amp; Kepatuhan Hukum
-              </Link>
-            </li>
-            <li className="pt-2 border-t border-slate-900/60">
-              <Link href="/login" className="hover:text-indigo-400 transition-colors font-bold text-slate-350">
-                Masuk / Registrasi Akun
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/god-mode" className="hover:text-indigo-400 transition-colors font-mono font-bold text-indigo-400 tracking-wider flex items-center gap-1">
-                👑 CEO COMMAND CONSOLE
               </Link>
             </li>
           </ul>

@@ -5,7 +5,7 @@
 -- ============================================================================
 
 -- 1. Create is_admin custom claim checker function
-CREATE OR REPLACE FUNCTION auth.is_admin() 
+CREATE OR REPLACE FUNCTION public.is_admin() 
 RETURNS BOOLEAN AS $$
   SELECT COALESCE(
     (current_setting('request.jwt.claims', true)::jsonb -> 'app_metadata' -> 'is_admin')::boolean, 
@@ -28,11 +28,11 @@ ALTER TABLE admin_audit_logs ENABLE ROW LEVEL SECURITY;
 -- 4. Create RLS policies for audit logs (Append-only)
 DROP POLICY IF EXISTS admin_audit_insert ON admin_audit_logs;
 CREATE POLICY admin_audit_insert ON admin_audit_logs 
-  FOR INSERT WITH CHECK (auth.is_admin() OR TRUE); -- Allow logging triggers
+  FOR INSERT WITH CHECK (public.is_admin() OR TRUE); -- Allow logging triggers
 
 DROP POLICY IF EXISTS admin_audit_select ON admin_audit_logs;
 CREATE POLICY admin_audit_select ON admin_audit_logs 
-  FOR SELECT USING (auth.is_admin());
+  FOR SELECT USING (public.is_admin());
 
 -- 5. Establish System Settings key-value registry
 CREATE TABLE IF NOT EXISTS system_settings (
@@ -51,7 +51,7 @@ CREATE POLICY settings_public_select ON system_settings
 
 DROP POLICY IF EXISTS settings_admin_all ON system_settings;
 CREATE POLICY settings_admin_all ON system_settings
-  FOR ALL USING (auth.is_admin() OR TRUE); -- Bypass for backend server calls
+  FOR ALL USING (public.is_admin() OR TRUE); -- Bypass for backend server calls
 
 -- Seed initial switches
 INSERT INTO system_settings (key, value) VALUES
@@ -63,12 +63,12 @@ ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
 -- 6. Add RLS bypass overrides on core platform entities for Admins
 DROP POLICY IF EXISTS admin_omni_bypass ON omni_directory;
 CREATE POLICY admin_omni_bypass ON omni_directory
-  FOR ALL USING (auth.is_admin() OR TRUE);
+  FOR ALL USING (public.is_admin() OR TRUE);
 
 DROP POLICY IF EXISTS admin_escrow_bypass ON escrow_ledger;
 CREATE POLICY admin_escrow_bypass ON escrow_ledger
-  FOR ALL USING (auth.is_admin() OR TRUE);
+  FOR ALL USING (public.is_admin() OR TRUE);
 
 DROP POLICY IF EXISTS admin_proofs_bypass ON trust_proofs;
 CREATE POLICY admin_proofs_bypass ON trust_proofs
-  FOR ALL USING (auth.is_admin() OR TRUE);
+  FOR ALL USING (public.is_admin() OR TRUE);

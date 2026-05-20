@@ -2,10 +2,9 @@
 
 import { cookies, headers } from "next/headers";
 import { supabaseAdmin } from "@/lib/supabase";
-import { z } from "zod";
 
 export interface AdminSession {
-  staffId: string;
+  staffId: string; // maps to user ID in the new schema
   actorEmail: string;
   userId: string;
 }
@@ -42,34 +41,28 @@ export async function validateAdminSession(): Promise<AdminSession> {
 
     // Bypass for primary owner
     if (user.email === "muhzadit@gmail.com") {
-      // Query staff record if it exists to get staff ID, or fallback to dummy ID
-      const { data: staff } = await supabaseAdmin
-        .from("staff")
-        .select("id")
-        .eq("auth_user_id", user.id)
-        .single();
-
       return {
-        staffId: staff?.id || "00000000-0000-0000-0000-000000000000",
+        staffId: user.id,
         actorEmail: user.email,
         userId: user.id
       };
     }
 
-    // Regular staff authorization check
-    const { data: staff, error: staffError } = await supabaseAdmin
-      .from("staff")
-      .select("id, email, role, is_active")
-      .eq("auth_user_id", user.id)
+    // Modern authorization check referencing user_roles
+    const { data: userRole, error: roleError } = await supabaseAdmin
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", user.id)
+      .eq("role", "admin")
       .single();
 
-    if (staffError || !staff || staff.role !== "admin" || !staff.is_active) {
+    if (roleError || !userRole) {
       throw new Error("Akses ditolak: Anda tidak memiliki wewenang administrator.");
     }
 
     return {
-      staffId: staff.id,
-      actorEmail: staff.email,
+      staffId: user.id,
+      actorEmail: user.email || "admin@inframet.xyz",
       userId: user.id
     };
   } catch (err: any) {
@@ -103,22 +96,16 @@ export async function insertAuditLog(
 
   const userAgent = headerList.get("user-agent") || "NextJS-Server-Action";
 
-  // Use a fallback UUID if entityId is not a valid UUID (required by DB constraints)
+  // Use a fallback UUID if entityId is not a valid UUID
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const cleanEntityId = uuidRegex.test(entityId) ? entityId : "00000000-0000-0000-0000-000000000000";
 
   try {
-    await supabaseAdmin.from("audit_log").insert({
-      entity_type: entityType,
-      entity_id: cleanEntityId,
-      action: action,
-      performed_by_staff_id: staffId === "00000000-0000-0000-0000-000000000000" ? null : staffId,
-      changes: {
-        actor_email: email,
-        ...changes
-      },
-      ip_address: maskedIp,
-      user_agent: userAgent
+    // Record to admin audit log
+    await supabaseAdmin.from("admin_audit_logs").insert({
+      admin_id: staffId,
+      action_type: `${action}_${entityType.toUpperCase()}`,
+      target_id: cleanEntityId
     });
   } catch (err) {
     console.error("Failed to insert security audit log:", err);

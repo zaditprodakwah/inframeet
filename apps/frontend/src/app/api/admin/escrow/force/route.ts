@@ -1,109 +1,92 @@
-import { NextRequest, NextResponse } from "next/server";
-import { supabase, supabaseAdmin } from "@/lib/supabase";
+import { NextRequest } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase";
+import { validateAdminSession } from "@/app/admin/actions/security";
+import { apiSuccess, apiError } from "@/lib/apiEnvelope";
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { action, transactionId, note } = body;
+    // 1. Authenticate Admin session
+    const session = await validateAdminSession();
+    if (!session || !session.userId) {
+      return apiError("UNAUTHORIZED", "Sesi administrator tidak sah.", {}, 401);
+    }
 
-    if (!action || !transactionId) {
-      return NextResponse.json({ error: "action and transactionId are required fields" }, { status: 400 });
+    const body = await req.json();
+    const { action, transactionId } = body;
+
+    if (!transactionId || !action) {
+      return apiError("VALIDATION_ERROR", "transactionId dan action wajib diisi.", {}, 400);
+    }
+
+    if (action !== "force_release" && action !== "force_refund") {
+      return apiError("VALIDATION_ERROR", "Aksi tidak dikenal. Hanya 'force_release' atau 'force_refund' yang sah.", {}, 400);
     }
 
     if (!supabaseAdmin) {
-      return NextResponse.json(
-        { error: "Supabase Admin client not configured on server" },
-        { status: 500 }
-      );
+      return apiError("INTERNAL_ERROR", "Database offline.", {}, 500);
     }
 
-    // 1. Authenticate performing administrator
-    const { data: { user } } = await supabase.auth.getUser();
-    let currentUserId = user?.id;
-
-    if (!currentUserId) {
-      // Fallback for local demo running
-      const { data: profiles } = await supabaseAdmin.from("profiles").select("id").limit(1);
-      if (profiles && profiles.length > 0) currentUserId = profiles[0].id;
-    }
-
-    if (!currentUserId) {
-      return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
-    }
-
-    // Fetch target transaction details
+    // 2. Fetch Escrow Details
     const { data: tx, error: fetchErr } = await supabaseAdmin
       .from("escrow_ledger")
-      .select("*")
+      .select("*, omni_directory(owner_id)")
       .eq("id", transactionId)
       .single();
 
     if (fetchErr || !tx) {
-      return NextResponse.json({ error: "Target transaction not found" }, { status: 404 });
+      return apiError("NOT_FOUND", `Transaksi dengan ID ${transactionId} tidak ditemukan.`, {}, 404);
     }
 
-    // 2. Execute Admin Force Override release/refund
+    const mappedStatus = action === "force_release" ? "RELEASED" : "REFUNDED";
+
+    // 3. Update status
+    const { error: updateErr } = await supabaseAdmin
+      .from("escrow_ledger")
+      .update({
+        status: mappedStatus,
+        updated_at: new Date().toISOString()
+      })
+      .eq("id", transactionId);
+
+    if (updateErr) {
+      console.error("[FORCE ESCROW ERROR]:", updateErr.message);
+      return apiError("INTERNAL_ERROR", `Gagal memperbarui status escrow: ${updateErr.message}`, {}, 500);
+    }
+
+    // 4. If forced release, award reputation points
     if (action === "force_release") {
-      const { error: updateErr } = await supabaseAdmin
-        .from("escrow_ledger")
-        .update({
-          status: "released",
-          released_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
-        .eq("id", transactionId);
-
-      if (updateErr) {
-        return NextResponse.json({ error: `Gagal rilis paksa: ${updateErr.message}` }, { status: 500 });
-      }
-
-      // Add audit log record (Append-only)
-      await supabaseAdmin
-        .from("admin_audit_logs")
-        .insert({
-          admin_id: currentUserId,
-          action_type: "FORCE_RELEASE_ESCROW",
-          target_id: transactionId
+      try {
+        // Record reputation log entry
+        await supabaseAdmin.from("reputation_logs").insert({
+          directory_id: tx.directory_id,
+          event_type: "ESCROW_RELEASED",
+          points_delta: 10,
+          meta: { escrow_id: tx.id, forced: true }
         });
 
-      return NextResponse.json({
-        success: true,
-        message: "Dana transaksi berhasil DIRILIS secara paksa oleh Admin Overrides."
-      });
-    }
-
-    if (action === "force_refund") {
-      const { error: updateErr } = await supabaseAdmin
-        .from("escrow_ledger")
-        .update({
-          status: "refunded",
-          refunded_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
-        .eq("id", transactionId);
-
-      if (updateErr) {
-        return NextResponse.json({ error: `Gagal refund paksa: ${updateErr.message}` }, { status: 500 });
-      }
-
-      // Add audit log record (Append-only)
-      await supabaseAdmin
-        .from("admin_audit_logs")
-        .insert({
-          admin_id: currentUserId,
-          action_type: "FORCE_REFUND_ESCROW",
-          target_id: transactionId
+        // Trigger dynamic cached trust score recalculation
+        const { data: scoreData, error: rpcErr } = await supabaseAdmin.rpc("recalculate_trust_score", {
+          dir_id: tx.directory_id
         });
-
-      return NextResponse.json({
-        success: true,
-        message: "Dana transaksi berhasil DIREFUND secara paksa oleh Admin Overrides."
-      });
+        if (rpcErr) console.warn("Failed to recalculate trust score via RPC:", rpcErr.message);
+      } catch (repErr: any) {
+        console.warn("Reputation score updates skipped:", repErr.message);
+      }
     }
 
-    return NextResponse.json({ error: "Invalid action parameter" }, { status: 400 });
-  } catch (error: any) {
-    console.error("[FORCE OVERRIDE ERROR]:", error.message);
-    return NextResponse.json({ error: "Internal server error during force override" }, { status: 500 });
+    // 5. Append audit trail log
+    await supabaseAdmin.from("admin_audit_logs").insert({
+      admin_id: session.userId,
+      action_type: action.toUpperCase(),
+      target_id: transactionId
+    });
+
+    return apiSuccess({
+      success: true,
+      message: `Sukses melakukan override status transaksi menjadi '${mappedStatus}'!`
+    });
+  } catch (err: any) {
+    console.error("[ESCROW OVERRIDE CRITICAL ERROR]:", err.message);
+    return apiError("INTERNAL_ERROR", err.message || "Gagal memproses override transaksi.", {}, 500);
   }
 }

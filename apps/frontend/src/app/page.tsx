@@ -67,13 +67,13 @@ export default async function Home() {
     if (supabaseAdmin) {
       const { data, error } = await supabaseAdmin
         .from("rss_items")
-        .select("*, rss_feeds(feed_name)")
-        .gte("relevance_score", 0.9)
+        .select("*, content_summary:summary, rss_feeds(feed_name:title)")
+        .eq("is_published_to_index", true)
         .order("published_at", { ascending: false })
         .limit(3);
       
       if (error) {
-        console.error("Supabase error fetching live insights:", error);
+        console.error("Supabase error fetching live insights:", error.message || error);
       } else if (data && data.length > 0) {
         liveArticles = data;
       }

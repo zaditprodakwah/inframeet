@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!supabaseAdmin) return {};
 
   const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
-  const query = supabaseAdmin.from("rss_items").select("title, content_summary, image_url, slug");
+  const query = supabaseAdmin.from("rss_items").select("title, content_summary:summary, slug");
   const { data: article } = await (isUuid ? query.eq("id", id) : query.eq("slug", id)).single();
 
   if (!article) return { title: "Ulasan Analis | INFRAMEET" };
@@ -54,7 +54,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
 
   // 2. Load primary article bypassing RLS (support both UUID and SEO slug resolving)
   const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
-  const baseQuery = supabaseAdmin.from("rss_items").select("*, rss_feeds(feed_name, source_category)");
+  const baseQuery = supabaseAdmin.from("rss_items").select("*, content_summary:summary, full_content:content_html, source_url:link, rss_feeds(feed_name:title, source_category:category)");
   const { data: article, error } = await (isUuid ? baseQuery.eq("id", id) : baseQuery.eq("slug", id)).single();
 
   if (error || !article) {
@@ -74,29 +74,28 @@ export default async function InsightDetailPage({ params }: PageProps) {
     : "Mei 2026";
 
   const categoryLabel =
-    article.rss_feeds?.source_category === "ai"
+    article.rss_feeds?.source_category === "ACADEMIC_JOURNAL"
       ? "Riset & Metodologi"
-      : article.rss_feeds?.source_category === "technology"
+      : article.rss_feeds?.source_category === "TECH_NEWS"
       ? "Teknologi"
-      : article.rss_feeds?.source_category === "business"
+      : article.rss_feeds?.source_category === "B2B_INSIGHTS"
       ? "Bisnis"
       : "Industri";
 
   const categoryClass =
-    article.rss_feeds?.source_category === "ai"
+    article.rss_feeds?.source_category === "ACADEMIC_JOURNAL"
       ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
-      : article.rss_feeds?.source_category === "technology"
+      : article.rss_feeds?.source_category === "TECH_NEWS"
       ? "bg-blue-500/10 text-blue-400 border-blue-500/20"
       : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
 
   // 3. Load Related Articles in same category (bypassing RLS)
-  const categoryFilter = article.categories && article.categories[0] ? article.categories[0] : "ai";
   const { data: related } = await supabaseAdmin
     .from("rss_items")
-    .select("*, rss_feeds(feed_name, source_category)")
-    .contains("categories", [categoryFilter])
-    .neq("id", id)
-    .gte("relevance_score", 0.9)
+    .select("*, content_summary:summary, rss_feeds!inner(feed_name:title, source_category:category)")
+    .eq("rss_feeds.category", article.rss_feeds?.source_category || "TECH_NEWS")
+    .neq("id", article.id)
+    .eq("is_published_to_index", true)
     .order("published_at", { ascending: false })
     .limit(3);
 
@@ -263,16 +262,16 @@ export default async function InsightDetailPage({ params }: PageProps) {
                   : "Mei 2026";
 
                 const relCategoryClass =
-                  item.rss_feeds?.source_category === "ai"
+                  item.rss_feeds?.source_category === "ACADEMIC_JOURNAL"
                     ? "text-amber-400 bg-amber-500/10 border-amber-500/20"
-                    : item.rss_feeds?.source_category === "technology"
+                    : item.rss_feeds?.source_category === "TECH_NEWS"
                     ? "text-blue-400 bg-blue-500/10 border-blue-500/20"
                     : "text-emerald-400 bg-emerald-500/10 border-emerald-500/20";
 
                 const relCategoryLabel =
-                  item.rss_feeds?.source_category === "ai"
+                  item.rss_feeds?.source_category === "ACADEMIC_JOURNAL"
                     ? "Riset"
-                    : item.rss_feeds?.source_category === "technology"
+                    : item.rss_feeds?.source_category === "TECH_NEWS"
                     ? "Teknologi"
                     : "Bisnis";
 

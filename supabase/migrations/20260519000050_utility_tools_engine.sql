@@ -121,4 +121,4 @@ CREATE POLICY "Publik dapat mengajukan konten"
 CREATE POLICY "Admin full CRUD on submissions" 
   ON content_submissions 
   FOR ALL 
-  USING (EXISTS (SELECT 1 FROM staff WHERE auth_user_id = auth.uid() AND role = 'admin'));
+  USING (EXISTS (SELECT 1 FROM user_roles WHERE user_id = auth.uid() AND role = 'admin'));

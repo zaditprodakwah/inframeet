@@ -37,8 +37,8 @@ CREATE POLICY vc_public_read ON verifiable_credentials
 CREATE POLICY vc_admin_all ON verifiable_credentials
     FOR ALL USING (
         EXISTS (
-            SELECT 1 FROM staff 
-            WHERE auth_user_id = auth.uid() 
-            AND role IN ('admin', 'manager')
+            SELECT 1 FROM user_roles 
+            WHERE user_id = auth.uid() 
+            AND role = 'admin'
         )
     );
