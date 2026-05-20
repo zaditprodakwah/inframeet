@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { Check, X, ShieldCheck, Sparkles, RefreshCw, Layers } from "lucide-react";
 import { moderateUgcSubmission } from "../actions/crm_cms";
+import { toast } from "sonner";
 
 export default function UgcApprovalPage() {
   const [submissions, setSubmissions] = useState<any[]>([]);
@@ -53,13 +54,13 @@ export default function UgcApprovalPage() {
       const res = await moderateUgcSubmission(id, newStatus);
 
       if (!res.success) {
-        alert(`Gagal memperbarui status: ${res.message}`);
+        toast.error(`Gagal memperbarui status: ${res.message}`)
       } else {
         // Optimistic UI update
         setSubmissions(submissions.map((sub) => (sub.id === id ? { ...sub, status: newStatus } : sub)));
       }
     } catch (err: any) {
-      alert(`Error: ${err.message}`);
+      toast.error(`Error: ${err.message}`)
     }
   };
 

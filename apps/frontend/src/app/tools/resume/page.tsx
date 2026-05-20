@@ -5,6 +5,7 @@ import MegaMenu from "@/app/components/MegaMenu";
 import Footer from "@/app/components/Footer";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { Sparkles, Download, Plus, Trash2, Printer } from "lucide-react";
+import { toast } from "sonner";
 
 export default function ResumeBuilderPage() {
   const [personalInfo, setPersonalInfo] = useState({
@@ -78,9 +79,9 @@ export default function ResumeBuilderPage() {
   const handleVerifyCode = () => {
     if (premiumCode.trim() === "@InframeetCV2026!") {
       setIsPremium(true);
-      alert("🎉 Akun Premium Aktif! Watermark SKU ACD-MOD-CV berhasil dihilangkan.");
+      toast.success("🎉 Akun Premium Aktif! Watermark SKU ACD-MOD-CV berhasil dihilangkan.")
     } else {
-      alert("❌ Kode premium tidak valid!");
+      toast.error("❌ Kode premium tidak valid!")
     }
   };
 

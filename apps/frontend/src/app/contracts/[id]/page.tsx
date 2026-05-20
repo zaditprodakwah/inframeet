@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { Shield, FileText, CheckCircle2, CreditCard, PenTool, ClipboardCheck, ArrowRight, Award } from "lucide-react";
+import { toast } from "sonner";
 
 export default function ContractPortal() {
   const { id } = useParams() as { id: string };
@@ -169,7 +170,7 @@ export default function ContractPortal() {
         window.open(data.paymentLink, "_blank");
         loadData();
       } else {
-        alert(data.error || "Gagal membuat invoice!");
+        toast.error(data.error || "Gagal membuat invoice!")
       }
     } catch (err) {
       console.error(err);
@@ -178,7 +179,7 @@ export default function ContractPortal() {
 
   const handleSignContract = async () => {
     if (!clientName || !clientTitle) {
-      alert("Harap isi nama penandatangan dan jabatan Anda!");
+      toast.error("Harap isi nama penandatangan dan jabatan Anda!")
       return;
     }
 
@@ -202,7 +203,7 @@ export default function ContractPortal() {
       if (data.success) {
         loadData();
       } else {
-        alert(data.error || "Gagal menandatangani kontrak!");
+        toast.error(data.error || "Gagal menandatangani kontrak!")
       }
     } catch (err) {
       console.error(err);
@@ -213,7 +214,7 @@ export default function ContractPortal() {
 
   const handleSignBast = async () => {
     if (!clientName) {
-      alert("Harap isi nama perwakilan penandatangan BAST!");
+      toast.error("Harap isi nama perwakilan penandatangan BAST!")
       return;
     }
 
@@ -236,7 +237,7 @@ export default function ContractPortal() {
       if (data.success) {
         loadData();
       } else {
-        alert(data.error || "Gagal menandatangani BAST!");
+        toast.error(data.error || "Gagal menandatangani BAST!")
       }
     } catch (err) {
       console.error(err);

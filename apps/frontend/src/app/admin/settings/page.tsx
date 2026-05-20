@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { saveSystemSettings, testFonnteWhatsApp } from "../actions/settings";
 import { 
+import { toast } from "sonner";
   Settings, 
   Users, 
   Plus, 
@@ -124,7 +125,7 @@ export default function SiteSettingsPage() {
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
     } else {
-      alert(`Gagal menyimpan: ${res.message}`);
+      toast.error(`Gagal menyimpan: ${res.message}`)
     }
   };
 
@@ -137,9 +138,9 @@ export default function SiteSettingsPage() {
     };
     const res = await saveSystemSettings("sitemap_configurations", payload, "Konfigurasi dynamic sitemap priorities.");
     if (res.success) {
-      alert("🎉 Konfigurasi Sitemap disimpan di database!");
+      toast.success("🎉 Konfigurasi Sitemap disimpan di database!")
     } else {
-      alert(`Gagal: ${res.message}`);
+      toast.error(`Gagal: ${res.message}`)
     }
   };
 
@@ -156,10 +157,10 @@ export default function SiteSettingsPage() {
         setEnterpriseSuccess(true);
         setTimeout(() => setEnterpriseSuccess(false), 3000);
       } else {
-        alert(`Gagal menyimpan: ${resScim.message || resN8n.message}`);
+        toast.error(`Gagal menyimpan: ${resScim.message || resN8n.message}`)
       }
     } catch (err: any) {
-      alert(`Error: ${err.message}`);
+      toast.error(`Error: ${err.message}`)
     } finally {
       setIsSavingEnterprise(false);
     }
@@ -176,7 +177,7 @@ export default function SiteSettingsPage() {
 
   const handleTestN8nWebhook = async () => {
     if (!n8nWebhook) {
-      alert("Harap isi alamat webhook n8n terlebih dahulu!");
+      toast.success("Harap isi alamat webhook n8n terlebih dahulu!")
       return;
     }
     setIsTestingN8n(true);
@@ -191,12 +192,12 @@ export default function SiteSettingsPage() {
         })
       });
       if (response.ok) {
-        alert("🎉 Webhook disemburkan sukses! n8n merespon status 200 OK.");
+        toast.success("🎉 Webhook disemburkan sukses! n8n merespon status 200 OK.")
       } else {
-        alert(`Gagal menyemburkan: Webhook merespon status ${response.status}`);
+        toast.success(`Gagal menyemburkan: Webhook merespon status ${response.status}`)
       }
     } catch (err: any) {
-      alert(`Gagal terhubung ke webhook n8n: ${err.message}`);
+      toast.success(`Gagal terhubung ke webhook n8n: ${err.message}`)
     } finally {
       setIsTestingN8n(false);
     }
@@ -209,7 +210,7 @@ export default function SiteSettingsPage() {
     setIsTestingWA(true);
     const res = await testFonnteWhatsApp(waPhone, waMessage);
     setIsTestingWA(false);
-    alert(res.message);
+    toast(res.message)
   };
 
   const handleToggleStaffActive = async (id: string, currentStatus: boolean) => {
@@ -220,19 +221,19 @@ export default function SiteSettingsPage() {
         .eq("id", id);
 
       if (error) {
-        alert(`Gagal memperbarui status: ${error.message}`);
+        toast.error(`Gagal memperbarui status: ${error.message}`)
       } else {
         setStaff(staff.map((s) => (s.id === id ? { ...s, is_active: !currentStatus } : s)));
       }
     } catch (err: any) {
-      alert(`Error: ${err.message}`);
+      toast.error(`Error: ${err.message}`)
     }
   };
 
   const handleAddStaff = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newStaffEmail.trim() || !newStaffName.trim()) {
-      alert("Harap lengkapi email dan nama staff!");
+      toast.error("Harap lengkapi email dan nama staff!")
       return;
     }
 
@@ -252,13 +253,13 @@ export default function SiteSettingsPage() {
 
       if (error) throw error;
 
-      alert("🎉 Staff berhasil ditambahkan ke dalam database!");
+      toast.success("🎉 Staff berhasil ditambahkan ke dalam database!")
       setNewStaffEmail("");
       setNewStaffName("");
       setShowAddForm(false);
       fetchStaffAndSettings();
     } catch (err: any) {
-      alert(`Gagal mendaftarkan staff: ${err.message}`);
+      toast.error(`Gagal mendaftarkan staff: ${err.message}`)
     } finally {
       setIsAddingStaff(false);
     }

@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Link from "next/link";
 import { 
+import { toast } from "sonner";
   Search, 
   Building2, 
   GraduationCap, 
@@ -316,7 +317,7 @@ export default function SchoolLookupPage() {
   // Live PDDikti Autocomplete search and auto-saving crowd-source database upsert
   const handleLivePddiktiSearch = async () => {
     if (!keyword.trim()) {
-      alert("Harap masukkan nama kampus yang ingin dicari!");
+      toast.error("Harap masukkan nama kampus yang ingin dicari!")
       return;
     }
     setIsFetchingLive(true);
@@ -369,16 +370,16 @@ export default function SchoolLookupPage() {
           const unique = combined.filter((v, i, a) => a.findIndex(t => t.name === v.name) === i);
           setInstitutions(unique);
           if (livePT[0]) setSelectedInst(livePT[0]);
-          alert(`🎉 Ditemukan ${livePT.length} universitas resmi dari PDDikti & tersimpan ke database!`);
+          toast.success(`🎉 Ditemukan ${livePT.length} universitas resmi dari PDDikti & tersimpan ke database!`)
         } else {
-          alert("Kampus tidak ditemukan di pangkalan PDDikti live. Menggunakan database lokal kami.");
+          toast.success("Kampus tidak ditemukan di pangkalan PDDikti live. Menggunakan database lokal kami.")
         }
       } else {
-        alert("Gagal terhubung ke API Pddikti. Menggunakan basis data lokal terenkripsi.");
+        toast.success("Gagal terhubung ke API Pddikti. Menggunakan basis data lokal terenkripsi.")
       }
     } catch (e) {
       console.warn("CORS/Offline: utilizing rich local directory fallback.", e);
-      alert("API Kemdikbud sedang membatasi akses (CORS). Menggunakan direktori lokal sekolah & kampus kami.");
+      toast.success("API Kemdikbud sedang membatasi akses (CORS). Menggunakan direktori lokal sekolah & kampus kami.")
     } finally {
       setIsFetchingLive(false);
     }

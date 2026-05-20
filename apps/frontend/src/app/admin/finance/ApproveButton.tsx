@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { approveWithdrawal } from "../actions/finance";
+import { toast } from "sonner";
 
 interface ApproveButtonProps {
   transactionId: string;
@@ -25,14 +26,14 @@ export default function ApproveButton({ transactionId }: ApproveButtonProps) {
       const res = await approveWithdrawal(transactionId);
       if (res.success) {
         setStatusText("Sukses!");
-        alert(res.message);
+        toast(res.message)
       } else {
         setStatusText("Gagal");
-        alert(`Gagal: ${res.message}`);
+        toast.error(`Gagal: ${res.message}`)
       }
     } catch (err: any) {
       setStatusText("Error");
-      alert(`Critical Error: ${err?.message || err}`);
+      toast.error(`Critical Error: ${err?.message || err}`)
     } finally {
       setLoading(false);
       setTimeout(() => setStatusText(null), 3000);

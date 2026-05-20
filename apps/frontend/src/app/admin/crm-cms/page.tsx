@@ -12,6 +12,7 @@ import {
   moderateRssItem
 } from "../actions/crm_cms";
 import { 
+import { toast } from "sonner";
   Users, 
   FolderGit, 
   Wrench, 
@@ -141,7 +142,7 @@ export default function CrmCmsDashboardPage() {
     if (res.success) {
       setBriefs(briefs.map(b => b.id === id ? { ...b, status } : b));
     } else {
-      alert(`Error: ${res.message}`);
+      toast.error(`Error: ${res.message}`)
     }
   };
 
@@ -151,7 +152,7 @@ export default function CrmCmsDashboardPage() {
     if (res.success) {
       setLeads(leads.map(l => l.id === id ? { ...l, status } : l));
     } else {
-      alert(`Error: ${res.message}`);
+      toast.error(`Error: ${res.message}`)
     }
   };
 
@@ -161,7 +162,7 @@ export default function CrmCmsDashboardPage() {
     if (res.success) {
       setRssItems(rssItems.map(item => item.id === id ? { ...item, is_published_to_index: isPublished } : item));
     } else {
-      alert(`Error: ${res.message}`);
+      toast.error(`Error: ${res.message}`)
     }
   };
 
@@ -182,7 +183,7 @@ export default function CrmCmsDashboardPage() {
 
     const res = await upsertPortfolioCase(payload);
     if (res.success) {
-      alert("🎉 Data portofolio berhasil disimpan!");
+      toast.success("🎉 Data portofolio berhasil disimpan!")
       setPortTitle("");
       setPortClient("");
       setPortTech("");
@@ -191,7 +192,7 @@ export default function CrmCmsDashboardPage() {
       setShowAddForm(false);
       fetchData();
     } else {
-      alert(`Error: ${res.message}`);
+      toast.error(`Error: ${res.message}`)
     }
   };
 
@@ -225,7 +226,7 @@ export default function CrmCmsDashboardPage() {
 
     const res = await upsertDigitalTool(payload);
     if (res.success) {
-      alert("🎉 Data perkakas digital berhasil disimpan!");
+      toast.success("🎉 Data perkakas digital berhasil disimpan!")
       setToolName("");
       setToolDesc("");
       setToolUrl("");
@@ -235,7 +236,7 @@ export default function CrmCmsDashboardPage() {
       setShowAddForm(false);
       fetchData();
     } else {
-      alert(`Error: ${res.message}`);
+      toast.error(`Error: ${res.message}`)
     }
   };
 

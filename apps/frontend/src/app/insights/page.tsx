@@ -23,6 +23,7 @@ import {
   Scale 
 } from "lucide-react";
 import InlineAffiliateRecommendation from "../components/InlineAffiliateRecommendation";
+import { toast } from "sonner";
 
 // 8 Curated high-fidelity fallback insights to prevent "Sindrom Etalase Kosong"
 const DEFAULT_ARTICLES = [
@@ -285,10 +286,10 @@ export default function InsightsPage() {
 
       // Reload
       await loadArticles(true);
-      alert(`Sinkronisasi Selesai! Premium feeds ter-update.`);
+      toast.success(`Sinkronisasi Selesai! Premium feeds ter-update.`)
     } catch (err) {
       console.error(err);
-      alert("Gagal melakukan sinkronisasi otomatis.");
+      toast.error("Gagal melakukan sinkronisasi otomatis.")
     } finally {
       setSyncing(false);
     }

@@ -8,6 +8,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import EmbedBadgeModal from "../components/EmbedBadgeModal";
 import Link from "next/link";
 import { 
+import { toast } from "sonner";
   ShieldCheck, 
   MapPin, 
   Award, 
@@ -237,7 +238,7 @@ export default function PolymorphicProfilePage({ params }: { params: any }) {
   const handleSendInquiry = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inquiryName.trim() || !inquiryEmail.trim() || !inquiryMsg.trim()) {
-      alert("Harap isi seluruh formulir kontak terlebih dahulu!");
+      toast.error("Harap isi seluruh formulir kontak terlebih dahulu!")
       return;
     }
 

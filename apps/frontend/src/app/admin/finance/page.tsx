@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { approveWithdrawal } from "../actions/finance";
 import { saveSystemSettings } from "../actions/settings";
 import { 
+import { toast } from "sonner";
   DollarSign, 
   Download, 
   CreditCard, 
@@ -102,10 +103,10 @@ export default function AdminFinancePage() {
     setApprovingIds(prev => ({ ...prev, [id]: true }));
     try {
       const res = await approveWithdrawal(id);
-      alert(res.message);
+      toast(res.message)
       await fetchData();
     } catch (err: any) {
-      alert(`Error: ${err.message}`);
+      toast.error(`Error: ${err.message}`)
     } finally {
       setApprovingIds(prev => ({ ...prev, [id]: false }));
     }
@@ -124,9 +125,9 @@ export default function AdminFinancePage() {
     const res = await saveSystemSettings("finance_settings", payload, "Konfigurasi gerbang invoicing dan pembayaran hibrida manual nominal unik.");
     setIsSavingConfig(false);
     if (res.success) {
-      alert("🎉 Konfigurasi finansial disimpan di system_settings!");
+      toast.success("🎉 Konfigurasi finansial disimpan di system_settings!")
     } else {
-      alert(`Gagal: ${res.message}`);
+      toast.error(`Gagal: ${res.message}`)
     }
   };
 
@@ -144,16 +145,16 @@ export default function AdminFinancePage() {
       });
 
       if (error) {
-        alert(`Error: ${error.message}`);
+        toast.error(`Error: ${error.message}`)
       } else {
-        alert("🎉 Entri pembukuan manual sukses disimpan di ledger!");
+        toast.success("🎉 Entri pembukuan manual sukses disimpan di ledger!")
         setManualAmount("");
         setManualNotes("");
         setShowBookkeeper(false);
         fetchData();
       }
     } catch (err: any) {
-      alert(err.message);
+      toast(err.message)
     }
   };
 

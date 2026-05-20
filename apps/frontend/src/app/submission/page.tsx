@@ -38,6 +38,7 @@ import {
   Globe
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 
 type DocTab = "kb" | "tor" | "tos" | "mou" | "policy" | "experts" | "verify";
 type FormTab = "expert" | "education" | "tool" | "post" | "case_study";
@@ -200,7 +201,7 @@ function SubmissionPageContent() {
 
   const handlePddiktiSearch = async () => {
     if (!title.trim()) {
-      alert("Harap ketik nama kampus/sekolah terlebih dahulu di kolom Nama Resmi!");
+      toast.error("Harap ketik nama kampus/sekolah terlebih dahulu di kolom Nama Resmi!")
       return;
     }
     setIsFetchingLive(true);
@@ -216,16 +217,16 @@ function SubmissionPageContent() {
           setCity(pt.singkatan || "Indonesia");
           setProvince("Indonesia");
           setAddress(`Kampus ${cleanName}`);
-          alert(`🎉 Data kampus terverifikasi ditemukan! Berhasil memuat NPSN/ID: ${pt.id.trim()}`);
+          toast.success(`🎉 Data kampus terverifikasi ditemukan! Berhasil memuat NPSN/ID: ${pt.id.trim()}`)
         } else {
-          alert("Kampus tidak ditemukan di pangkalan data PDDikti Kemendikbud. Anda dapat mengisi kolom secara manual.");
+          toast.error("Kampus tidak ditemukan di pangkalan data PDDikti Kemendikbud. Anda dapat mengisi kolom secara manual.")
         }
       } else {
-        alert("Gagal terhubung ke server PDDikti Kemendikbud. Silakan isi secara manual.");
+        toast.error("Gagal terhubung ke server PDDikti Kemendikbud. Silakan isi secara manual.")
       }
     } catch (e) {
       console.warn(e);
-      alert("API PDDikti sedang membatasi akses (CORS). Silakan isi detail kampus Anda secara manual.");
+      toast("API PDDikti sedang membatasi akses (CORS). Silakan isi detail kampus Anda secara manual.")
     } finally {
       setIsFetchingLive(false);
     }
@@ -233,7 +234,7 @@ function SubmissionPageContent() {
 
   const handleDoiSearch = async () => {
     if (!doi.trim()) {
-      alert("Harap masukkan nomor DOI (misal: 10.1016/j.chb.2020.106518)!");
+      toast.error("Harap masukkan nomor DOI (misal: 10.1016/j.chb.2020.106518)!")
       return;
     }
     setIsFetchingDoi(true);
@@ -251,16 +252,16 @@ function SubmissionPageContent() {
           setTitle(paperTitle);
           setPostSummary(`Diterbitkan pada ${paperJournal} (${paperYear}) oleh ${paperAuthors}.`);
           setPostContent(`Judul Paper: ${paperTitle}\nPenulis: ${paperAuthors}\nJurnal: ${paperJournal}\nTahun: ${paperYear}\nDOI: ${doi}\n\nAbstrak / Catatan Analisis Ulasan:`);
-          alert(`🎉 Berhasil memuat data sitasi paper resmi dari Crossref!`);
+          toast.success(`🎉 Berhasil memuat data sitasi paper resmi dari Crossref!`)
         } else {
-          alert("Data DOI tidak ditemukan di jaringan pangkalan Crossref.");
+          toast.error("Data DOI tidak ditemukan di jaringan pangkalan Crossref.")
         }
       } else {
-        alert("Gagal terhubung ke API Crossref. Harap periksa kembali nomor DOI.");
+        toast.error("Gagal terhubung ke API Crossref. Harap periksa kembali nomor DOI.")
       }
     } catch (e) {
       console.warn(e);
-      alert("Tidak dapat menghubungi server Crossref. Silakan masukkan detail esai secara manual.");
+      toast.error("Tidak dapat menghubungi server Crossref. Silakan masukkan detail esai secara manual.")
     } finally {
       setIsFetchingDoi(false);
     }
@@ -288,7 +289,7 @@ function SubmissionPageContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !contributor.trim() || !email.trim()) {
-      alert("Harap isi semua kolom wajib!");
+      toast.error("Harap isi semua kolom wajib!")
       return;
     }
 

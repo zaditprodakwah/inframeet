@@ -15,6 +15,7 @@ import {
   Undo
 } from "lucide-react";
 import servicesStaticFallback from "../../../../../../packages/config/services.json";
+import { toast } from "sonner";
 
 export default function AdminCatalogPage() {
   const [catalogItems, setCatalogItems] = useState<any[]>([]);
@@ -112,10 +113,10 @@ export default function AdminCatalogPage() {
     const res = await resetCatalogToDefault();
     setIsResetting(false);
     if (res.success) {
-      alert("🎉 Katalog sukses di-reset ke data statis bawaan!");
+      toast.success("🎉 Katalog sukses di-reset ke data statis bawaan!")
       fetchCatalog();
     } else {
-      alert(`Gagal: ${res.message}`);
+      toast.error(`Gagal: ${res.message}`)
     }
   };
 
@@ -140,13 +141,13 @@ export default function AdminCatalogPage() {
 
     const res = await upsertCatalogItem(payload);
     if (res.success) {
-      alert("🎉 Katalog sukses diperbarui!");
+      toast.success("🎉 Katalog sukses diperbarui!")
       setShowForm(false);
       setEditingItem(null);
       clearForm();
       fetchCatalog();
     } else {
-      alert(`Error: ${res.message}`);
+      toast.error(`Error: ${res.message}`)
     }
   };
 
@@ -188,7 +189,7 @@ export default function AdminCatalogPage() {
     if (res.success) {
       setCatalogItems(catalogItems.filter(item => item.sku !== skuCode));
     } else {
-      alert(`Error: ${res.message}`);
+      toast.error(`Error: ${res.message}`)
     }
   };
 

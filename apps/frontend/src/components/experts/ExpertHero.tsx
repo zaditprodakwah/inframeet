@@ -3,6 +3,7 @@
 import React from "react";
 import { Star, ShieldCheck, CheckCircle2, Share2, Sparkles, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 interface ExpertHeroProps {
   expert: {
@@ -42,7 +43,7 @@ export default function ExpertHero({ expert, onContactClick }: ExpertHeroProps) 
       }).catch(console.error);
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert("Tautan profil berhasil disalin ke papan klip!");
+      toast.success("Tautan profil berhasil disalin ke papan klip!")
     }
   };
 

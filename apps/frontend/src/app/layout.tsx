@@ -58,8 +58,8 @@ export const metadata: Metadata = {
 };
 
 import QueryProvider from "@/components/QueryProvider";
-
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -104,6 +104,19 @@ export default function RootLayout({
         <MobileBottomNav />
         <FloatingContactForm />
         <CommandMenu />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: "#0f172a",
+              color: "#f1f5f9",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "12px",
+              fontSize: "13px",
+              fontFamily: "var(--font-plus-jakarta)"
+            }
+          }}
+        />
         </ThemeProvider>
       </body>
     </html>

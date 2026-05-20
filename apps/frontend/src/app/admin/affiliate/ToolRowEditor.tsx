@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { updateToolAffiliate } from "../actions/affiliate";
+import { toast } from "sonner";
 
 interface ToolRowEditorProps {
   tool: {
@@ -33,7 +34,7 @@ export default function ToolRowEditor({ tool }: ToolRowEditorProps) {
         setTimeout(() => setStatus("idle"), 2500);
       } else {
         setStatus("error");
-        alert(`Gagal: ${res.message}`);
+        toast.error(`Gagal: ${res.message}`)
       }
     } catch (err) {
       setStatus("error");

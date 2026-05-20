@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import MegaMenu from "../../components/MegaMenu";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { Shield, Coins, History, ClipboardList, Wallet, CheckSquare, XCircle, AlertCircle, Send, CheckCircle2 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function EscrowAdminDashboard() {
   // Data States
@@ -66,9 +67,9 @@ export default function EscrowAdminDashboard() {
         setAdminNotes("");
         setSelectedPayout(null);
         await loadData();
-        alert("Pencairan dana berhasil disetujui and email konfirmasi terkirim ke freelancer!");
+        toast.success("Pencairan dana berhasil disetujui and email konfirmasi terkirim ke freelancer!")
       } else {
-        alert(data.error || "Gagal menyetujui pencairan.");
+        toast.error(data.error || "Gagal menyetujui pencairan.")
       }
     } catch (err) {
       console.error(err);
@@ -81,7 +82,7 @@ export default function EscrowAdminDashboard() {
   const handleSimulateWithdrawal = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!simUserId || !simAmount || Number(simAmount) <= 0) {
-      alert("Harap isi seluruh formulir simulasi!");
+      toast.error("Harap isi seluruh formulir simulasi!")
       return;
     }
 
@@ -99,9 +100,9 @@ export default function EscrowAdminDashboard() {
       if (data.success) {
         setSimAmount("");
         await loadData();
-        alert("Simulasi penarikan saldo sukses diajukan ke admin!");
+        toast.success("Simulasi penarikan saldo sukses diajukan ke admin!")
       } else {
-        alert(data.error || "Simulasi penarikan gagal.");
+        toast.error(data.error || "Simulasi penarikan gagal.")
       }
     } catch (err) {
       console.error(err);
