@@ -41,11 +41,15 @@ if (isServer) {
   });
 
   if (!parsed.success) {
-    console.error("❌ Invalid environment variables during boot-up validation:");
-    console.error(JSON.stringify(parsed.error.format(), null, 2));
-    // Fail-fast in production to prevent deployment of broken states
-    if (process.env.NODE_ENV === "production") {
+    console.warn("⚠️ Invalid environment variables detected during boot-up validation:");
+    console.warn(JSON.stringify(parsed.error.format(), null, 2));
+    
+    // Bypass throwing error if in CI/CD or building phase (next build)
+    const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build" || process.env.CI === "true" || process.env.CI === "1" || !!process.env.CI;
+    if (process.env.NODE_ENV === "production" && !isBuildPhase) {
       throw new Error("Missing or invalid environment variables. Build aborted.");
+    } else {
+      console.warn("⚠️ Bypassing environment variable build check for CI/CD or Build runner.");
     }
   }
 

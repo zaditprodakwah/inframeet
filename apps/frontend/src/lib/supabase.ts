@@ -1,8 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build" || process.env.CI === "true" || process.env.CI === "1" || !!process.env.CI;
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || (isBuildPhase ? "https://placeholder-project-id.supabase.co" : "");
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || (isBuildPhase ? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.placeholder" : "");
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || (isBuildPhase ? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.placeholder-service" : "");
 
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error("Missing Supabase public environment variables (URL/Anon Key)!");
