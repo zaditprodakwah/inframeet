@@ -18,8 +18,8 @@ RETURNS TRIGGER AS $$
 BEGIN
   NEW.search_vector := to_tsvector('simple', 
     coalesce(NEW.name, '') || ' ' || 
-    coalesce(NEW.headline, '') || ' ' || 
-    coalesce(NEW.description, '')
+    coalesce(NEW.description, '') || ' ' ||
+    coalesce(NEW.category, '')
   );
   NEW.last_indexed_at := now();
   RETURN NEW;
@@ -36,8 +36,8 @@ CREATE TRIGGER trg_omni_directory_vector_update
 UPDATE omni_directory
 SET search_vector = to_tsvector('simple', 
   coalesce(name, '') || ' ' || 
-  coalesce(headline, '') || ' ' || 
-  coalesce(description, '')
+  coalesce(description, '') || ' ' ||
+  coalesce(category, '')
 )
 WHERE search_vector IS NULL;
 

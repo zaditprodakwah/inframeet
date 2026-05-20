@@ -20,7 +20,7 @@ DECLARE
 BEGIN
   -- Get verification status and last activity date
   SELECT 
-    omni_directory.verified_status,
+    omni_directory.verification_status,
     coalesce(omni_directory.last_activity_at, omni_directory.created_at)
   INTO verified_status, last_activity
   FROM omni_directory
@@ -83,5 +83,5 @@ $$ LANGUAGE plpgsql;
 -- Attach trigger to dynamically recalculate score on directory updates
 DROP TRIGGER IF EXISTS trg_omni_directory_score_update ON omni_directory;
 CREATE TRIGGER trg_omni_directory_score_update
-  AFTER UPDATE OF verified_status ON omni_directory
+  AFTER UPDATE OF verification_status ON omni_directory
   FOR EACH ROW EXECUTE FUNCTION fn_trigger_update_trust_score();
