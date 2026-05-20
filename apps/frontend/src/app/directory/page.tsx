@@ -27,7 +27,7 @@ const PRE_SEEDED_CATALOG = [
     name: "Universitas Indonesia (UI)",
     slug: "universitas-indonesia",
     website_url: "https://ui.ac.id",
-    description: "Universitas riset terkemuka di Indonesia dengan komitmen penuh pada integritas publikasi ilmiah and orisinalitas riset nasional.",
+    description: "Universitas riset terkemuka di Indonesia dengan komitmen penuh pada integritas publikasi ilmiah dan orisinalitas riset nasional.",
     verification_status: "verified",
     trust_score: 95.0,
     category: "Universitas",
@@ -40,6 +40,69 @@ const PRE_SEEDED_CATALOG = [
       citation_style: "APA 7th Edition",
       turnitin_limit: "15% Max",
       sector: "Negeri"
+    }
+  },
+  {
+    id: "catalog-itb",
+    entity_type: "institution",
+    name: "Institut Teknologi Bandung (ITB)",
+    slug: "institut-teknologi-bandung",
+    website_url: "https://itb.ac.id",
+    description: "Pusat unggulan pendidikan teknik, sains, dan seni rupa nasional dengan standar akreditasi internasional terluas di Indonesia.",
+    verification_status: "verified",
+    trust_score: 97.0,
+    category: "Institut",
+    subcategory: "Perguruan Tinggi",
+    city: "Bandung, Jawa Barat",
+    country: "ID",
+    tags: ["teknik", "sains", "rekayasa", "riset"],
+    metadata: {
+      akreditasi: "Unggul",
+      citation_style: "IEEE Style",
+      turnitin_limit: "12% Max",
+      sector: "Negeri"
+    }
+  },
+  {
+    id: "catalog-ugm",
+    entity_type: "institution",
+    name: "Universitas Gadjah Mada (UGM)",
+    slug: "universitas-gadjah-mada",
+    website_url: "https://ugm.ac.id",
+    description: "Universitas nasional pertama berasaskan kerakyatan dan kebudayaan, melahirkan riset aplikatif sosial, humaniora, dan kedokteran.",
+    verification_status: "verified",
+    trust_score: 96.0,
+    category: "Universitas",
+    subcategory: "Perguruan Tinggi",
+    city: "Yogyakarta",
+    country: "ID",
+    tags: ["sosial", "kedokteran", "budaya", "riset"],
+    metadata: {
+      akreditasi: "Unggul",
+      citation_style: "Harvard Style",
+      turnitin_limit: "15% Max",
+      sector: "Negeri"
+    }
+  },
+  {
+    id: "catalog-binus",
+    entity_type: "institution",
+    name: "Binus University",
+    slug: "binus-university",
+    website_url: "https://binus.ac.id",
+    description: "Perguruan tinggi swasta unggulan bidang teknologi informasi, desain kreatif, dan kewirausahaan bertaraf internasional.",
+    verification_status: "verified",
+    trust_score: 91.5,
+    category: "Universitas",
+    subcategory: "Perguruan Tinggi",
+    city: "Jakarta Barat",
+    country: "ID",
+    tags: ["it", "bisnis", "desain", "swasta"],
+    metadata: {
+      akreditasi: "Unggul",
+      citation_style: "APA 7th Edition",
+      turnitin_limit: "18% Max",
+      sector: "Swasta"
     }
   },
   {
@@ -64,12 +127,33 @@ const PRE_SEEDED_CATALOG = [
     }
   },
   {
+    id: "catalog-sman3bdg",
+    entity_type: "institution",
+    name: "SMA Negeri 3 Bandung",
+    slug: "sman3-bandung",
+    website_url: "https://sman3bdg.sch.id",
+    description: "Sekolah menengah atas favorit di Jawa Barat dengan reputasi keaktifan organisasi siswa, riset remaja, dan kelulusan PTN tertinggi.",
+    verification_status: "verified",
+    trust_score: 89.5,
+    category: "Sekolah",
+    subcategory: "Sekolah Menengah",
+    city: "Bandung, Jawa Barat",
+    country: "ID",
+    tags: ["organisasi", "sains", "prestasi"],
+    metadata: {
+      akreditasi: "A",
+      curriculum: "Kurikulum Merdeka",
+      focus: "Sains & Sosial",
+      sector: "Negeri"
+    }
+  },
+  {
     id: "catalog-vercel",
     entity_type: "saas",
     name: "Vercel Cloud Platform",
     slug: "vercel-cloud",
     website_url: "https://vercel.com",
-    description: "Platform serverless global premium untuk Next.js and framework modern. Dioptimalkan khusus untuk performa Core Web Vitals tertinggi.",
+    description: "Platform serverless global premium untuk Next.js dan framework modern. Dioptimalkan khusus untuk performa Core Web Vitals tertinggi.",
     verification_status: "claimed",
     trust_score: 98.0,
     category: "Cloud Hosting",
@@ -88,7 +172,7 @@ const PRE_SEEDED_CATALOG = [
     name: "IBM SPSS Statistics",
     slug: "ibm-spss",
     website_url: "https://ibm.com/spss",
-    description: "Software statistik standard industri untuk analisis kuantitatif, pengujian regresi linear, and verifikasi validitas hipotesis riset akademik.",
+    description: "Software statistik standar industri untuk analisis kuantitatif, pengujian regresi linear, dan verifikasi validitas hipotesis riset akademik.",
     verification_status: "verified",
     trust_score: 88.0,
     category: "Statistik",
@@ -99,6 +183,44 @@ const PRE_SEEDED_CATALOG = [
     metadata: {
       pricing_info: "Lisensi Akademik Mulai $99",
       standard: "Quantitative Analysis"
+    }
+  },
+  {
+    id: "catalog-turnitin",
+    entity_type: "saas",
+    name: "Turnitin Integrity",
+    slug: "turnitin-integrity",
+    website_url: "https://turnitin.com",
+    description: "Layanan pencegahan plagiarisme dan pencocokan teks terkemuka dunia untuk menjaga orisinalitas karya tulis akademik.",
+    verification_status: "verified",
+    trust_score: 94.5,
+    category: "Plagiarisme",
+    subcategory: "Academic Tools",
+    city: "Oakland",
+    country: "US",
+    tags: ["plagiarisme", "karya-ilmiah", "keaslian"],
+    metadata: {
+      pricing_info: "Lisensi Institusi Saja",
+      standard: "Plagiarism Detection"
+    }
+  },
+  {
+    id: "catalog-zotero",
+    entity_type: "saas",
+    name: "Zotero Reference Manager",
+    slug: "zotero-manager",
+    website_url: "https://zotero.org",
+    description: "Aplikasi open-source gratis untuk mengumpulkan, mengelola, mengutip, dan membagikan sumber riset ilmiah Anda secara teratur.",
+    verification_status: "verified",
+    trust_score: 93.0,
+    category: "Sitasi",
+    subcategory: "Academic Tools",
+    city: "Fairfax",
+    country: "US",
+    tags: ["sitasi", "referensi", "open-source"],
+    metadata: {
+      pricing_info: "Gratis (Penyimpanan Cloud Opsional)",
+      standard: "Reference Management"
     }
   },
   {
@@ -118,6 +240,44 @@ const PRE_SEEDED_CATALOG = [
     metadata: {
       years_experience: "8+ Years",
       accreditation: "Certified Solutions Architect"
+    }
+  },
+  {
+    id: "catalog-yohanes",
+    entity_type: "personal",
+    name: "Prof. Dr. Ir. Yohanes Surya",
+    slug: "yohanes-surya",
+    website_url: "https://yohanessurya.com",
+    description: "Fisikawan terkemuka Indonesia, pembimbing Tim Olimpiade Fisika Indonesia (TOFI), dan perintis metode pembelajaran fisika gampang gembira menyenangkan (Gasing).",
+    verification_status: "verified",
+    trust_score: 98.0,
+    category: "Pendidikan Fisika",
+    subcategory: "Akademisi",
+    city: "Tangerang, Banten",
+    country: "ID",
+    tags: ["fisika", "olimpiade", "gasing", "tokoh"],
+    metadata: {
+      years_experience: "30+ Years",
+      accreditation: "Guru Besar Fisika & Pendiri Surya University"
+    }
+  },
+  {
+    id: "catalog-indrawan",
+    entity_type: "personal",
+    name: "Dr. Indrawan Nugroho",
+    slug: "indrawan-nugroho",
+    website_url: "https://indrawannugroho.com",
+    description: "Konsultan Inovasi Korporasi, Pembicara Strategis Bisnis, & Co-founder Kubik Leadership. Membantu transformasi digital perusahaan besar Indonesia.",
+    verification_status: "verified",
+    trust_score: 92.5,
+    category: "Corporate Innovation",
+    subcategory: "Professional",
+    city: "Jakarta",
+    country: "ID",
+    tags: ["inovasi", "kepemimpinan", "bisnis", "konsultan"],
+    metadata: {
+      years_experience: "15+ Years",
+      accreditation: "CEO & Co-founder CIAS (Corporate Innovation Asia)"
     }
   }
 ];

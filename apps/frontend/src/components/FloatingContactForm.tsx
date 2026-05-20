@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { z } from "zod";
+import { useTheme } from "next-themes";
 import { 
   Sparkles, 
   Settings, 
@@ -44,22 +45,19 @@ export default function FloatingContactForm() {
   const [successMsg, setSuccessMsg] = useState("");
 
   // Accessibility States
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [fontSize, setFontSize] = useState<FontSize>("base");
   const [serifMode, setSerifMode] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
 
   // 1. Initialize states on mount from LocalStorage
   useEffect(() => {
-    const savedTheme = localStorage.getItem("access-theme") as "dark" | "light" | null;
+    setMounted(true);
     const savedSize = localStorage.getItem("access-font-size") as FontSize | null;
     const savedSerif = localStorage.getItem("access-serif") === "true";
     const savedContrast = localStorage.getItem("access-contrast") === "true";
 
-    if (savedTheme === "light") {
-      setTheme("light");
-      document.body.classList.add("light-mode");
-    }
     if (savedSize) {
       setFontSize(savedSize);
       document.documentElement.classList.add(`font-size-${savedSize}`);
@@ -78,14 +76,8 @@ export default function FloatingContactForm() {
 
   // 2. Personalization Actions
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    localStorage.setItem("access-theme", newTheme);
-    if (newTheme === "light") {
-      document.body.classList.add("light-mode");
-    } else {
-      document.body.classList.remove("light-mode");
-    }
+    const isDark = resolvedTheme === "dark";
+    setTheme(isDark ? "light" : "dark");
   };
 
   const changeFontSize = (direction: "up" | "down") => {
@@ -129,7 +121,6 @@ export default function FloatingContactForm() {
   };
 
   const handleReset = () => {
-    document.body.classList.remove("light-mode");
     document.documentElement.classList.remove("serif-font", "high-contrast");
     document.documentElement.classList.remove(`font-size-${fontSize}`);
     document.documentElement.classList.add("font-size-base");
@@ -139,7 +130,6 @@ export default function FloatingContactForm() {
     setSerifMode(false);
     setHighContrast(false);
 
-    localStorage.removeItem("access-theme");
     localStorage.removeItem("access-font-size");
     localStorage.removeItem("access-serif");
     localStorage.removeItem("access-contrast");
@@ -383,14 +373,15 @@ export default function FloatingContactForm() {
                   {/* 1. Theme Switcher */}
                   <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-950/45 border border-slate-850">
                     <span className="text-[11px] font-mono font-bold text-slate-350 flex items-center gap-2">
-                      {theme === "dark" ? <Moon className="w-4 h-4 text-indigo-400" /> : <Sun className="w-4 h-4 text-amber-500" />}
+                      {mounted && resolvedTheme === "dark" ? <Moon className="w-4 h-4 text-indigo-400" /> : <Sun className="w-4 h-4 text-amber-500" />}
                       MODE MALAM (THEME)
                     </span>
                     <button
+                      type="button"
                       onClick={toggleTheme}
                       className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-850 hover:border-slate-700 text-slate-200 text-[10px] font-mono font-black uppercase tracking-wider transition cursor-pointer"
                     >
-                      {theme === "dark" ? "NON-AKTIFKAN MALAM" : "AKTIFKAN MALAM"}
+                      {mounted && resolvedTheme === "dark" ? "NON-AKTIFKAN MALAM" : "AKTIFKAN MALAM"}
                     </button>
                   </div>
 
@@ -402,6 +393,7 @@ export default function FloatingContactForm() {
                     </span>
                     <div className="flex items-center gap-2">
                       <button
+                        type="button"
                         onClick={() => changeFontSize("down")}
                         disabled={fontSize === "sm"}
                         className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-850 hover:border-slate-700 flex items-center justify-center text-xs font-bold text-slate-300 transition cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
@@ -409,6 +401,7 @@ export default function FloatingContactForm() {
                         A-
                       </button>
                       <button
+                        type="button"
                         onClick={() => changeFontSize("up")}
                         disabled={fontSize === "xl"}
                         className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-850 hover:border-slate-700 flex items-center justify-center text-xs font-bold text-slate-300 transition cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
