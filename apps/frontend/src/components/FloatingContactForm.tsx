@@ -370,20 +370,6 @@ export default function FloatingContactForm() {
               <div className="flex flex-col gap-5 py-2">
                 <div className="space-y-4">
                   
-                  {/* 1. Theme Switcher */}
-                  <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-950/45 border border-slate-850">
-                    <span className="text-[11px] font-mono font-bold text-slate-350 flex items-center gap-2">
-                      {mounted && resolvedTheme === "dark" ? <Moon className="w-4 h-4 text-indigo-400" /> : <Sun className="w-4 h-4 text-amber-500" />}
-                      MODE MALAM (THEME)
-                    </span>
-                    <button
-                      type="button"
-                      onClick={toggleTheme}
-                      className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-850 hover:border-slate-700 text-slate-200 text-[10px] font-mono font-black uppercase tracking-wider transition cursor-pointer"
-                    >
-                      {mounted && resolvedTheme === "dark" ? "NON-AKTIFKAN MALAM" : "AKTIFKAN MALAM"}
-                    </button>
-                  </div>
 
                   {/* 2. Text Sizing */}
                   <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-950/45 border border-slate-850">

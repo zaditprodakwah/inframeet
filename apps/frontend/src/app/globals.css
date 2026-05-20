@@ -10,7 +10,7 @@
 }
 
 .dark {
-  --background: #09090b; /* Industrial Ultra-Dark Zinc */
+  --background: #0b0f10; /* Deep Space Industrial Dark */
   --foreground: #f8fafc;
   --card-bg: rgba(24, 24, 27, 0.6); /* Cyber-Minimalism Surface */
   --border-color: rgba(255, 255, 255, 0.08);
@@ -53,6 +53,13 @@ body {
 }
 
 /* Premium Glassmorphic Card Utilities */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
 .glass-card {
   background: var(--card-bg);
   backdrop-filter: blur(12px);
@@ -65,6 +72,7 @@ body {
   box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1);
   transform: translateY(-2px);
 }
+
 
 /* Accessibility Relative Font Scaling Overrides */
 html.font-size-sm { font-size: 87.5% !important; }

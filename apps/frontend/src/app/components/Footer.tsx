@@ -155,7 +155,7 @@ export default function Footer() {
       {/* Footer Bottom copyright and notes */}
       <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-200/50 dark:border-slate-900/50 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-slate-500 dark:text-slate-500">
         <div>
-          &copy; {new Date().getFullYear()} INFRAMEET Integrity Infrastructure. Seluruh Hak Cipta Dilindungi.
+          &copy; {new Date().getFullYear()} INFRAMEET Integrity Infrastructure. Seluruh Hak Cipta Dilindungi. <span className="font-mono text-[9px] text-slate-400 dark:text-slate-600 block sm:inline sm:ml-2">System Hash: 8f4a3c2b9e1a7d6c5b4a3f2e1d0c9b8a7f6e5d4c</span>
         </div>
         <div className="flex gap-4">
           <span className="hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer">Syarat &amp; Ketentuan</span>
