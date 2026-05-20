@@ -30,7 +30,7 @@ export default function CitationToolPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-200 pb-20">
+    <div className="min-h-screen bg-[#0b0f10]/80">
       <main className="max-w-7xl mx-auto px-6 py-12 pt-24 lg:pt-32">
         {/* Hero Section */}
         <div className="mb-16">
@@ -40,10 +40,10 @@ export default function CitationToolPage() {
             </span>
             <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white max-w-3xl mb-6">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white max-w-3xl mb-6">
             Citation &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-emerald-400">Reference Generator</span>
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+          <p className="text-lg text-slate-400 max-w-2xl leading-relaxed">
             Format sitasi terverifikasi kriptografis untuk *whitepaper* infrastruktur dan jurnal akademik *peer-reviewed*. Pengambilan metadata otomatis via indeks DOI/ISBN.
           </p>
         </div>
@@ -55,14 +55,14 @@ export default function CitationToolPage() {
           <div className="lg:col-span-7 space-y-8">
             
             {/* Search Bar Module */}
-            <section className="glass-panel p-8 rounded-3xl bg-white/50 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-3 text-slate-900 dark:text-white">
+            <section className="glass-panel p-8 rounded-3xl bg-[#0b0f10]/80 border border-white/5 shadow-xl">
+              <h2 className="text-xl font-bold mb-6 flex items-center gap-3 text-white">
                 <Search className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                 Source Identification
               </h2>
               <div className="relative group">
                 <input 
-                  className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-2xl px-6 py-4 font-mono text-sm text-slate-900 dark:text-white transition-all outline-none" 
+                  className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-2xl px-6 py-4 font-mono text-sm text-white transition-all outline-none" 
                   placeholder="Enter ISBN, DOI, or Research URL..." 
                   type="text"
                 />
@@ -81,11 +81,11 @@ export default function CitationToolPage() {
             </section>
 
             {/* Configuration Module */}
-            <section className="glass-panel p-8 rounded-3xl bg-white/50 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+            <section className="glass-panel p-8 rounded-3xl bg-[#0b0f10]/80 border border-white/5 shadow-xl">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
                 <div>
-                  <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-1">Standardization</h2>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">Pilih format target publikasi</p>
+                  <h2 className="text-xl font-bold text-white mb-1">Standardization</h2>
+                  <p className="text-sm text-slate-400">Pilih format target publikasi</p>
                 </div>
                 <div className="bg-slate-100 dark:bg-slate-900 p-1.5 rounded-xl flex gap-1">
                   {["APA 7TH", "IEEE", "HARVARD"].map(format => (
@@ -109,7 +109,7 @@ export default function CitationToolPage() {
                   <label className="block font-mono text-[10px] font-bold uppercase tracking-widest text-slate-500">SOURCE TYPE</label>
                   <div className="relative">
                     <select 
-                      className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 appearance-none focus:border-indigo-500 outline-none text-sm font-medium text-slate-900 dark:text-white"
+                      className="w-full bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 appearance-none focus:border-indigo-500 outline-none text-sm font-medium text-white"
                       value={sourceType}
                       onChange={(e) => setSourceType(e.target.value)}
                     >
@@ -163,9 +163,9 @@ export default function CitationToolPage() {
                 <div className="p-5 bg-white dark:bg-slate-900/80 rounded-2xl border-l-4 border-indigo-500 shadow-sm">
                   <div className="flex items-center gap-2 mb-2">
                     <Shield className="w-5 h-5 text-indigo-500" />
-                    <span className="font-mono text-[10px] font-bold text-slate-900 dark:text-white uppercase tracking-widest">Turnitin Pre-Check</span>
+                    <span className="font-mono text-[10px] font-bold text-white uppercase tracking-widest">Turnitin Pre-Check</span>
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-400 leading-relaxed">
                     The source was scanned against the Global Academic Index. Integrity score: <span className="text-emerald-600 dark:text-emerald-400 font-bold">98.4% Unique</span>. No matches found in student repositories.
                   </p>
                 </div>
@@ -185,24 +185,24 @@ export default function CitationToolPage() {
 
         {/* Recent Citations Bento Section */}
         <div className="mt-24">
-          <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Infrastructure Directory History</h3>
+          <h3 className="text-2xl font-bold mb-8 text-white">Infrastructure Directory History</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
-            <div className="glass-panel p-6 rounded-2xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/5 hover:border-indigo-300 dark:hover:border-indigo-500/50 transition-all cursor-pointer group shadow-sm">
+            <div className="glass-panel p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-indigo-500/50 transition-all cursor-pointer group shadow-sm">
               <div className="flex justify-between items-start mb-6">
                 <FileText className="w-6 h-6 text-slate-400 group-hover:text-indigo-500 transition-colors" />
                 <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">ID: 982-FF-22</span>
               </div>
-              <p className="font-mono text-sm font-bold text-slate-900 dark:text-white mb-3 truncate">Structural Rigidity in High-Speed Rails</p>
+              <p className="font-mono text-sm font-bold text-white mb-3 truncate">Structural Rigidity in High-Speed Rails</p>
               <p className="font-mono text-[10px] text-slate-500 uppercase tracking-widest font-bold">IEEE Format • 2h ago</p>
             </div>
 
-            <div className="glass-panel p-6 rounded-2xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/5 hover:border-indigo-300 dark:hover:border-indigo-500/50 transition-all cursor-pointer group shadow-sm">
+            <div className="glass-panel p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-indigo-500/50 transition-all cursor-pointer group shadow-sm">
               <div className="flex justify-between items-start mb-6">
                 <FilePlus className="w-6 h-6 text-slate-400 group-hover:text-indigo-500 transition-colors" />
                 <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">ID: 104-BB-09</span>
               </div>
-              <p className="font-mono text-sm font-bold text-slate-900 dark:text-white mb-3 truncate">Renewable Energy Microgrid Dynamics</p>
+              <p className="font-mono text-sm font-bold text-white mb-3 truncate">Renewable Energy Microgrid Dynamics</p>
               <p className="font-mono text-[10px] text-slate-500 uppercase tracking-widest font-bold">APA 7th • 5h ago</p>
             </div>
 

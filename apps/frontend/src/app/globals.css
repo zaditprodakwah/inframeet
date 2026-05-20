@@ -1,15 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(15, 23, 42, 0.08);
-  --glow-primary: rgba(99, 102, 241, 0.06);
-  --scrollbar-thumb: #cbd5e1;
-}
-
-.dark {
   --background: #0b0f10; /* Deep Space Industrial Dark */
   --foreground: #f8fafc;
   --card-bg: rgba(24, 24, 27, 0.6); /* Cyber-Minimalism Surface */

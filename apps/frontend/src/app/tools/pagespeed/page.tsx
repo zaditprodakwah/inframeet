@@ -27,7 +27,7 @@ export default function PageSpeedToolPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-200 pb-20">
+    <div className="min-h-screen bg-[#020617] text-slate-900 dark:text-slate-200 pb-20">
       <main className="max-w-7xl mx-auto px-6 py-12 pt-24 lg:pt-32 space-y-12">
         
         {/* Header Section */}
@@ -41,10 +41,10 @@ export default function PageSpeedToolPage() {
                 NODE: DX-4092-ALPHA
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white">
               Infrastructure Integrity &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">Core Web Vitals</span>
             </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+            <p className="text-lg text-slate-400 max-w-2xl leading-relaxed">
               *Deep-space scanning* lingkungan produksi untuk mengidentifikasi sumbatan latensi dan inefisiensi rendering. Diagnostik *high-trust* untuk platform B2B.
             </p>
           </div>
@@ -62,7 +62,7 @@ export default function PageSpeedToolPage() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           
           {/* Performance Gauge (Span 4) */}
-          <div className="md:col-span-4 glass-panel p-8 rounded-3xl flex flex-col items-center justify-center text-center space-y-6 bg-white/50 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+          <div className="md:col-span-4 glass-panel p-8 rounded-3xl flex flex-col items-center justify-center text-center space-y-6 bg-[#0b0f10]/80 border border-white/5 shadow-xl">
             <div className="relative w-64 h-64 flex items-center justify-center">
               {/* Simple SVG Circle for gauge */}
               <svg className="w-full h-full -rotate-90 absolute inset-0" viewBox="0 0 100 100">
@@ -81,7 +81,7 @@ export default function PageSpeedToolPage() {
             </div>
             
             <div className="space-y-4">
-              <p className="font-mono text-xs text-slate-600 dark:text-slate-400 italic leading-relaxed">
+              <p className="font-mono text-xs text-slate-400 italic leading-relaxed">
                 "Skor ini melampaui persentil ke-95 dari standar infrastruktur akademik."
               </p>
               <div className="flex justify-center gap-6">
@@ -96,7 +96,7 @@ export default function PageSpeedToolPage() {
           <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
             
             {/* LCP */}
-            <div className="glass-panel p-6 rounded-3xl space-y-4 bg-white/50 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+            <div className="glass-panel p-6 rounded-3xl space-y-4 bg-[#0b0f10]/80 border border-white/5 shadow-xl">
               <div className="flex justify-between items-start mb-2">
                 <span className="font-mono text-[10px] font-bold text-slate-500 uppercase tracking-widest">LCP</span>
                 <CheckCircle2 className="w-5 h-5 text-emerald-500" />
@@ -108,13 +108,13 @@ export default function PageSpeedToolPage() {
               <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                 <div className="h-full bg-emerald-500 w-[85%]"></div>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Respon infrastruktur optimal. Aset utama (*Hero*) dikirim via Edge Cache Node-04.
               </p>
             </div>
 
             {/* FID */}
-            <div className="glass-panel p-6 rounded-3xl space-y-4 bg-white/50 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+            <div className="glass-panel p-6 rounded-3xl space-y-4 bg-[#0b0f10]/80 border border-white/5 shadow-xl">
               <div className="flex justify-between items-start mb-2">
                 <span className="font-mono text-[10px] font-bold text-slate-500 uppercase tracking-widest">FID</span>
                 <CheckCircle2 className="w-5 h-5 text-emerald-500" />
@@ -126,13 +126,13 @@ export default function PageSpeedToolPage() {
               <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                 <div className="h-full bg-emerald-500 w-[95%]"></div>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Konkurensi *thread* utama terverifikasi. Eksekusi skrip ditunda (*deferred*) dengan sukses.
               </p>
             </div>
 
             {/* CLS */}
-            <div className="glass-panel p-6 rounded-3xl space-y-4 bg-white/50 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+            <div className="glass-panel p-6 rounded-3xl space-y-4 bg-[#0b0f10]/80 border border-white/5 shadow-xl">
               <div className="flex justify-between items-start mb-2">
                 <span className="font-mono text-[10px] font-bold text-slate-500 uppercase tracking-widest">CLS</span>
                 <Info className="w-5 h-5 text-amber-500" />
@@ -144,7 +144,7 @@ export default function PageSpeedToolPage() {
               <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                 <div className="h-full bg-amber-500 w-[60%]"></div>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Pergeseran minor terdeteksi pada *ad-frames* dinamis. Disarankan menggunakan kontainer rasio statis.
               </p>
             </div>
@@ -154,7 +154,7 @@ export default function PageSpeedToolPage() {
               <div className="flex-1 space-y-4 w-full">
                 <div className="flex items-center gap-3">
                   <Activity className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Serverless Migration Savings</h2>
+                  <h2 className="text-2xl font-bold text-white">Serverless Migration Savings</h2>
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
                   Diagnostik kami mengindikasikan arsitektur monolitik Anda membocorkan 24% efisiensi komputasi. Estimasikan ROI (Return of Investment) dengan beralih ke layanan *serverless* terenkripsi INFRAMEET.
@@ -188,7 +188,7 @@ export default function PageSpeedToolPage() {
 
           {/* Terminal Optimization (Span 7) */}
           <div className="md:col-span-7 space-y-6">
-            <h2 className="text-2xl font-bold flex items-center gap-3 text-slate-900 dark:text-white">
+            <h2 className="text-2xl font-bold flex items-center gap-3 text-white">
               <Terminal className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
               Optimization Recommendations
             </h2>
@@ -255,7 +255,7 @@ export default function PageSpeedToolPage() {
 
           {/* Visualization Module (Span 5) */}
           <div className="md:col-span-5 space-y-6">
-            <h2 className="text-2xl font-bold flex items-center gap-3 text-slate-900 dark:text-white">
+            <h2 className="text-2xl font-bold flex items-center gap-3 text-white">
               <CloudRain className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
               Global Node Latency
             </h2>

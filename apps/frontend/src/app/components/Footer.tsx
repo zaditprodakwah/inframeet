@@ -29,7 +29,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-50 dark:bg-slate-950/70 border-t border-slate-200/60 dark:border-slate-900/80 text-slate-600 dark:text-slate-400 select-none py-16 transition-colors duration-300">
+    <footer className="bg-[#070a0b] border-t border-slate-900 text-slate-500 select-none py-16">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
         
         {/* Column 1: Brand Pitch */}
@@ -41,38 +41,38 @@ export default function Footer() {
             <div className="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-650/20 group-hover:scale-105 transition-all">
               <Sparkles className="w-4.5 h-4.5" />
             </div>
-            <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white">
-              INFRA<span className="text-indigo-600 dark:text-indigo-400">MEET</span>
+            <span className="font-extrabold text-sm tracking-tight text-white">
+              INFRA<span className="text-indigo-400">MEET</span>
             </span>
           </div>
-          <p className="text-[11px] leading-relaxed text-slate-500 dark:text-slate-450">
+          <p className="text-[11px] leading-relaxed text-slate-500">
             Infrastruktur Integritas &amp; Verifikasi Kredensial Kriptografis Terakreditasi pertama di Nusantara. Bebas beban perjokian akademik dengan standar ketaatan ilmiah tertinggi.
           </p>
           <div className="flex items-center gap-2 pt-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[10px] font-black text-slate-500 dark:text-slate-450 tracking-wider font-mono uppercase">Node Active</span>
+            <span className="text-[10px] font-black text-slate-500 tracking-wider font-mono uppercase">Node Active</span>
           </div>
         </div>
 
         {/* Column 2: Public & Core Pages */}
         <div className="space-y-3">
-          <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
+          <h4 className="text-xs font-black uppercase tracking-wider text-slate-300 font-mono">
             Public &amp; Core Pages
           </h4>
           <ul className="space-y-2 text-[11px]">
-            <li><Link href="/" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Beranda</Link></li>
-            <li><Link href="/layanan/akademik" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Layanan Akademik</Link></li>
-            <li><Link href="/layanan/b2b" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Layanan Cloud B2B</Link></li>
-            <li><Link href="/directory" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Direktori Bisnis</Link></li>
-            <li><Link href="/experts" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Jaringan Pakar</Link></li>
-            <li><Link href="/portfolio" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portofolio</Link></li>
+            <li><Link href="/" className="hover:text-indigo-400 transition-colors">Beranda</Link></li>
+            <li><Link href="/layanan/akademik" className="hover:text-indigo-400 transition-colors">Layanan Akademik</Link></li>
+            <li><Link href="/layanan/b2b" className="hover:text-indigo-400 transition-colors">Layanan Cloud B2B</Link></li>
+            <li><Link href="/directory" className="hover:text-indigo-400 transition-colors">Direktori Bisnis</Link></li>
+            <li><Link href="/experts" className="hover:text-indigo-400 transition-colors">Jaringan Pakar</Link></li>
+            <li><Link href="/portfolio" className="hover:text-indigo-400 transition-colors">Portofolio</Link></li>
             <li><Link href="/verify" className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors font-bold flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> Verifikasi</Link></li>
           </ul>
         </div>
 
         {/* Column 3: Interactive Hub & Tools */}
         <div className="space-y-3">
-          <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
+          <h4 className="text-xs font-black uppercase tracking-wider text-slate-300 font-mono">
             Hub Alat &amp; Utilitas
           </h4>
           <ul className="space-y-2 text-[11px]">
@@ -82,13 +82,13 @@ export default function Footer() {
             <li><Link href="/tools/pagespeed" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Audit PageSpeed</Link></li>
             <li><Link href="/tools/plagiarism" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Cek Plagiarisme</Link></li>
             <li><Link href="/tools/resume" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Optimasi Resume</Link></li>
-            <li><Link href="/tools/submission" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portal Pengajuan</Link></li>
+            <li><Link href="/submission" className="hover:text-indigo-400 transition-colors">Portal Pengajuan</Link></li>
           </ul>
         </div>
 
         {/* Column 4: Insights & Legal */}
         <div className="space-y-3">
-          <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
+          <h4 className="text-xs font-black uppercase tracking-wider text-slate-300 font-mono">
             Insights &amp; Kepatuhan
           </h4>
           <ul className="space-y-2 text-[11px]">
@@ -102,7 +102,7 @@ export default function Footer() {
 
         {/* Column 5: Access & Transaction */}
         <div className="space-y-3">
-          <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
+          <h4 className="text-xs font-black uppercase tracking-wider text-slate-300 font-mono">
             Akses &amp; Transaksi
           </h4>
           <ul className="space-y-2 text-[11px]">
@@ -115,16 +115,16 @@ export default function Footer() {
       </div>
 
       {/* Footer Bottom copyright and notes */}
-      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-200/50 dark:border-slate-900/50 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-slate-500 dark:text-slate-500">
+      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-900/50 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-slate-500">
         <div>
-          &copy; {new Date().getFullYear()} INFRAMEET Integrity Infrastructure. Seluruh Hak Cipta Dilindungi. <span className="font-mono text-[9px] text-slate-400 dark:text-slate-600 block sm:inline sm:ml-2">System Hash: 8f4a3c2b9e1a7d6c5b4a3f2e1d0c9b8a7f6e5d4c</span>
+          &copy; {new Date().getFullYear()} INFRAMEET Integrity Infrastructure. Seluruh Hak Cipta Dilindungi. <span className="font-mono text-[9px] text-slate-600 block sm:inline sm:ml-2">System Hash: 8f4a3c2b9e1a7d6c5b4a3f2e1d0c9b8a7f6e5d4c</span>
         </div>
         <div className="flex gap-4">
-          <span className="hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer">Syarat &amp; Ketentuan</span>
+          <span className="hover:text-indigo-400 cursor-pointer">Syarat &amp; Ketentuan</span>
           <span>&middot;</span>
-          <span className="hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer">Kebijakan Privasi</span>
+          <span className="hover:text-indigo-400 cursor-pointer">Kebijakan Privasi</span>
           <span>&middot;</span>
-          <span className="hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer">Academic Integrity &amp; Ethical Research Protocol</span>
+          <span className="hover:text-indigo-400 cursor-pointer">Academic Integrity &amp; Ethical Research Protocol</span>
         </div>
       </div>
     </footer>
