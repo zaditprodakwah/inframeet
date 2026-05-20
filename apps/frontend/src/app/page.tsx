@@ -37,28 +37,45 @@ const HOMEPAGE_FALLBACK_ARTICLES = [
 ];
 
 export default async function Home() {
-  // Dynamic live insights fetching server-side directly from Supabase to bypass network fetches
-  let liveArticles = [];
+  // Dynamic live insights fetching server-side directly from Supabase
+  let liveArticles: any[] = [];
+  let topDirectories: any[] = [];
+  let topExperts: any[] = [];
+
   try {
     if (supabaseAdmin) {
-      const { data, error } = await supabaseAdmin
+      // 1. Fetch Articles
+      const { data: articles } = await supabaseAdmin
         .from("rss_items")
         .select("*, content_summary:summary, rss_feeds(feed_name:title)")
         .eq("is_published_to_index", true)
         .order("published_at", { ascending: false })
         .limit(3);
-      
-      if (error) {
-        console.error("Supabase error fetching live insights:", error.message || error);
-      } else if (data && data.length > 0) {
-        liveArticles = data;
-      }
+      if (articles) liveArticles = articles;
+
+      // 2. Fetch Top B2B Directories
+      const { data: dirs } = await supabaseAdmin
+        .from("omni_directory")
+        .select("id, slug, name, trust_score, verification_status")
+        .eq("verification_status", "verified")
+        .order("trust_score", { ascending: false })
+        .limit(3);
+      if (dirs) topDirectories = dirs;
+
+      // 3. Fetch Top Experts
+      const { data: experts } = await supabaseAdmin
+        .from("omni_directory")
+        .select("id, slug, name, trust_score, verification_status")
+        .eq("entity_type", "expert")
+        .order("trust_score", { ascending: false })
+        .limit(3);
+      if (experts) topExperts = experts;
     }
   } catch (err) {
-    console.error("Gagal mengambil data live insights di homepage, menggunakan fallback:", err);
+    console.error("Gagal mengambil data dinamis di homepage:", err);
   }
 
   const articlesToShow = liveArticles.length > 0 ? liveArticles : HOMEPAGE_FALLBACK_ARTICLES;
 
-  return <HomeClient articles={articlesToShow} />;
+  return <HomeClient articles={articlesToShow} topDirectories={topDirectories} topExperts={topExperts} />;
 }

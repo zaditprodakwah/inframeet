@@ -37,9 +37,11 @@ interface Article {
 
 interface HomeClientProps {
   articles: Article[];
+  topDirectories?: any[];
+  topExperts?: any[];
 }
 
-export default function HomeClient({ articles }: HomeClientProps) {
+export default function HomeClient({ articles, topDirectories = [], topExperts = [] }: HomeClientProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [emailInput, setEmailInput] = useState('');
 
@@ -334,6 +336,102 @@ export default function HomeClient({ articles }: HomeClientProps) {
                 </div>
               );
             })}
+          </div>
+        </section>
+
+        {/* ========================================================== */}
+        {/* PITCH DECK SHOWCASE: USER DASHBOARD & EMBED WIDGETS        */}
+        {/* ========================================================== */}
+        <section className="max-w-7xl mx-auto px-4 md:px-10 py-16">
+          <div className="text-center space-y-4 mb-12">
+            <span className="text-xs font-mono text-[#4edea3] uppercase tracking-wider flex items-center justify-center gap-1.5">
+              <ShieldCheck className="w-4.5 h-4.5 text-[#4edea3]" />
+              Transparansi Kredensial
+            </span>
+            <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Akses Dasbor Klien &amp; Widget Lencana Integrasi
+            </h3>
+            <p className="text-sm text-slate-650 dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">
+              Tingkatkan konversi klien dengan mempublikasikan lencana verifikasi kriptografis di website institusi Anda. Didukung arsitektur telemetri yang terhubung ke jaringan audit utama.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Mockup: User Dashboard */}
+            <div className="glass-panel p-6 rounded-3xl relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/5 to-transparent pointer-events-none" />
+              <div className="flex items-center justify-between mb-6 relative z-10">
+                <div className="flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-[#6366f1]" />
+                  <h4 className="font-bold text-slate-900 dark:text-white text-lg">Dasbor Pemantauan (Klien B2B)</h4>
+                </div>
+                <Link href="/login" className="px-3 py-1.5 bg-[#6366f1] hover:bg-[#8083ff] text-white text-[10px] font-bold font-mono uppercase rounded-lg transition-colors shadow-sm">
+                  Coba Dasbor
+                </Link>
+              </div>
+
+              {/* Fake UI Dashboard */}
+              <div className="bg-slate-50 dark:bg-[#0b0f10] border border-slate-200 dark:border-white/10 rounded-2xl p-4 space-y-4 relative z-10">
+                <div className="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-white/10">
+                  <div>
+                    <p className="text-[10px] font-mono uppercase text-slate-500">Total Transaksi Escrow</p>
+                    <p className="font-extrabold text-slate-800 dark:text-white text-xl">Rp 120.500.000</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <p className="text-[10px] font-mono uppercase text-slate-500 font-bold">Kinerja Entitas Direktori Top</p>
+                  {topDirectories.length > 0 ? (
+                    topDirectories.slice(0, 2).map((dir: any) => (
+                      <div key={dir.id} className="flex justify-between items-center p-2.5 rounded-lg bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/5">
+                        <span className="text-xs font-bold text-slate-800 dark:text-white">{dir.name}</span>
+                        <span className="text-[10px] font-mono text-[#6366f1] bg-[#6366f1]/10 px-2 py-0.5 rounded font-bold">{dir.trust_score}% Trust</span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-xs text-slate-500 italic p-2">Memuat performa node...</div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Mockup: Widget Embed */}
+            <div className="glass-panel p-6 rounded-3xl relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#4edea3]/5 to-transparent pointer-events-none" />
+              <div className="flex items-center justify-between mb-6 relative z-10">
+                <div className="flex items-center gap-2">
+                  <Star className="w-5 h-5 text-[#4edea3]" />
+                  <h4 className="font-bold text-slate-900 dark:text-white text-lg">Embed Widget &amp; Lencana SEO</h4>
+                </div>
+              </div>
+
+              {/* Fake UI Widget Export */}
+              <div className="bg-slate-50 dark:bg-[#0b0f10] border border-slate-200 dark:border-white/10 rounded-2xl p-4 space-y-4 relative z-10 flex flex-col justify-between min-h-[220px]">
+                <div className="flex items-center justify-center py-4">
+                  {/* Fake Badge */}
+                  <div className="px-4 py-2 bg-white dark:bg-[#151a1d] border border-slate-200 dark:border-white/10 shadow-lg rounded-xl flex items-center gap-3 w-max mx-auto transform transition-transform group-hover:scale-105">
+                    <ShieldCheck className="w-6 h-6 text-emerald-500" />
+                    <div className="text-left">
+                      <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest leading-none">VERIFIED PARTNER</div>
+                      <div className="font-black text-sm text-slate-800 dark:text-white leading-tight">INFRAMEET</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-[10px] font-mono uppercase text-slate-500 font-bold">Salin Kode HTML (iFrame/Script)</p>
+                  <div className="p-3 rounded-lg bg-slate-900 dark:bg-black font-mono text-[9px] text-[#4edea3] overflow-hidden whitespace-nowrap overflow-ellipsis">
+                    {`<script src="https://inframeet.com/widgets/telemetry.js"></script><div class="inframeet-badge" data-id="8f2a1"></div>`}
+                  </div>
+                  <p className="text-[9px] text-slate-500 italic mt-1 flex items-center gap-1">
+                    <Activity className="w-3 h-3" /> Telemetri hit akan dikirim ke /api/widgets/track
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

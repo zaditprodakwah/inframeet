@@ -54,99 +54,60 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Column 2: B2B Enterprise Growth */}
+        {/* Column 2: Public & Core Pages */}
         <div className="space-y-3">
           <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
-            Enterprise Solutions
+            Public &amp; Core Pages
           </h4>
           <ul className="space-y-2 text-[11px]">
-            <li>
-              <Link href="/layanan/b2b" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Enterprise Web App Development
-              </Link>
-            </li>
-            <li>
-              <Link href="/layanan/b2b" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                SaaS &amp; Cloud Database Migration
-              </Link>
-            </li>
-            <li>
-              <Link href="/layanan/b2b" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Speed &amp; Core Web Vitals Audit
-              </Link>
-            </li>
+            <li><Link href="/" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Beranda</Link></li>
+            <li><Link href="/layanan/akademik" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Layanan Akademik</Link></li>
+            <li><Link href="/layanan/b2b" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Layanan Cloud B2B</Link></li>
+            <li><Link href="/directory" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Direktori Bisnis</Link></li>
+            <li><Link href="/experts" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Jaringan Pakar</Link></li>
+            <li><Link href="/portfolio" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portofolio</Link></li>
+            <li><Link href="/verify" className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors font-bold flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> Verifikasi</Link></li>
           </ul>
         </div>
 
-        {/* Column 3: Academic & Research */}
+        {/* Column 3: Interactive Hub & Tools */}
         <div className="space-y-3">
           <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
-            Academic Integrity
+            Hub Alat &amp; Utilitas
           </h4>
           <ul className="space-y-2 text-[11px]">
-            <li>
-              <Link href="/layanan/akademik" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Statistik &amp; Olah Data (SEM/SPSS)
-              </Link>
-            </li>
-            <li>
-              <Link href="/layanan/akademik" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Asistensi Kepatuhan Turnitin
-              </Link>
-            </li>
-            <li>
-              <Link href="/tools/institusi" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Direktori Kampus &amp; Sekolah
-              </Link>
-            </li>
+            <li><Link href="/calculator" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-bold">Kalkulator ROI</Link></li>
+            <li><Link href="/tools/citation" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sitasi Ilmiah</Link></li>
+            <li><Link href="/tools/institusi" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Cek Institusi</Link></li>
+            <li><Link href="/tools/pagespeed" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Audit PageSpeed</Link></li>
+            <li><Link href="/tools/plagiarism" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Cek Plagiarisme</Link></li>
+            <li><Link href="/tools/resume" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Optimasi Resume</Link></li>
+            <li><Link href="/tools/submission" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portal Pengajuan</Link></li>
           </ul>
         </div>
 
-        {/* Column 4: Trust & Verification */}
+        {/* Column 4: Insights & Legal */}
         <div className="space-y-3">
           <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
-            Trust &amp; Verification
+            Insights &amp; Kepatuhan
           </h4>
           <ul className="space-y-2 text-[11px]">
-            <li>
-              <Link href="/submission?tab=experts" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-bold text-indigo-600 dark:text-indigo-400">
-                Jaringan Pakar Terverifikasi
-              </Link>
-            </li>
-            <li>
-              <Link href="/submission?tab=verify" className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 text-emerald-605 dark:text-emerald-400 font-bold">
-                <ShieldCheck className="w-3.5 h-3.5" /> Portal Verifikasi Kriptografis
-              </Link>
-            </li>
-            <li>
-              <Link href="/submission?tab=onboarding" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Daftar Sebagai Pakar (Onboarding)
-              </Link>
-            </li>
+            <li><Link href="/insights" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Insights &amp; Artikel</Link></li>
+            <li><Link href="/case-studies" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Studi Kasus Proyek</Link></li>
+            <li><Link href="/about" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Tentang Kami</Link></li>
+            <li><Link href="/legal" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Legal &amp; Kepatuhan</Link></li>
           </ul>
         </div>
 
-        {/* Column 5: Sumber Daya & Legal */}
+        {/* Column 5: Access & Transaction */}
         <div className="space-y-3">
           <h4 className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
-            Sumber Daya &amp; Legal
+            Akses &amp; Transaksi
           </h4>
           <ul className="space-y-2 text-[11px]">
-            <li>
-              <Link href="/insights" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Insights &amp; Artikel UGC
-              </Link>
-            </li>
-            <li>
-              <Link href="/case-studies" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Studi Kasus Proyek
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                Tentang &amp; Kepatuhan Hukum
-              </Link>
-            </li>
+            <li><Link href="/login" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Masuk / Dasbor</Link></li>
+            <li><Link href="/join-expert" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Gabung Jaringan Pakar</Link></li>
+            <li><Link href="/contact" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Hubungi Kami</Link></li>
           </ul>
         </div>
 

@@ -98,45 +98,55 @@ export default function MegaMenu() {
             {isLayananOpen && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[800px] bg-white dark:bg-[#090d1f] border border-slate-200/90 dark:border-slate-800/80 rounded-3xl shadow-2xl p-6 grid grid-cols-3 gap-6 animate-in fade-in slide-in-from-top-2 duration-200">
                 
-                {/* COLUMN 1: KATEGORI POPULER (CHIPS MINIMALIS) */}
+                {/* COLUMN 1: PUBLIC & CORE PAGES */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100 dark:border-slate-800/80">
-                    <Sparkles className="w-4 h-4 text-indigo-500" />
-                    Kategori Layanan
+                    <Building className="w-4 h-4 text-indigo-500" />
+                    Layanan Utama
                   </div>
-                  <div className="flex flex-wrap gap-2 pt-1">
+                  <div className="flex flex-col gap-2 pt-1">
                     {[
-                      { label: "Direktori B2B", href: "/directory" },
-                      { label: "Registrasi Akademik", href: "/tools/institusi" },
-                      { label: "Verifikasi Legalitas", href: "/submission?tab=verify" },
-                      { label: "Kalkulator ROI", href: "/calculator" }
+                      { label: "Beranda Utama", href: "/" },
+                      { label: "Layanan Akademik", href: "/layanan/akademik" },
+                      { label: "Layanan Cloud B2B", href: "/layanan/b2b" },
+                      { label: "Direktori Bisnis", href: "/directory" },
+                      { label: "Jaringan Pakar", href: "/experts" },
+                      { label: "Portofolio", href: "/portfolio" }
                     ].map((item) => (
                       <Link
                         key={item.label}
                         href={item.href}
-                        className="px-3 py-1.5 bg-slate-50 dark:bg-slate-950 hover:bg-indigo-50 dark:hover:bg-indigo-955/50 border border-slate-200 dark:border-slate-850 hover:border-indigo-200 dark:hover:border-indigo-850/80 text-[11px] font-bold text-slate-600 dark:text-slate-350 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-xl transition-all"
+                        className="px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-950/50 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-350 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center gap-2"
                       >
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 shrink-0" />
                         {item.label}
                       </Link>
                     ))}
                   </div>
                 </div>
 
-                {/* COLUMN 2: KOTA-KOTA TERATAS (DIREKTORI REGIONAL) */}
+                {/* COLUMN 2: TOOLS & INTERACTIVE HUB */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100 dark:border-slate-800/80">
-                    <Building className="w-4 h-4 text-indigo-500" />
-                    Wilayah Terpopuler
+                    <Wrench className="w-4 h-4 text-indigo-500" />
+                    Hub Alat & Utilitas
                   </div>
                   <div className="grid grid-cols-2 gap-2 pt-1">
-                    {["Jakarta Raya", "Bandung", "Surabaya", "Yogyakarta", "Medan", "Makassar"].map((city) => (
+                    {[
+                      { label: "Kalkulator ROI", href: "/calculator" },
+                      { label: "Sitasi Ilmiah", href: "/tools/citation" },
+                      { label: "Cek Institusi", href: "/tools/institusi" },
+                      { label: "Audit PageSpeed", href: "/tools/pagespeed" },
+                      { label: "Cek Plagiarisme", href: "/tools/plagiarism" },
+                      { label: "Optimasi Resume", href: "/tools/resume" },
+                      { label: "Pengajuan", href: "/tools/submission" }
+                    ].map((item) => (
                       <Link
-                        key={city}
-                        href={`/directory?city=${city.toLowerCase()}`}
-                        className="px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center gap-1.5"
+                        key={item.label}
+                        href={item.href}
+                        className="px-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 shrink-0" />
-                        {city}
+                        {item.label}
                       </Link>
                     ))}
                   </div>
@@ -208,7 +218,13 @@ export default function MegaMenu() {
                 <Link href="/contact" className="block px-4 py-2 text-xs font-bold text-slate-650 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg transition-colors">
                   Hubungi Kami
                 </Link>
-                <Link href="/legal" className="block px-4 py-2 text-xs font-bold text-slate-650 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg transition-colors">
+                <Link href="/login" className="block px-4 py-2 text-xs font-bold text-slate-650 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg transition-colors border-t border-slate-100 dark:border-slate-800 mt-1 pt-2">
+                  Masuk / Akses Dasbor
+                </Link>
+                <Link href="/join-expert" className="block px-4 py-2 text-xs font-bold text-slate-650 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg transition-colors">
+                  Daftar Jaringan Pakar
+                </Link>
+                <Link href="/legal" className="block px-4 py-2 text-xs font-bold text-slate-650 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg transition-colors border-t border-slate-100 dark:border-slate-800 mt-1 pt-2">
                   Legal &amp; Kepatuhan
                 </Link>
               </div>
