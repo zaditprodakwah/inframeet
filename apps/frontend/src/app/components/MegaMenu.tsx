@@ -20,7 +20,11 @@ import {
   BookOpen,
   School,
   Send,
-  ShieldCheck
+  ShieldCheck,
+  Search,
+  Wrench,
+  Compass,
+  User
 } from "lucide-react";
 
 export default function MegaMenu() {
@@ -91,107 +95,69 @@ export default function MegaMenu() {
 
             {/* MEGA MENU DROPDOWN PANEL */}
             {isLayananOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[600px] bg-white border border-slate-200/80 rounded-3xl shadow-xl p-6 grid grid-cols-2 gap-6 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[800px] bg-white border border-slate-200/80 rounded-3xl shadow-xl p-6 grid grid-cols-3 gap-6 animate-in fade-in slide-in-from-top-2 duration-200">
                 
-                {/* COLUMN A: B2B Growth */}
+                {/* COLUMN 1: KATEGORI POPULER (CHIPS MINIMALIS) */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100">
-                    <Building className="w-4 h-4" />
-                    Enterprise & B2B Growth
+                    <Sparkles className="w-4 h-4 text-indigo-600" />
+                    Kategori Populer
                   </div>
-                  <div className="space-y-3">
-                    <Link href="/layanan/b2b" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-indigo-600">
-                        <Laptop className="w-4 h-4 text-slate-400 group-hover:text-indigo-500" />
-                        Enterprise Web App
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Pembangunan web high-performance bebas beban server bulanan.
-                      </p>
-                    </Link>
-                    <Link href="/layanan/b2b" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-indigo-600">
-                        <Database className="w-4 h-4 text-slate-400 group-hover:text-indigo-500" />
-                        SaaS & Cloud Migration
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Migrasi sistem database and deployment serverless handal.
-                      </p>
-                    </Link>
-                    <Link href="/layanan/b2b" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-indigo-600">
-                        <Zap className="w-4 h-4 text-slate-400 group-hover:text-indigo-500" />
-                        Speed & SEO Audit
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Skor Core Web Vitals 100% dan penguatan entitas AEO/GEO.
-                      </p>
-                    </Link>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {["Enterprise Cloud", "Olah Data PLS/SEM", "SaaS Serverless", "Turnitin Compliance", "Kepenulisan Akademik", "Kepatuhan UU PDP"].map((cat) => (
+                      <Link
+                        key={cat}
+                        href={`/directory?category=${cat.toLowerCase().replace(/ /g, "-")}`}
+                        className="px-3 py-1.5 bg-slate-50 hover:bg-indigo-50 border border-slate-200/60 hover:border-indigo-200 text-[11px] font-bold text-slate-700 hover:text-indigo-650 rounded-xl transition-all"
+                      >
+                        {cat}
+                      </Link>
+                    ))}
                   </div>
                 </div>
 
-                {/* COLUMN B: Academic Support */}
+                {/* COLUMN 2: KOTA-KOTA TERATAS (DIREKTORI pSEO) */}
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100">
-                    <GraduationCap className="w-4 h-4" />
-                    Academic & Research
+                  <div className="flex items-center gap-2 text-indigo-650 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100">
+                    <Building className="w-4 h-4 text-indigo-600" />
+                    Kota Teratas (pSEO)
                   </div>
-                  <div className="space-y-3">
-                    <Link href="/layanan/akademik" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-emerald-600">
-                        <BarChart3 className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
-                        Statistik & Olah Data
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Regresi linear, Structural Equation Modeling (SEM), SPSS/SmartPLS.
-                      </p>
-                    </Link>
-                    <Link href="/layanan/akademik" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-emerald-600">
-                        <FileText className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
-                        Kepatuhan Turnitin
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Asistensi penurunan tingkat plagiarisme naskah ilmiah steril.
-                      </p>
-                    </Link>
-                    <Link href="/layanan/akademik" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-emerald-600">
-                        <FileCheck className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
-                        Layouting & Presentasi
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Format naskah jurnal terakreditasi and deck sidang estetik.
-                      </p>
-                    </Link>
-                    <Link href="/tools/citation" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-emerald-600">
-                        <BookOpen className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
-                        Smart Citation Formatter
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Format bibliography & cari DOI (APA, IEEE, Harvard) gratis.
-                      </p>
-                    </Link>
-                    <Link href="/tools/institusi" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-emerald-600">
-                        <School className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
-                        Direktori Kampus & Sekolah
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Pencarian pedoman format sitasi & Turnitin institusi Nusantara.
-                      </p>
-                    </Link>
-                    <Link href="/submission" className="group block space-y-1 p-2 hover:bg-slate-50 rounded-xl transition-all">
-                      <div className="flex items-center gap-2 font-bold text-sm text-slate-800 group-hover:text-emerald-600">
-                        <Send className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
-                        Kontribusi Konten & Direktori
-                      </div>
-                      <p className="text-xs text-slate-500 pl-6">
-                        Ajukan esai ilmiah, perkakas buatan Anda, or data kampus baru.
-                      </p>
-                    </Link>
+                  <div className="grid grid-cols-2 gap-2 pt-1">
+                    {["Jakarta Raya", "Bandung", "Surabaya", "Yogyakarta", "Medan", "Makassar"].map((city) => (
+                      <Link
+                        key={city}
+                        href={`/directory?city=${city.toLowerCase()}`}
+                        className="px-2 py-1.5 hover:bg-slate-50 rounded-lg text-xs font-semibold text-slate-650 hover:text-indigo-600 transition-all flex items-center gap-1.5"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0" />
+                        {city}
+                      </Link>
+                    ))}
                   </div>
+                </div>
+
+                {/* COLUMN 3: SOROTAN AHLI TERVERIFIKASI HARI INI */}
+                <div className="space-y-4 bg-slate-55/40 p-4 rounded-2xl border border-slate-200/60 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 text-indigo-650 font-bold text-[10px] uppercase tracking-wider pb-2">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                      Sorotan Hari Ini
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-black text-slate-900 leading-tight">
+                        Dr. Budi Santoso, M.Si.
+                      </h4>
+                      <p className="text-[10px] text-slate-550 leading-relaxed font-medium">
+                        Pakar Metodologi Penelitian & PLS-SEM dengan tingkat kepuasan 100% dari 40+ publikasi formal terverifikasi.
+                      </p>
+                    </div>
+                  </div>
+                  <Link 
+                    href="/experts/dr-budi-santoso" 
+                    className="inline-flex items-center gap-1 text-[10px] font-bold text-indigo-600 hover:text-indigo-700 transition-colors pt-2"
+                  >
+                    Lihat Profil Verifikasi &rarr;
+                  </Link>
                 </div>
 
               </div>
@@ -354,6 +320,31 @@ export default function MegaMenu() {
           </Link>
         </div>
       )}
+      {/* 3.2 Navigasi Mobile-First Bottom Nav Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden px-4 pb-4">
+        <div className="w-full bg-white/95 backdrop-blur-xl border border-slate-200/60 rounded-2xl h-16 shadow-lg flex items-center justify-around select-none">
+          <Link href="/" className="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-600 transition-colors">
+            <Home className="w-5 h-5" />
+            <span className="text-[9px] font-bold mt-1 uppercase tracking-wider">Home</span>
+          </Link>
+          <Link href="/directory" className="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-600 transition-colors">
+            <Search className="w-5 h-5" />
+            <span className="text-[9px] font-bold mt-1 uppercase tracking-wider">Search</span>
+          </Link>
+          <Link href="/tools" className="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-600 transition-colors">
+            <Wrench className="w-5 h-5" />
+            <span className="text-[9px] font-bold mt-1 uppercase tracking-wider">Tools</span>
+          </Link>
+          <Link href="/insights" className="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-600 transition-colors">
+            <Compass className="w-5 h-5" />
+            <span className="text-[9px] font-bold mt-1 uppercase tracking-wider">Updates</span>
+          </Link>
+          <Link href="/login" className="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-600 transition-colors">
+            <User className="w-5 h-5" />
+            <span className="text-[9px] font-bold mt-1 uppercase tracking-wider">Profile</span>
+          </Link>
+        </div>
+      </div>
     </header>
   );
 }

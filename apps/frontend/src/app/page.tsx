@@ -160,12 +160,12 @@ export default async function Home() {
 
             {/* H1 Headline */}
             <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] max-w-4xl mx-auto">
-              Fokus pada Visi Bisnis dan Kelulusan Riset Anda. <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-700 to-emerald-600">Biarkan Kami yang Menangani</span> Kerumitan Infrastrukturnya.
+              Infrastruktur Kepercayaan <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-850">Berbasis Bukti</span>.
             </h1>
 
             {/* H2 Sub-headline */}
-            <h2 className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto font-normal leading-relaxed">
-              Mitra konsultan strategis untuk transformasi arsitektur digital enterprise dan asistensi riset akademik kuantitatif. Kami mengamankan skalabilitas bisnis dan validitas data riset Anda dengan presisi tinggi, transparan sejak hari pertama.
+            <h2 className="text-base md:text-lg text-slate-650 max-w-3xl mx-auto font-medium leading-relaxed">
+              Klaim etalase profil Anda, tunjukkan bukti verifikasi legalitas, dan kembangkan bisnis Anda melalui ulasan yang transparan dan dapat diaudit oleh publik.
             </h2>
 
             {/* Zero-Friction Leads Capture Intake Form */}

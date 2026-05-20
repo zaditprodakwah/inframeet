@@ -104,6 +104,16 @@ export default function ExpertProfileClient({ expert, achievements }: ExpertProf
         </div>
       </div>
 
+      {/* Mobile Sticky CTA: Kirim Pesan (Inquiry) */}
+      <div className="fixed bottom-20 left-0 right-0 z-40 md:hidden px-6">
+        <button
+          onClick={() => setIsContactOpen(true)}
+          className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-850 text-white font-black rounded-2xl text-xs transition-all shadow-lg shadow-indigo-650/20 flex items-center justify-center gap-2 cursor-pointer border border-indigo-500"
+        >
+          <ShieldCheck className="w-4.5 h-4.5" /> Kirim Konsultasi (Inquiry)
+        </button>
+      </div>
+
       {/* Smart Contact Modal popup overlay */}
       <SmartContactModal
         isOpen={isContactOpen}
