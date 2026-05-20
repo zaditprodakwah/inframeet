@@ -2,249 +2,221 @@
 
 import React from "react";
 import MegaMenu from "../components/MegaMenu";
-import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
+import Breadcrumbs from "../components/Breadcrumbs";
 import Link from "next/link";
 import { 
   Sparkles, 
-  ArrowRight, 
   ShieldCheck, 
-  Users, 
+  Settings, 
+  Activity, 
+  Key, 
+  Globe, 
   Cpu, 
-  FileText, 
-  HeartHandshake, 
-  GraduationCap, 
-  HelpCircle,
-  CheckCircle2,
-  Lock,
-  Search,
-  Scale
+  Users, 
+  Lock, 
+  Scale, 
+  ArrowRight,
+  BookOpen,
+  HelpCircle
 } from "lucide-react";
-
-const TEAM = [
-  {
-    name: "Muhammad Zadit",
-    role: "Pakar Utama Solusi Digital & Infrastruktur",
-    desc: "Praktisi teknologi senior dengan pengalaman luas merancang arsitektur sistem digital yang andal, cepat, and sangat efisien dalam biaya operasional untuk skala nasional.",
-    avatar: "/assets/img/photo.jpg",
-    links: [
-      { label: "Profil GitHub Resmi", url: "https://github.com/zaditprodakwah" }
-    ]
-  },
-  {
-    name: "Dr. Farah Anindya",
-    role: "Penasihat Senior Metodologi Riset Akademik",
-    desc: "Pakar metodologi penelitian kuantitatif dengan keahlian mendalam pada pemrosesan analisis statistik numerik (SPSS/SmartPLS) and standardisasi naskah publikasi resmi.",
-    avatar: "academic",
-    links: []
-  }
-];
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans selection:bg-indigo-600/30">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
       <MegaMenu />
+      
+      {/* Dynamic Breadcrumbs */}
       <Breadcrumbs />
 
-      <main className="flex-grow py-16 space-y-20 max-w-7xl mx-auto px-6 lg:px-12 xl:px-16 relative">
+      <main className="flex-grow pt-8 pb-20 max-w-7xl mx-auto px-4 md:px-10 w-full flex flex-col md:flex-row gap-8">
         
-        {/* Decorative Glows */}
-        <div className="absolute top-10 left-1/4 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[150px] pointer-events-none" />
-
-        {/* Banner Section */}
-        <section className="max-w-4xl mx-auto text-center space-y-5 relative z-10">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            <HelpCircle className="w-3.5 h-3.5" /> Pusat Informasi Utama &amp; Panduan Pengguna
-          </span>
-          <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-            Bagaimana <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">INFRAMEET</span> Membantu Anda
-          </h1>
-          <p className="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Mitra Tepercaya Pendampingan Riset Ilmiah Etis dan Transformasi Solusi Digital Berbiaya Efisien di Indonesia.
-          </p>
-        </section>
-
-        {/* 📚 PANDUAN PENGGUNA: CARA KERJA INFRAMEET */}
-        <section className="space-y-10 relative z-10">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white flex items-center justify-center gap-2">
-              <Sparkles className="w-5 h-5 text-indigo-400" /> Panduan Cara Kerja Platform
-            </h2>
-            <p className="text-xs text-slate-450">
-              Alur kolaborasi yang transparan, mudah, and terverifikasi dari awal hingga serah terima.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {/* Side Navigation (Mobile Hidden, Web Visible) */}
+        <aside className="hidden md:flex flex-col w-64 flex-shrink-0 relative">
+          <div className="sticky top-24 bg-slate-50 dark:bg-[#1d2022]/60 h-[calc(100vh-8rem)] rounded-2xl p-4 flex flex-col justify-between border border-slate-200 dark:border-white/5">
+            <div className="space-y-6">
+              <div className="px-4">
+                <h2 className="text-lg font-bold text-[#6366f1] dark:text-[#c0c1ff]">INFRAMEET Core</h2>
+                <p className="font-mono text-xs text-slate-500 dark:text-[#c7c4d7] mt-1 opacity-70">V.2.0.4-Alpha</p>
+              </div>
+              <nav className="flex flex-col gap-1">
+                <a className="flex items-center gap-3 font-mono text-xs text-slate-700 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-[#c0c1ff] px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all duration-200" href="/directory">
+                  <Globe className="w-4 h-4" />
+                  <span>Infrastructure</span>
+                </a>
+                <a className="flex items-center gap-3 font-mono text-xs bg-[#6366f1]/10 text-[#6366f1] dark:text-[#c0c1ff] border-l-4 border-[#6366f1] px-4 py-3 rounded-r-xl transition-all duration-200" href="/about">
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Academic Integrity</span>
+                </a>
+                <a className="flex items-center gap-3 font-mono text-xs text-slate-700 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-[#c0c1ff] px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all duration-200" href="/">
+                  <Activity className="w-4 h-4" />
+                  <span>Telemetry</span>
+                </a>
+                <a className="flex items-center gap-3 font-mono text-xs text-slate-700 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-[#c0c1ff] px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all duration-200" href="/admin">
+                  <Key className="w-4 h-4" />
+                  <span>Cryptographic Logs</span>
+                </a>
+              </nav>
+            </div>
             
-            {/* Langkah 1 */}
-            <div className="p-6 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/30 space-y-4">
-              <span className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-black font-mono flex items-center justify-center">01</span>
-              <h4 className="text-sm font-bold text-white">Kalkulasi Transparan</h4>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
-                Gunakan kalkulator biaya otomatis di situs kami untuk menyusun estimasi anggaran secara langsung, transparan, and instan sesuai kebutuhan Anda.
-              </p>
-            </div>
-
-            {/* Langkah 2 */}
-            <div className="p-6 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/30 space-y-4">
-              <span className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-black font-mono flex items-center justify-center">02</span>
-              <h4 className="text-sm font-bold text-white">Lingkup Kerja (SOW)</h4>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
-                Kami menyusun rincian rencana pengerjaan secara rinci and hitam di atas putih, disahkan lewat sertifikat persetujuan resmi.
-              </p>
-            </div>
-
-            {/* Langkah 3 */}
-            <div className="p-6 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/30 space-y-4">
-              <span className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-black font-mono flex items-center justify-center">03</span>
-              <h4 className="text-sm font-bold text-white">Pengerjaan Oleh Ahli</h4>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
-                Proyek Anda ditangani langsung oleh jaringan praktisi riset or insinyur digital bersertifikat yang terverifikasi ketat di bidangnya.
-              </p>
-            </div>
-
-            {/* Langkah 4 */}
-            <div className="p-6 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/30 space-y-4">
-              <span className="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-black font-mono flex items-center justify-center">04</span>
-              <h4 className="text-sm font-bold text-white">Jaminan Integritas Etis</h4>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
-                Hasil pengerjaan diserahkan beserta jaminan keaslian bebas plagiarisme (Turnitin) and validitas pengolahan data statistik yang akurat.
-              </p>
-            </div>
-
-          </div>
-        </section>
-
-        {/* Vision & Mission Row */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-          <div className="glass-panel p-8 rounded-3xl space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <h3 className="text-lg font-bold text-white">Visi Efisiensi Solusi Digital</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Kami percaya bahwa pemanfaatan teknologi modern harus diimbangi dengan efisiensi anggaran total. Lewat keahlian arsitektur digital hemat biaya, kami merancang platform and situs web Anda agar berjalan super cepat, andal, tanpa membengkaknya biaya sewa server bulanan.
-            </p>
-          </div>
-
-          <div className="glass-panel p-8 rounded-3xl space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-              <HeartHandshake className="w-5 h-5" />
-            </div>
-            <h3 className="text-lg font-bold text-white">Komitmen Mutlak Jaminan Integritas Riset</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Kami menolak secara tegas segala bentuk jasa pembuatan tugas ilmiah or perjokian akademik yang melanggar hukum etika. Dukungan asistensi akademis kami murni berfokus pada pendampingan teknis olah data statistik kuantitatif, perapian tata letak format, and pengecekan orisinalitas naskah.
-            </p>
-          </div>
-        </section>
-
-        {/* Academic policy shield banner */}
-        <section className="w-full relative z-10">
-          <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <div className="space-y-1.5">
-                <h4 className="text-base font-bold text-white">100% Kebijakan Integritas Ilmiah &amp; Asistensi Etis</h4>
-                <p className="text-xs text-slate-450 leading-relaxed max-w-3xl">
-                  Setiap pendampingan riset di INFRAMEET dijamin bebas dari pelanggaran moral ilmiah. Kami hanya membantu pengolahan data statistik numerik (SPSS/SmartPLS/SmartSEM) and visual naskah. Hak cipta, orisinalitas ide, and kepemilikan riset sepenuhnya berada di tangan Anda secara mutlak.
-                </p>
+            <div className="space-y-4">
+              <Link 
+                href="/calculator"
+                className="w-full bg-[#6366f1] hover:bg-[#8083ff] text-white font-mono text-xs py-3 rounded-xl transition-colors flex justify-center items-center gap-2 cursor-pointer shadow"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Deploy Node</span>
+              </Link>
+              <div className="flex justify-between px-4 pt-4 border-t border-slate-200 dark:border-white/5">
+                <a className="font-mono text-[10px] text-slate-550 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-[#c0c1ff] transition-colors flex items-center gap-1" href="/legal">
+                  <BookOpen className="w-3.5 h-3.5" /> Docs
+                </a>
+                <a className="font-mono text-[10px] text-slate-550 dark:text-[#c7c4d7] hover:text-[#6366f1] dark:hover:text-[#c0c1ff] transition-colors flex items-center gap-1" href="/contact">
+                  <HelpCircle className="w-3.5 h-3.5" /> Support
+                </a>
               </div>
             </div>
           </div>
-        </section>
+        </aside>
 
-        {/* Team Section */}
-        <section className="space-y-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h3 className="text-xl md:text-2xl font-bold text-white">Tenaga Ahli di Balik INFRAMEET</h3>
-            <p className="text-xs text-slate-450">
-              Setiap penugasan didampingi langsung oleh praktisi riset and teknologi berdedikasi tinggi.
+        {/* Main Content Canvas */}
+        <div className="flex-grow max-w-4xl space-y-12">
+          {/* Hero / Vision Section */}
+          <section className="space-y-6">
+            <div className="inline-block px-3 py-1 rounded-full bg-slate-100 dark:bg-[#1d2022]/60 border border-slate-200 dark:border-white/10 font-mono text-xs text-[#8083ff] mb-4 flex items-center gap-2 w-max">
+              <span className="w-2 h-2 rounded-full bg-[#4edea3] shadow-[0_0_8px_#4edea3] animate-pulse"></span>
+              SYSTEM VISION &amp; SUPPORT
+            </div>
+            <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+              Infrastructural Integrity
+            </h1>
+            <p className="text-sm md:text-base text-slate-650 dark:text-[#c7c4d7] leading-relaxed max-w-2xl">
+              INFRAMEET engineers trust through transparency. We provide secure, cryptographically verified infrastructure pipelines bridging high-performance enterprise calculation with stringent academic integrity standards.
             </p>
-          </div>
+          </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {TEAM.map((member) => (
-              <div key={member.name} className="glass-card p-6 rounded-3xl flex flex-col sm:flex-row items-start gap-5 bg-white dark:bg-slate-950/20 border border-slate-900">
-                <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center shrink-0 overflow-hidden">
-                  {member.avatar.startsWith("/") ? (
-                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
-                  ) : (
-                    <GraduationCap className="w-8 h-8 text-emerald-450" />
-                  )}
-                </div>
-                <div className="space-y-2">
-                  <h4 className="text-base font-bold text-white">{member.name}</h4>
-                  <span className="text-[9px] uppercase font-bold tracking-widest text-indigo-400 block">{member.role}</span>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{member.desc}</p>
-                  
-                  {member.links && member.links.length > 0 && (
-                    <div className="flex gap-3 pt-2">
-                      {member.links.map((link) => (
-                        <a 
-                          key={link.label}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[10px] text-indigo-400 hover:text-indigo-300 font-bold underline transition-colors"
-                        >
-                          {link.label} →
-                        </a>
-                      ))}
-                    </div>
-                  )}
+          {/* Collaboration Flow Timeline */}
+          <section className="space-y-8">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/10 pb-4 flex items-center gap-3">
+              <Users className="w-5 h-5 text-[#6366f1] dark:text-[#c0c1ff]" />
+              Collaboration Protocol Flow
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+              {/* Step 1 */}
+              <div className="glass-panel p-6 rounded-2xl relative hover:border-[#6366f1]/40 transition-colors">
+                <div className="font-mono text-xs text-[#6366f1] dark:text-[#c0c1ff] mb-2 font-bold">PHASE_01</div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">Calculation &amp; Requirements</h3>
+                <p className="text-xs text-slate-600 dark:text-[#c7c4d7]">Algorithmic assessment of computational needs and academic parameters prior to resource allocation.</p>
+              </div>
+              {/* Step 2 */}
+              <div className="glass-panel p-6 rounded-2xl relative hover:border-[#6366f1]/40 transition-colors">
+                <div className="font-mono text-xs text-[#8083ff] mb-2 font-bold">PHASE_02</div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">SOW Generation</h3>
+                <p className="text-xs text-slate-600 dark:text-[#c7c4d7]">Automated Statement of Work drafting utilizing verified academic templates and SLA cryptographic bindings.</p>
+              </div>
+              {/* Step 3 */}
+              <div className="glass-panel p-6 rounded-2xl relative hover:border-[#6366f1]/40 transition-colors">
+                <div className="font-mono text-xs text-[#4edea3] mb-2 font-bold">PHASE_03</div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">Expert Matching</h3>
+                <p className="text-xs text-slate-600 dark:text-[#c7c4d7]">Heuristic routing of requirements to vetted technical leadership and academic researchers based on node topology.</p>
+              </div>
+              {/* Step 4 */}
+              <div className="glass-panel p-6 rounded-2xl relative hover:border-[#6366f1]/40 transition-colors">
+                <div className="font-mono text-xs text-[#c0c1ff] mb-2 font-bold">PHASE_04</div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">Secure Delivery</h3>
+                <p className="text-xs text-slate-600 dark:text-[#c7c4d7]">End-to-end encrypted payload transfer with immutable hash verification appended to the compliance log.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Technical Leadership */}
+          <section className="space-y-8">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/10 pb-4 flex items-center gap-3">
+              <Users className="w-5 h-5 text-[#6366f1] dark:text-[#c0c1ff]" />
+              Technical Leadership
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Profile 1 */}
+              <div className="glass-panel rounded-2xl overflow-hidden hover:border-[#6366f1]/40 transition-colors group bg-slate-50/50 dark:bg-transparent">
+                <div className="p-6 space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="bg-slate-100 dark:bg-[#1d2022] text-[#6366f1] dark:text-[#c0c1ff] font-mono text-[10px] px-2 py-1 rounded border border-[#6366f1]/30 uppercase tracking-widest">ID_AUTH_01</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#6366f1] dark:group-hover:text-[#c0c1ff] transition-colors">Muhammad Zadit</h3>
+                    <p className="font-mono text-xs text-slate-550 dark:text-[#c7c4d7] mt-1">Lead Systems Architect</p>
+                    <p className="text-xs text-slate-600 dark:text-[#c7c4d7] mt-4 leading-relaxed">Directs core infrastructure deployment and oversees node topology optimization for enterprise clients. Focuses on zero-latency bridging.</p>
+                  </div>
+                  <div className="flex gap-2 font-mono text-[10px]">
+                    <span className="bg-slate-200 dark:bg-white/5 px-2 py-1 rounded text-slate-700 dark:text-[#c7c4d7]">GCP</span>
+                    <span className="bg-slate-200 dark:bg-white/5 px-2 py-1 rounded text-slate-700 dark:text-[#c7c4d7]">K8s</span>
+                    <span className="bg-slate-200 dark:bg-white/5 px-2 py-1 rounded text-slate-700 dark:text-[#c7c4d7]">Cryptography</span>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* SLA Jaminan Kepatuhan PDP */}
-        <section className="max-w-3xl mx-auto py-8 border-t border-slate-900 space-y-6 relative z-10">
-          <h3 className="text-base font-bold text-center text-white">Jaminan Keamanan &amp; Kepatuhan Hukum</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div className="flex items-start gap-2.5 text-xs text-slate-350">
-              <Lock className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold block text-slate-800 dark:text-slate-200">Pelindungan Privasi Berlapis</span>
-                <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
-                  Kami sepenuhnya tunduk pada Undang-Undang Pelindungan Data Pribadi (UU PDP) Republik Indonesia. Data kontak WhatsApp and email Anda dijamin aman and terenkripsi penuh.
-                </p>
+              {/* Profile 2 */}
+              <div className="glass-panel rounded-2xl overflow-hidden hover:border-[#6366f1]/40 transition-colors group bg-slate-50/50 dark:bg-transparent">
+                <div className="p-6 space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="bg-slate-100 dark:bg-[#1d2022] text-[#4edea3] font-mono text-[10px] px-2 py-1 rounded border border-[#4edea3]/30 uppercase tracking-widest">ID_AUTH_02</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#4edea3] transition-colors">Dr. Farah Anindya</h3>
+                    <p className="font-mono text-xs text-slate-550 dark:text-[#c7c4d7] mt-1">Head of Academic Integrity</p>
+                    <p className="text-xs text-slate-600 dark:text-[#c7c4d7] mt-4 leading-relaxed">Maintains structural compliance protocols and algorithmic verification of research artifacts. Ensures adherence to global academic standards.</p>
+                  </div>
+                  <div className="flex gap-2 font-mono text-[10px]">
+                    <span className="bg-slate-200 dark:bg-white/5 px-2 py-1 rounded text-slate-700 dark:text-[#c7c4d7]">Ethics</span>
+                    <span className="bg-slate-200 dark:bg-white/5 px-2 py-1 rounded text-slate-700 dark:text-[#c7c4d7]">Data Governance</span>
+                    <span className="bg-slate-200 dark:bg-white/5 px-2 py-1 rounded text-slate-700 dark:text-[#c7c4d7]">Compliance</span>
+                  </div>
+                </div>
               </div>
             </div>
+          </section>
 
-            <div className="flex items-start gap-2.5 text-xs text-slate-350">
-              <Scale className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold block text-slate-800 dark:text-slate-200">Kepatuhan Kode Etik Ilmiah</span>
-                <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
-                  Seluruh panduan, berkas kesepahaman kerja, and syarat layanan tunduk pada regulasi resmi Kementerian Pendidikan demi menjaga nama baik akademik Anda secara absolut.
+          {/* Compliance & Integrity */}
+          <section className="glass-panel p-8 rounded-2xl bg-slate-50/50 dark:bg-[#1d2022]/40 border border-slate-200 dark:border-white/5">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
+              <ShieldCheck className="w-5 h-5 text-[#4edea3]" />
+              Compliance Framework
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <h4 className="font-mono text-xs text-[#6366f1] dark:text-[#c0c1ff] uppercase tracking-wider">UU PDP Compliance</h4>
+                <p className="text-xs text-slate-600 dark:text-[#c7c4d7] leading-relaxed">
+                  Strict adherence to the Personal Data Protection Law (UU PDP). All user data, telemetry, and research metadata are encrypted at rest and in transit using AES-256 protocols.
                 </p>
+                <div className="bg-slate-100 dark:bg-[#101415] p-3 rounded-lg border border-slate-200 dark:border-white/5 font-mono text-[10px] text-slate-600 dark:text-[#c0c1ff] break-all">
+                  HASH_VERIFY: a9f8b4c2d1e... [STATUS: SECURE]
+                </div>
+              </div>
+              <div className="space-y-4">
+                <h4 className="font-mono text-xs text-[#4edea3] uppercase tracking-wider">Academic Protocol</h4>
+                <p className="text-xs text-slate-600 dark:text-[#c7c4d7] leading-relaxed">
+                  Automated plagiarism scanning, heuristic anomaly detection, and peer-review cryptographic logging ensure that all hosted research maintains pristine integrity metrics.
+                </p>
+                <div className="flex items-center gap-2 bg-slate-100 dark:bg-[#101415] p-3 rounded-lg border border-slate-200 dark:border-white/5">
+                  <span className="w-2 h-2 rounded-full bg-[#4edea3] animate-pulse"></span>
+                  <span className="font-mono text-[10px] text-[#4edea3]">INTEGRITY_SCAN_ACTIVE</span>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Global CTA */}
-        <section className="max-w-4xl mx-auto text-center space-y-6 pt-12 relative z-10">
-          <h3 className="text-lg font-bold text-white">Siap Bermitra dengan Tenaga Ahli Kami?</h3>
-          <p className="text-xs text-slate-400 max-w-md mx-auto">
-            Rundingkan kebutuhan analisis riset ilmiah or visi solusi digital bisnis Anda secara aman and obyektif sekarang juga.
-          </p>
-          <div>
-            <Link
-              href="/calculator"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition-all shadow-md cursor-pointer"
+          {/* Support CTA */}
+          <section className="text-center py-12 border-t border-slate-200 dark:border-white/10 mt-12 space-y-6">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Require Technical Assistance?</h2>
+            <p className="text-sm text-slate-600 dark:text-[#c7c4d7] max-w-lg mx-auto">Open a secure ticket with our Level 3 support engineers for immediate infrastructure troubleshooting.</p>
+            <Link 
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-slate-100 dark:bg-[#101415] hover:bg-slate-250 dark:hover:bg-[#1d2022] text-slate-800 dark:text-white border border-slate-350 dark:border-white/10 font-mono text-xs px-8 py-3 rounded-xl transition-all shadow cursor-pointer"
             >
-              Mulai Konsultasi &amp; Kalkulasi Biaya
+              <span>Initialize Support Sequence</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
-        </section>
-
+          </section>
+        </div>
       </main>
 
       <Footer />

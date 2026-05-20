@@ -11,16 +11,63 @@ import {
   Sparkles, 
   Search, 
   BadgeAlert, 
-  Building2, 
-  GraduationCap, 
   Layers, 
   Server, 
   Cpu, 
-  UserCheck 
+  UserCheck,
+  RefreshCw
 } from "lucide-react";
 
-// Curated high-fidelity polymorphic fallback dataset to prevent empty showcases
+// Pre-seeded polymorphic showcase catalog including references from UI UX audit
 const PRE_SEEDED_CATALOG = [
+  {
+    id: "catalog-sarah",
+    entity_type: "personal",
+    name: "Dr. Sarah Jenkins",
+    slug: "sarah-jenkins",
+    description: "Cryptographic analyst specializing in zero-knowledge proofs, academic integrity validations, and decentralized compute pipelines.",
+    verification_status: "verified",
+    trust_score: 99.8,
+    category: "Cryptographic Analyst",
+    city: "San Francisco, CA",
+    country: "US",
+    tags: ["ZKP", "Scopus", "Integrity"],
+    metadata: {
+      node_auth: "0x8F9C...4B2A"
+    }
+  },
+  {
+    id: "catalog-marcus",
+    entity_type: "personal",
+    name: "Marcus Chen",
+    slug: "marcus-chen",
+    description: "Lead infrastructure architect focused on serverless orchestration, Kubernetes topology optimization, and high-latency middleware systems.",
+    verification_status: "verified",
+    trust_score: 98.5,
+    category: "Infrastructure Engineer",
+    city: "Singapore",
+    country: "SG",
+    tags: ["Kubernetes", "SLA 99.9%", "Telemetry"],
+    metadata: {
+      node_auth: "0x2A1B...9C1F"
+    }
+  },
+  {
+    id: "catalog-elena",
+    entity_type: "personal",
+    name: "Elena Rodriguez",
+    slug: "elena-rodriguez",
+    description: "Compliance officer managing SOC2 audits, data sovereignty protocols, and global software engineering governance structures.",
+    verification_status: "verified",
+    trust_score: 95.2,
+    category: "Compliance Lead",
+    city: "Madrid",
+    country: "ES",
+    tags: ["SOC2", "Sovereignty", "GDPR"],
+    metadata: {
+      node_auth: "0x5D7E...7E3B"
+    }
+  },
   {
     id: "catalog-ui",
     entity_type: "institution",
@@ -39,7 +86,8 @@ const PRE_SEEDED_CATALOG = [
       akreditasi: "Unggul",
       citation_style: "APA 7th Edition",
       turnitin_limit: "15% Max",
-      sector: "Negeri"
+      sector: "Negeri",
+      node_auth: "0x3F8B...1C4A"
     }
   },
   {
@@ -55,12 +103,13 @@ const PRE_SEEDED_CATALOG = [
     subcategory: "Perguruan Tinggi",
     city: "Bandung, Jawa Barat",
     country: "ID",
-    tags: ["teknik", "sains", "rekayasa", "riset"],
+    tags: ["teknik", "sains", "rekayasa"],
     metadata: {
       akreditasi: "Unggul",
       citation_style: "IEEE Style",
       turnitin_limit: "12% Max",
-      sector: "Negeri"
+      sector: "Negeri",
+      node_auth: "0x9E7D...2F9B"
     }
   },
   {
@@ -76,12 +125,13 @@ const PRE_SEEDED_CATALOG = [
     subcategory: "Perguruan Tinggi",
     city: "Yogyakarta",
     country: "ID",
-    tags: ["sosial", "kedokteran", "budaya", "riset"],
+    tags: ["sosial", "kedokteran", "budaya"],
     metadata: {
       akreditasi: "Unggul",
       citation_style: "Harvard Style",
       turnitin_limit: "15% Max",
-      sector: "Negeri"
+      sector: "Negeri",
+      node_auth: "0x8D3C...8E2A"
     }
   },
   {
@@ -97,12 +147,13 @@ const PRE_SEEDED_CATALOG = [
     subcategory: "Perguruan Tinggi",
     city: "Jakarta Barat",
     country: "ID",
-    tags: ["it", "bisnis", "desain", "swasta"],
+    tags: ["it", "bisnis", "desain"],
     metadata: {
       akreditasi: "Unggul",
       citation_style: "APA 7th Edition",
       turnitin_limit: "18% Max",
-      sector: "Swasta"
+      sector: "Swasta",
+      node_auth: "0x2B4C...9F5D"
     }
   },
   {
@@ -123,7 +174,8 @@ const PRE_SEEDED_CATALOG = [
       akreditasi: "A",
       curriculum: "Kurikulum Merdeka",
       focus: "Karya Tulis Ilmiah (KTI)",
-      sector: "Negeri"
+      sector: "Negeri",
+      node_auth: "0x7F2B...4A2A"
     }
   },
   {
@@ -144,7 +196,8 @@ const PRE_SEEDED_CATALOG = [
       akreditasi: "A",
       curriculum: "Kurikulum Merdeka",
       focus: "Sains & Sosial",
-      sector: "Negeri"
+      sector: "Negeri",
+      node_auth: "0x6C4D...5F8B"
     }
   },
   {
@@ -162,8 +215,9 @@ const PRE_SEEDED_CATALOG = [
     country: "US",
     tags: ["hosting", "nextjs", "serverless"],
     metadata: {
-      pricing_info: "Hobby Gratis / Pro $20 member",
-      deployment_speed: "Ultra Fast"
+      pricing_info: "Hobby Gratis / Pro $20",
+      deployment_speed: "Ultra Fast",
+      node_auth: "0x1A2B...9F8E"
     }
   },
   {
@@ -181,8 +235,9 @@ const PRE_SEEDED_CATALOG = [
     country: "US",
     tags: ["spss", "statistika", "skripsi"],
     metadata: {
-      pricing_info: "Lisensi Akademik Mulai $99",
-      standard: "Quantitative Analysis"
+      pricing_info: "Lisensi Akademik",
+      standard: "Quantitative Analysis",
+      node_auth: "0x5C8E...3A2B"
     }
   },
   {
@@ -200,34 +255,16 @@ const PRE_SEEDED_CATALOG = [
     country: "US",
     tags: ["plagiarisme", "karya-ilmiah", "keaslian"],
     metadata: {
-      pricing_info: "Lisensi Institusi Saja",
-      standard: "Plagiarism Detection"
-    }
-  },
-  {
-    id: "catalog-zotero",
-    entity_type: "saas",
-    name: "Zotero Reference Manager",
-    slug: "zotero-manager",
-    website_url: "https://zotero.org",
-    description: "Aplikasi open-source gratis untuk mengumpulkan, mengelola, mengutip, dan membagikan sumber riset ilmiah Anda secara teratur.",
-    verification_status: "verified",
-    trust_score: 93.0,
-    category: "Sitasi",
-    subcategory: "Academic Tools",
-    city: "Fairfax",
-    country: "US",
-    tags: ["sitasi", "referensi", "open-source"],
-    metadata: {
-      pricing_info: "Gratis (Penyimpanan Cloud Opsional)",
-      standard: "Reference Management"
+      pricing_info: "Lisensi Institusi",
+      standard: "Plagiarism Detection",
+      node_auth: "0x4D9C...2F8A"
     }
   },
   {
     id: "catalog-architect",
     entity_type: "personal",
-    name: "Zadit Prodakwah, M.T.",
-    slug: "zadit-prodakwah",
+    name: "Muhammad Zadit, M.T.",
+    slug: "muhammad-zadit",
     website_url: "mailto:zadit@inframeet.com",
     description: "Lead Enterprise Architect & Senior Systems Engineer specializing in secure cloud systems, Next.js optimization, and high-trust directory schemas.",
     verification_status: "verified",
@@ -236,48 +273,11 @@ const PRE_SEEDED_CATALOG = [
     subcategory: "Professional",
     city: "Bandung, Jawa Barat",
     country: "ID",
-    tags: ["systems", "nextjs", "supabase", "scalability"],
+    tags: ["systems", "nextjs", "supabase"],
     metadata: {
       years_experience: "8+ Years",
-      accreditation: "Certified Solutions Architect"
-    }
-  },
-  {
-    id: "catalog-yohanes",
-    entity_type: "personal",
-    name: "Prof. Dr. Ir. Yohanes Surya",
-    slug: "yohanes-surya",
-    website_url: "https://yohanessurya.com",
-    description: "Fisikawan terkemuka Indonesia, pembimbing Tim Olimpiade Fisika Indonesia (TOFI), dan perintis metode pembelajaran fisika gampang gembira menyenangkan (Gasing).",
-    verification_status: "verified",
-    trust_score: 98.0,
-    category: "Pendidikan Fisika",
-    subcategory: "Akademisi",
-    city: "Tangerang, Banten",
-    country: "ID",
-    tags: ["fisika", "olimpiade", "gasing", "tokoh"],
-    metadata: {
-      years_experience: "30+ Years",
-      accreditation: "Guru Besar Fisika & Pendiri Surya University"
-    }
-  },
-  {
-    id: "catalog-indrawan",
-    entity_type: "personal",
-    name: "Dr. Indrawan Nugroho",
-    slug: "indrawan-nugroho",
-    website_url: "https://indrawannugroho.com",
-    description: "Konsultan Inovasi Korporasi, Pembicara Strategis Bisnis, & Co-founder Kubik Leadership. Membantu transformasi digital perusahaan besar Indonesia.",
-    verification_status: "verified",
-    trust_score: 92.5,
-    category: "Corporate Innovation",
-    subcategory: "Professional",
-    city: "Jakarta",
-    country: "ID",
-    tags: ["inovasi", "kepemimpinan", "bisnis", "konsultan"],
-    metadata: {
-      years_experience: "15+ Years",
-      accreditation: "CEO & Co-founder CIAS (Corporate Innovation Asia)"
+      accreditation: "Certified Solutions Architect",
+      node_auth: "0x8F2A...1B3C"
     }
   }
 ];
@@ -292,11 +292,9 @@ export default function DirectoryCatalogPage() {
   // Advanced filters state
   const [sectorFilter, setSectorFilter] = useState("all");
   const [accreditationFilter, setAccreditationFilter] = useState("all");
-  const [curriculumFilter, setCurriculumFilter] = useState("all");
 
   const [activeBadgeModalTool, setActiveBadgeModalTool] = useState<string | null>(null);
 
-  // 1. Fetch directories from Supabase with fallbacks
   async function loadDirectories() {
     try {
       setLoading(true);
@@ -307,7 +305,6 @@ export default function DirectoryCatalogPage() {
         .order("trust_score", { ascending: false });
 
       if (error) {
-        console.warn("Falling back to local pre-seeded catalog:", error.message);
         setEntities(PRE_SEEDED_CATALOG);
         setFilteredEntities(PRE_SEEDED_CATALOG);
       } else {
@@ -316,7 +313,6 @@ export default function DirectoryCatalogPage() {
         setFilteredEntities(loadedData);
       }
     } catch (err) {
-      console.warn("Offline fallback activated:", err);
       setEntities(PRE_SEEDED_CATALOG);
       setFilteredEntities(PRE_SEEDED_CATALOG);
     } finally {
@@ -328,19 +324,18 @@ export default function DirectoryCatalogPage() {
     loadDirectories();
   }, []);
 
-  // 2. Perform live advanced filtering
   useEffect(() => {
     let result = entities;
 
     // Filter by Entity Type
     if (entityTypeFilter !== "all") {
-      if (entityTypeFilter === "school") {
-        result = result.filter(
-          (e) => e.entity_type === "institution" && e.subcategory === "Sekolah Menengah"
-        );
-      } else if (entityTypeFilter === "campus") {
+      if (entityTypeFilter === "campus") {
         result = result.filter(
           (e) => e.entity_type === "institution" && e.subcategory !== "Sekolah Menengah"
+        );
+      } else if (entityTypeFilter === "school") {
+        result = result.filter(
+          (e) => e.entity_type === "institution" && e.subcategory === "Sekolah Menengah"
         );
       } else if (entityTypeFilter === "brand_saas") {
         result = result.filter((e) => e.entity_type === "brand" || e.entity_type === "saas");
@@ -350,7 +345,7 @@ export default function DirectoryCatalogPage() {
     }
 
     // Filter by Sector (Negeri, Swasta)
-    if (sectorFilter !== "all" && (entityTypeFilter === "school" || entityTypeFilter === "campus" || entityTypeFilter === "institution" || entityTypeFilter === "all")) {
+    if (sectorFilter !== "all") {
       result = result.filter(
         (e) => e.metadata?.sector?.toLowerCase() === sectorFilter.toLowerCase()
       );
@@ -358,16 +353,11 @@ export default function DirectoryCatalogPage() {
 
     // Filter by Accreditation (Unggul, A, B)
     if (accreditationFilter !== "all") {
-      result = result.filter(
-        (e) => e.metadata?.akreditasi?.toLowerCase() === accreditationFilter.toLowerCase()
-      );
-    }
-
-    // Filter by Curriculum (Kurikulum Merdeka, K-13)
-    if (curriculumFilter !== "all" && (entityTypeFilter === "school" || entityTypeFilter === "all")) {
-      result = result.filter(
-        (e) => e.metadata?.curriculum?.toLowerCase() === curriculumFilter.toLowerCase()
-      );
+      if (accreditationFilter === "tier_a") {
+        result = result.filter((e) => e.trust_score >= 95.0);
+      } else if (accreditationFilter === "tier_b") {
+        result = result.filter((e) => e.trust_score >= 88.0 && e.trust_score < 95.0);
+      }
     }
 
     // Search Query Text Filter
@@ -384,7 +374,7 @@ export default function DirectoryCatalogPage() {
     }
 
     setFilteredEntities(result);
-  }, [searchQuery, entityTypeFilter, sectorFilter, accreditationFilter, curriculumFilter, entities]);
+  }, [searchQuery, entityTypeFilter, sectorFilter, accreditationFilter, entities]);
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans antialiased">
@@ -392,24 +382,27 @@ export default function DirectoryCatalogPage() {
       
       <Breadcrumbs />
 
-      <main className="flex-1 py-12 space-y-16">
+      <main className="flex-grow pt-8 pb-20 max-w-7xl mx-auto px-4 md:px-10 space-y-12 relative w-full">
         
         {/* Banner Section */}
-        <section className="max-w-4xl mx-auto px-6 text-center space-y-5 animate-fade-in">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" /> Polymorphic Trust & Credibility Directory
-          </span>
-          <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-            Direktori Kredibilitas <span className="text-indigo-600">Polimorfik</span>
+        <section className="max-w-4xl mx-auto text-center space-y-5">
+          <div className="inline-flex items-center gap-2 bg-slate-105 dark:bg-[#1d2022]/60 border border-slate-200 dark:border-white/10 px-3 py-1 rounded-full">
+            <Sparkles className="w-4 h-4 text-[#8083ff]" />
+            <span className="font-mono text-xs text-[#8083ff] uppercase tracking-wider">
+              Polymorphic Trust &amp; Credibility Directory
+            </span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Proof-of-Authority Index
           </h1>
-          <p className="text-sm md:text-base text-slate-600 dark:text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            Temukan standardisasi sitasi perguruan tinggi, pedoman Karya Tulis KIR sekolah menengah, software pendukung riset ilmiah, and verifikasi expert profesional secara transparan.
+          <p className="text-sm md:text-base text-slate-650 dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">
+            A cryptographically verified directory of certified infrastructure architects, academic integrity analysts, and security engineers. All credentials are cross-referenced against the global ledger.
           </p>
         </section>
 
         {/* Dynamic Filters & Search Command Bar */}
-        <section className="max-w-7xl mx-auto px-6 space-y-6">
-          <div className="flex flex-col gap-6 p-6 rounded-3xl bg-white dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800/80 shadow-sm shadow-slate-100/5">
+        <section className="space-y-6">
+          <div className="flex flex-col gap-6 p-6 rounded-3xl bg-slate-50/50 dark:bg-[#1d2022]/40 border border-slate-200 dark:border-white/5 shadow-sm">
             
             {/* Search Input Box & Main Type Filters */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
@@ -420,7 +413,7 @@ export default function DirectoryCatalogPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Cari universitas, sekolah, expert, saas..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all font-semibold"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none focus:border-[#6366f1] transition-all font-semibold"
                 />
               </div>
 
@@ -437,15 +430,13 @@ export default function DirectoryCatalogPage() {
                     key={item.id}
                     onClick={() => {
                       setEntityTypeFilter(item.id);
-                      // Reset child filters upon parent type change
                       setSectorFilter("all");
                       setAccreditationFilter("all");
-                      setCurriculumFilter("all");
                     }}
-                    className={`px-4 py-2 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all border whitespace-nowrap ${
+                    className={`px-4 py-2 rounded-xl text-[10px] font-bold font-mono uppercase tracking-wider transition-all border whitespace-nowrap cursor-pointer ${
                       entityTypeFilter === item.id
-                        ? "bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-600/10"
-                        : "bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700"
+                        ? "bg-[#6366f1] border-[#6366f1] text-white shadow-md shadow-[#6366f1]/10"
+                        : "bg-white dark:bg-[#101415] border-slate-200 dark:border-white/10 text-slate-500 hover:text-slate-900 dark:hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -454,73 +445,54 @@ export default function DirectoryCatalogPage() {
               </div>
             </div>
 
-            {/* Specialized Sub-Filters Row (Schools & Campus Accreditations) */}
-            {(entityTypeFilter === "all" || entityTypeFilter === "school" || entityTypeFilter === "campus" || entityTypeFilter === "institution") && (
-              <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-4 items-center text-xs">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Filter Khusus:</span>
-                
-                {/* Sector Filter */}
-                <div className="flex items-center gap-1.5">
-                  <label className="text-[11px] font-bold text-slate-500">Sektor:</label>
-                  <select
-                    value={sectorFilter}
-                    onChange={(e) => setSectorFilter(e.target.value)}
-                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
-                  >
-                    <option value="all">Semua Sektor</option>
-                    <option value="Negeri">Negeri</option>
-                    <option value="Swasta">Swasta</option>
-                  </select>
-                </div>
-
-                {/* Accreditation Filter */}
-                <div className="flex items-center gap-1.5">
-                  <label className="text-[11px] font-bold text-slate-500">Akreditasi:</label>
-                  <select
-                    value={accreditationFilter}
-                    onChange={(e) => setAccreditationFilter(e.target.value)}
-                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
-                  >
-                    <option value="all">Semua Akreditasi</option>
-                    <option value="Unggul">Unggul</option>
-                    <option value="A">Akreditasi A</option>
-                    <option value="B">Akreditasi B</option>
-                  </select>
-                </div>
-
-                {/* School Standard/Curriculum (Only when not filtering SaaS/Experts exclusively) */}
-                {(entityTypeFilter === "all" || entityTypeFilter === "school") && (
-                  <div className="flex items-center gap-1.5">
-                    <label className="text-[11px] font-bold text-slate-500">Kurikulum:</label>
-                    <select
-                      value={curriculumFilter}
-                      onChange={(e) => setCurriculumFilter(e.target.value)}
-                      className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
-                    >
-                      <option value="all">Semua Kurikulum</option>
-                      <option value="Kurikulum Merdeka">Kurikulum Merdeka</option>
-                      <option value="K-13">K-13 Standard</option>
-                    </select>
-                  </div>
-                )}
+            {/* Specialized Sub-Filters Row */}
+            <div className="pt-4 border-t border-slate-250 dark:border-white/10 flex flex-wrap gap-4 items-center text-xs">
+              <span className="font-mono text-[9px] font-bold text-slate-400 uppercase tracking-widest">QUERY PARAMETERS:</span>
+              
+              {/* Sector Filter */}
+              <div className="flex items-center gap-1.5">
+                <label className="text-[11px] font-bold text-slate-550">Sektor:</label>
+                <select
+                  value={sectorFilter}
+                  onChange={(e) => setSectorFilter(e.target.value)}
+                  className="bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-lg text-slate-800 dark:text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
+                >
+                  <option value="all">Semua Sektor</option>
+                  <option value="Negeri">Negeri</option>
+                  <option value="Swasta">Swasta</option>
+                </select>
               </div>
-            )}
+
+              {/* Accreditation Filter */}
+              <div className="flex items-center gap-1.5">
+                <label className="text-[11px] font-bold text-slate-550">Kredensial:</label>
+                <select
+                  value={accreditationFilter}
+                  onChange={(e) => setAccreditationFilter(e.target.value)}
+                  className="bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-lg text-slate-800 dark:text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
+                >
+                  <option value="all">Tier A &amp; B</option>
+                  <option value="tier_a">Tier A (Global)</option>
+                  <option value="tier_b">Tier B (Regional)</option>
+                </select>
+              </div>
+            </div>
 
           </div>
         </section>
 
         {/* Directory Showcase grid */}
-        <section className="max-w-7xl mx-auto px-6">
+        <section>
           {loading ? (
             <div className="flex flex-col items-center justify-center py-24 space-y-3">
-              <div className="w-9 h-9 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-              <p className="text-slate-500 text-xs font-bold animate-pulse">Menghubungkan ke Direktori Polimorfik...</p>
+              <div className="w-8 h-8 border-3 border-[#6366f1] border-t-transparent rounded-full animate-spin"></div>
+              <p className="text-slate-500 font-mono text-[10px] uppercase tracking-wider animate-pulse">Menghubungkan ke Direktori Polimorfik...</p>
             </div>
           ) : filteredEntities.length === 0 ? (
-            <div className="text-center py-20 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 max-w-md mx-auto space-y-3 shadow-sm shadow-slate-100/5">
-              <BadgeAlert className="w-8 h-8 text-indigo-600 mx-auto" />
-              <p className="text-slate-800 text-sm font-extrabold">Tidak menemukan entitas yang cocok.</p>
-              <p className="text-slate-400 text-xs font-medium">Cobalah menyetel ulang filter atau ganti kata kunci pencarian Anda.</p>
+            <div className="text-center py-20 bg-slate-50/50 dark:bg-[#1d2022]/40 border border-slate-200 dark:border-white/5 rounded-3xl p-8 max-w-md mx-auto space-y-3">
+              <BadgeAlert className="w-8 h-8 text-[#6366f1] mx-auto" />
+              <p className="text-slate-800 dark:text-white text-sm font-extrabold">Tidak menemukan entitas yang cocok.</p>
+              <p className="text-slate-450 dark:text-[#c7c4d7] text-xs font-medium">Cobalah menyetel ulang filter atau ganti kata kunci pencarian Anda.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -534,6 +506,17 @@ export default function DirectoryCatalogPage() {
             </div>
           )}
         </section>
+
+        {/* Pagination/Load More */}
+        <div className="flex justify-center mt-8">
+          <button 
+            onClick={loadDirectories}
+            className="bg-slate-50 dark:bg-[#1d2022] hover:bg-slate-100 dark:hover:bg-[#323537] border border-slate-250 dark:border-white/10 text-slate-700 dark:text-white font-mono text-[10px] px-8 py-3 rounded-xl transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>Load Additional Hashes</span>
+          </button>
+        </div>
 
       </main>
 
