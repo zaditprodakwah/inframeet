@@ -36,7 +36,7 @@ export default function CalculatorPage() {
               Kalkulator Instan v6.8-ROI Enabled
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Pricing Configurator &amp; ROI Optimizer
           </h1>
           <p className="text-sm md:text-base text-slate-650 dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">

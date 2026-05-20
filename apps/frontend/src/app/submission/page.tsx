@@ -87,11 +87,11 @@ export default function SubmissionPortalPage() {
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">PATHWAY</span>
               </div>
               <div className="flex items-center gap-3 pb-2 text-slate-400 dark:text-slate-600 min-w-max">
-                <span className="font-mono text-xs font-bold bg-slate-200 dark:bg-slate-800 w-7 h-7 flex items-center justify-center rounded-full">02</span>
+                <span className="font-mono text-xs font-bold bg-slate-200 bg-slate-800 w-7 h-7 flex items-center justify-center rounded-full">02</span>
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest">DETAILS</span>
               </div>
               <div className="flex items-center gap-3 pb-2 text-slate-400 dark:text-slate-600 min-w-max">
-                <span className="font-mono text-xs font-bold bg-slate-200 dark:bg-slate-800 w-7 h-7 flex items-center justify-center rounded-full">03</span>
+                <span className="font-mono text-xs font-bold bg-slate-200 bg-slate-800 w-7 h-7 flex items-center justify-center rounded-full">03</span>
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest">VERIFICATION</span>
               </div>
             </div>
@@ -162,9 +162,9 @@ export default function SubmissionPortalPage() {
                 <span className="font-mono text-[9px] font-bold text-indigo-600 dark:text-indigo-400 px-3 py-1.5 bg-indigo-100 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20 rounded-full tracking-widest">AES-256 ENCRYPTION ACTIVE</span>
               </div>
               
-              <label className="block border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-12 text-center hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors cursor-pointer group bg-slate-50 dark:bg-slate-900/20">
+              <label className="block border-2 border-dashed border-slate-300 border-slate-700 rounded-2xl p-12 text-center hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors cursor-pointer group bg-slate-50 bg-slate-900/20">
                 <UploadCloud className="w-12 h-12 text-slate-400 mx-auto mb-4 group-hover:text-indigo-500 transition-colors" />
-                <p className="text-base text-slate-700 dark:text-slate-300 mb-2 font-medium">Drag &amp; drop technical specifications or CSV datasets</p>
+                <p className="text-base text-slate-300 mb-2 font-medium">Drag &amp; drop technical specifications or CSV datasets</p>
                 <p className="font-mono text-[10px] text-slate-500 uppercase tracking-widest font-bold">Supported: PDF, JSON, CSV, .INFRA (Max 500MB)</p>
                 <input className="hidden" multiple type="file" onChange={handleFileUpload} />
               </label>
@@ -176,7 +176,7 @@ export default function SubmissionPortalPage() {
                       <div className="flex items-center gap-4 overflow-hidden">
                         <FileText className="w-6 h-6 text-indigo-500 flex-shrink-0" />
                         <div className="overflow-hidden">
-                          <p className="font-mono text-xs font-bold text-slate-900 dark:text-slate-200 truncate">{file.name}</p>
+                          <p className="font-mono text-xs font-bold text-slate-200 truncate">{file.name}</p>
                           <p className={`font-mono text-[9px] mt-1 font-bold ${file.loading ? 'text-amber-500' : 'text-emerald-500'}`}>
                             {file.hash}
                           </p>
@@ -192,7 +192,7 @@ export default function SubmissionPortalPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row justify-end gap-4">
-              <button className="px-8 py-4 rounded-xl font-mono text-[10px] font-bold tracking-widest border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors bg-white dark:bg-transparent shadow-sm">
+              <button className="px-8 py-4 rounded-xl font-mono text-[10px] font-bold tracking-widest border border-slate-200 border-slate-700 text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors bg-white dark:bg-transparent shadow-sm">
                 SAVE DRAFT
               </button>
               <button 
@@ -274,7 +274,7 @@ export default function SubmissionPortalPage() {
             <p className="text-sm text-slate-400 mb-8 leading-relaxed">
               *Brief* proyek Anda telah ditandatangani secara kriptografis dan dimasukkan ke dalam antrean audit.
             </p>
-            <div className="bg-slate-50 dark:bg-black/50 p-5 rounded-2xl mb-8 text-left border border-slate-200 dark:border-slate-800">
+            <div className="bg-slate-50 dark:bg-black/50 p-5 rounded-2xl mb-8 text-left border border-slate-200 border-slate-800">
               <p className="font-mono text-[9px] font-bold text-slate-500 mb-2 uppercase tracking-widest">Unique Audit ID</p>
               <p className="font-mono text-sm font-black text-indigo-600 dark:text-indigo-400 select-all tracking-wider">INF-B2B-992-XRAY-4491-Z</p>
             </div>

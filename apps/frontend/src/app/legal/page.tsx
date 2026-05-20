@@ -41,7 +41,7 @@ export default function LegalPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-200 pb-20">
+    <div className="min-h-screen bg-[#020617] text-slate-200 pb-20">
       <main className="max-w-7xl mx-auto px-6 py-12">
         {/* Hero Section */}
         <section className="mb-16">
@@ -53,10 +53,10 @@ export default function LegalPage() {
                   Transparency Protocol v4.2.0
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
                 Pusat <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-emerald-400">Transparansi &amp; Kepatuhan</span>
               </h1>
-              <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-lg text-slate-400 leading-relaxed">
                 Repositori definitif untuk kerangka kerja regulasi INFRAMEET, standar verifikasi kriptografis, dan perjanjian tingkat layanan infrastruktur (*Service Level Agreements*).
               </p>
             </div>
@@ -67,7 +67,7 @@ export default function LegalPage() {
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
               <div className="font-mono text-3xl font-black text-emerald-500 dark:text-emerald-400">99.999%</div>
-              <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
+              <div className="w-full bg-slate-200 bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
                 <div className="bg-emerald-500 h-full w-[99.9%]"></div>
               </div>
               <span className="text-[10px] font-mono text-slate-400 mt-1">HASH: 0x82f...a9c2</span>
@@ -92,7 +92,7 @@ export default function LegalPage() {
                 }`}
               >
                 <GraduationCap className={`w-5 h-5 ${activeSection === "academic-protocol" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
-                <span className={`font-bold text-sm ${activeSection === "academic-protocol" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-600 dark:text-slate-400"}`}>
+                <span className={`font-bold text-sm ${activeSection === "academic-protocol" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-400"}`}>
                   Academic Integrity
                 </span>
               </a>
@@ -106,7 +106,7 @@ export default function LegalPage() {
                 }`}
               >
                 <Scale className={`w-5 h-5 ${activeSection === "compliance" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
-                <span className={`font-bold text-sm ${activeSection === "compliance" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-600 dark:text-slate-400"}`}>
+                <span className={`font-bold text-sm ${activeSection === "compliance" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-400"}`}>
                   UU PDP Compliance
                 </span>
               </a>
@@ -120,7 +120,7 @@ export default function LegalPage() {
                 }`}
               >
                 <Server className={`w-5 h-5 ${activeSection === "sla-guarantee" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
-                <span className={`font-bold text-sm ${activeSection === "sla-guarantee" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-600 dark:text-slate-400"}`}>
+                <span className={`font-bold text-sm ${activeSection === "sla-guarantee" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-400"}`}>
                   SLA 99.999%
                 </span>
               </a>
@@ -134,7 +134,7 @@ export default function LegalPage() {
                 }`}
               >
                 <Lock className={`w-5 h-5 ${activeSection === "privacy-encryption" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
-                <span className={`font-bold text-sm ${activeSection === "privacy-encryption" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-600 dark:text-slate-400"}`}>
+                <span className={`font-bold text-sm ${activeSection === "privacy-encryption" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-400"}`}>
                   Data Sovereignty
                 </span>
               </a>
@@ -162,15 +162,15 @@ export default function LegalPage() {
                     <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 font-mono text-[10px] rounded-lg border border-indigo-200 dark:border-indigo-500/20 font-bold">DOCUMENT_ID: AC-77</span>
                     <span className="font-mono text-[10px] text-slate-500 font-bold">STAMP: 2024-11-20T09:44:12Z</span>
                   </div>
-                  <h2 className="text-2xl lg:text-3xl font-extrabold mb-6 text-slate-900 dark:text-white">Academic Integrity Protocol</h2>
+                  <h2 className="text-2xl lg:text-3xl font-extrabold mb-6 text-white">Academic Integrity Protocol</h2>
                   
-                  <div className="space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed text-sm lg:text-base">
+                  <div className="space-y-6 text-slate-300 leading-relaxed text-sm lg:text-base">
                     <p>
                       Protokol ini mengatur semua interaksi akademik di dalam ekosistem INFRAMEET. Kami menggunakan verifikasi kriptografis otomatis untuk memastikan bahwa data riset dan verifikasi institusi tetap absolut (immutable) mulai dari titik pengumpulan (*capture*) hingga publikasi.
                     </p>
-                    <div className="border-l-4 border-indigo-500 pl-6 py-4 bg-slate-100 dark:bg-slate-900/50 rounded-r-xl">
-                      <h4 className="font-mono text-xs text-slate-800 dark:text-white mb-2 font-black">CLAUSE 1.4: PROOF OF ORIGIN</h4>
-                      <p className="font-mono text-sm italic text-slate-600 dark:text-slate-400">
+                    <div className="border-l-4 border-indigo-500 pl-6 py-4 bg-slate-100 bg-slate-900/50 rounded-r-xl">
+                      <h4 className="font-mono text-xs text-white mb-2 font-black">CLAUSE 1.4: PROOF OF ORIGIN</h4>
+                      <p className="font-mono text-sm italic text-slate-400">
                         "Setiap paket data yang ditransmisikan melintasi *node* akademik INFRAMEET harus memuat *anchor* sertifikat X.509 yang valid, dipetakan ke identitas institusi terverifikasi."
                       </p>
                     </div>
@@ -189,25 +189,25 @@ export default function LegalPage() {
                   <Scale className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                 </div>
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white">Universal Data Privacy (UU PDP)</h2>
+                  <h2 className="text-2xl lg:text-3xl font-extrabold text-white">Universal Data Privacy (UU PDP)</h2>
                   <p className="font-mono text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-widest font-bold mt-1">Compliance Status: ACTIVE</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-4">
                 <div className="space-y-4">
-                  <h4 className="text-xl font-bold text-slate-900 dark:text-white">Data Sovereignty</h4>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                  <h4 className="text-xl font-bold text-white">Data Sovereignty</h4>
+                  <p className="text-slate-400 text-sm leading-relaxed">
                     INFRAMEET menerapkan kedaulatan data absolut (*absolute data sovereignty*). Tidak ada data yang meninggalkan area server tanpa otoritas kriptografis eksplisit dari pengendali data.
                   </p>
                   <ul className="space-y-3 mt-4">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
-                      <span className="font-mono text-sm text-slate-700 dark:text-slate-300">Full AES-256-GCM encryption at rest</span>
+                      <span className="font-mono text-sm text-slate-300">Full AES-256-GCM encryption at rest</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
-                      <span className="font-mono text-sm text-slate-700 dark:text-slate-300">Automated right-to-erasure (Clause 19.b)</span>
+                      <span className="font-mono text-sm text-slate-300">Automated right-to-erasure (Clause 19.b)</span>
                     </li>
                   </ul>
                 </div>
@@ -217,8 +217,8 @@ export default function LegalPage() {
                     <span className="font-mono text-xs font-black tracking-widest">AUDIT LOG</span>
                     <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold text-xs">SUCCESS</span>
                   </div>
-                  <div className="font-mono text-xs space-y-2 text-slate-500 dark:text-slate-400">
-                    <p className="text-slate-800 dark:text-slate-200 font-bold">2026.05.20 08:00:01 - Audit Started</p>
+                  <div className="font-mono text-xs space-y-2 text-slate-400">
+                    <p className="text-slate-800 text-slate-200 font-bold">2026.05.20 08:00:01 - Audit Started</p>
                     <p className="pl-4">&gt; Checking UU-PDP-Compliance-V3</p>
                     <p className="pl-4">&gt; Verifying Encryption Layers... [OK]</p>
                     <p className="pl-4">&gt; Key Rotation Verified... [OK]</p>
@@ -235,33 +235,33 @@ export default function LegalPage() {
               <div className="absolute -right-20 -top-20 w-64 h-64 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
               
               <div className="relative z-10">
-                <h2 className="text-2xl lg:text-3xl font-extrabold mb-4 text-slate-900 dark:text-white">99.999% Service Level Agreement</h2>
-                <p className="text-slate-600 dark:text-slate-400 mb-10 text-sm leading-relaxed max-w-2xl">
+                <h2 className="text-2xl lg:text-3xl font-extrabold mb-4 text-white">99.999% Service Level Agreement</h2>
+                <p className="text-slate-400 mb-10 text-sm leading-relaxed max-w-2xl">
                   Arsitektur *redundancy-first* yang dirancang untuk penelitian akademik skala besar dan performa web klien B2B yang sangat krusial.
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                  <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                  <div className="bg-slate-50 bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
                     <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
                       <Gauge className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white mb-1">5.2ms</div>
+                    <div className="text-2xl font-black text-white mb-1">5.2ms</div>
                     <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Global Latency Avg</div>
                   </div>
                   
-                  <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                  <div className="bg-slate-50 bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
                     <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-500/10 rounded-full flex items-center justify-center mb-4">
                       <RefreshCw className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white mb-1">&lt; 30s</div>
+                    <div className="text-2xl font-black text-white mb-1">&lt; 30s</div>
                     <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Failover Transition</div>
                   </div>
                   
-                  <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                  <div className="bg-slate-50 bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
                     <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
                       <Shield className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white mb-1">0</div>
+                    <div className="text-2xl font-black text-white mb-1">0</div>
                     <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Critical Violations</div>
                   </div>
                 </div>
@@ -280,7 +280,7 @@ export default function LegalPage() {
 
             {/* Section: Data Sovereignty & Encryption */}
             <article id="privacy-encryption" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
-              <h2 className="text-2xl lg:text-3xl font-extrabold mb-8 text-slate-900 dark:text-white">Protocol Encryption Standards</h2>
+              <h2 className="text-2xl lg:text-3xl font-extrabold mb-8 text-white">Protocol Encryption Standards</h2>
               
               <div className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
@@ -290,14 +290,14 @@ export default function LegalPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div className="space-y-4">
-                    <h5 className="text-xl font-bold text-slate-900 dark:text-white">End-to-End Tunneling</h5>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    <h5 className="text-xl font-bold text-white">End-to-End Tunneling</h5>
+                    <p className="text-slate-400 text-sm leading-relaxed">
                       Semua data dalam transit dienkapsulasi menggunakan terowongan aman berbasis WireGuard® dengan mekanisme *key exchange* tipe *post-quantum*.
                     </p>
                   </div>
                   <div className="space-y-4">
-                    <h5 className="text-xl font-bold text-slate-900 dark:text-white">Identity Anchoring</h5>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    <h5 className="text-xl font-bold text-white">Identity Anchoring</h5>
+                    <p className="text-slate-400 text-sm leading-relaxed">
                       Modul Keamanan Perangkat Keras (HSM) menyimpan *master keys* untuk *node* institusional, memastikan kunci tidak pernah terekspos ke sistem operasi tuan rumah.
                     </p>
                   </div>

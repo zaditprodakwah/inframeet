@@ -165,7 +165,7 @@ export default function PortfolioPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Award className="w-3.5 h-3.5" /> Bukti Kerja & Validasi Nyata (E-E-A-T)
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Portofolio & <span className="text-indigo-500">Studi Kasus</span> Sukses
           </h1>
           <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -175,13 +175,13 @@ export default function PortfolioPage() {
 
         {/* Tab Filters */}
         <section className="max-w-7xl mx-auto px-6 flex justify-center">
-          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 backdrop-blur-md">
+          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-200 border-slate-800/80 backdrop-blur-md">
             <button
               onClick={() => setActiveTab("all")}
               className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "all"
                   ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
-                  : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
+                  : "text-slate-400 hover:text-slate-800 text-slate-200"
               }`}
             >
               Semua Proyek
@@ -191,7 +191,7 @@ export default function PortfolioPage() {
               className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "b2b"
                   ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
-                  : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
+                  : "text-slate-400 hover:text-slate-800 text-slate-200"
               }`}
             >
               Enterprise B2B
@@ -201,7 +201,7 @@ export default function PortfolioPage() {
               className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "academic"
                   ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
-                  : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
+                  : "text-slate-400 hover:text-slate-800 text-slate-200"
               }`}
             >
               Akademik & Riset
@@ -221,7 +221,7 @@ export default function PortfolioPage() {
               {filteredCases.map((c) => (
                 <div 
                   key={c.id} 
-                  className="rounded-3xl border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md p-8 flex flex-col justify-between space-y-6 hover:border-indigo-500/20 transition-all duration-300"
+                  className="rounded-3xl border border-slate-200/80 dark:border-slate-200 border-slate-800/80 bg-white/70 dark:bg-slate-100 bg-slate-900/40 backdrop-blur-md p-8 flex flex-col justify-between space-y-6 hover:border-indigo-500/20 transition-all duration-300"
                 >
                   <div className="space-y-6">
                     {/* Header: Company & Segment */}
@@ -237,13 +237,13 @@ export default function PortfolioPage() {
                       <h3 className="text-xl font-bold text-white leading-tight">
                         {c.project_title}
                       </h3>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <p className="text-xs text-slate-400 leading-relaxed">
                         {c.description}
                       </p>
                     </div>
 
                     {/* CSS Progress Bars Metrics */}
-                    <div className="space-y-3 bg-white dark:bg-slate-950/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800/60">
+                    <div className="space-y-3 bg-white dark:bg-slate-950/40 p-5 rounded-2xl border border-slate-200 border-slate-800/60">
                       <span className="text-[9px] uppercase tracking-widest text-slate-500 font-extrabold block mb-2">Metrik Keberhasilan Terverifikasi</span>
                       
                       {/* Metric 1 */}
@@ -252,7 +252,7 @@ export default function PortfolioPage() {
                           <span>Akurasi Timeline SOW</span>
                           <span className="font-mono">{c.metric_timeline_accuracy}%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-slate-100 bg-slate-900 rounded-full overflow-hidden">
                           <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${c.metric_timeline_accuracy}%` }} />
                         </div>
                       </div>
@@ -264,7 +264,7 @@ export default function PortfolioPage() {
                             <span>Kualitas Kode & Optimasi</span>
                             <span className="font-mono">{c.metric_code_quality}%</span>
                           </div>
-                          <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden">
+                          <div className="w-full h-1.5 bg-slate-100 bg-slate-900 rounded-full overflow-hidden">
                             <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${c.metric_code_quality}%` }} />
                           </div>
                         </div>
@@ -274,7 +274,7 @@ export default function PortfolioPage() {
                             <span>Presisi Olah Data Penelitian</span>
                             <span className="font-mono">{c.metric_data_precision}%</span>
                           </div>
-                          <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden">
+                          <div className="w-full h-1.5 bg-slate-100 bg-slate-900 rounded-full overflow-hidden">
                             <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${c.metric_data_precision}%` }} />
                           </div>
                         </div>
@@ -286,7 +286,7 @@ export default function PortfolioPage() {
                           <span>Rasio Pemuatan / Kecepatan</span>
                           <span className="font-mono">{c.metric_speed || 95}%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-900 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-slate-100 bg-slate-900 rounded-full overflow-hidden">
                           <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${c.metric_speed || 95}%` }} />
                         </div>
                       </div>

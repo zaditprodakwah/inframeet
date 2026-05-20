@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b0f10; /* Deep Space Industrial Dark */
-  --foreground: #f8fafc;
-  --card-bg: rgba(24, 24, 27, 0.6); /* Cyber-Minimalism Surface */
-  --border-color: rgba(255, 255, 255, 0.08);
-  --glow-primary: rgba(99, 102, 241, 0.15);
+  --background: #0b0f10;
+  --foreground: #e0e3e5;
+  --card-bg: rgba(17, 24, 39, 0.82);
+  --card-bg-raised: rgba(25, 32, 48, 0.94);
+  --border-color: rgba(255, 255, 255, 0.10);
+  --border-active: rgba(99, 102, 241, 0.40);
+  --glow-primary: rgba(99, 102, 241, 0.18);
   --scrollbar-thumb: #27272a;
 }
 
@@ -14,60 +16,87 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card-bg);
   --color-border: var(--border-color);
-  --color-primary: #6366f1;    /* Cyber Purple */
-  --color-secondary: #3b82f6;  /* Trust Blue */
-  --color-success: #10b981;    /* Emerald Green */
-  --color-critical: #ef4444;   /* Ruby Red (Anti-Joki) */
+  --color-primary: #6366f1;
+  --color-secondary: #3b82f6;
+  --color-success: #10b981;
+  --color-critical: #ef4444;
   --font-sans: var(--font-plus-jakarta), Inter, sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
 }
 
-body {
+html, body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Premium Custom Sleek Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border-radius: 9999px;
-}
-
-/* Premium Glassmorphic Card Utilities */
+/* ─────────────────────────────────────────────
+   GLASS SURFACE SYSTEM
+───────────────────────────────────────────── */
 .glass-panel {
   background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-panel:hover {
+  border-color: var(--border-active);
+  box-shadow: 0 8px 40px var(--glow-primary);
 }
 .glass-card {
-  background: var(--card-bg);
+  background: var(--card-bg-raised);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .glass-card:hover {
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1);
+  border-color: var(--border-active);
+  box-shadow: 0 10px 40px var(--glow-primary);
   transform: translateY(-2px);
 }
+.inner-card {
+  background: rgba(11, 15, 16, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.75rem;
+}
 
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY UTILITIES
+───────────────────────────────────────────── */
+.hero-title {
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.section-heading {
+  color: #e0e3e5;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.body-muted {
+  color: #c7c4d7;
+  line-height: 1.65;
+}
+.text-glow {
+  text-shadow: 0 0 30px rgba(99, 102, 241, 0.45);
+}
 
-/* Accessibility Relative Font Scaling Overrides */
-html.font-size-sm { font-size: 87.5% !important; }
-html.font-size-base { font-size: 100% !important; }
-html.font-size-md { font-size: 112.5% !important; }
-html.font-size-lg { font-size: 125% !important; }
-html.font-size-xl { font-size: 137.5% !important; }
+/* ─────────────────────────────────────────────
+   SCROLLBAR
+───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 9999px; }
+
+/* ─────────────────────────────────────────────
+   ACCESSIBILITY FONT SCALE
+───────────────────────────────────────────── */
+html.font-size-sm  { font-size: 87.5%  !important; }
+html.font-size-base{ font-size: 100%   !important; }
+html.font-size-md  { font-size: 112.5% !important; }
+html.font-size-lg  { font-size: 125%   !important; }
+html.font-size-xl  { font-size: 137.5% !important; }

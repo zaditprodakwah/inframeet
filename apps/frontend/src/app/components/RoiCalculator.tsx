@@ -49,7 +49,7 @@ export default function RoiCalculator() {
               <Sparkles className="w-3.5 h-3.5" />
               <span>Infrastructure Optimizer</span>
             </div>
-            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white">
               The Formulator
             </h3>
             <p className="text-xs text-slate-550 dark:text-[#c7c4d7] leading-relaxed">

@@ -72,7 +72,7 @@ export default function PlagiarismCheckerPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Sparkles className="w-3.5 h-3.5" /> Client-Side Heuristics Engine
           </span>
-          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h1 className="text-3xl font-extrabold text-white tracking-tight leading-tight">
             Penelaah Plagiarisme & Sitasi Karya Tulis
           </h1>
           <p className="text-xs text-slate-455 max-w-xl mx-auto">
@@ -83,7 +83,7 @@ export default function PlagiarismCheckerPage() {
         {/* Audit Form & Result Container */}
         <section className="grid grid-cols-1 gap-8">
           
-          <div className="p-6 rounded-2xl bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 backdrop-blur-md space-y-6">
+          <div className="p-6 rounded-2xl bg-white/70 dark:bg-slate-100 bg-slate-900/40 border border-slate-200 border-slate-800 backdrop-blur-md space-y-6">
             <form onSubmit={handleScan} className="space-y-4">
               
               {/* Text Input Block */}
@@ -98,7 +98,7 @@ export default function PlagiarismCheckerPage() {
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Tempel dokumen tesis, esai, or artikel ilmiah Anda di sini untuk memulai pemindaian steril..."
-                  className="w-full px-3 py-2.5 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 resize-none font-sans leading-relaxed"
+                  className="w-full px-3 py-2.5 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-xl text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500 resize-none font-sans leading-relaxed"
                 />
                 <div className="flex justify-between items-center text-[10px] text-slate-500 mt-1 font-mono">
                   <span>Karakter: {text.length}/10.000</span>
@@ -120,7 +120,7 @@ export default function PlagiarismCheckerPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="email@domain.com"
-                  className="w-full px-3 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3 py-2 bg-slate-100 bg-slate-900 border border-slate-200 border-slate-800 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                 />
               </div>
 
@@ -155,7 +155,7 @@ export default function PlagiarismCheckerPage() {
 
           {/* Results Panel */}
           {scanResult && (
-            <div className="p-6 rounded-2xl bg-white/80 dark:bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 backdrop-blur-md space-y-6 animate-fade-in-up">
+            <div className="p-6 rounded-2xl bg-white/80 dark:bg-slate-100 bg-slate-900/60 border border-slate-200 border-slate-800 backdrop-blur-md space-y-6 animate-fade-in-up">
               
               <h3 className="text-xs font-bold text-slate-350 uppercase tracking-widest border-b border-slate-200 dark:border-slate-850 pb-2">HASIL PEMINDAIAN DOKUMEN</h3>
 

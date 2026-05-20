@@ -87,7 +87,7 @@ export default function AboutPage() {
               <span className="w-2 h-2 rounded-full bg-[#4edea3] shadow-[0_0_8px_#4edea3] animate-pulse"></span>
               SYSTEM VISION &amp; SUPPORT
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
               Infrastructural Integrity
             </h1>
             <p className="text-sm md:text-base text-slate-650 dark:text-[#c7c4d7] leading-relaxed max-w-2xl">
@@ -97,7 +97,7 @@ export default function AboutPage() {
 
           {/* Collaboration Flow Timeline */}
           <section className="space-y-8">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/10 pb-4 flex items-center gap-3">
+            <h2 className="text-xl md:text-2xl font-bold text-white border-b border-slate-200 dark:border-white/10 pb-4 flex items-center gap-3">
               <Users className="w-5 h-5 text-[#6366f1] dark:text-[#c0c1ff]" />
               Collaboration Protocol Flow
             </h2>
@@ -105,25 +105,25 @@ export default function AboutPage() {
               {/* Step 1 */}
               <div className="glass-panel p-6 rounded-2xl relative hover:border-[#6366f1]/40 transition-colors">
                 <div className="font-mono text-xs text-[#6366f1] dark:text-[#c0c1ff] mb-2 font-bold">PHASE_01</div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">Calculation &amp; Requirements</h3>
+                <h3 className="text-base font-bold text-white mb-3">Calculation &amp; Requirements</h3>
                 <p className="text-xs text-slate-600 dark:text-[#c7c4d7]">Algorithmic assessment of computational needs and academic parameters prior to resource allocation.</p>
               </div>
               {/* Step 2 */}
               <div className="glass-panel p-6 rounded-2xl relative hover:border-[#6366f1]/40 transition-colors">
                 <div className="font-mono text-xs text-[#8083ff] mb-2 font-bold">PHASE_02</div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">SOW Generation</h3>
+                <h3 className="text-base font-bold text-white mb-3">SOW Generation</h3>
                 <p className="text-xs text-slate-600 dark:text-[#c7c4d7]">Automated Statement of Work drafting utilizing verified academic templates and SLA cryptographic bindings.</p>
               </div>
               {/* Step 3 */}
               <div className="glass-panel p-6 rounded-2xl relative hover:border-[#6366f1]/40 transition-colors">
                 <div className="font-mono text-xs text-[#4edea3] mb-2 font-bold">PHASE_03</div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">Expert Matching</h3>
+                <h3 className="text-base font-bold text-white mb-3">Expert Matching</h3>
                 <p className="text-xs text-slate-600 dark:text-[#c7c4d7]">Heuristic routing of requirements to vetted technical leadership and academic researchers based on node topology.</p>
               </div>
               {/* Step 4 */}
               <div className="glass-panel p-6 rounded-2xl relative hover:border-[#6366f1]/40 transition-colors">
                 <div className="font-mono text-xs text-[#c0c1ff] mb-2 font-bold">PHASE_04</div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">Secure Delivery</h3>
+                <h3 className="text-base font-bold text-white mb-3">Secure Delivery</h3>
                 <p className="text-xs text-slate-600 dark:text-[#c7c4d7]">End-to-end encrypted payload transfer with immutable hash verification appended to the compliance log.</p>
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function AboutPage() {
 
           {/* Technical Leadership */}
           <section className="space-y-8">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/10 pb-4 flex items-center gap-3">
+            <h2 className="text-xl md:text-2xl font-bold text-white border-b border-slate-200 dark:border-white/10 pb-4 flex items-center gap-3">
               <Users className="w-5 h-5 text-[#6366f1] dark:text-[#c0c1ff]" />
               Technical Leadership
             </h2>
@@ -143,7 +143,7 @@ export default function AboutPage() {
                     <span className="bg-slate-100 dark:bg-[#1d2022] text-[#6366f1] dark:text-[#c0c1ff] font-mono text-[10px] px-2 py-1 rounded border border-[#6366f1]/30 uppercase tracking-widest">ID_AUTH_01</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#6366f1] dark:group-hover:text-[#c0c1ff] transition-colors">Muhammad Zadit</h3>
+                    <h3 className="text-lg font-bold text-white group-hover:text-[#6366f1] dark:group-hover:text-[#c0c1ff] transition-colors">Muhammad Zadit</h3>
                     <p className="font-mono text-xs text-slate-550 dark:text-[#c7c4d7] mt-1">Lead Systems Architect</p>
                     <p className="text-xs text-slate-600 dark:text-[#c7c4d7] mt-4 leading-relaxed">Directs core infrastructure deployment and oversees node topology optimization for enterprise clients. Focuses on zero-latency bridging.</p>
                   </div>
@@ -161,7 +161,7 @@ export default function AboutPage() {
                     <span className="bg-slate-100 dark:bg-[#1d2022] text-[#4edea3] font-mono text-[10px] px-2 py-1 rounded border border-[#4edea3]/30 uppercase tracking-widest">ID_AUTH_02</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#4edea3] transition-colors">Dr. Farah Anindya</h3>
+                    <h3 className="text-lg font-bold text-white group-hover:text-[#4edea3] transition-colors">Dr. Farah Anindya</h3>
                     <p className="font-mono text-xs text-slate-550 dark:text-[#c7c4d7] mt-1">Head of Academic Integrity</p>
                     <p className="text-xs text-slate-600 dark:text-[#c7c4d7] mt-4 leading-relaxed">Maintains structural compliance protocols and algorithmic verification of research artifacts. Ensures adherence to global academic standards.</p>
                   </div>
@@ -177,7 +177,7 @@ export default function AboutPage() {
 
           {/* Compliance & Integrity */}
           <section className="glass-panel p-8 rounded-2xl bg-slate-50/50 dark:bg-[#1d2022]/40 border border-slate-200 dark:border-white/5">
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
+            <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
               <ShieldCheck className="w-5 h-5 text-[#4edea3]" />
               Compliance Framework
             </h2>
@@ -206,11 +206,11 @@ export default function AboutPage() {
 
           {/* Support CTA */}
           <section className="text-center py-12 border-t border-slate-200 dark:border-white/10 mt-12 space-y-6">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Require Technical Assistance?</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-white">Require Technical Assistance?</h2>
             <p className="text-sm text-slate-600 dark:text-[#c7c4d7] max-w-lg mx-auto">Open a secure ticket with our Level 3 support engineers for immediate infrastructure troubleshooting.</p>
             <Link 
               href="/contact"
-              className="inline-flex items-center gap-2 bg-slate-100 dark:bg-[#101415] hover:bg-slate-250 dark:hover:bg-[#1d2022] text-slate-800 dark:text-white border border-slate-350 dark:border-white/10 font-mono text-xs px-8 py-3 rounded-xl transition-all shadow cursor-pointer"
+              className="inline-flex items-center gap-2 bg-slate-100 dark:bg-[#101415] hover:bg-slate-250 dark:hover:bg-[#1d2022] text-white border border-slate-350 dark:border-white/10 font-mono text-xs px-8 py-3 rounded-xl transition-all shadow cursor-pointer"
             >
               <span>Initialize Support Sequence</span>
               <ArrowRight className="w-4 h-4" />

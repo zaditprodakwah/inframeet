@@ -424,7 +424,7 @@ export default function InsightsPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Sparkles className="w-3.5 h-3.5" /> Sindikasi Tren &amp; Analisis Industri
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Curated Industry <span className="text-indigo-500">Insights</span>
           </h1>
           <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -454,7 +454,7 @@ export default function InsightsPage() {
               placeholder="Cari riset, ulasan bisnis, software, atau kata kunci metodologi..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-6 py-4 rounded-2xl bg-[#090d1f] border border-slate-200 dark:border-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-sm text-slate-800 dark:text-slate-200 outline-none transition duration-200"
+              className="w-full pl-12 pr-6 py-4 rounded-2xl bg-[#090d1f] border border-slate-200 border-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-sm text-slate-800 text-slate-200 outline-none transition duration-200"
             />
             {searchQuery && (
               <button
@@ -475,7 +475,7 @@ export default function InsightsPage() {
                 className={`px-4 py-2.5 text-xs font-bold rounded-lg uppercase tracking-wider border transition-all cursor-pointer ${
                   activeTab === tab
                     ? "bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-600/10"
-                    : "bg-[#090d1f] border-slate-200 dark:border-slate-800 text-slate-400 hover:text-white"
+                    : "bg-[#090d1f] border-slate-200 border-slate-800 text-slate-400 hover:text-white"
                 }`}
               >
                 {tab === "all" ? "Semua" : tab === "ai" ? "Riset & Metodologi" : tab === "technology" ? "Teknologi" : "Bisnis"}
@@ -523,7 +523,7 @@ export default function InsightsPage() {
                           <span className={`px-2.5 py-0.5 rounded capitalize border ${
                             isCurated 
                               ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
-                              : "bg-slate-500/10 text-slate-400 border-slate-200 dark:border-slate-800"
+                              : "bg-slate-500/10 text-slate-400 border-slate-200 border-slate-800"
                           }`}>
                             {isCurated ? "🟢 EXPERT ANALYSIS" : "BERITA SEKTOR"}
                           </span>
@@ -555,7 +555,7 @@ export default function InsightsPage() {
                                 <button
                                   key={tag}
                                   onClick={() => setSearchQuery(tag)}
-                                  className="px-2 py-0.5 text-[10px] font-bold bg-[#090d1f] hover:bg-indigo-600/20 text-slate-400 hover:text-indigo-400 rounded border border-slate-200 dark:border-slate-800 transition"
+                                  className="px-2 py-0.5 text-[10px] font-bold bg-[#090d1f] hover:bg-indigo-600/20 text-slate-400 hover:text-indigo-400 rounded border border-slate-200 border-slate-800 transition"
                                 >
                                   #{tag}
                                 </button>
@@ -596,7 +596,7 @@ export default function InsightsPage() {
                                 <div key={idx} className="border border-[#1e293b] rounded-lg overflow-hidden bg-[#0a0f1d] transition">
                                   <button
                                     onClick={() => toggleFaq(art.id, idx)}
-                                    className="w-full p-3 text-left flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-white"
+                                    className="w-full p-3 text-left flex items-center justify-between text-xs font-bold text-slate-800 text-slate-200 hover:text-white"
                                   >
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`w-3.5 h-3.5 text-indigo-500 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
@@ -638,7 +638,7 @@ export default function InsightsPage() {
                   <button
                     onClick={() => loadArticles(false)}
                     disabled={loadingMore}
-                    className="inline-flex items-center gap-2 px-6 py-3 border border-slate-200 dark:border-slate-800 hover:border-slate-700 bg-white dark:bg-slate-950/40 text-xs font-black tracking-widest uppercase rounded-xl text-amber-400 hover:text-amber-300 hover:scale-105 active:scale-95 disabled:opacity-50 transition cursor-pointer"
+                    className="inline-flex items-center gap-2 px-6 py-3 border border-slate-200 border-slate-800 hover:border-slate-700 bg-white dark:bg-slate-950/40 text-xs font-black tracking-widest uppercase rounded-xl text-amber-400 hover:text-amber-300 hover:scale-105 active:scale-95 disabled:opacity-50 transition cursor-pointer"
                   >
                     {loadingMore ? "Memuat..." : "Tampilkan Lebih Banyak"}
                   </button>

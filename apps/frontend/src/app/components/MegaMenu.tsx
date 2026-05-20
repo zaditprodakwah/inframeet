@@ -117,7 +117,7 @@ export default function MegaMenu() {
                         href={item.href}
                         className="px-3 py-1.5 hover:bg-slate-950/50 rounded-xl text-xs font-bold text-slate-400 hover:text-indigo-400 transition-all flex items-center gap-2"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 bg-slate-700 shrink-0" />
                         {item.label}
                       </Link>
                     ))}
@@ -126,7 +126,7 @@ export default function MegaMenu() {
 
                 {/* COLUMN 2: TOOLS & INTERACTIVE HUB */}
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100 dark:border-slate-800/80">
+                  <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider pb-2 border-b border-slate-100 border-slate-800/80">
                     <Wrench className="w-4 h-4 text-indigo-500" />
                     Hub Alat & Utilitas
                   </div>
@@ -321,7 +321,7 @@ export default function MegaMenu() {
             Legalitas &amp; Kepatuhan
           </Link>
           <div className="flex items-center justify-between pt-2">
-            <span className="text-xs font-bold text-slate-500 dark:text-slate-400">Pilih Tema</span>
+            <span className="text-xs font-bold text-slate-400">Pilih Tema</span>
           </div>
           <Link
             href="/calculator"

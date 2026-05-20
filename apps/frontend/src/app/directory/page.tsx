@@ -392,7 +392,7 @@ export default function DirectoryCatalogPage() {
               Polymorphic Trust &amp; Credibility Directory
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Proof-of-Authority Index
           </h1>
           <p className="text-sm md:text-base text-slate-650 dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">
@@ -413,7 +413,7 @@ export default function DirectoryCatalogPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Cari universitas, sekolah, expert, saas..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none focus:border-[#6366f1] transition-all font-semibold"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#6366f1] transition-all font-semibold"
                 />
               </div>
 
@@ -455,7 +455,7 @@ export default function DirectoryCatalogPage() {
                 <select
                   value={sectorFilter}
                   onChange={(e) => setSectorFilter(e.target.value)}
-                  className="bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-lg text-slate-800 dark:text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
+                  className="bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-lg text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
                 >
                   <option value="all">Semua Sektor</option>
                   <option value="Negeri">Negeri</option>
@@ -469,7 +469,7 @@ export default function DirectoryCatalogPage() {
                 <select
                   value={accreditationFilter}
                   onChange={(e) => setAccreditationFilter(e.target.value)}
-                  className="bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-lg text-slate-800 dark:text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
+                  className="bg-white dark:bg-[#101415] border border-slate-200 dark:border-white/10 rounded-lg text-white px-2.5 py-1.5 text-xs font-bold focus:outline-none focus:border-[#6366f1]"
                 >
                   <option value="all">Tier A &amp; B</option>
                   <option value="tier_a">Tier A (Global)</option>
@@ -491,7 +491,7 @@ export default function DirectoryCatalogPage() {
           ) : filteredEntities.length === 0 ? (
             <div className="text-center py-20 bg-slate-50/50 dark:bg-[#1d2022]/40 border border-slate-200 dark:border-white/5 rounded-3xl p-8 max-w-md mx-auto space-y-3">
               <BadgeAlert className="w-8 h-8 text-[#6366f1] mx-auto" />
-              <p className="text-slate-800 dark:text-white text-sm font-extrabold">Tidak menemukan entitas yang cocok.</p>
+              <p className="text-white text-sm font-extrabold">Tidak menemukan entitas yang cocok.</p>
               <p className="text-slate-450 dark:text-[#c7c4d7] text-xs font-medium">Cobalah menyetel ulang filter atau ganti kata kunci pencarian Anda.</p>
             </div>
           ) : (
@@ -511,7 +511,7 @@ export default function DirectoryCatalogPage() {
         <div className="flex justify-center mt-8">
           <button 
             onClick={loadDirectories}
-            className="bg-slate-50 dark:bg-[#1d2022] hover:bg-slate-100 dark:hover:bg-[#323537] border border-slate-250 dark:border-white/10 text-slate-700 dark:text-white font-mono text-[10px] px-8 py-3 rounded-xl transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+            className="bg-slate-50 dark:bg-[#1d2022] hover:bg-slate-100 dark:hover:bg-[#323537] border border-slate-250 dark:border-white/10 text-slate-700 text-white font-mono text-[10px] px-8 py-3 rounded-xl transition-all flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Load Additional Hashes</span>

@@ -15,7 +15,7 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 animate-pulse" />
+      <div className="w-8 h-8 rounded-lg bg-slate-100 bg-slate-900 border border-slate-200 border-slate-800 animate-pulse" />
     );
   }
 

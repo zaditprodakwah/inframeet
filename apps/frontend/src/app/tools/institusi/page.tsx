@@ -414,7 +414,7 @@ export default function SchoolLookupPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <School className="w-3.5 h-3.5" /> Direktori &amp; Validasi Kampus Nusantara
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Pencarian Institusi &amp; <span className="text-indigo-500">Panduan Akademik</span>
           </h1>
           <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -438,7 +438,7 @@ export default function SchoolLookupPage() {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder="Ketik Universitas Indonesia, ITB, SMAN 8..."
-                    className="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:border-indigo-500 rounded-2xl text-sm focus:outline-none transition-all placeholder:text-slate-600"
+                    className="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-950 border border-slate-200 border-slate-800 focus:border-indigo-500 rounded-2xl text-sm focus:outline-none transition-all placeholder:text-slate-600"
                   />
                 </div>
                 <button
@@ -489,7 +489,7 @@ export default function SchoolLookupPage() {
             {/* Results List */}
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
               {displayList.length === 0 ? (
-                <div className="p-12 text-center rounded-3xl border border-slate-200 dark:border-slate-850 bg-slate-100 dark:bg-slate-900/10 text-slate-500 text-sm">
+                <div className="p-12 text-center rounded-3xl border border-slate-200 dark:border-slate-850 bg-slate-100 bg-slate-900/10 text-slate-500 text-sm">
                   Tidak ditemukan institusi dengan nama &quot;{keyword}&quot;. Silakan coba cari menggunakan data PDDikti di atas.
                 </div>
               ) : (
@@ -535,7 +535,7 @@ export default function SchoolLookupPage() {
               <div className="glass-panel rounded-3xl p-6 space-y-6">
                 
                 {/* Header detail */}
-                <div className="space-y-3 pb-4 border-b border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80">
+                <div className="space-y-3 pb-4 border-b border-slate-200/80 dark:border-slate-200 border-slate-800/80">
                   <div className="flex items-center justify-between">
                     <span className="text-[9px] uppercase font-bold tracking-widest text-indigo-400 px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/10">
                       {selectedInst.type}
@@ -545,7 +545,7 @@ export default function SchoolLookupPage() {
                     </span>
                   </div>
                   <h3 className="text-lg font-bold text-white leading-tight">{selectedInst.name}</h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{selectedInst.description}</p>
+                  <p className="text-xs text-slate-400 leading-relaxed">{selectedInst.description}</p>
                 </div>
 
                 {/* Academic/School guidelines (E-E-A-T values) */}
@@ -559,13 +559,13 @@ export default function SchoolLookupPage() {
                       <>
                         <div className="p-3 rounded-xl bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 space-y-1">
                           <span className="text-[9px] text-slate-500 font-medium block">Kurikulum Nasional</span>
-                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1">
+                          <span className="text-xs font-bold text-slate-800 text-slate-200 flex items-center gap-1">
                             <BookOpen className="w-3.5 h-3.5 text-indigo-400" /> {selectedInst.curriculum}
                           </span>
                         </div>
                         <div className="p-3 rounded-xl bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 space-y-1">
                           <span className="text-[9px] text-slate-500 font-medium block">Fokus Pembinaan</span>
-                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1">
+                          <span className="text-xs font-bold text-slate-800 text-slate-200 flex items-center gap-1">
                             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> {selectedInst.focus}
                           </span>
                         </div>
@@ -574,13 +574,13 @@ export default function SchoolLookupPage() {
                       <>
                         <div className="p-3 rounded-xl bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 space-y-1">
                           <span className="text-[9px] text-slate-500 font-medium block">Format Sitasi Wajib</span>
-                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1">
+                          <span className="text-xs font-bold text-slate-800 text-slate-200 flex items-center gap-1">
                             <BookOpen className="w-3.5 h-3.5 text-indigo-400" /> {selectedInst.citation_style}
                           </span>
                         </div>
                         <div className="p-3 rounded-xl bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 space-y-1">
                           <span className="text-[9px] text-slate-500 font-medium block">Batas Maks Turnitin</span>
-                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1">
+                          <span className="text-xs font-bold text-slate-800 text-slate-200 flex items-center gap-1">
                             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> {selectedInst.turnitin_limit}
                           </span>
                         </div>
@@ -620,7 +620,7 @@ export default function SchoolLookupPage() {
 
               </div>
             ) : (
-              <div className="p-12 text-center rounded-3xl border border-slate-200 dark:border-slate-850 bg-slate-100 dark:bg-slate-900/10 text-slate-500 text-sm">
+              <div className="p-12 text-center rounded-3xl border border-slate-200 dark:border-slate-850 bg-slate-100 bg-slate-900/10 text-slate-500 text-sm">
                 Pilih sekolah atau universitas dari list untuk melihat standar pedoman dan bantuan integrasi kustom.
               </div>
             )}

@@ -105,10 +105,10 @@ export default function ResumeBuilderPage() {
             <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
               <Sparkles className="w-4 h-4" />
             </span>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Formulator CV ATS-Friendly</h1>
+            <h1 className="text-xl font-bold text-white tracking-tight">Formulator CV ATS-Friendly</h1>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 backdrop-blur-md space-y-6">
+          <div className="p-6 rounded-2xl bg-white/70 dark:bg-slate-100 bg-slate-900/40 border border-slate-200 border-slate-800 backdrop-blur-md space-y-6">
             
             {/* Personal Info */}
             <div className="space-y-4 font-sans">
@@ -123,7 +123,7 @@ export default function ResumeBuilderPage() {
                     value={personalInfo.fullName}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, fullName: e.target.value })}
                     placeholder="Nama Lengkap"
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
@@ -135,7 +135,7 @@ export default function ResumeBuilderPage() {
                     value={personalInfo.title}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, title: e.target.value })}
                     placeholder="Profesi / Jabatan"
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
@@ -148,7 +148,7 @@ export default function ResumeBuilderPage() {
                     value={personalInfo.email}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })}
                     placeholder="Email"
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
@@ -161,7 +161,7 @@ export default function ResumeBuilderPage() {
                     value={personalInfo.phone}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
                     placeholder="Telepon/WA"
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                   />
                 </div>
                 <div className="flex flex-col gap-1 md:col-span-2">
@@ -173,7 +173,7 @@ export default function ResumeBuilderPage() {
                     value={personalInfo.location}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, location: e.target.value })}
                     placeholder="Lokasi (e.g. Jakarta, Indonesia)"
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                   />
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function ResumeBuilderPage() {
                   rows={3}
                   onChange={(e) => setPersonalInfo({ ...personalInfo, summary: e.target.value })}
                   placeholder="Rangkuman Karir / Profil Singkat"
-                  className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"
+                  className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"
                 />
               </div>
             </div>
@@ -223,7 +223,7 @@ export default function ResumeBuilderPage() {
                         setExperiences(newExp);
                       }}
                       placeholder="Nama Perusahaan"
-                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                     />
                     <input
                       type="text"
@@ -234,7 +234,7 @@ export default function ResumeBuilderPage() {
                         setExperiences(newExp);
                       }}
                       placeholder="Jabatan"
-                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                     />
                     <input
                       type="text"
@@ -245,7 +245,7 @@ export default function ResumeBuilderPage() {
                         setExperiences(newExp);
                       }}
                       placeholder="Periode (e.g. 2021 - 2024)"
-                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                     />
                   </div>
                   <textarea
@@ -257,7 +257,7 @@ export default function ResumeBuilderPage() {
                       setExperiences(newExp);
                     }}
                     placeholder="Deskripsi tugas dan kontribusi Anda..."
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"
                   />
                 </div>
               ))}
@@ -295,7 +295,7 @@ export default function ResumeBuilderPage() {
                         setEducations(newEdu);
                       }}
                       placeholder="Nama Lembaga"
-                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                     />
                     <input
                       type="text"
@@ -306,7 +306,7 @@ export default function ResumeBuilderPage() {
                         setEducations(newEdu);
                       }}
                       placeholder="Gelar"
-                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                     />
                     <input
                       type="text"
@@ -317,7 +317,7 @@ export default function ResumeBuilderPage() {
                         setEducations(newEdu);
                       }}
                       placeholder="Periode (e.g. 2017 - 2021)"
-                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                     />
                   </div>
                 </div>
@@ -335,7 +335,7 @@ export default function ResumeBuilderPage() {
                   value={newSkill}
                   onChange={(e) => setNewSkill(e.target.value)}
                   placeholder="Tambah keahlian baru..."
-                  className="flex-1 px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                  className="flex-1 px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                 />
                 <button
                   type="submit"
@@ -348,7 +348,7 @@ export default function ResumeBuilderPage() {
                 {skills.map((skill) => (
                   <span
                     key={skill}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-850 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-300 font-bold"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-850 border border-slate-200 border-slate-800 text-[10px] text-slate-300 font-bold"
                   >
                     {skill}
                     <button
@@ -376,7 +376,7 @@ export default function ResumeBuilderPage() {
                   value={premiumCode}
                   onChange={(e) => setPremiumCode(e.target.value)}
                   placeholder="Masukkan Kode Kemitraan Anda"
-                  className="flex-1 px-3 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500"
+                  className="flex-1 px-3 py-2 bg-slate-100 bg-slate-900 border border-slate-200 border-slate-800 rounded-lg text-xs text-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
                 />
                 <button
                   onClick={handleVerifyCode}

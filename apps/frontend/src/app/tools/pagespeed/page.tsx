@@ -27,7 +27,7 @@ export default function PageSpeedToolPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-900 dark:text-slate-200 pb-20">
+    <div className="min-h-screen bg-[#020617] text-slate-200 pb-20">
       <main className="max-w-7xl mx-auto px-6 py-12 pt-24 lg:pt-32 space-y-12">
         
         {/* Header Section */}
@@ -37,7 +37,7 @@ export default function PageSpeedToolPage() {
               <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-500/10 px-3 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200 dark:border-emerald-500/20">
                 CRYPTOGRAPHICALLY VERIFIED
               </span>
-              <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-200 dark:bg-slate-800 px-3 py-1.5 rounded-full uppercase tracking-widest">
+              <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-200 bg-slate-800 px-3 py-1.5 rounded-full uppercase tracking-widest">
                 NODE: DX-4092-ALPHA
               </span>
             </div>
@@ -49,7 +49,7 @@ export default function PageSpeedToolPage() {
             </p>
           </div>
           <div className="flex gap-4">
-            <button className="px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-mono text-[10px] font-bold uppercase hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm">
+            <button className="px-6 py-3 bg-white bg-slate-800 border border-slate-200 border-slate-700 rounded-xl font-mono text-[10px] font-bold uppercase hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm">
               Export Report
             </button>
             <button className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-mono text-[10px] font-bold uppercase transition-all shadow-lg active:scale-95">
@@ -105,7 +105,7 @@ export default function PageSpeedToolPage() {
                 <h3 className="text-3xl font-black text-emerald-600 dark:text-emerald-400 mb-1">1.2s</h3>
                 <p className="font-mono text-[9px] font-bold text-slate-500 uppercase tracking-widest">Largest Contentful Paint</p>
               </div>
-              <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-slate-200 bg-slate-800 rounded-full overflow-hidden">
                 <div className="h-full bg-emerald-500 w-[85%]"></div>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -123,7 +123,7 @@ export default function PageSpeedToolPage() {
                 <h3 className="text-3xl font-black text-emerald-600 dark:text-emerald-400 mb-1">14ms</h3>
                 <p className="font-mono text-[9px] font-bold text-slate-500 uppercase tracking-widest">First Input Delay</p>
               </div>
-              <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-slate-200 bg-slate-800 rounded-full overflow-hidden">
                 <div className="h-full bg-emerald-500 w-[95%]"></div>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -141,7 +141,7 @@ export default function PageSpeedToolPage() {
                 <h3 className="text-3xl font-black text-amber-600 dark:text-amber-400 mb-1">0.08</h3>
                 <p className="font-mono text-[9px] font-bold text-slate-500 uppercase tracking-widest">Cumulative Layout Shift</p>
               </div>
-              <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-slate-200 bg-slate-800 rounded-full overflow-hidden">
                 <div className="h-full bg-amber-500 w-[60%]"></div>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -156,7 +156,7 @@ export default function PageSpeedToolPage() {
                   <Activity className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                   <h2 className="text-2xl font-bold text-white">Serverless Migration Savings</h2>
                 </div>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
+                <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
                   Diagnostik kami mengindikasikan arsitektur monolitik Anda membocorkan 24% efisiensi komputasi. Estimasikan ROI (Return of Investment) dengan beralih ke layanan *serverless* terenkripsi INFRAMEET.
                 </p>
                 <div className="pt-6 w-full max-w-xl">
@@ -170,7 +170,7 @@ export default function PageSpeedToolPage() {
                     max="100" 
                     value={trafficVal}
                     onChange={(e) => setTrafficVal(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-600" 
+                    className="w-full h-2 bg-slate-200 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-600" 
                   />
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default function PageSpeedToolPage() {
                 <div className="p-5 bg-white/90 dark:bg-black/60 border border-slate-200 dark:border-white/10 rounded-2xl backdrop-blur-md flex justify-between items-center transform hover:scale-105 hover:-translate-y-1 transition-all shadow-sm">
                   <div className="flex items-center gap-4">
                     <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
-                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-200">NA-EAST-01 (NY)</span>
+                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-slate-800 text-slate-200">NA-EAST-01 (NY)</span>
                   </div>
                   <span className="font-mono font-black text-emerald-600 dark:text-emerald-400">12ms</span>
                 </div>
@@ -276,7 +276,7 @@ export default function PageSpeedToolPage() {
                 <div className="p-5 bg-white/90 dark:bg-black/60 border border-slate-200 dark:border-white/10 rounded-2xl backdrop-blur-md flex justify-between items-center transform hover:scale-105 hover:-translate-y-1 transition-all shadow-sm">
                   <div className="flex items-center gap-4">
                     <span className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
-                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-200">EU-WEST-02 (LDN)</span>
+                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-slate-800 text-slate-200">EU-WEST-02 (LDN)</span>
                   </div>
                   <span className="font-mono font-black text-emerald-600 dark:text-emerald-400">48ms</span>
                 </div>
@@ -284,7 +284,7 @@ export default function PageSpeedToolPage() {
                 <div className="p-5 bg-white/90 dark:bg-black/60 border border-slate-200 dark:border-white/10 rounded-2xl backdrop-blur-md flex justify-between items-center transform hover:scale-105 hover:-translate-y-1 transition-all shadow-sm">
                   <div className="flex items-center gap-4">
                     <span className="w-3 h-3 bg-amber-500 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)]"></span>
-                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-slate-200">AP-SOUTH-01 (SGP)</span>
+                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-slate-800 text-slate-200">AP-SOUTH-01 (SGP)</span>
                   </div>
                   <span className="font-mono font-black text-amber-600 dark:text-amber-400">142ms</span>
                 </div>

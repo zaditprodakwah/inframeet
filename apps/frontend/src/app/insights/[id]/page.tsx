@@ -248,7 +248,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
         {/* 6. Related Posts (Clustered recommendations) */}
         {related && related.length > 0 && (
           <div className="mt-16 pt-12 border-t border-slate-900 no-print">
-            <h3 className="text-lg font-black text-slate-800 dark:text-slate-200 tracking-tight mb-6 flex items-center gap-2">
+            <h3 className="text-lg font-black text-slate-800 text-slate-200 tracking-tight mb-6 flex items-center gap-2">
               📖 Ulasan Analis Terkait Lainnya
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -279,7 +279,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
                   <Link
                     href={`/insights/${item.slug || item.id}`}
                     key={item.id}
-                    className="group flex flex-col p-4 bg-white dark:bg-slate-950/40 border border-slate-900 hover:border-slate-200 dark:border-slate-800 rounded-2xl transition-all duration-300"
+                    className="group flex flex-col p-4 bg-white dark:bg-slate-950/40 border border-slate-900 hover:border-slate-200 border-slate-800 rounded-2xl transition-all duration-300"
                   >
                     <div className="flex gap-2 items-center mb-2">
                       <span className={`px-2 py-0.5 text-[9px] font-bold uppercase rounded border ${relCategoryClass}`}>
@@ -289,7 +289,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
                         {itemDate}
                       </span>
                     </div>
-                    <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-amber-400 line-clamp-2 leading-tight transition-colors duration-200">
+                    <h4 className="text-xs font-bold text-slate-800 text-slate-200 group-hover:text-amber-400 line-clamp-2 leading-tight transition-colors duration-200">
                       {item.title}
                     </h4>
                   </Link>

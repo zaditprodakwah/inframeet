@@ -67,10 +67,10 @@ export default function ContactPage() {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                 HUBUNGI KAMI
               </span>
-              <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+              <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
                 Hubungi Kami secara Transparan
               </h1>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-400 leading-relaxed">
                 Tim kami siap menjawab pertanyaan teknis seputar migrasi arsitektur serverless enterprise maupun verifikasi integritas riset Anda.
               </p>
             </div>
@@ -124,7 +124,7 @@ export default function ContactPage() {
 
           {/* Right Form Panel (8 cols) */}
           <div className="lg:col-span-8 bg-white dark:bg-slate-950/40 border border-slate-900/80 p-6 md:p-10 rounded-3xl backdrop-blur-md shadow-2xl space-y-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 border-b border-slate-900 pb-4">
+            <h2 className="text-lg font-bold text-slate-800 text-slate-200 flex items-center gap-2 border-b border-slate-900 pb-4">
               <MessageSquare className="w-5 h-5 text-indigo-400" />
               Kirim Pesan Instan
             </h2>
@@ -234,7 +234,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-800 disabled:opacity-50 text-slate-900 dark:text-white font-bold text-sm rounded-xl transition-all shadow-md hover:shadow-indigo-500/15 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-800 disabled:opacity-50 text-white font-bold text-sm rounded-xl transition-all shadow-md hover:shadow-indigo-500/15 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {loading ? (
                     "Mengirimkan..."
