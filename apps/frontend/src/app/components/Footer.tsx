@@ -64,7 +64,7 @@ export default function Footer() {
             <li><Link href="/layanan/akademik" className="hover:text-indigo-400 transition-colors">Layanan Akademik</Link></li>
             <li><Link href="/layanan/b2b" className="hover:text-indigo-400 transition-colors">Layanan Cloud B2B</Link></li>
             <li><Link href="/directory" className="hover:text-indigo-400 transition-colors">Direktori Bisnis</Link></li>
-            <li><Link href="/experts" className="hover:text-indigo-400 transition-colors">Jaringan Pakar</Link></li>
+            <li><Link href="/directory?type=personal" className="hover:text-indigo-400 transition-colors">Jaringan Pakar</Link></li>
             <li><Link href="/portfolio" className="hover:text-indigo-400 transition-colors">Portofolio</Link></li>
             <li><Link href="/verify" className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors font-bold flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> Verifikasi</Link></li>
           </ul>

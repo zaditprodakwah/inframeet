@@ -18,7 +18,7 @@ export default function CalculatorPage() {
   const [activeTab, setActiveTab] = useState<"intake" | "roi">("intake");
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 transition-colors duration-300">
       
       {/* MegaMenu & Header Nav */}
       <div className="print:hidden">
@@ -33,14 +33,14 @@ export default function CalculatorPage() {
           <div className="inline-flex items-center gap-2 dark:bg-[#1d2022]/60 border dark:border-white/10 px-3 py-1 rounded-full">
             <Sparkles className="w-4 h-4 text-[#8083ff]" />
             <span className="font-mono text-xs text-[#8083ff] uppercase tracking-wider">
-              Kalkulator Instan v6.8-ROI Enabled
+              Formulator Solusi v2.0-Intake Enabled
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Pricing Configurator &amp; ROI Optimizer
+          <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+            Smart Formulator Solusi &amp; Asesmen Kebutuhan
           </h1>
-          <p className="text-sm md:text-base dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed">
-            Simulasikan biaya kustom asistensi akademik secara transparan, atau hitung proyeksi penghematan anggaran infrastruktur server B2B Anda.
+          <p className="text-xs md:text-sm dark:text-[#c7c4d7] max-w-2xl mx-auto leading-relaxed font-medium">
+            Simulasikan alokasi kebutuhan proyek, estimasikan sumber daya riset secara transparan, atau hitung proyeksi penghematan anggaran infrastruktur server B2B Anda.
           </p>
 
           {/* Toggle Switcher tabs */}
@@ -55,7 +55,7 @@ export default function CalculatorPage() {
                 }`}
               >
                 <FileText className="w-4 h-4" /> 
-                <span>Intake Brief Configurator</span>
+                <span>Brief Formulator Asesmen</span>
               </button>
               <button
                 onClick={() => setActiveTab("roi")}
@@ -66,7 +66,7 @@ export default function CalculatorPage() {
                 }`}
               >
                 <Calculator className="w-4 h-4" /> 
-                <span>B2B Serverless ROI Calculator</span>
+                <span>Kalkulator Penghematan ROI</span>
               </button>
             </div>
           </div>

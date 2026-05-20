@@ -175,13 +175,13 @@ export default function PortfolioPage() {
 
         {/* Tab Filters */}
         <section className="max-w-7xl mx-auto px-6 flex justify-center">
-          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-200 border-slate-800/80 backdrop-blur-md">
+          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white/80 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md">
             <button
               onClick={() => setActiveTab("all")}
               className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "all"
                   ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
-                  : "text-slate-400 hover:text-slate-800 text-slate-200"
+                  : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               }`}
             >
               Semua Proyek
@@ -191,7 +191,7 @@ export default function PortfolioPage() {
               className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "b2b"
                   ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
-                  : "text-slate-400 hover:text-slate-800 text-slate-200"
+                  : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               }`}
             >
               Enterprise B2B
@@ -201,7 +201,7 @@ export default function PortfolioPage() {
               className={`px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 activeTab === "academic"
                   ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
-                  : "text-slate-400 hover:text-slate-800 text-slate-200"
+                  : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"
               }`}
             >
               Akademik & Riset
@@ -221,7 +221,7 @@ export default function PortfolioPage() {
               {filteredCases.map((c) => (
                 <div 
                   key={c.id} 
-                  className="rounded-3xl border border-slate-200/80 dark:border-slate-200 border-slate-800/80 bg-white/70 dark:bg-slate-100 bg-slate-900/40 backdrop-blur-md p-8 flex flex-col justify-between space-y-6 hover:border-indigo-500/20 transition-all duration-300"
+                  className="rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white/75 dark:bg-slate-950/40 backdrop-blur-md p-8 flex flex-col justify-between space-y-6 hover:border-indigo-500/20 transition-all duration-300"
                 >
                   <div className="space-y-6">
                     {/* Header: Company & Segment */}
@@ -243,16 +243,16 @@ export default function PortfolioPage() {
                     </div>
 
                     {/* CSS Progress Bars Metrics */}
-                    <div className="space-y-3 bg-white dark:bg-slate-950/40 p-5 rounded-2xl border border-slate-200 border-slate-800/60">
+                    <div className="space-y-3 bg-white/50 dark:bg-slate-950/40 p-5 rounded-2xl border border-slate-200/60 dark:border-slate-850">
                       <span className="text-[9px] uppercase tracking-widest text-slate-500 font-extrabold block mb-2">Metrik Keberhasilan Terverifikasi</span>
                       
                       {/* Metric 1 */}
                       <div className="space-y-1">
-                        <div className="flex justify-between text-[10px] font-semibold text-slate-300">
+                        <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-slate-300">
                           <span>Akurasi Timeline SOW</span>
                           <span className="font-mono">{c.metric_timeline_accuracy}%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-slate-100 bg-slate-900 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                           <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${c.metric_timeline_accuracy}%` }} />
                         </div>
                       </div>
@@ -260,21 +260,21 @@ export default function PortfolioPage() {
                       {/* Metric 2 */}
                       {c.segment === "b2b" ? (
                         <div className="space-y-1">
-                          <div className="flex justify-between text-[10px] font-semibold text-slate-300">
+                          <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-slate-300">
                             <span>Kualitas Kode & Optimasi</span>
                             <span className="font-mono">{c.metric_code_quality}%</span>
                           </div>
-                          <div className="w-full h-1.5 bg-slate-100 bg-slate-900 rounded-full overflow-hidden">
+                          <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                             <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${c.metric_code_quality}%` }} />
                           </div>
                         </div>
                       ) : (
                         <div className="space-y-1">
-                          <div className="flex justify-between text-[10px] font-semibold text-slate-300">
+                          <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-slate-300">
                             <span>Presisi Olah Data Penelitian</span>
                             <span className="font-mono">{c.metric_data_precision}%</span>
                           </div>
-                          <div className="w-full h-1.5 bg-slate-100 bg-slate-900 rounded-full overflow-hidden">
+                          <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                             <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${c.metric_data_precision}%` }} />
                           </div>
                         </div>
@@ -282,11 +282,11 @@ export default function PortfolioPage() {
 
                       {/* Metric 3 */}
                       <div className="space-y-1">
-                        <div className="flex justify-between text-[10px] font-semibold text-slate-300">
+                        <div className="flex justify-between text-[10px] font-semibold text-slate-600 dark:text-slate-300">
                           <span>Rasio Pemuatan / Kecepatan</span>
                           <span className="font-mono">{c.metric_speed || 95}%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-slate-100 bg-slate-900 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                           <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${c.metric_speed || 95}%` }} />
                         </div>
                       </div>

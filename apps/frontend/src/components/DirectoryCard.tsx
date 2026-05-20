@@ -121,7 +121,7 @@ export default function DirectoryCard({ entity, onEmbedBadge }: DirectoryCardPro
           </button>
         )}
         <Link
-          href={`/directory/${entitySlug}`}
+          href={`/${entitySlug}`}
           className="flex-1 py-2.5 bg-[#6366f1] hover:bg-[#8083ff] text-white font-mono text-[10px] rounded-xl transition-all shadow text-center font-bold flex items-center justify-center gap-1"
         >
           <span>Request Audit</span>

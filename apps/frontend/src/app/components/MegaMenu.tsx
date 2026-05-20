@@ -103,13 +103,13 @@ export default function MegaMenu() {
                     <Building className="w-4 h-4 text-indigo-500" />
                     Layanan Utama
                   </div>
-                  <div className="flex flex-col gap-2 pt-1">
+                    <div className="flex flex-col gap-2 pt-1">
                     {[
                       { label: "Beranda Utama", href: "/" },
                       { label: "Layanan Akademik", href: "/layanan/akademik" },
                       { label: "Layanan Cloud B2B", href: "/layanan/b2b" },
                       { label: "Direktori Bisnis", href: "/directory" },
-                      { label: "Jaringan Pakar", href: "/experts" },
+                      { label: "Jaringan Pakar", href: "/directory?type=personal" },
                       { label: "Portofolio", href: "/portfolio" }
                     ].map((item) => (
                       <Link
@@ -132,7 +132,7 @@ export default function MegaMenu() {
                   </div>
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     {[
-                      { label: "Kalkulator ROI", href: "/calculator" },
+                      { label: "Formulator Solusi", href: "/calculator" },
                       { label: "Sitasi Ilmiah", href: "/tools/citation" },
                       { label: "Cek Institusi", href: "/tools/institusi" },
                       { label: "Audit PageSpeed", href: "/tools/pagespeed" },
@@ -163,12 +163,12 @@ export default function MegaMenu() {
                         InfraMeet Registry Verified
                       </h4>
                       <p className="text-[10px] text-slate-400 leading-relaxed font-medium">
-                        Kredensial institusi, profil pakar, dan hasil validasi data dijamin keasliannya melalui sistem verifikasi digital yang aman dan transparan.
+                        Setiap profil pakar, kredensial institusi, dan berkas analisis diverifikasi secara ketat untuk menjaga orisinalitas dan integritas data terbaik.
                       </p>
                     </div>
                   </div>
                   <Link 
-                    href="/submission?tab=verify" 
+                    href="/verify" 
                     className="inline-flex items-center gap-1 text-[10px] font-bold text-indigo-650 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors pt-2"
                   >
                     Pelajari Verifikasi &rarr;
@@ -180,13 +180,13 @@ export default function MegaMenu() {
           </div>
 
           <Link 
-            href="/submission?tab=experts" 
+            href="/directory?type=personal" 
             className="text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-indigo-400 transition-colors"
           >
             Jaringan Pakar
           </Link>
           <Link 
-            href="/submission?tab=verify" 
+            href="/verify" 
             className="text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-1.5"
           >
             <ShieldCheck className="w-4 h-4 text-emerald-500 animate-pulse" /> Verifikasi
@@ -286,7 +286,7 @@ export default function MegaMenu() {
             Kontribusi &amp; Pengajuan
           </Link>
           <Link 
-            href="/submission?tab=verify" 
+            href="/verify" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-sm font-bold text-emerald-400 py-2 border-b border-slate-900/50"
           >

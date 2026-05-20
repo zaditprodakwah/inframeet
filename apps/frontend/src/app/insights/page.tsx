@@ -596,7 +596,7 @@ export default function InsightsPage() {
                                 <div key={idx} className="border border-[#1e293b] rounded-lg overflow-hidden bg-[#0a0f1d] transition">
                                   <button
                                     onClick={() => toggleFaq(art.id, idx)}
-                                    className="w-full p-3 text-left flex items-center justify-between text-xs font-bold text-slate-800 text-slate-200 hover:text-white"
+                                    className="w-full p-3 text-left flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400"
                                   >
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`w-3.5 h-3.5 text-indigo-500 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
