@@ -95,6 +95,7 @@ export default function Footer() {
             <li><Link href="/insights" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Insights &amp; Artikel</Link></li>
             <li><Link href="/case-studies" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Studi Kasus Proyek</Link></li>
             <li><Link href="/about" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Tentang Kami</Link></li>
+            <li><Link href="/support" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Helpdesk &amp; Panduan</Link></li>
             <li><Link href="/legal" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Legal &amp; Kepatuhan</Link></li>
           </ul>
         </div>

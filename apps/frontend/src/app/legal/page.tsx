@@ -1,205 +1,326 @@
 "use client";
 
-import React, { useState } from "react";
-import MegaMenu from "../components/MegaMenu";
-import Breadcrumbs from "../components/Breadcrumbs";
-import Footer from "../components/Footer";
-import { Shield, FileText, Scale, Eye, AlertTriangle } from "lucide-react";
-
-type DocType = "terms" | "privacy" | "academic" | "pdp";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { 
+  ShieldCheck, 
+  GraduationCap, 
+  Scale, 
+  Server, 
+  Lock, 
+  Download, 
+  History, 
+  Gauge, 
+  RefreshCw, 
+  Shield, 
+  Info,
+  CheckCircle2
+} from "lucide-react";
 
 export default function LegalPage() {
-  const [activeDoc, setActiveDoc] = useState<DocType>("terms");
+  const [activeSection, setActiveSection] = useState("academic-protocol");
 
-  const docs = [
-    {
-      id: "terms" as DocType,
-      title: "Ketentuan Layanan",
-      icon: FileText,
-      description: "Aturan umum penggunaan platform INFRAMEET"
-    },
-    {
-      id: "privacy" as DocType,
-      title: "Kebijakan Privasi",
-      icon: Eye,
-      description: "Bagaimana kami mengelola data pribadi Anda"
-    },
-    {
-      id: "academic" as DocType,
-      title: "Integritas Akademik",
-      icon: Shield,
-      description: "Standar anti-joki & bantuan Turnitin steril"
-    },
-    {
-      id: "pdp" as DocType,
-      title: "Kepatuhan UU PDP",
-      icon: Scale,
-      description: "Hak data Anda berdasarkan UU Perlindungan Data Pribadi"
-    }
-  ];
+  // Scroll spy logic
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("article[id]");
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        if (window.scrollY >= sectionTop - 150) {
+          current = section.getAttribute("id") || "";
+        }
+      });
+      if (current) {
+        setActiveSection(current);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans selection:bg-indigo-500/30">
-      
-      {/* GLOBAL HEADER */}
-      <MegaMenu />
-
-      {/* Breadcrumbs */}
-      <Breadcrumbs />
-
-      <main className="flex-1 max-w-7xl mx-auto px-6 py-12 w-full relative overflow-hidden">
-        {/* Background Decorative Glow */}
-        <div className="absolute top-10 left-1/3 w-[450px] h-[450px] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
-
-        <div className="space-y-8 mb-12 text-center max-w-2xl mx-auto">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            DOKUMEN HUKUM RESMI
-          </span>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Kepatuhan Hukum &amp; Transparansi
-          </h1>
-          <p className="text-sm text-slate-400">
-            Kami berkomitmen penuh untuk melindungi hak konsumen, kerahasiaan kekayaan intelektual (HKI), serta integritas ilmiah.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
-          
-          {/* Left Navigation Menu (4 cols) */}
-          <div className="lg:col-span-4 space-y-4">
-            {docs.map((doc) => {
-              const Icon = doc.icon;
-              const isActive = activeDoc === doc.id;
-              return (
-                <button
-                  key={doc.id}
-                  onClick={() => setActiveDoc(doc.id)}
-                  className={`w-full text-left p-5 rounded-2xl border transition-all flex items-start gap-4 cursor-pointer ${
-                    isActive
-                      ? "bg-indigo-600/10 border-indigo-500/40 text-white shadow-lg"
-                      : "bg-white dark:bg-slate-950/40 border-slate-900/60 text-slate-400 hover:text-slate-800 dark:text-slate-200"
-                  }`}
-                >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                    isActive ? "bg-indigo-500/20 text-indigo-400" : "bg-slate-100 dark:bg-slate-900 text-slate-400"
-                  }`}>
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold">{doc.title}</h3>
-                    <p className="text-[11px] text-slate-500 mt-1 leading-normal">{doc.description}</p>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right Document Display (8 cols) */}
-          <div className="lg:col-span-8 bg-white dark:bg-slate-950/40 border border-slate-900/80 p-8 md:p-10 rounded-3xl backdrop-blur-md shadow-2xl min-h-[500px]">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-200 pb-20">
+      <main className="max-w-7xl mx-auto px-6 py-12">
+        {/* Hero Section */}
+        <section className="mb-16">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-3 mb-4">
+                <ShieldCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                <span className="text-xs font-mono text-indigo-600 dark:text-indigo-400 uppercase tracking-widest font-bold">
+                  Transparency Protocol v4.2.0
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
+                Pusat <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-emerald-400">Transparansi &amp; Kepatuhan</span>
+              </h1>
+              <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                Repositori definitif untuk kerangka kerja regulasi INFRAMEET, standar verifikasi kriptografis, dan perjanjian tingkat layanan infrastruktur (*Service Level Agreements*).
+              </p>
+            </div>
             
-            {activeDoc === "terms" && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-bold text-white border-b border-slate-900 pb-3 flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-indigo-400" /> Ketentuan Layanan (Terms of Service)
-                </h2>
-                <div className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed space-y-4 font-normal">
-                  <p><strong>Terakhir diperbarui:</strong> 20 Mei 2026</p>
-                  <p>Selamat datang di INFRAMEET. Dengan mengakses, mendaftarkan profil pakar, atau menggunakan kalkulator harga kami, Anda menyatakan setuju untuk terikat oleh Ketentuan Layanan ini.</p>
-                  
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">1. Layanan yang Disediakan</h3>
-                  <p>INFRAMEET menyediakan platform B2B yang menghubungkan pakar bersertifikat dengan pelaku bisnis, serta menyediakan alat bantu kalkulator biaya serverless and asistensi riset ilmiah.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">2. Akurasi Informasi &amp; Profil Pakar</h3>
-                  <p>Setiap pakar bertanggung jawab penuh atas keakuratan profil, data lisensi, and kontak yang dicantumkan. INFRAMEET berhak menangguhkan profil yang terbukti menyajikan informasi palsu/menyesatkan.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">3. Biaya and Transaksi</h3>
-                  <p>Semua estimasi harga yang diterbitkan oleh kalkulator kami didasarkan pada parameter teknis standar dan bersifat estimasi tidak mengikat hingga Berita Acara Kesepakatan resmi ditandatangani.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">4. Batasan Tanggung Jawab</h3>
-                  <p>INFRAMEET tidak bertanggung jawab atas kerugian tidak langsung yang disebabkan oleh downtime server pihak ketiga (seperti AWS, Vercel, Supabase), atau hasil interpretasi data statistik dari alat pemrosesan eksternal.</p>
-                </div>
+            <div className="glass-panel p-6 rounded-2xl flex flex-col gap-2 min-w-[280px] bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-xl">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] font-mono text-slate-500 uppercase font-bold">Global Integrity Status</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
-            )}
-
-            {activeDoc === "privacy" && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-bold text-white border-b border-slate-900 pb-3 flex items-center gap-2">
-                  <Eye className="w-5 h-5 text-indigo-400" /> Kebijakan Privasi (Privacy Policy)
-                </h2>
-                <div className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed space-y-4 font-normal">
-                  <p><strong>Terakhir diperbarui:</strong> 20 Mei 2026</p>
-                  <p>Di INFRAMEET, kami menghormati privasi Anda. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, and mengamankan informasi pribadi pengguna.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">1. Informasi yang Kami Kumpulkan</h3>
-                  <p>Kami mengumpulkan data nama, email, nomor telepon, and preferensi kontak melalui formulir kalkulator, formulir kontak, and pendaftaran direktori pakar.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">2. Keamanan Data</h3>
-                  <p>Semua transaksi data dienkripsi menggunakan protokol Secure Sockets Layer (SSL). Data disimpan dalam database Supabase PostgreSQL dengan pengamanan Row Level Security (RLS) berlapis.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">3. Penggunaan Informasi</h3>
-                  <p>Data pribadi Anda digunakan semata-mata untuk mengoordinasikan pengiriman penawaran harga, validasi profil direktori, dan kepentingan audit keamanan internal.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">4. Penyebaran Pihak Ketiga</h3>
-                  <p>Kami menjamin secara mutlak tidak pernah menjual, menyewakan, atau memberikan data pribadi Anda kepada broker data pihak ketiga manapun.</p>
-                </div>
+              <div className="font-mono text-3xl font-black text-emerald-500 dark:text-emerald-400">99.999%</div>
+              <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
+                <div className="bg-emerald-500 h-full w-[99.9%]"></div>
               </div>
-            )}
+              <span className="text-[10px] font-mono text-slate-400 mt-1">HASH: 0x82f...a9c2</span>
+            </div>
+          </div>
+        </section>
 
-            {activeDoc === "academic" && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-bold text-white border-b border-slate-900 pb-3 flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-indigo-400" /> Integritas Akademik &amp; Turnitin Safe
-                </h2>
-                <div className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed space-y-4 font-normal">
-                  <p><strong>Kebijakan Tegas Anti-Perjokian:</strong></p>
-                  <div className="p-4 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl flex gap-3 items-start">
-                    <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-bold text-sm">PENTING BAGI SELURUH KLIEN DAN MITRA</span>
-                      <p className="mt-1 text-xs">INFRAMEET secara mutlak MENOLAK penulisan substansi karya ilmiah hantu (ghostwriting) maupun perjokian tesis/disertasi/tugas akhir.</p>
-                    </div>
+        {/* Layout Grid */}
+        <div className="flex flex-col lg:flex-row gap-10 relative">
+          
+          {/* Sticky Sidebar Navigation */}
+          <aside className="hidden lg:block w-72 sticky top-32 h-max">
+            <nav className="flex flex-col gap-2">
+              <h3 className="text-xs font-mono text-slate-500 mb-4 px-4 font-bold tracking-wider">DOCUMENT SECTIONS</h3>
+              
+              <a 
+                href="#academic-protocol"
+                className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all border-l-2 ${
+                  activeSection === "academic-protocol" 
+                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10" 
+                    : "border-transparent hover:bg-slate-100 dark:hover:bg-white/5 hover:border-slate-300 dark:hover:border-slate-700"
+                }`}
+              >
+                <GraduationCap className={`w-5 h-5 ${activeSection === "academic-protocol" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
+                <span className={`font-bold text-sm ${activeSection === "academic-protocol" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-600 dark:text-slate-400"}`}>
+                  Academic Integrity
+                </span>
+              </a>
+              
+              <a 
+                href="#compliance"
+                className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all border-l-2 ${
+                  activeSection === "compliance" 
+                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10" 
+                    : "border-transparent hover:bg-slate-100 dark:hover:bg-white/5 hover:border-slate-300 dark:hover:border-slate-700"
+                }`}
+              >
+                <Scale className={`w-5 h-5 ${activeSection === "compliance" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
+                <span className={`font-bold text-sm ${activeSection === "compliance" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-600 dark:text-slate-400"}`}>
+                  UU PDP Compliance
+                </span>
+              </a>
+
+              <a 
+                href="#sla-guarantee"
+                className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all border-l-2 ${
+                  activeSection === "sla-guarantee" 
+                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10" 
+                    : "border-transparent hover:bg-slate-100 dark:hover:bg-white/5 hover:border-slate-300 dark:hover:border-slate-700"
+                }`}
+              >
+                <Server className={`w-5 h-5 ${activeSection === "sla-guarantee" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
+                <span className={`font-bold text-sm ${activeSection === "sla-guarantee" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-600 dark:text-slate-400"}`}>
+                  SLA 99.999%
+                </span>
+              </a>
+
+              <a 
+                href="#privacy-encryption"
+                className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all border-l-2 ${
+                  activeSection === "privacy-encryption" 
+                    ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10" 
+                    : "border-transparent hover:bg-slate-100 dark:hover:bg-white/5 hover:border-slate-300 dark:hover:border-slate-700"
+                }`}
+              >
+                <Lock className={`w-5 h-5 ${activeSection === "privacy-encryption" ? "text-indigo-600 dark:text-indigo-400" : "text-slate-500"}`} />
+                <span className={`font-bold text-sm ${activeSection === "privacy-encryption" ? "text-indigo-700 dark:text-indigo-300" : "text-slate-600 dark:text-slate-400"}`}>
+                  Data Sovereignty
+                </span>
+              </a>
+
+              <div className="mt-8 px-4 py-6 border-t border-slate-200 dark:border-white/10">
+                <div className="text-xs font-mono text-slate-500 mb-3 font-bold">QUICK DOWNLOADS</div>
+                <button className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:underline font-mono text-xs py-1.5 font-bold">
+                  <Download className="w-4 h-4" /> Full PDF Protocol
+                </button>
+                <button className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:underline font-mono text-xs py-1.5 font-bold">
+                  <History className="w-4 h-4" /> Version History (JSON)
+                </button>
+              </div>
+            </nav>
+          </aside>
+
+          {/* Main Content Area */}
+          <div className="flex-1 space-y-16">
+            
+            {/* Section: Academic Integrity */}
+            <article id="academic-protocol" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+              <div className="flex flex-col xl:flex-row gap-10">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 font-mono text-[10px] rounded-lg border border-indigo-200 dark:border-indigo-500/20 font-bold">DOCUMENT_ID: AC-77</span>
+                    <span className="font-mono text-[10px] text-slate-500 font-bold">STAMP: 2024-11-20T09:44:12Z</span>
                   </div>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">1. Ruang Lingkup Bantuan yang Diizinkan</h3>
-                  <p>Mitra akademisi kami hanya diperkenankan memberikan asistensi pada pengolahan data statistik mentah (SPSS/SmartPLS), tata letak dokumen (layouting standar IEEE/APA), turnitin checking, and perbaikan sintaksis penulisan (parafrase).</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">2. Kebijakan Turnitin No-Repository</h3>
-                  <p>Pemeriksaan plagiarisme wajib dilakukan menggunakan pengaturan akun Turnitin non-repository, sehingga dokumen riset klien tidak akan terindeks ke dalam pangkalan data global Turnitin dan tetap steril untuk submit jurnal resmi.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">3. Kepemilikan Harian / HKI</h3>
-                  <p>Hak Kekayaan Intelektual (HKI) and hak cipta atas dokumen riset sepenuhnya dan secara absolut tetap menjadi milik mahasiswa atau peneliti pemohon.</p>
+                  <h2 className="text-2xl lg:text-3xl font-extrabold mb-6 text-slate-900 dark:text-white">Academic Integrity Protocol</h2>
+                  
+                  <div className="space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed text-sm lg:text-base">
+                    <p>
+                      Protokol ini mengatur semua interaksi akademik di dalam ekosistem INFRAMEET. Kami menggunakan verifikasi kriptografis otomatis untuk memastikan bahwa data riset dan verifikasi institusi tetap absolut (immutable) mulai dari titik pengumpulan (*capture*) hingga publikasi.
+                    </p>
+                    <div className="border-l-4 border-indigo-500 pl-6 py-4 bg-slate-100 dark:bg-slate-900/50 rounded-r-xl">
+                      <h4 className="font-mono text-xs text-slate-800 dark:text-white mb-2 font-black">CLAUSE 1.4: PROOF OF ORIGIN</h4>
+                      <p className="font-mono text-sm italic text-slate-600 dark:text-slate-400">
+                        "Setiap paket data yang ditransmisikan melintasi *node* akademik INFRAMEET harus memuat *anchor* sertifikat X.509 yang valid, dipetakan ke identitas institusi terverifikasi."
+                      </p>
+                    </div>
+                    <p>
+                      Pelanggaran terhadap protokol ini akan mengakibatkan penangguhan tier-1 seketika atas akses infrastruktur. Integritas buku besar (*ledger*) dipertahankan melalui konsensus terdistribusi.
+                    </p>
+                  </div>
                 </div>
               </div>
-            )}
+            </article>
 
-            {activeDoc === "pdp" && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-bold text-white border-b border-slate-900 pb-3 flex items-center gap-2">
-                  <Scale className="w-5 h-5 text-indigo-400" /> Kepatuhan Undang-Undang PDP Indonesia
-                </h2>
-                <div className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed space-y-4 font-normal">
-                  <p><strong>Terakhir diperbarui:</strong> 20 Mei 2026</p>
-                  <p>INFRAMEET tunduk sepenuhnya pada ketentuan Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Perlindungan Data Pribadi (UU PDP).</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">1. Hak Anda sebagai Pemilik Data</h3>
-                  <p>Berdasarkan UU PDP, Anda memiliki hak penuh untuk meminta kejelasan informasi, melengkapi, memperbarui, membatasi pemrosesan, hingga menuntut penghapusan (delete request) data pribadi Anda yang tersimpan di sistem kami.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">2. Persetujuan Pemrosesan</h3>
-                  <p>Dengan menekan tombol kirim formulir di platform kami, Anda secara sadar memberikan persetujuan tertulis yang sah bagi INFRAMEET untuk memproses data sesuai kebutuhan layanan B2B.</p>
-
-                  <h3 className="text-sm font-bold text-slate-250 mt-4">3. Petugas Perlindungan Data (DPO)</h3>
-                  <p>Untuk mengajukan keberatan hukum, pencabutan persetujuan data pribadi, atau hak penghapusan data, Anda dapat menghubungi Data Protection Officer kami melalui email resmi: <strong className="text-indigo-400">dpo@inframeet.com</strong>.</p>
+            {/* Section: UU PDP Compliance */}
+            <article id="compliance" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="p-4 bg-emerald-100 dark:bg-emerald-500/20 rounded-2xl">
+                  <Scale className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <div>
+                  <h2 className="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white">Universal Data Privacy (UU PDP)</h2>
+                  <p className="font-mono text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-widest font-bold mt-1">Compliance Status: ACTIVE</p>
                 </div>
               </div>
-            )}
+
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-4">
+                <div className="space-y-4">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white">Data Sovereignty</h4>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    INFRAMEET menerapkan kedaulatan data absolut (*absolute data sovereignty*). Tidak ada data yang meninggalkan area server tanpa otoritas kriptografis eksplisit dari pengendali data.
+                  </p>
+                  <ul className="space-y-3 mt-4">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+                      <span className="font-mono text-sm text-slate-700 dark:text-slate-300">Full AES-256-GCM encryption at rest</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+                      <span className="font-mono text-sm text-slate-700 dark:text-slate-300">Automated right-to-erasure (Clause 19.b)</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-slate-100 dark:bg-black/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10">
+                  <div className="flex justify-between items-center mb-6">
+                    <span className="font-mono text-xs font-black tracking-widest">AUDIT LOG</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold text-xs">SUCCESS</span>
+                  </div>
+                  <div className="font-mono text-xs space-y-2 text-slate-500 dark:text-slate-400">
+                    <p className="text-slate-800 dark:text-slate-200 font-bold">2026.05.20 08:00:01 - Audit Started</p>
+                    <p className="pl-4">&gt; Checking UU-PDP-Compliance-V3</p>
+                    <p className="pl-4">&gt; Verifying Encryption Layers... [OK]</p>
+                    <p className="pl-4">&gt; Key Rotation Verified... [OK]</p>
+                    <p className="pl-4">&gt; Resident Sovereignty... [OK]</p>
+                    <p className="text-emerald-600 dark:text-emerald-400 font-bold mt-4 pt-2 border-t border-slate-200 dark:border-white/10">2026.05.20 08:00:14 - All Nodes Compliant</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            {/* Section: SLA Guarantee */}
+            <article id="sla-guarantee" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl relative overflow-hidden">
+              {/* Background Glow */}
+              <div className="absolute -right-20 -top-20 w-64 h-64 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+              
+              <div className="relative z-10">
+                <h2 className="text-2xl lg:text-3xl font-extrabold mb-4 text-slate-900 dark:text-white">99.999% Service Level Agreement</h2>
+                <p className="text-slate-600 dark:text-slate-400 mb-10 text-sm leading-relaxed max-w-2xl">
+                  Arsitektur *redundancy-first* yang dirancang untuk penelitian akademik skala besar dan performa web klien B2B yang sangat krusial.
+                </p>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                  <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                    <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
+                      <Gauge className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                    </div>
+                    <div className="text-2xl font-black text-slate-900 dark:text-white mb-1">5.2ms</div>
+                    <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Global Latency Avg</div>
+                  </div>
+                  
+                  <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-500/10 rounded-full flex items-center justify-center mb-4">
+                      <RefreshCw className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                    </div>
+                    <div className="text-2xl font-black text-slate-900 dark:text-white mb-1">&lt; 30s</div>
+                    <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Failover Transition</div>
+                  </div>
+                  
+                  <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col items-center text-center shadow-sm">
+                    <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-500/10 rounded-full flex items-center justify-center mb-4">
+                      <Shield className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                    </div>
+                    <div className="text-2xl font-black text-slate-900 dark:text-white mb-1">0</div>
+                    <div className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-widest">Critical Violations</div>
+                  </div>
+                </div>
+
+                <div className="mt-10 p-6 bg-indigo-50 dark:bg-indigo-950/20 rounded-2xl border border-indigo-100 dark:border-indigo-500/20">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Info className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                    <span className="font-mono text-xs font-black text-indigo-900 dark:text-indigo-200">REBATE CLAUSE (SECTION 5)</span>
+                  </div>
+                  <p className="font-mono text-sm text-indigo-800/80 dark:text-indigo-300/80 leading-relaxed">
+                    Dalam hal infrastruktur mengalami *downtime* melebihi 0.001% per bulan kalender, kredit layanan dicairkan secara otomatis melalui *smart contract* ke akun terdampak. Mekanisme ini tidak memerlukan klaim manual.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            {/* Section: Data Sovereignty & Encryption */}
+            <article id="privacy-encryption" className="glass-panel rounded-3xl p-8 lg:p-10 scroll-mt-32 bg-white/40 dark:bg-[#0b0f10]/80 border border-slate-200 dark:border-white/5 shadow-xl">
+              <h2 className="text-2xl lg:text-3xl font-extrabold mb-8 text-slate-900 dark:text-white">Protocol Encryption Standards</h2>
+              
+              <div className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                  <div className="font-mono text-xs font-bold text-slate-500 tracking-widest uppercase">TRANSPORT LAYER</div>
+                  <div className="md:col-span-3 h-px bg-slate-200 dark:bg-white/10"></div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  <div className="space-y-4">
+                    <h5 className="text-xl font-bold text-slate-900 dark:text-white">End-to-End Tunneling</h5>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                      Semua data dalam transit dienkapsulasi menggunakan terowongan aman berbasis WireGuard® dengan mekanisme *key exchange* tipe *post-quantum*.
+                    </p>
+                  </div>
+                  <div className="space-y-4">
+                    <h5 className="text-xl font-bold text-slate-900 dark:text-white">Identity Anchoring</h5>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                      Modul Keamanan Perangkat Keras (HSM) menyimpan *master keys* untuk *node* institusional, memastikan kunci tidak pernah terekspos ke sistem operasi tuan rumah.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-10 p-8 rounded-2xl bg-slate-900 dark:bg-black border border-slate-800 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                  <div className="relative z-10 max-w-lg">
+                    <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                      <Lock className="w-5 h-5 text-indigo-400" />
+                      Zero-Knowledge Architecture
+                    </h4>
+                    <p className="text-slate-400 text-sm leading-relaxed font-mono">
+                      Teknisi INFRAMEET tidak dapat mengakses data riset mentah Anda. Hanya *headers* rute yang terlihat pada infrastruktur untuk keperluan telemetri dan audit lalu lintas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
 
           </div>
-
         </div>
       </main>
-
-      {/* FOOTER */}
-      <Footer />
     </div>
   );
 }

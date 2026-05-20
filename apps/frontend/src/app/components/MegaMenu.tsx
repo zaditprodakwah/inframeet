@@ -215,6 +215,9 @@ export default function MegaMenu() {
                 <Link href="/about" className="block px-4 py-2 text-xs font-bold text-slate-650 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg transition-colors">
                   Tentang Kami
                 </Link>
+                <Link href="/support" className="block px-4 py-2 text-xs font-bold text-slate-650 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg transition-colors">
+                  Helpdesk &amp; Panduan
+                </Link>
                 <Link href="/contact" className="block px-4 py-2 text-xs font-bold text-slate-650 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-950 rounded-lg transition-colors">
                   Hubungi Kami
                 </Link>

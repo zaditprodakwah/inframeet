@@ -36,6 +36,23 @@ const HOMEPAGE_FALLBACK_ARTICLES = [
   }
 ];
 
+function getMixedFreshData(data: any[], totalNeeded: number = 3) {
+  if (!data || data.length === 0) return [];
+  if (data.length <= totalNeeded) return data;
+  
+  // 1 Data paling terbaru (teratas)
+  const newest = data[0];
+  
+  // Sisa data diacak
+  const rest = data.slice(1);
+  const shuffledRest = [...rest].sort(() => 0.5 - Math.random());
+  
+  // Ambil sisa kebutuhan dari data yang sudah diacak
+  const randomPicks = shuffledRest.slice(0, totalNeeded - 1);
+  
+  return [newest, ...randomPicks];
+}
+
 export default async function Home() {
   // Dynamic live insights fetching server-side directly from Supabase
   let liveArticles: any[] = [];
@@ -53,23 +70,23 @@ export default async function Home() {
         .limit(3);
       if (articles) liveArticles = articles;
 
-      // 2. Fetch Top B2B Directories
+      // 2. Fetch Top B2B Directories (Ambil 10 terbaru, lalu mix random)
       const { data: dirs } = await supabaseAdmin
         .from("omni_directory")
         .select("id, slug, name, trust_score, verification_status")
         .eq("verification_status", "verified")
-        .order("trust_score", { ascending: false })
-        .limit(3);
-      if (dirs) topDirectories = dirs;
+        .order("created_at", { ascending: false })
+        .limit(10);
+      if (dirs) topDirectories = getMixedFreshData(dirs, 3);
 
-      // 3. Fetch Top Experts
+      // 3. Fetch Top Experts (Ambil 10 terbaru, lalu mix random)
       const { data: experts } = await supabaseAdmin
         .from("omni_directory")
         .select("id, slug, name, trust_score, verification_status")
         .eq("entity_type", "expert")
-        .order("trust_score", { ascending: false })
-        .limit(3);
-      if (experts) topExperts = experts;
+        .order("created_at", { ascending: false })
+        .limit(10);
+      if (experts) topExperts = getMixedFreshData(experts, 3);
     }
   } catch (err) {
     console.error("Gagal mengambil data dinamis di homepage:", err);
