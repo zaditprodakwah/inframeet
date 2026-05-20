@@ -38,8 +38,8 @@ async function curateItems() {
     // 1. Fetch uncurated items belonging to technology and business feeds
     const { data: feeds, error: feedsError } = await supabase
       .from("rss_feeds")
-      .select("id, source_category")
-      .in("source_category", ["technology", "business"]);
+      .select("id, category")
+      .in("category", ["TECH_NEWS", "B2B_INSIGHTS"]);
 
     if (feedsError || !feeds || feeds.length === 0) {
       console.error("Error loading feeds:", feedsError);
@@ -48,7 +48,7 @@ async function curateItems() {
 
     const feedIds = feeds.map((f) => f.id);
     const feedMap = feeds.reduce((acc, f) => {
-      acc[f.id] = f.source_category;
+      acc[f.id] = f.category;
       return acc;
     }, {});
 
@@ -75,7 +75,7 @@ async function curateItems() {
     console.log(`Curating ${items.length} uncurated technology & business items...`);
 
     for (const item of items) {
-      const sourceCat = feedMap[item.feed_id] || "technology";
+      const sourceCat = feedMap[item.feed_id] || "TECH_NEWS";
       console.log(`\n📄 Curating: "${item.title}" [Category: ${sourceCat}]`);
 
       const prompt = `
@@ -126,9 +126,9 @@ ${parsed.faq.map((f) => `* **Q: ${f.question}**\n  A: ${f.answer}`).join("\n")}`
 
       // Set premium Unsplash cover image based on category
       let curatedImage = null;
-      if (sourceCat === "technology") {
+      if (sourceCat === "TECH_NEWS") {
         curatedImage = "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop";
-      } else if (sourceCat === "business") {
+      } else if (sourceCat === "B2B_INSIGHTS") {
         curatedImage = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop";
       } else {
         curatedImage = "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop";
