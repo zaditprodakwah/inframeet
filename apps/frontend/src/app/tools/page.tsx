@@ -181,7 +181,7 @@ export default function ToolsPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans transition-colors duration-300">
       <MegaMenu />
       
       {/* Dynamic Breadcrumbs */}
@@ -194,7 +194,7 @@ export default function ToolsPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Sparkles className="w-3.5 h-3.5" /> Programmatic Affiliate & SEO Directory Engine
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
             Direktori Komparasi <span className="text-indigo-500">Teknologi Modern</span>
           </h1>
           <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -204,7 +204,7 @@ export default function ToolsPage() {
 
         {/* Dynamic Filters & Search Command Bar */}
         <section className="max-w-7xl mx-auto px-6 space-y-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-6 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-6 rounded-2xl bg-white/80 dark:bg-slate-100 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 backdrop-blur-md">
             
             {/* Search Input Box */}
             <div className="relative w-full md:max-w-md">
@@ -214,7 +214,7 @@ export default function ToolsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari hosting, CMS, software statistik..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-all font-medium"
+                className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-all font-medium"
               />
             </div>
 
@@ -227,7 +227,7 @@ export default function ToolsPage() {
                   className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border whitespace-nowrap ${
                     selectedCategory === cat
                       ? "bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-500/10"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+                      : "bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-400 hover:text-white"
                   }`}
                 >
                   {cat === "all" ? "Semua Kategori" : cat}
@@ -241,7 +241,7 @@ export default function ToolsPage() {
         {/* FREE ACADEMIC & ENTERPRISE TOOLS GRID */}
         <section className="max-w-7xl mx-auto px-6 space-y-6">
           <div className="space-y-1">
-            <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-indigo-400" />
               Alat Asistensi Instan & Lead Magnets Gratis
             </h2>
@@ -254,7 +254,7 @@ export default function ToolsPage() {
             {/* ATS Resume */}
             <Link 
               href="/tools/resume" 
-              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
+              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
             >
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
@@ -263,8 +263,8 @@ export default function ToolsPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">ATS Resume Builder</h3>
-                  <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mt-1">Buat lembar portofolio CV satu halaman standar ATS secara instan and rapi.</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-400 transition-colors">ATS Resume Builder</h3>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2 mt-1">Buat lembar portofolio CV satu halaman standar ATS secara instan and rapi.</p>
                 </div>
               </div>
               <span className="text-[10px] font-bold text-indigo-400 flex items-center gap-1">
@@ -275,7 +275,7 @@ export default function ToolsPage() {
             {/* Plagiarism Checker */}
             <Link 
               href="/tools/plagiarism" 
-              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
+              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
             >
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
@@ -284,8 +284,8 @@ export default function ToolsPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">Plagiarism Checker</h3>
-                  <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mt-1">Uji orisinalitas riset and naskah ilmiah Anda secara instan and steril.</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-400 transition-colors">Plagiarism Checker</h3>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2 mt-1">Uji orisinalitas riset and naskah ilmiah Anda secara instan and steril.</p>
                 </div>
               </div>
               <span className="text-[10px] font-bold text-indigo-400 flex items-center gap-1">
@@ -296,7 +296,7 @@ export default function ToolsPage() {
             {/* PageSpeed */}
             <Link 
               href="/tools/pagespeed" 
-              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
+              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
             >
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
@@ -305,8 +305,8 @@ export default function ToolsPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">PageSpeed Domain Auditor</h3>
-                  <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mt-1">Audit kecepatan Core Web Vitals domain web B2B Anda secara otomatis.</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-400 transition-colors">PageSpeed Domain Auditor</h3>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2 mt-1">Audit kecepatan Core Web Vitals domain web B2B Anda secara otomatis.</p>
                 </div>
               </div>
               <span className="text-[10px] font-bold text-indigo-400 flex items-center gap-1">
@@ -317,7 +317,7 @@ export default function ToolsPage() {
             {/* Citation Fetcher */}
             <Link 
               href="/tools/citation" 
-              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
+              className="p-6 rounded-3xl bg-gradient-to-br from-indigo-950/20 to-slate-900/40 border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 hover:border-indigo-500/40 transition-all duration-300 group hover:-translate-y-1 flex flex-col justify-between h-48"
             >
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
@@ -326,8 +326,8 @@ export default function ToolsPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">Crossref Citation Fetcher</h3>
-                  <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mt-1">Konversi sitasi nomor DOI naskah ilmiah ke format APA/Harvard/MLA instan.</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-400 transition-colors">Crossref Citation Fetcher</h3>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2 mt-1">Konversi sitasi nomor DOI naskah ilmiah ke format APA/Harvard/MLA instan.</p>
                 </div>
               </div>
               <span className="text-[10px] font-bold text-indigo-400 flex items-center gap-1">
@@ -345,9 +345,9 @@ export default function ToolsPage() {
               <p className="text-slate-400 text-xs animate-pulse">Menghubungkan ke Direktori Supabase...</p>
             </div>
           ) : filteredTools.length === 0 ? (
-            <div className="text-center py-20 bg-slate-900/40 border border-slate-800/80 rounded-3xl p-8 max-w-md mx-auto space-y-3">
+            <div className="text-center py-20 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 rounded-3xl p-8 max-w-md mx-auto space-y-3">
               <BadgeAlert className="w-8 h-8 text-indigo-500 mx-auto" />
-              <p className="text-slate-200 text-sm font-semibold">Tidak menemukan tools yang cocok.</p>
+              <p className="text-slate-800 dark:text-slate-200 text-sm font-semibold">Tidak menemukan tools yang cocok.</p>
               <p className="text-slate-500 text-xs">Coba sesuaikan kata kunci pencarian atau ganti filter kategori Anda.</p>
             </div>
           ) : (
@@ -359,10 +359,10 @@ export default function ToolsPage() {
                 return (
                   <div 
                     key={tool.id} 
-                    className={`relative rounded-3xl border p-6 md:p-8 bg-slate-900/40 backdrop-blur-md flex flex-col justify-between space-y-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/5 ${
+                    className={`relative rounded-3xl border p-6 md:p-8 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md flex flex-col justify-between space-y-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/5 ${
                       isSponsor 
                         ? "border-amber-500/30 shadow-md shadow-amber-500/5" 
-                        : "border-slate-800/80"
+                        : "border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80"
                     }`}
                   >
                     
@@ -384,7 +384,7 @@ export default function ToolsPage() {
 
                       {/* Name & desc */}
                       <div className="space-y-1.5">
-                        <h3 className="text-lg font-bold text-white flex items-center gap-1.5">
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                           {tool.name}
                           {tool.team_uses && (
                             <span title="Rekomendasi Utama Tim INFRAMEET">
@@ -392,17 +392,17 @@ export default function ToolsPage() {
                             </span>
                           )}
                         </h3>
-                        <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
                           {tool.description || "Ulasan independen performa hosting cloud serverless, integrasi database, dan optimalisasi komparasi riset ilmiah modern."}
                         </p>
                       </div>
 
                       {/* Pricing Tag */}
                       {tool.pricing_info && (
-                        <div className="flex items-center gap-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/50 text-[10px] text-slate-400">
+                        <div className="flex items-center gap-1.5 bg-white dark:bg-slate-950/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800/50 text-[10px] text-slate-400">
                           <Layers className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
                           <span className="font-medium">Pricing: </span>
-                          <span className="font-bold text-slate-200">{tool.pricing_info}</span>
+                          <span className="font-bold text-slate-800 dark:text-slate-200">{tool.pricing_info}</span>
                         </div>
                       )}
 
@@ -419,12 +419,12 @@ export default function ToolsPage() {
                     </div>
 
                     {/* Action button triggers */}
-                    <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3 text-xs">
+                    <div className="pt-4 border-t border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80 flex items-center justify-between gap-3 text-xs">
                       
                       {/* Embed Badge Option (SEO Mutualism) */}
                       <button
                         onClick={() => setActiveModalTool(tool.name)}
-                        className="px-3.5 py-2.5 rounded-xl border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white font-bold tracking-wide transition-all shadow-sm shrink-0 flex items-center gap-1.5 text-[11px]"
+                        className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-700 text-slate-400 hover:text-slate-900 dark:text-white font-bold tracking-wide transition-all shadow-sm shrink-0 flex items-center gap-1.5 text-[11px]"
                       >
                         <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
                         Embed Badge
@@ -433,7 +433,7 @@ export default function ToolsPage() {
                       {/* Masked Affiliate Outbound link redirect */}
                       <Link
                         href={`/r/${toolSlug}`}
-                        className="flex-1 text-center py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-md shadow-indigo-500/10 flex items-center justify-center gap-1 text-[11px]"
+                        className="flex-1 text-center py-2.5 bg-indigo-600 hover:bg-indigo-500 text-slate-900 dark:text-white font-bold rounded-xl transition-all shadow-md shadow-indigo-500/10 flex items-center justify-center gap-1 text-[11px]"
                       >
                         Akses Resmi
                         <ArrowRight className="w-3 h-3" />

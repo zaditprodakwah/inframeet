@@ -81,7 +81,7 @@ const FEATURED_STUDIES = [
 
 export default function CaseStudiesPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans transition-colors duration-300">
       <MegaMenu />
       
       {/* Dynamic Breadcrumbs */}
@@ -94,7 +94,7 @@ export default function CaseStudiesPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Award className="w-3.5 h-3.5" /> Jurnal &amp; Catatan Portofolio Riil
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
             Transformasi <span className="text-indigo-500">Studi Kasus</span>
           </h1>
           <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -108,7 +108,7 @@ export default function CaseStudiesPage() {
             {FEATURED_STUDIES.map((study) => (
               <div 
                 key={study.id} 
-                className="rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-md p-8 flex flex-col justify-between space-y-8 hover:border-indigo-500/25 transition-all duration-300"
+                className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md p-8 flex flex-col justify-between space-y-8 hover:border-indigo-500/25 transition-all duration-300"
               >
                 <div className="space-y-6">
                   {/* Segment Badge & Client */}
@@ -146,7 +146,7 @@ export default function CaseStudiesPage() {
                   </div>
 
                   {/* Verified Metrics Cards */}
-                  <div className="space-y-3 bg-slate-950/50 p-5 rounded-2xl border border-slate-800/80">
+                  <div className="space-y-3 bg-white dark:bg-slate-950/50 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-200 dark:border-slate-800/80">
                     <span className="text-[9px] uppercase tracking-wider text-slate-500 font-extrabold block mb-2">Metrik Keberhasilan Terverifikasi</span>
                     
                     {study.metrics.map((metric, idx) => (
@@ -168,7 +168,7 @@ export default function CaseStudiesPage() {
                 </div>
 
                 {/* SOW Anchor CTA */}
-                <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-between">
                   <span className="text-[10px] text-slate-500 flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" />
                     Verified Deliverable
@@ -202,7 +202,7 @@ export default function CaseStudiesPage() {
             </Link>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-slate-800 hover:bg-slate-900 text-slate-300 rounded-xl text-xs font-bold transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:bg-slate-900 text-slate-300 rounded-xl text-xs font-bold transition-all cursor-pointer"
             >
               Mengenal Tim Ahli Kami
             </Link>

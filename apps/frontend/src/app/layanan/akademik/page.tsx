@@ -8,7 +8,7 @@ import { Sparkles, ArrowRight, BarChart3, FileText, FileCheck, ShieldCheck, Chec
 
 export default function AkademikPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans transition-colors duration-300">
       <MegaMenu />
       
       {/* Dynamic Breadcrumbs */}
@@ -21,7 +21,7 @@ export default function AkademikPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
             <Sparkles className="w-3.5 h-3.5" /> Asistensi Riset &amp; Pengolahan Data
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
             Asistensi Teknis Ilmiah dengan <br className="hidden md:inline" />
             <span className="text-emerald-500">Komitmen Integritas Mutlak</span>
           </h1>
@@ -38,7 +38,7 @@ export default function AkademikPage() {
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div className="space-y-2">
-                <h4 className="text-lg font-bold text-white flex items-center gap-2">
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                   100% Academic Integrity &amp; Ethical Research Protocol
                 </h4>
                 <p className="text-xs text-slate-300 leading-relaxed max-w-4xl">
@@ -51,15 +51,15 @@ export default function AkademikPage() {
 
         {/* Academic Services Showcase */}
         <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
               <BarChart3 className="w-5 h-5" />
             </div>
             <h3 className="text-lg font-bold text-white">Validasi Statistik &amp; Olah Data</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Membantu komputasi data statistik yang rumit agar riset kuantitatif Anda teruji keabsahannya. Kami menyusun estimasi regresi, uji asumsi klasik, and pemodelan SEM secara metodologis untuk sidang Anda.
             </p>
-            <div className="space-y-2 pt-2 border-t border-slate-800/60">
+            <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/60">
               <div className="flex items-center gap-2 text-[10px] text-slate-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                 <span>Olah Data SPSS, SmartPLS, &amp; Python</span>
@@ -71,15 +71,15 @@ export default function AkademikPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
               <FileText className="w-5 h-5" />
             </div>
             <h3 className="text-lg font-bold text-white">Pencegahan Plagiasi &amp; Turnitin Check</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Asistensi pengecekan uji kemiripan naskah menggunakan sistem Turnitin Premium No-Repository. Memastikan draf riset berharga Anda tidak tersimpan di database global demi melindungi hak cipta mutlak.
             </p>
-            <div className="space-y-2 pt-2 border-t border-slate-800/60">
+            <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/60">
               <div className="flex items-center gap-2 text-[10px] text-slate-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                 <span>Turnitin Premium Tanpa Simpan Database</span>
@@ -91,15 +91,15 @@ export default function AkademikPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 backdrop-blur-md p-8 space-y-5 hover:border-emerald-500/20 transition-all duration-300">
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
               <FileCheck className="w-5 h-5" />
             </div>
             <h3 className="text-lg font-bold text-white">Standardisasi Layout &amp; Slide Sidang</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Penyelarasan tata letak margins, fonts, and bab rujukan riset sesuai pedoman resmi institusi penerbit (Sinta / Scopus Q1). Dilengkapi desain slide deck ujian akhir yang profesional and interaktif.
             </p>
-            <div className="space-y-2 pt-2 border-t border-slate-800/60">
+            <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800/60">
               <div className="flex items-center gap-2 text-[10px] text-slate-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                 <span>Format Layouting Naskah Presisi Sesuai Panduan</span>
@@ -125,7 +125,7 @@ export default function AkademikPage() {
             <div className="pt-2">
               <Link
                 href="/calculator"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl transition-all shadow-lg cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-slate-900 dark:text-white font-bold rounded-2xl transition-all shadow-lg cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Sparkles className="w-4 h-4" />
                 Mulai Kalkulasi Biaya Sekarang

@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
     // 1. Fetch widget instance config
     const { data: widget, error } = await supabaseAdmin
       .from("widget_instances")
-      .select("id, host_domain, theme, border_color, cta_text, is_active")
+      .select("id, user_id, host_domain, theme, border_color, cta_text, is_active")
       .eq("id", widgetId)
       .single();
 

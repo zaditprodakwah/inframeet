@@ -72,7 +72,7 @@ export default function CalculatorPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-950 text-slate-100 font-sans transition-all selection:bg-indigo-500/30">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 text-slate-100 font-sans transition-all selection:bg-indigo-500/30">
       
       {/* Decorative background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none print:hidden" />
@@ -89,7 +89,7 @@ export default function CalculatorPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             Kalkulator Instan v6.8-ROI Enabled
           </span>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Pricing Configurator & ROI Cost Optimizer
           </h1>
           <p className="text-sm text-slate-450 max-w-xl mx-auto">
@@ -98,7 +98,7 @@ export default function CalculatorPage() {
 
           {/* Toggle Switcher tabs */}
           <div className="flex justify-center pt-4">
-            <div className="flex bg-slate-900 border border-slate-850 p-1.5 rounded-2xl gap-1">
+            <div className="flex bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 p-1.5 rounded-2xl gap-1">
               <button
                 onClick={() => setActiveTab("intake")}
                 className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
@@ -135,8 +135,8 @@ export default function CalculatorPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start animate-fade-in print:block">
             
             {/* Control Sliders (hide during print) */}
-            <div className="lg:col-span-7 bg-slate-900/40 border border-slate-800 p-6 md:p-8 rounded-3xl backdrop-blur-md shadow-2xl space-y-6 print:hidden">
-              <h2 className="text-lg font-bold text-slate-200 flex items-center gap-2 border-b border-slate-850 pb-3">
+            <div className="lg:col-span-7 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-3xl backdrop-blur-md shadow-2xl space-y-6 print:hidden">
+              <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 border-b border-slate-200 dark:border-slate-850 pb-3">
                 <Server className="w-5 h-5 text-indigo-400" />
                 Parameter Server VPS Tradisional Anda
               </h2>
@@ -156,7 +156,7 @@ export default function CalculatorPage() {
                     step={10000}
                     value={traffic}
                     onChange={(e) => setTraffic(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                    className="w-full h-1.5 bg-white dark:bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500"
                   />
                 </div>
 
@@ -172,7 +172,7 @@ export default function CalculatorPage() {
                     max={50}
                     value={servers}
                     onChange={(e) => setServers(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                    className="w-full h-1.5 bg-white dark:bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500"
                   />
                 </div>
 
@@ -188,7 +188,7 @@ export default function CalculatorPage() {
                     max={64}
                     value={serverRam}
                     onChange={(e) => setServerRam(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                    className="w-full h-1.5 bg-white dark:bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500"
                   />
                 </div>
 
@@ -205,7 +205,7 @@ export default function CalculatorPage() {
                     step={500000}
                     value={opsSalary}
                     onChange={(e) => setOpsSalary(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                    className="w-full h-1.5 bg-white dark:bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500"
                   />
                   <p className="text-[9px] text-slate-500 italic">
                     *Mencerminkan rata-rata UMR and overhead biaya administrator sistem lokal Indonesia.
@@ -216,7 +216,7 @@ export default function CalculatorPage() {
             </div>
 
             {/* Cost comparison outcome display */}
-            <div className="lg:col-span-5 bg-slate-900/40 border border-slate-800 p-6 md:p-8 rounded-3xl backdrop-blur-md shadow-2xl flex flex-col justify-between gap-6 print:border-none print:bg-transparent print:p-0">
+            <div className="lg:col-span-5 bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-3xl backdrop-blur-md shadow-2xl flex flex-col justify-between gap-6 print:border-none print:bg-transparent print:p-0">
               
               {/* Executive Header for PDF printing */}
               <div className="hidden print:block text-slate-900 mb-8 border-b-2 border-slate-200 pb-6">
@@ -231,12 +231,12 @@ export default function CalculatorPage() {
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-sm font-bold text-slate-200 print:text-slate-800 mb-4 uppercase tracking-widest font-mono">
+                  <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 print:text-slate-800 mb-4 uppercase tracking-widest font-mono">
                     Perbandingan Penghematan Bulanan
                   </h3>
                   
                   {/* Traditional VPS Card */}
-                  <div className="p-4 bg-slate-950/60 border border-slate-850 rounded-2xl flex justify-between items-center print:border-slate-200 print:bg-slate-50 print:text-slate-900">
+                  <div className="p-4 bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 rounded-2xl flex justify-between items-center print:border-slate-200 print:bg-slate-50 print:text-slate-900">
                     <div>
                       <span className="text-[10px] text-slate-500 uppercase font-mono block">Arsitektur VPS Lama</span>
                       <span className="text-xs font-semibold block mt-1">Total Biaya Hardware & Ops</span>
@@ -270,7 +270,7 @@ export default function CalculatorPage() {
               <div className="space-y-3 print:hidden">
                 <button
                   onClick={handlePrint}
-                  className="w-full py-3 bg-slate-900 border border-slate-800 hover:border-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="w-full py-3 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-700 hover:text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Printer className="w-4 h-4" /> Cetak Laporan Efisiensi (PDF)
                 </button>

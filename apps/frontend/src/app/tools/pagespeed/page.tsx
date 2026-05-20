@@ -123,7 +123,7 @@ export default function PageSpeedAuditorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300 font-sans">
       <MegaMenu />
       <Breadcrumbs />
 
@@ -134,7 +134,7 @@ export default function PageSpeedAuditorPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Sparkles className="w-3.5 h-3.5" /> Google Lighthouse Audit Core
           </span>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
             Audit Kecepatan Situs & Performa Web
           </h1>
           <p className="text-xs text-slate-455 max-w-xl mx-auto">
@@ -144,7 +144,7 @@ export default function PageSpeedAuditorPage() {
 
         {/* Audit Request Card */}
         <section className="space-y-6">
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 backdrop-blur-md space-y-6">
+          <div className="p-6 rounded-2xl bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 backdrop-blur-md space-y-6">
             <form onSubmit={handleAudit} className="flex flex-col gap-2">
               <div className="flex flex-col gap-1.5 font-sans">
                 <label htmlFor="pagespeed-url" className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Alamat URL / Domain Situs</label>
@@ -158,7 +158,7 @@ export default function PageSpeedAuditorPage() {
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     placeholder="Masukkan domain situs Anda (contoh: inframeet.com)..."
-                    className="flex-1 px-4 py-3 bg-slate-950 border border-slate-850 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
+                    className="flex-1 px-4 py-3 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-850 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
                   />
                   <button
                     type="submit"
@@ -187,9 +187,9 @@ export default function PageSpeedAuditorPage() {
 
           {/* Audit Results Panel */}
           {auditResult && (
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-md space-y-8 animate-fade-in-up">
+            <div className="p-6 rounded-2xl bg-white/80 dark:bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 backdrop-blur-md space-y-8 animate-fade-in-up">
               
-              <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-850 pb-4 gap-2">
+              <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-850 pb-4 gap-2">
                 <div className="flex flex-col">
                   <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Domain Audit</span>
                   <span className="text-sm font-semibold text-slate-350">{auditResult.url}</span>
@@ -235,22 +235,22 @@ export default function PageSpeedAuditorPage() {
               </div>
 
               {/* Core Web Vitals Details */}
-              <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-850/80 flex flex-col md:flex-row items-center justify-around text-center gap-4 py-6">
+              <div className="p-4 rounded-xl bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850/80 flex flex-col md:flex-row items-center justify-around text-center gap-4 py-6">
                 <div className="flex flex-col gap-1">
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Largest Contentful Paint (LCP)</span>
-                  <span className="text-lg font-extrabold text-slate-200 font-mono">{auditResult.metrics.lcp}</span>
+                  <span className="text-lg font-extrabold text-slate-800 dark:text-slate-200 font-mono">{auditResult.metrics.lcp}</span>
                   <span className="text-[8px] font-bold text-emerald-400 uppercase tracking-widest">Sangat Cepat</span>
                 </div>
                 <div className="h-8 w-px bg-slate-850 hidden md:block" />
                 <div className="flex flex-col gap-1">
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">First Input Delay (FID)</span>
-                  <span className="text-lg font-extrabold text-slate-200 font-mono">{auditResult.metrics.fid}</span>
+                  <span className="text-lg font-extrabold text-slate-800 dark:text-slate-200 font-mono">{auditResult.metrics.fid}</span>
                   <span className="text-[8px] font-bold text-emerald-400 uppercase tracking-widest">Responsif</span>
                 </div>
                 <div className="h-8 w-px bg-slate-850 hidden md:block" />
                 <div className="flex flex-col gap-1">
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Cumulative Layout Shift (CLS)</span>
-                  <span className="text-lg font-extrabold text-slate-200 font-mono">{auditResult.metrics.cls}</span>
+                  <span className="text-lg font-extrabold text-slate-800 dark:text-slate-200 font-mono">{auditResult.metrics.cls}</span>
                   <span className="text-[8px] font-bold text-emerald-400 uppercase tracking-widest">Sangat Stabil</span>
                 </div>
               </div>
@@ -261,7 +261,7 @@ export default function PageSpeedAuditorPage() {
                   <span className="text-xs font-bold text-slate-350 uppercase tracking-wider">Audit Diagnostik Lighthouse:</span>
                   <div className="flex flex-col gap-2">
                     {auditResult.recommendations.map((rec: string, idx: number) => (
-                      <div key={idx} className="flex gap-2.5 items-start bg-slate-950/60 border border-slate-850/80 p-3 rounded-lg text-xs text-slate-400 leading-relaxed">
+                      <div key={idx} className="flex gap-2.5 items-start bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850/80 p-3 rounded-lg text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                         <Activity className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
                         <span>{rec}</span>
                       </div>

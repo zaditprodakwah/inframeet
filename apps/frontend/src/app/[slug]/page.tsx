@@ -7,8 +7,8 @@ import Footer from "../components/Footer";
 import Breadcrumbs from "../components/Breadcrumbs";
 import EmbedBadgeModal from "../components/EmbedBadgeModal";
 import Link from "next/link";
-import { 
 import { toast } from "sonner";
+import { 
   ShieldCheck, 
   MapPin, 
   Award, 

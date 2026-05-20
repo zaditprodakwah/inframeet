@@ -42,7 +42,7 @@ const TEAM = [
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-indigo-600/30">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans selection:bg-indigo-600/30">
       <MegaMenu />
       <Breadcrumbs />
 
@@ -57,7 +57,7 @@ export default function AboutPage() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <HelpCircle className="w-3.5 h-3.5" /> Pusat Informasi Utama &amp; Panduan Pengguna
           </span>
-          <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
             Bagaimana <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">INFRAMEET</span> Membantu Anda
           </h1>
           <p className="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
@@ -68,7 +68,7 @@ export default function AboutPage() {
         {/* 📚 PANDUAN PENGGUNA: CARA KERJA INFRAMEET */}
         <section className="space-y-10 relative z-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="text-xl md:text-2xl font-bold text-white flex items-center justify-center gap-2">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white flex items-center justify-center gap-2">
               <Sparkles className="w-5 h-5 text-indigo-400" /> Panduan Cara Kerja Platform
             </h2>
             <p className="text-xs text-slate-450">
@@ -79,7 +79,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             
             {/* Langkah 1 */}
-            <div className="p-6 rounded-2xl border border-slate-900 bg-slate-950/30 space-y-4">
+            <div className="p-6 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/30 space-y-4">
               <span className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-black font-mono flex items-center justify-center">01</span>
               <h4 className="text-sm font-bold text-white">Kalkulasi Transparan</h4>
               <p className="text-[11px] text-slate-500 leading-relaxed">
@@ -88,7 +88,7 @@ export default function AboutPage() {
             </div>
 
             {/* Langkah 2 */}
-            <div className="p-6 rounded-2xl border border-slate-900 bg-slate-950/30 space-y-4">
+            <div className="p-6 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/30 space-y-4">
               <span className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-black font-mono flex items-center justify-center">02</span>
               <h4 className="text-sm font-bold text-white">Lingkup Kerja (SOW)</h4>
               <p className="text-[11px] text-slate-500 leading-relaxed">
@@ -97,7 +97,7 @@ export default function AboutPage() {
             </div>
 
             {/* Langkah 3 */}
-            <div className="p-6 rounded-2xl border border-slate-900 bg-slate-950/30 space-y-4">
+            <div className="p-6 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/30 space-y-4">
               <span className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-black font-mono flex items-center justify-center">03</span>
               <h4 className="text-sm font-bold text-white">Pengerjaan Oleh Ahli</h4>
               <p className="text-[11px] text-slate-500 leading-relaxed">
@@ -106,7 +106,7 @@ export default function AboutPage() {
             </div>
 
             {/* Langkah 4 */}
-            <div className="p-6 rounded-2xl border border-slate-900 bg-slate-950/30 space-y-4">
+            <div className="p-6 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/30 space-y-4">
               <span className="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-black font-mono flex items-center justify-center">04</span>
               <h4 className="text-sm font-bold text-white">Jaminan Integritas Etis</h4>
               <p className="text-[11px] text-slate-500 leading-relaxed">
@@ -124,7 +124,7 @@ export default function AboutPage() {
               <Cpu className="w-5 h-5" />
             </div>
             <h3 className="text-lg font-bold text-white">Visi Efisiensi Solusi Digital</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Kami percaya bahwa pemanfaatan teknologi modern harus diimbangi dengan efisiensi anggaran total. Lewat keahlian arsitektur digital hemat biaya, kami merancang platform and situs web Anda agar berjalan super cepat, andal, tanpa membengkaknya biaya sewa server bulanan.
             </p>
           </div>
@@ -134,7 +134,7 @@ export default function AboutPage() {
               <HeartHandshake className="w-5 h-5" />
             </div>
             <h3 className="text-lg font-bold text-white">Komitmen Mutlak Jaminan Integritas Riset</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Kami menolak secara tegas segala bentuk jasa pembuatan tugas ilmiah or perjokian akademik yang melanggar hukum etika. Dukungan asistensi akademis kami murni berfokus pada pendampingan teknis olah data statistik kuantitatif, perapian tata letak format, and pengecekan orisinalitas naskah.
             </p>
           </div>
@@ -168,8 +168,8 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {TEAM.map((member) => (
-              <div key={member.name} className="glass-card p-6 rounded-3xl flex flex-col sm:flex-row items-start gap-5 bg-slate-950/20 border border-slate-900">
-                <div className="w-16 h-16 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 overflow-hidden">
+              <div key={member.name} className="glass-card p-6 rounded-3xl flex flex-col sm:flex-row items-start gap-5 bg-white dark:bg-slate-950/20 border border-slate-900">
+                <div className="w-16 h-16 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center shrink-0 overflow-hidden">
                   {member.avatar.startsWith("/") ? (
                     <img src={member.avatar} alt={member.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
                   ) : (
@@ -179,7 +179,7 @@ export default function AboutPage() {
                 <div className="space-y-2">
                   <h4 className="text-base font-bold text-white">{member.name}</h4>
                   <span className="text-[9px] uppercase font-bold tracking-widest text-indigo-400 block">{member.role}</span>
-                  <p className="text-xs text-slate-400 leading-relaxed">{member.desc}</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{member.desc}</p>
                   
                   {member.links && member.links.length > 0 && (
                     <div className="flex gap-3 pt-2">
@@ -209,7 +209,7 @@ export default function AboutPage() {
             <div className="flex items-start gap-2.5 text-xs text-slate-350">
               <Lock className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold block text-slate-200">Pelindungan Privasi Berlapis</span>
+                <span className="font-bold block text-slate-800 dark:text-slate-200">Pelindungan Privasi Berlapis</span>
                 <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
                   Kami sepenuhnya tunduk pada Undang-Undang Pelindungan Data Pribadi (UU PDP) Republik Indonesia. Data kontak WhatsApp and email Anda dijamin aman and terenkripsi penuh.
                 </p>
@@ -219,7 +219,7 @@ export default function AboutPage() {
             <div className="flex items-start gap-2.5 text-xs text-slate-350">
               <Scale className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold block text-slate-200">Kepatuhan Kode Etik Ilmiah</span>
+                <span className="font-bold block text-slate-800 dark:text-slate-200">Kepatuhan Kode Etik Ilmiah</span>
                 <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
                   Seluruh panduan, berkas kesepahaman kerja, and syarat layanan tunduk pada regulasi resmi Kementerian Pendidikan demi menjaga nama baik akademik Anda secara absolut.
                 </p>

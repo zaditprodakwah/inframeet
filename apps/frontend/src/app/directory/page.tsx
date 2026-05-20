@@ -227,7 +227,7 @@ export default function DirectoryCatalogPage() {
   }, [searchQuery, entityTypeFilter, sectorFilter, accreditationFilter, curriculumFilter, entities]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-800 font-sans antialiased">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans antialiased">
       <MegaMenu />
       
       <Breadcrumbs />
@@ -242,14 +242,14 @@ export default function DirectoryCatalogPage() {
           <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
             Direktori Kredibilitas <span className="text-indigo-600">Polimorfik</span>
           </h1>
-          <p className="text-sm md:text-base text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-base text-slate-600 dark:text-slate-500 max-w-2xl mx-auto leading-relaxed">
             Temukan standardisasi sitasi perguruan tinggi, pedoman Karya Tulis KIR sekolah menengah, software pendukung riset ilmiah, and verifikasi expert profesional secara transparan.
           </p>
         </section>
 
         {/* Dynamic Filters & Search Command Bar */}
         <section className="max-w-7xl mx-auto px-6 space-y-6">
-          <div className="flex flex-col gap-6 p-6 rounded-3xl bg-white border border-slate-200/80 shadow-sm shadow-slate-100">
+          <div className="flex flex-col gap-6 p-6 rounded-3xl bg-white dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800/80 shadow-sm shadow-slate-100/5">
             
             {/* Search Input Box & Main Type Filters */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
@@ -260,7 +260,7 @@ export default function DirectoryCatalogPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Cari universitas, sekolah, expert, saas..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all font-semibold"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:bg-white transition-all font-semibold"
                 />
               </div>
 
@@ -285,7 +285,7 @@ export default function DirectoryCatalogPage() {
                     className={`px-4 py-2 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all border whitespace-nowrap ${
                       entityTypeFilter === item.id
                         ? "bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-600/10"
-                        : "bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-800 hover:border-slate-300"
+                        : "bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700"
                     }`}
                   >
                     {item.label}
@@ -305,7 +305,7 @@ export default function DirectoryCatalogPage() {
                   <select
                     value={sectorFilter}
                     onChange={(e) => setSectorFilter(e.target.value)}
-                    className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
                   >
                     <option value="all">Semua Sektor</option>
                     <option value="Negeri">Negeri</option>
@@ -319,7 +319,7 @@ export default function DirectoryCatalogPage() {
                   <select
                     value={accreditationFilter}
                     onChange={(e) => setAccreditationFilter(e.target.value)}
-                    className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
+                    className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
                   >
                     <option value="all">Semua Akreditasi</option>
                     <option value="Unggul">Unggul</option>
@@ -335,7 +335,7 @@ export default function DirectoryCatalogPage() {
                     <select
                       value={curriculumFilter}
                       onChange={(e) => setCurriculumFilter(e.target.value)}
-                      className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
+                      className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 px-2.5 py-1.5 text-xs text-slate-700 font-bold focus:outline-none focus:border-indigo-500"
                     >
                       <option value="all">Semua Kurikulum</option>
                       <option value="Kurikulum Merdeka">Kurikulum Merdeka</option>
@@ -357,7 +357,7 @@ export default function DirectoryCatalogPage() {
               <p className="text-slate-500 text-xs font-bold animate-pulse">Menghubungkan ke Direktori Polimorfik...</p>
             </div>
           ) : filteredEntities.length === 0 ? (
-            <div className="text-center py-20 bg-white border border-slate-200 rounded-3xl p-8 max-w-md mx-auto space-y-3 shadow-sm">
+            <div className="text-center py-20 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 max-w-md mx-auto space-y-3 shadow-sm shadow-slate-100/5">
               <BadgeAlert className="w-8 h-8 text-indigo-600 mx-auto" />
               <p className="text-slate-800 text-sm font-extrabold">Tidak menemukan entitas yang cocok.</p>
               <p className="text-slate-400 text-xs font-medium">Cobalah menyetel ulang filter atau ganti kata kunci pencarian Anda.</p>

@@ -20,7 +20,7 @@ export async function proxy(req: NextRequest) {
           token: upstashToken,
         });
         
-        const ip = req.headers.get("x-forwarded-for") || req.ip || "anon";
+        const ip = req.headers.get("x-forwarded-for") || (req as any).ip || "anon";
         // Sliding window token bucket: 60 requests per 60 seconds
         const WINDOW_SEC = 60;
         const MAX_REQ = 60;

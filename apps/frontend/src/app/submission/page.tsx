@@ -46,7 +46,7 @@ type FormTab = "expert" | "education" | "tool" | "post" | "case_study";
 export default function CrowdSourcedSubmissionPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-[#020617] text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background transition-colors duration-300 text-slate-900 dark:text-white flex items-center justify-center">
         <Loader2 className="w-8 h-8 text-indigo-500 animate-spin" />
       </div>
     }>
@@ -401,7 +401,7 @@ function SubmissionPageContent() {
   });
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-indigo-600/30 transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300 font-sans selection:bg-indigo-600/30 transition-colors duration-300">
       <MegaMenu />
       <Breadcrumbs />
 
@@ -416,13 +416,13 @@ function SubmissionPageContent() {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Sparkles className="w-3.5 h-3.5" /> Portal Kontribusi Komunitas
           </span>
-          <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
             Bagikan Pengetahuan &amp; <br className="hidden md:inline" />
             <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent">
               Integritas Riset Nasional
             </span>
           </h1>
-          <p className="text-xs md:text-sm text-slate-400 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
             Selamat datang di hub kolaborasi terbuka INFRAMEET. Ajukan profil ahli, lembaga resmi, direktori pendidikan, 
             perkakas bantu riset, hingga studi kasus teknologi Anda secara sukarela untuk mendukung keterbukaan pengetahuan publik.
           </p>
@@ -455,7 +455,7 @@ function SubmissionPageContent() {
                     className={`w-full text-left p-3.5 rounded-2xl transition-all flex items-start gap-3 border cursor-pointer ${
                       activeDocTab === tab.id
                         ? "bg-indigo-600/10 border-indigo-500/30 text-indigo-400 shadow-md shadow-indigo-600/5"
-                        : "bg-slate-950/20 border-slate-900 text-slate-400 hover:text-slate-200 hover:border-slate-800"
+                        : "bg-white dark:bg-slate-950/20 border-slate-900 text-slate-400 hover:text-slate-800 dark:text-slate-200 hover:border-slate-200 dark:border-slate-800"
                     }`}
                   >
                     <Icon className="w-5 h-5 shrink-0 mt-0.5" />
@@ -483,7 +483,7 @@ function SubmissionPageContent() {
           </div>
 
           {/* Document Content Display Area */}
-          <div className="lg:col-span-3 glass-panel p-8 md:p-10 rounded-3xl border border-slate-900 bg-slate-950/30 min-h-[450px] flex flex-col justify-between">
+          <div className="lg:col-span-3 glass-panel p-8 md:p-10 rounded-3xl border border-slate-900 bg-white dark:bg-slate-950/30 min-h-[450px] flex flex-col justify-between">
             <div className="space-y-6">
               
               {/* Jaringan Pakar Terverifikasi */}
@@ -507,7 +507,7 @@ function SubmissionPageContent() {
                         placeholder="Cari pakar atau kompetensi..."
                         value={expertSearchQuery}
                         onChange={(e) => setExpertSearchQuery(e.target.value)}
-                        className="w-full pl-9 pr-4 py-2 bg-slate-950 border border-slate-900 focus:border-indigo-500 outline-none text-xs rounded-xl text-white placeholder:text-slate-700"
+                        className="w-full pl-9 pr-4 py-2 bg-white dark:bg-slate-950 border border-slate-900 focus:border-indigo-500 outline-none text-xs rounded-xl text-white placeholder:text-slate-700"
                       />
                     </div>
                   </div>
@@ -521,7 +521,7 @@ function SubmissionPageContent() {
                         className={`px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-wider font-mono border transition cursor-pointer ${
                           selectedExpertCategory === cat
                             ? "bg-indigo-600 border-indigo-500 text-white"
-                            : "bg-slate-950/40 border-slate-900 text-slate-400 hover:text-slate-200"
+                            : "bg-white dark:bg-slate-950/40 border-slate-900 text-slate-400 hover:text-slate-800 dark:text-slate-200"
                         }`}
                       >
                         {cat === "all" ? "Semua" : cat === "ACADEMIC" ? "Akademisi" : "Bisnis/Praktisi"}
@@ -535,14 +535,14 @@ function SubmissionPageContent() {
                       <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Menghubungkan ke Direktori...</p>
                     </div>
                   ) : filteredExperts.length === 0 ? (
-                    <div className="text-center py-12 bg-slate-950/20 border border-slate-900/60 rounded-2xl p-6">
+                    <div className="text-center py-12 bg-white dark:bg-slate-950/20 border border-slate-900/60 rounded-2xl p-6">
                       <p className="text-slate-400 text-xs font-bold">Pakar belum ditemukan.</p>
                       <p className="text-[10px] text-slate-650 mt-1">Gunakan kata kunci pencarian lain atau ajukan profil Anda sekarang.</p>
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {filteredExperts.map((exp) => (
-                        <div key={exp.id} className="p-5 rounded-2xl border border-slate-900 bg-slate-950/40 hover:border-slate-800 transition duration-300 flex flex-col justify-between space-y-3">
+                        <div key={exp.id} className="p-5 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/40 hover:border-slate-200 dark:border-slate-800 transition duration-300 flex flex-col justify-between space-y-3">
                           <div className="space-y-2">
                             <div className="flex justify-between items-start">
                               <div>
@@ -566,7 +566,7 @@ function SubmissionPageContent() {
                             {/* Skills Tag Pills */}
                             <div className="flex flex-wrap gap-1">
                               {exp.tags?.slice(0, 3).map((tag: string) => (
-                                <span key={tag} className="px-1.5 py-0.5 text-[8px] font-bold bg-slate-900 text-slate-400 rounded">
+                                <span key={tag} className="px-1.5 py-0.5 text-[8px] font-bold bg-slate-100 dark:bg-slate-900 text-slate-400 rounded">
                                   #{tag}
                                 </span>
                               ))}
@@ -603,7 +603,7 @@ function SubmissionPageContent() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     Masukkan kode identitas pakar or hash sertifikasi digital untuk memverifikasi kecocokan tanda tangan kriptografis dengan data registrasi terenkripsi UU PDP kami.
                   </p>
 
@@ -613,7 +613,7 @@ function SubmissionPageContent() {
                       placeholder="Masukkan ID Pakar (misal: 6e9b...) or Nama Pakar..."
                       value={verificationCode}
                       onChange={(e) => setVerificationCode(e.target.value)}
-                      className="flex-grow px-4 py-3 bg-slate-950 border border-slate-900 text-xs rounded-xl font-bold text-white focus:outline-none focus:border-indigo-500 transitionplaceholder:text-slate-700"
+                      className="flex-grow px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 text-xs rounded-xl font-bold text-white focus:outline-none focus:border-indigo-500 transitionplaceholder:text-slate-700"
                     />
                     <button
                       onClick={() => triggerVerification(verificationCode)}
@@ -645,7 +645,7 @@ function SubmissionPageContent() {
                             </div>
                             <div className="col-span-2">
                               <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Tanda Tangan Kriptografis (ES256)</span>
-                              <p className="font-mono text-[9px] text-indigo-400 bg-slate-950 p-2.5 rounded-lg border border-slate-900 break-all mt-1">
+                              <p className="font-mono text-[9px] text-indigo-400 bg-white dark:bg-slate-950 p-2.5 rounded-lg border border-slate-900 break-all mt-1">
                                 {verifiedResult.signature}
                               </p>
                             </div>
@@ -678,22 +678,22 @@ function SubmissionPageContent() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     INFRAMEET dirancang sebagai ekosistem digital terbuka yang menjembatani para peneliti, praktisi industri, sekolah, 
                     dan instansi resmi untuk saling berbagi aset pengetahuan ilmiah terverifikasi. Berikut adalah bagaimana kolaborasi Anda bekerja:
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                    <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
-                      <h4 className="text-xs font-bold text-slate-200 flex items-center gap-2">
+                    <div className="p-4 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/40 space-y-2">
+                      <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" /> Sertifikasi Digital Terverifikasi
                       </h4>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
                         Saat pengajuan ulasan riset or data keahlian Anda disetujui, kami menerbitkan kode sertifikat digital unik yang menjamin orisinalitas kepengarangan Anda di hadapan publik.
                       </p>
                     </div>
-                    <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
-                      <h4 className="text-xs font-bold text-slate-200 flex items-center gap-2">
+                    <div className="p-4 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/40 space-y-2">
+                      <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Sistem Poin Reputasi Ahli
                       </h4>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
@@ -717,7 +717,7 @@ function SubmissionPageContent() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     Guna menjaga kemurnian, keterbacaan, dan manfaat praktis direktori bagi masyarakat umum, kami menetapkan parameter mutu berikut:
                   </p>
 
@@ -725,7 +725,7 @@ function SubmissionPageContent() {
                     <li className="flex items-start gap-2.5">
                       <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-[10px] font-black font-mono flex items-center justify-center shrink-0 mt-0.5">1</span>
                       <div>
-                        <strong className="text-slate-200">Profil Orang / Lembaga Resmi:</strong>
+                        <strong className="text-slate-800 dark:text-slate-200">Profil Orang / Lembaga Resmi:</strong>
                         <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
                           Terbuka untuk Pakar Perorangan (Akademisi, Konsultan, Peneliti) maupun Instansi Resmi (Kampus, Lab Riset, Perusahaan Teknologi). Wajib menulis biografi or latar belakang kontribusi minimal 50 kata.
                         </p>
@@ -734,7 +734,7 @@ function SubmissionPageContent() {
                     <li className="flex items-start gap-2.5">
                       <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-[10px] font-black font-mono flex items-center justify-center shrink-0 mt-0.5">2</span>
                       <div>
-                        <strong className="text-slate-200">Perkakas &amp; Platform Riset:</strong>
+                        <strong className="text-slate-800 dark:text-slate-200">Perkakas &amp; Platform Riset:</strong>
                         <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
                           Menyertakan nama resmi platform digital, klasifikasi biaya (Gratis/Berlangganan), kegunaan spesifik bagi analisis ilmiah, serta tautan menuju situs resmi yang aman (HTTPS).
                         </p>
@@ -743,7 +743,7 @@ function SubmissionPageContent() {
                     <li className="flex items-start gap-2.5">
                       <span className="w-5 h-5 rounded-full bg-indigo-500/10 text-indigo-400 text-[10px] font-black font-mono flex items-center justify-center shrink-0 mt-0.5">3</span>
                       <div>
-                        <strong className="text-slate-200">Studi Kasus &amp; Artikel Ilmiah:</strong>
+                        <strong className="text-slate-800 dark:text-slate-200">Studi Kasus &amp; Artikel Ilmiah:</strong>
                         <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
                           Esai riset or studi kasus teknologi wajib merupakan buah pemikiran orisinal bebas plagiasi, memiliki ringkasan abstrak yang lugas, and menyertakan minimal 3 label kata kunci klasifikasi keilmuan.
                         </p>
@@ -766,16 +766,16 @@ function SubmissionPageContent() {
                     </div>
                   </div>
 
-                  <div className="space-y-4 text-xs text-slate-400 leading-relaxed">
+                  <div className="space-y-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     <div className="space-y-1">
-                      <h4 className="font-bold text-slate-200">Kebijakan Anti-Jokian Tugas Akhir</h4>
+                      <h4 className="font-bold text-slate-800 dark:text-slate-200">Kebijakan Anti-Jokian Tugas Akhir</h4>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
                         INFRAMEET mendukung penuh gerakan etika akademis berkarakter. Kami menolak secara permanen setiap upaya pengajuan profil, perkakas, or materi tulisan yang mempromosikan pembuatan karya tulis ilmiah ilegal or manipulasi nilai riset.
                       </p>
                     </div>
 
                     <div className="space-y-1">
-                      <h4 className="font-bold text-slate-200">Kepemilikan Hak Cipta</h4>
+                      <h4 className="font-bold text-slate-800 dark:text-slate-200">Kepemilikan Hak Cipta</h4>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
                         Hak atas tulisan orisinal and kekayaan intelektual data profil tetap 100% milik pengirim. INFRAMEET hanya berhak menampilkan data tersebut pada portal direktori pencarian publik agar dapat dimanfaatkan oleh masyarakat luas.
                       </p>
@@ -797,11 +797,11 @@ function SubmissionPageContent() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     Kolaborasi ini didirikan di atas konsensus saling percaya dan pengakuan atas kontribusi masing-masing pihak:
                   </p>
 
-                  <div className="p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/10 text-xs text-slate-400 leading-relaxed space-y-2 max-w-2xl">
+                  <div className="p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/10 text-xs text-slate-600 dark:text-slate-400 leading-relaxed space-y-2 max-w-2xl">
                     <p>
                       <strong>1. Kontribusi Sukarela Terbuka:</strong> Kontributor sepakat membagikan data profil keahlian, direktori sekolah, or esai riset secara sukarela demi kemaslahatan literasi bangsa, tanpa kompensasi finansial langsung.
                     </p>
@@ -825,24 +825,24 @@ function SubmissionPageContent() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     Sesuai amanat Undang-Undang Pelindungan Data Pribadi (UU PDP) Republik Indonesia, kami berkomitmen penuh melindungi kerahasiaan informasi kontak Anda:
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                    <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
+                    <div className="p-4 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/40 space-y-2">
                       <span className="text-[9px] font-black text-slate-500 tracking-wider font-mono uppercase">Enkripsi Kontak Aman</span>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
                         Data WhatsApp and email pribadi Anda dienkripsi penuh di database kami untuk mencegah akses ilegal pihak ketiga.
                       </p>
                     </div>
-                    <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
+                    <div className="p-4 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/40 space-y-2">
                       <span className="text-[9px] font-black text-slate-500 tracking-wider font-mono uppercase">Bebas Spam</span>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
                         Kami tidak akan pernah membagikan, menjual, or menyebarluaskan detail kontak Anda kepada pengiklan luar.
                       </p>
                     </div>
-                    <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/40 space-y-2">
+                    <div className="p-4 rounded-2xl border border-slate-900 bg-white dark:bg-slate-950/40 space-y-2">
                       <span className="text-[9px] font-black text-slate-500 tracking-wider font-mono uppercase">Kendali Akun Penuh</span>
                       <p className="text-[11px] text-slate-500 leading-relaxed">
                         Anda berhak meminta pembaruan data or penghapusan profil publik Anda dari direktori kapan saja.
@@ -869,12 +869,12 @@ function SubmissionPageContent() {
       {/* Multi-Step/Tab Embedded Curation Modal Form */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white dark:bg-slate-950/80 backdrop-blur-md overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              className="bg-[#020617] border border-slate-900 rounded-3xl w-full max-w-3xl shadow-2xl p-6 md:p-8 space-y-6 relative max-h-[90vh] overflow-y-auto"
+              className="bg-background transition-colors duration-300 border border-slate-900 rounded-3xl w-full max-w-3xl shadow-2xl p-6 md:p-8 space-y-6 relative max-h-[90vh] overflow-y-auto"
             >
               
               {/* Modal Close Header */}
@@ -898,14 +898,14 @@ function SubmissionPageContent() {
 
               {/* Inner Tab Form Switcher (5 Categories) */}
               <div className="flex justify-center">
-                <div className="grid grid-cols-2 sm:grid-cols-5 bg-slate-950 border border-slate-900 p-1 rounded-2xl gap-1 w-full">
+                <div className="grid grid-cols-2 sm:grid-cols-5 bg-white dark:bg-slate-950 border border-slate-900 p-1 rounded-2xl gap-1 w-full">
                   <button
                     type="button"
                     onClick={() => { setActiveFormTab("expert"); setSubmissionStatus(null); }}
                     className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       activeFormTab === "expert"
                         ? "bg-indigo-600 text-white shadow-md"
-                        : "text-slate-400 hover:text-slate-200"
+                        : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
                     }`}
                   >
                     <Users className="w-3 h-3" /> Profil Pakar
@@ -916,7 +916,7 @@ function SubmissionPageContent() {
                     className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       activeFormTab === "education"
                         ? "bg-indigo-600 text-white shadow-md"
-                        : "text-slate-400 hover:text-slate-200"
+                        : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
                     }`}
                   >
                     <Building2 className="w-3 h-3" /> Pendidikan
@@ -927,7 +927,7 @@ function SubmissionPageContent() {
                     className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       activeFormTab === "tool"
                         ? "bg-indigo-600 text-white shadow-md"
-                        : "text-slate-400 hover:text-slate-200"
+                        : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
                     }`}
                   >
                     <Wrench className="w-3 h-3" /> Perkakas
@@ -938,7 +938,7 @@ function SubmissionPageContent() {
                     className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       activeFormTab === "post"
                         ? "bg-indigo-600 text-white shadow-md"
-                        : "text-slate-400 hover:text-slate-200"
+                        : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
                     }`}
                   >
                     <FileText className="w-3 h-3" /> Esai Ilmiah
@@ -949,7 +949,7 @@ function SubmissionPageContent() {
                     className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-wider font-mono transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       activeFormTab === "case_study"
                         ? "bg-indigo-600 text-white shadow-md"
-                        : "text-slate-400 hover:text-slate-200"
+                        : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
                     }`}
                   >
                     <Compass className="w-3 h-3" /> Studi Kasus
@@ -993,7 +993,7 @@ function SubmissionPageContent() {
                         value={contributor}
                         onChange={(e) => setContributor(e.target.value)}
                         placeholder="Dr. Muhammad Zadit, M.Cs"
-                        className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                        className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                       />
                     </div>
                     <div className="space-y-1.5">
@@ -1004,7 +1004,7 @@ function SubmissionPageContent() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="nama@institusi.ac.id"
-                        className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                        className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                       />
                     </div>
                   </div>
@@ -1021,14 +1021,14 @@ function SubmissionPageContent() {
                     <div className="space-y-4">
                       <div className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Jenis Profil Kontributor</label>
-                        <div className="flex bg-slate-950 border border-slate-900 p-1 rounded-xl gap-1 w-full max-w-xs">
+                        <div className="flex bg-white dark:bg-slate-950 border border-slate-900 p-1 rounded-xl gap-1 w-full max-w-xs">
                           <button
                             type="button"
                             onClick={() => setExpertType("INDIVIDU")}
                             className={`flex-1 py-1.5 rounded-lg text-[9px] font-bold uppercase transition-all cursor-pointer ${
                               expertType === "INDIVIDU"
                                 ? "bg-indigo-600 text-white"
-                                : "text-slate-400 hover:text-slate-200"
+                                : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
                             }`}
                           >
                             Pakar Individu
@@ -1039,7 +1039,7 @@ function SubmissionPageContent() {
                             className={`flex-1 py-1.5 rounded-lg text-[9px] font-bold uppercase transition-all cursor-pointer ${
                               expertType === "ORGANISASI"
                                 ? "bg-indigo-600 text-white"
-                                : "text-slate-400 hover:text-slate-200"
+                                : "text-slate-400 hover:text-slate-800 dark:text-slate-200"
                             }`}
                           >
                             Organisasi / Instansi
@@ -1058,7 +1058,7 @@ function SubmissionPageContent() {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder={expertType === "INDIVIDU" ? "Prof. Dr. Ahmad Riyadi, M.Kom" : "Pusat Penelitian Teknologi Nusantara"}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
 
@@ -1068,7 +1068,7 @@ function SubmissionPageContent() {
                             <select
                               value={orgType}
                               onChange={(e) => setOrgType(e.target.value)}
-                              className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
+                              className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                             >
                               <option value="Kampus / Universitas">Kampus / Universitas</option>
                               <option value="Lembaga Riset / Litbang">Lembaga Riset / Litbang</option>
@@ -1084,7 +1084,7 @@ function SubmissionPageContent() {
                               value={expertRole}
                               onChange={(e) => setExpertRole(e.target.value)}
                               placeholder="Dosen Senior Metodologi Penelitian Kuantitatif"
-                              className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                              className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                             />
                           </div>
                         )}
@@ -1099,7 +1099,7 @@ function SubmissionPageContent() {
                             value={whatsapp}
                             onChange={(e) => setWhatsapp(e.target.value)}
                             placeholder="081234567890"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -1112,7 +1112,7 @@ function SubmissionPageContent() {
                             value={expertSkills}
                             onChange={(e) => setExpertSkills(e.target.value)}
                             placeholder="spss, statistika, structural equation modeling"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                       </div>
@@ -1124,7 +1124,7 @@ function SubmissionPageContent() {
                           value={expertBio}
                           onChange={(e) => setExpertBio(e.target.value)}
                           placeholder={expertType === "INDIVIDU" ? "Ceritakan secara singkat latar belakang penelitian, pencapaian ilmiah, or kepakaran Anda..." : "Jelaskan sejarah singkat, misi riset, and layanan unggulan yang disediakan..."}
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
+                          className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
                         />
                       </div>
                     </div>
@@ -1143,7 +1143,7 @@ function SubmissionPageContent() {
                               value={title}
                               onChange={(e) => setTitle(e.target.value)}
                               placeholder="Universitas Gadjah Mada"
-                              className="flex-grow px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                              className="flex-grow px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                             />
                             <button
                               type="button"
@@ -1174,7 +1174,7 @@ function SubmissionPageContent() {
                           <select
                             value={eduType}
                             onChange={(e) => setEduType(e.target.value)}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                           >
                             <option value="NEGERI">Negeri</option>
                             <option value="SWASTA">Swasta</option>
@@ -1187,7 +1187,7 @@ function SubmissionPageContent() {
                             value={npsn}
                             onChange={(e) => setNpsn(e.target.value)}
                             placeholder="20123456"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -1195,7 +1195,7 @@ function SubmissionPageContent() {
                           <select
                             value={akreditasi}
                             onChange={(e) => setAkreditasi(e.target.value)}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                           >
                             <option value="Unggul">Unggul (Perguruan Tinggi)</option>
                             <option value="A">Akreditasi A</option>
@@ -1212,7 +1212,7 @@ function SubmissionPageContent() {
                             value={province}
                             onChange={(e) => setProvince(e.target.value)}
                             placeholder="D.I. Yogyakarta"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -1222,7 +1222,7 @@ function SubmissionPageContent() {
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             placeholder="Sleman"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                       </div>
@@ -1235,7 +1235,7 @@ function SubmissionPageContent() {
                             value={citationStyle}
                             onChange={(e) => setCitationStyle(e.target.value)}
                             placeholder="APA 7th Edition, IEEE Style, Harvard"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -1245,7 +1245,7 @@ function SubmissionPageContent() {
                             value={turnitinLimit}
                             onChange={(e) => setTurnitinLimit(e.target.value)}
                             placeholder="15%"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                       </div>
@@ -1257,7 +1257,7 @@ function SubmissionPageContent() {
                           value={address}
                           onChange={(e) => setAddress(e.target.value)}
                           placeholder="Jalan Kaliurang KM 4.5, Sleman, Yogyakarta..."
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
+                          className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
                         />
                       </div>
                     </div>
@@ -1275,7 +1275,7 @@ function SubmissionPageContent() {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder="Kalkulator Structural Equation Modeling (PLS-SEM)"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -1283,7 +1283,7 @@ function SubmissionPageContent() {
                           <select
                             value={toolCategory}
                             onChange={(e) => setToolCategory(e.target.value)}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                           >
                             <option value="Kalkulator Statistik & Riset">Kalkulator Statistik &amp; Riset</option>
                             <option value="Parafrase & Anti-Turnitin">Parafrase &amp; Anti-Turnitin</option>
@@ -1302,7 +1302,7 @@ function SubmissionPageContent() {
                             value={toolUrl}
                             onChange={(e) => setToolUrl(e.target.value)}
                             placeholder="https://inframeet.app/tools/calculator"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -1310,7 +1310,7 @@ function SubmissionPageContent() {
                           <select
                             value={toolPricing}
                             onChange={(e) => setToolPricing(e.target.value)}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-slate-350 focus:outline-none focus:border-indigo-500 transition-colors"
                           >
                             <option value="Gratis / Open-Source">Gratis / Open-Source</option>
                             <option value="Gratis / Freemium">Gratis / Freemium</option>
@@ -1327,7 +1327,7 @@ function SubmissionPageContent() {
                           value={toolDescription}
                           onChange={(e) => setToolDescription(e.target.value)}
                           placeholder="Jelaskan secara obyektif apa kegunaan utama perkakas ini, cara input data, serta bagaimana ia mempercepat proses publikasi ilmiah..."
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
+                          className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
                         />
                       </div>
                     </div>
@@ -1345,7 +1345,7 @@ function SubmissionPageContent() {
                               value={doi}
                               onChange={(e) => setDoi(e.target.value)}
                               placeholder="10.1016/j.chb.2020.106518"
-                              className="flex-grow px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                              className="flex-grow px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                             />
                             <button
                               type="button"
@@ -1365,7 +1365,7 @@ function SubmissionPageContent() {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder="Analisis Dampak AI Terhadap Kepatuhan Penulisan Jurnal Ilmiah Sinta"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                       </div>
@@ -1378,7 +1378,7 @@ function SubmissionPageContent() {
                           value={postSummary}
                           onChange={(e) => setPostSummary(e.target.value)}
                           placeholder="Ulasan komparatif menguji efektivitas parafrase manual versus AI dalam menurunkan persentase Turnitin naskah..."
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                          className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                         />
                       </div>
 
@@ -1390,7 +1390,7 @@ function SubmissionPageContent() {
                           value={postContent}
                           onChange={(e) => setPostContent(e.target.value)}
                           placeholder="Tuliskan temuan riset, analisis komparatif, dan saran implementasi secara akademis and obyektif di sini..."
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
+                          className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
                         />
                       </div>
 
@@ -1402,7 +1402,7 @@ function SubmissionPageContent() {
                             value={tags}
                             onChange={(e) => setTags(e.target.value)}
                             placeholder="riset, metodologi, kecerdasan buatan"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                       </div>
@@ -1421,7 +1421,7 @@ function SubmissionPageContent() {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder="Pembangunan Web Platform Layanan Enterprise Bebas Biaya Server"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -1431,7 +1431,7 @@ function SubmissionPageContent() {
                             value={tags}
                             onChange={(e) => setTags(e.target.value)}
                             placeholder="migrasi cloud, serverless, efisiensi"
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                           />
                         </div>
                       </div>
@@ -1443,7 +1443,7 @@ function SubmissionPageContent() {
                           value={caseImpact}
                           onChange={(e) => setCaseImpact(e.target.value)}
                           placeholder="Contoh: Menghemat pengeluaran bulanan server hingga 80% dan loading web dipercepat 3x lipat..."
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
+                          className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700"
                         />
                       </div>
 
@@ -1455,7 +1455,7 @@ function SubmissionPageContent() {
                           value={caseDescription}
                           onChange={(e) => setCaseDescription(e.target.value)}
                           placeholder="Jabarkan masalah awal yang dihadapi, solusi teknologi yang diimplementasikan, serta proses pengerjaannya secara obyektif..."
-                          className="w-full px-4 py-3 bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
+                          className="w-full px-4 py-3 bg-white dark:bg-slate-950 border border-slate-900 rounded-xl text-xs font-semibold text-white focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-700 resize-none font-sans leading-relaxed"
                         />
                       </div>
                     </div>
@@ -1468,7 +1468,7 @@ function SubmissionPageContent() {
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="px-6 py-3.5 border border-slate-900 text-slate-400 hover:text-white rounded-xl text-xs font-bold hover:bg-slate-950 cursor-pointer transition-all animate-pulse"
+                    className="px-6 py-3.5 border border-slate-900 text-slate-400 hover:text-white rounded-xl text-xs font-bold hover:bg-white dark:bg-slate-950 cursor-pointer transition-all animate-pulse"
                   >
                     Kosongkan Form
                   </button>

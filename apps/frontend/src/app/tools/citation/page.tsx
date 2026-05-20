@@ -120,7 +120,7 @@ export default function CitationFormatterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-100 font-sans selection:bg-indigo-500/30">
       
       {/* Decorative background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
@@ -141,7 +141,7 @@ export default function CitationFormatterPage() {
         </div>
 
         {/* Console Box */}
-        <div className="bg-slate-900/40 border border-slate-800 p-6 md:p-8 rounded-3xl backdrop-blur-md shadow-2xl space-y-6">
+        <div className="bg-white/70 dark:bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-3xl backdrop-blur-md shadow-2xl space-y-6">
           
           <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-3">
             <div className="relative flex-1">
@@ -151,7 +151,7 @@ export default function CitationFormatterPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Masukkan Nomor DOI (misal: 10.1038/s41586-020-2003-x) atau kata kunci judul..."
-                className="w-full pl-10 pr-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500 transition-all outline-none"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 transition-all outline-none"
               />
             </div>
 
@@ -159,7 +159,7 @@ export default function CitationFormatterPage() {
               <select
                 value={selectedStyle}
                 onChange={(e) => setSelectedStyle(e.target.value)}
-                className="px-3.5 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs text-slate-350 focus:outline-none focus:border-indigo-500 outline-none"
+                className="px-3.5 py-3 bg-slate-50/60 dark:bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 rounded-xl text-xs text-slate-350 focus:outline-none focus:border-indigo-500 outline-none"
               >
                 {CITATION_STYLES.map(style => (
                   <option key={style.id} value={style.id}>{style.name}</option>
@@ -193,13 +193,13 @@ export default function CitationFormatterPage() {
 
           {/* Formatted output result card */}
           {formattedCitation && (
-            <div className="p-6 bg-slate-950/80 border border-slate-850 rounded-2xl space-y-4 animate-fade-in">
-              <div className="flex justify-between items-center border-b border-slate-850 pb-3">
+            <div className="p-6 bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-850 rounded-2xl space-y-4 animate-fade-in">
+              <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-850 pb-3">
                 <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest font-mono">Hasil Format Sitasi</span>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleCopy}
-                    className="p-2 hover:bg-slate-900 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer inline-flex items-center gap-1 text-[10px] font-bold"
+                    className="p-2 hover:bg-slate-100 dark:bg-slate-900 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer inline-flex items-center gap-1 text-[10px] font-bold"
                     title="Salin Sitasi"
                   >
                     {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -207,7 +207,7 @@ export default function CitationFormatterPage() {
                   </button>
                   <button
                     onClick={handleDownload}
-                    className="p-2 hover:bg-slate-900 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer inline-flex items-center gap-1 text-[10px] font-bold"
+                    className="p-2 hover:bg-slate-100 dark:bg-slate-900 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer inline-flex items-center gap-1 text-[10px] font-bold"
                     title="Unduh Text"
                   >
                     <Download className="w-3.5 h-3.5" />
@@ -215,7 +215,7 @@ export default function CitationFormatterPage() {
                   </button>
                 </div>
               </div>
-              <p className="text-xs text-slate-200 leading-relaxed font-serif italic select-all">
+              <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-serif italic select-all">
                 {formattedCitation}
               </p>
             </div>
@@ -231,10 +231,10 @@ export default function CitationFormatterPage() {
                   return (
                     <div 
                       key={work.id} 
-                      className="p-4 bg-slate-950/40 hover:bg-slate-950/70 border border-slate-850 rounded-xl flex items-center justify-between gap-4 transition-all"
+                      className="p-4 bg-white dark:bg-slate-950/40 hover:bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-slate-850 rounded-xl flex items-center justify-between gap-4 transition-all"
                     >
                       <div className="space-y-1">
-                        <h4 className="text-xs font-bold text-slate-200 leading-snug">{work.title}</h4>
+                        <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 leading-snug">{work.title}</h4>
                         <span className="text-[10px] text-slate-500 block">
                           {work.publication_year ? `Tahun: ${work.publication_year}` : ""} 
                           {work.primary_location?.source?.display_name ? ` • ${work.primary_location.source.display_name}` : ""}
@@ -263,22 +263,22 @@ export default function CitationFormatterPage() {
         {/* Feature Highlights section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left mt-4">
           <div className="space-y-2 p-4">
-            <h3 className="text-sm font-bold text-slate-200">100% Client-Side</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">100% Client-Side</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Semua kompilasi bibliografi diproses langsung di browser Anda, menjamin pemrosesan super cepat tanpa batas server.
             </p>
           </div>
 
           <div className="space-y-2 p-4">
-            <h3 className="text-sm font-bold text-slate-200">Ratusan Juta Jurnal</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">Ratusan Juta Jurnal</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Didukung oleh pangkalan data terbuka OpenAlex dan Semantic Scholar untuk akses publikasi global terlengkap.
             </p>
           </div>
 
           <div className="space-y-2 p-4">
-            <h3 className="text-sm font-bold text-slate-200">Format Akurat</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">Format Akurat</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Mendukung gaya sitasi standar internasional (APA, IEEE, Harvard, MLA) terintegrasi langsung dengan Crossref.
             </p>
           </div>
