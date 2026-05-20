@@ -20,6 +20,8 @@ function BadgeWidgetContent() {
   
   const containerRef = useRef<HTMLDivElement>(null);
   const [variant, setVariant] = useState<"A" | "B">("A");
+  const [config, setConfig] = useState<WidgetConfig | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // 1. Assign A/B test variant randomly on mount
   useEffect(() => {

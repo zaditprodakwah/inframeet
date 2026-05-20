@@ -49,9 +49,18 @@ export async function GET(req: NextRequest) {
       console.warn(`Widget domain mismatch: registered '${widget.host_domain}', loaded on '${referrer}'. Proceeding organically.`);
     }
 
-    // 4. Fetch the verified profile name associated with the user
-    // (Simulated join for verified organization name)
-    const verifiedName = "Zadit Prodakwah Enterprise";
+    // 4. Fetch the verified profile name associated with the widget owner
+    let verifiedName = "INFRAMEET Partner";
+    const { data: profile } = await supabaseAdmin
+      .from("omni_directory")
+      .select("name")
+      .eq("owner_id", widget.user_id)
+      .eq("is_public", true)
+      .order("trust_score", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (profile?.name) verifiedName = profile.name;
 
     return NextResponse.json({
       success: true,

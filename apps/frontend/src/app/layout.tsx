@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "@/env";
 import CommandMenu from "./components/CommandMenu";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -16,11 +16,6 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -73,8 +68,8 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${plusJakarta.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
+      lang="id"
+      className={`${plusJakarta.variable} ${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col pb-16 md:pb-0">
@@ -89,15 +84,17 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
-                "@type": "GovernmentBenefitsService",
-                "name": "INFRAMEET Trust Engine",
+                "@type": "ProfessionalService",
+                "name": "INFRAMEET Trust Infrastructure",
                 "provider": {
                   "@type": "Organization",
                   "name": "INFRAMEET",
                   "url": "https://inframeet.vercel.app"
                 },
-                "serviceType": "Evidence-Based Verification Service",
-                "description": "Infrastruktur tepercaya berbasis bukti untuk B2B dan Akademisi."
+                "serviceType": "B2B Trust & Verification Platform",
+                "description": "Platform infrastruktur kepercayaan berbasis bukti untuk direktori B2B, lembaga akademik, dan pakar terverifikasi.",
+                "areaServed": "ID",
+                "availableLanguage": "Indonesian"
               })
             }}
           />

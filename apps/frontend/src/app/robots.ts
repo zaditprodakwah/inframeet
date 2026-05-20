@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/login", "/admin", "/admin/*", "/api/*", "/checkout/*"],
+        disallow: ["/login", "/admin", "/admin/*", "/api/*", "/checkout/*", "/auth"],
       },
       {
         userAgent: [
@@ -22,7 +22,7 @@ export default function robots(): MetadataRoute.Robots {
           "Applebot-Extended",
           "FacebookBot",
         ],
-        disallow: ["/login", "/admin", "/admin/*", "/api/*", "/checkout/*"],
+        disallow: ["/login", "/admin", "/admin/*", "/api/*", "/checkout/*", "/auth"],
       },
     ],
     sitemap: "https://inframeet.vercel.app/sitemap.xml",
