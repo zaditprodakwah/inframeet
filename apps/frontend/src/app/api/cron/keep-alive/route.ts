@@ -1,19 +1,49 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 
+import crypto from "crypto";
+
 export const dynamic = "force-dynamic";
+
+function safeCompare(a: string, b: string): boolean {
+  try {
+    const bufA = Buffer.from(a);
+    const bufB = Buffer.from(b);
+    if (bufA.length !== bufB.length) return false;
+    return crypto.timingSafeEqual(bufA, bufB);
+  } catch {
+    return false;
+  }
+}
 
 export async function GET(request: NextRequest) {
   try {
     // 1. Extract and validate authorization token from request query parameters
     const { searchParams } = new URL(request.url);
     const token = searchParams.get("key");
-    const expectedToken = process.env.UPTIMEROBOT_API_KEY || "u3510678-584d82de50f915d03ea25963";
+    const expectedToken = process.env.UPTIMEROBOT_API_KEY;
+
+    if (!expectedToken) {
+      console.error("[SECURITY ERROR] UPTIMEROBOT_API_KEY environment variable is not configured.");
+      return NextResponse.json(
+        { success: false, error: "Server authentication misconfiguration." },
+        { status: 500 }
+      );
+    }
 
     const isVercelCron = request.headers.get("x-vercel-cron") === "1";
-    const isCronAuthHeader = request.headers.get("authorization")?.startsWith("Bearer ");
+    
+    // Auth header verification
+    const authHeader = request.headers.get("authorization");
+    let isCronAuthHeader = false;
+    if (authHeader?.startsWith("Bearer ")) {
+      const headerToken = authHeader.substring(7).trim();
+      isCronAuthHeader = safeCompare(headerToken, expectedToken);
+    }
 
-    const isAuthorized = (token && token === expectedToken) || isVercelCron || isCronAuthHeader;
+    const isQueryTokenValid = token ? safeCompare(token, expectedToken) : false;
+
+    const isAuthorized = isQueryTokenValid || isVercelCron || isCronAuthHeader;
 
     if (!isAuthorized) {
       return NextResponse.json(

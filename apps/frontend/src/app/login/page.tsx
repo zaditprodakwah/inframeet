@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,6 +12,19 @@ export default function LoginPage() {
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  
+  // Stealth controls: Click 5 times to reveal the private login form
+  const [clickCount, setClickCount] = useState(0);
+  const [showForm, setShowForm] = useState(false);
+
+  const handleLogoClick = () => {
+    const nextCount = clickCount + 1;
+    setClickCount(nextCount);
+    
+    if (nextCount === 5) {
+      setShowForm(true);
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,6 +68,59 @@ export default function LoginPage() {
     }
   };
 
+  // 1. RENDER FAKE 404 SCREEN BY DEFAULT (Stealth Obscurity)
+  if (!showForm) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center relative overflow-hidden font-sans px-4">
+        {/* Background ambient light */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-indigo-600/5 rounded-full blur-3xl" />
+
+        <div className="max-w-md w-full text-center flex flex-col items-center gap-6 relative z-10">
+          
+          {/* Brand Icon (Interactive Easter Egg) */}
+          <div 
+            onClick={handleLogoClick}
+            className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center shadow-xl cursor-default select-none active:scale-95 transition-transform duration-100"
+            title="INFRAMEET"
+          >
+            <svg className="w-8 h-8 text-indigo-500/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+
+          {/* 404 Banner Details */}
+          <div className="flex flex-col gap-2">
+            <span className="text-[11px] font-bold text-slate-500 bg-slate-900 px-3 py-1 rounded-full uppercase tracking-widest self-center">
+              Kesalahan 404
+            </span>
+            <h1 className="text-3xl font-extrabold tracking-tight text-white mt-2">
+              Halaman Tidak Ditemukan
+            </h1>
+            <p className="text-sm text-slate-400 max-w-sm mt-1 leading-relaxed">
+              Maaf, halaman yang Anda cari telah dipindahkan, dihapus, atau tidak pernah ada dalam sistem direktori kami.
+            </p>
+          </div>
+
+          {/* Back to Home Link */}
+          <div className="w-full mt-4 flex justify-center">
+            <Link
+              href="/"
+              className="py-3 px-8 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-300 text-xs font-bold transition-all text-center cursor-pointer"
+            >
+              Kembali ke Beranda
+            </Link>
+          </div>
+
+          {/* Footer branding */}
+          <div className="text-[9px] text-slate-600 uppercase tracking-widest mt-8">
+            INFRAMEET System Node
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. RENDER THE PRIVATE SECRET ADMIN GATEWAY (After 5 clicks)
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center relative overflow-hidden font-sans">
       {/* Dynamic Background Glows */}
@@ -61,7 +128,7 @@ export default function LoginPage() {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl" />
 
       {/* Login Card */}
-      <div className="w-full max-w-md p-8 rounded-2xl bg-slate-900/40 border border-slate-800/80 backdrop-blur-xl relative z-10 shadow-2xl flex flex-col gap-6">
+      <div className="w-full max-w-md p-8 rounded-2xl bg-slate-900/40 border border-slate-800/80 backdrop-blur-xl relative z-10 shadow-2xl flex flex-col gap-6 animate-in fade-in zoom-in duration-300">
         
         {/* Brand/Logo Header */}
         <div className="flex flex-col items-center gap-3">

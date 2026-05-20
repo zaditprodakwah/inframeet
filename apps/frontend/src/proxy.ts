@@ -1,14 +1,58 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Redis } from "@upstash/redis";
 
 export async function proxy(req: NextRequest) {
   const res = NextResponse.next();
   const { pathname } = req.nextUrl;
 
+  // 0. Global Edge Rate Limiting (Upstash Redis)
+  // Apply to API routes to protect database and reduce Vercel compute
+  if (pathname.startsWith("/api/")) {
+    const upstashUrl = process.env.UPSTASH_REDIS_REST_URL;
+    const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+    
+    if (upstashUrl && upstashToken) {
+      try {
+        const redis = new Redis({
+          url: upstashUrl,
+          token: upstashToken,
+        });
+        
+        const ip = req.headers.get("x-forwarded-for") || req.ip || "anon";
+        // Sliding window token bucket: 60 requests per 60 seconds
+        const WINDOW_SEC = 60;
+        const MAX_REQ = 60;
+        
+        const key = `rl:${ip}:${Math.floor(Date.now() / 1000 / WINDOW_SEC)}`;
+        const cur = await redis.incr(key);
+        
+        if (cur === 1) {
+          await redis.expire(key, WINDOW_SEC);
+        }
+        
+        if (cur > MAX_REQ) {
+          return NextResponse.json(
+            { error: "Too Many Requests. IP has been rate-limited." }, 
+            { status: 429 }
+          );
+        }
+      } catch (err) {
+        console.warn("Redis Rate Limit failed or offline, bypassing safely:", err);
+      }
+    }
+  }
+
   // 1. Guard administrative routes and serverless APIs
   const isAdminPath = pathname.startsWith("/admin");
   const isAdminApiPath = pathname.startsWith("/api/admin");
+  const isLoginPath = pathname === "/login";
+
+  // Append bulletproof anti-crawler & anti-AI header to login, admin, and admin API routes
+  if (isAdminPath || isAdminApiPath || isLoginPath) {
+    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive, nosnippet, noimageindex");
+  }
 
   if (isAdminPath || isAdminApiPath) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;

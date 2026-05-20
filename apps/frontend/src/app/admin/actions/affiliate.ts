@@ -73,3 +73,58 @@ export async function updateToolAffiliate(
     return { success: false, message: err?.message || "Otorisasi ditolak atau input tidak valid." };
   }
 }
+
+const batchUpdateSchema = z.array(updateToolAffiliateSchema);
+
+export async function batchUpdateToolAffiliates(
+  payload: { toolId: string; network: string; advertiserId: string; originalUrl: string }[]
+) {
+  try {
+    const session = await validateAdminSession();
+    const validated = batchUpdateSchema.parse(payload);
+
+    if (!supabaseAdmin) {
+      return { success: false, message: "Database offline." };
+    }
+
+    // Bulk Upsert in O(1) single transaction
+    const upsertData = validated.map((item) => ({
+      id: item.toolId,
+      affiliate_network: item.network,
+      network_advertiser_id: item.advertiserId,
+      original_url: item.originalUrl || null,
+      cached_deep_link: null,
+      deep_link_generated_at: null
+    }));
+
+    const { error } = await supabaseAdmin
+      .from("tools_directory")
+      .upsert(upsertData, { onConflict: "id" });
+
+    if (error) {
+      console.error(`Failed to batch update tool networks:`, error);
+      return { success: false, message: error.message };
+    }
+
+    // Single Audit Log entry for the entire batch
+    await insertAuditLog(
+      session.staffId,
+      session.actorEmail,
+      "tools_directory",
+      "BATCH_MULTIPLE_IDS",
+      "BATCH_UPDATE_AFFILIATE_CONFIG",
+      { count: validated.length }
+    );
+
+    revalidatePath("/admin/affiliate");
+    revalidatePath("/tools");
+
+    return { 
+      success: true, 
+      message: `Konfigurasi massal sukses! ${validated.length} alat telah diperbarui jaringannya.` 
+    };
+  } catch (err: any) {
+    console.error("Critical failure during batch affiliate settings update:", err);
+    return { success: false, message: err?.message || "Otorisasi ditolak atau input massal tidak valid." };
+  }
+}

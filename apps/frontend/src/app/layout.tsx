@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter, Geist_Mono } from "next/font/google";
+import "@/env";
 import CommandMenu from "./components/CommandMenu";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import FloatingContactForm from "@/components/FloatingContactForm";
@@ -23,17 +24,47 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "INFRAMEET | Premium B2B Solusi Enterprise & Akademik Kustom",
-  description: "Pembangunan web-application berkecepatan tinggi, migrasi cloud database serverless, audit Core Web Vitals, asistensi statistik, Turnitin, layouting naskah jurnal steril.",
-  keywords: ["Serverless hosting", "Web-development kustom", "Migrasi database cloud", "Turnitin naskah ilmiah", "SPSS SmartPLS", "Zadit Prodakwah"],
+  title: {
+    default: "INFRAMEET | Infrastruktur Kepercayaan B2B",
+    template: "%s | INFRAMEET"
+  },
+  description: "Platform Infrastruktur Kepercayaan B2B. Pembangunan web berkecepatan tinggi, integrasi direktori, audit Vitals, dan agregator data publik.",
+  keywords: ["B2B SaaS", "Web Enterprise", "Direktori Pakar", "Migrasi Cloud", "Zadit Prodakwah"],
   authors: [{ name: "Zadit Prodakwah" }],
-  metadataBase: new URL("https://inframeet.vercel.app"),
+  creator: "Zadit Prodakwah",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://inframeet.vercel.app"),
   alternates: {
     canonical: "/"
-  }
+  },
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: "https://inframeet.vercel.app",
+    title: "INFRAMEET | Infrastruktur Kepercayaan B2B",
+    description: "Platform Infrastruktur Kepercayaan B2B. Akselerasi pertumbuhan bisnis dan akademik melalui direktori pakar terverifikasi.",
+    siteName: "INFRAMEET",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "INFRAMEET | Infrastruktur Kepercayaan B2B",
+    description: "Platform Infrastruktur Kepercayaan B2B. Akselerasi pertumbuhan bisnis dan akademik.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 import QueryProvider from "@/components/QueryProvider";
+
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -46,13 +77,37 @@ export default function RootLayout({
       className={`${plusJakarta.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col pb-16 md:pb-0 light-mode">
-        <QueryProvider>
-          {children}
-        </QueryProvider>
+      <body className="min-h-full flex flex-col pb-16 md:pb-0">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "GovernmentBenefitsService",
+                "name": "INFRAMEET Trust Engine",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "INFRAMEET",
+                  "url": "https://inframeet.vercel.app"
+                },
+                "serviceType": "Evidence-Based Verification Service",
+                "description": "Infrastruktur tepercaya berbasis bukti untuk B2B dan Akademisi."
+              })
+            }}
+          />
+          <QueryProvider>
+            {children}
+          </QueryProvider>
         <MobileBottomNav />
         <FloatingContactForm />
         <CommandMenu />
+        </ThemeProvider>
       </body>
     </html>
   );

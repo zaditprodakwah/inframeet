@@ -8,9 +8,17 @@ export interface AIAnalysisResult {
 }
 
 export class AIContentParser {
-  private static groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY || "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"
-  });
+  private static groq: Groq | null = null;
+
+  private static getGroqClient(): Groq {
+    if (this.groq) return this.groq;
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      throw new Error("[FATAL] GROQ_API_KEY environment variable is not defined.");
+    }
+    this.groq = new Groq({ apiKey });
+    return this.groq;
+  }
 
   /**
    * Evaluates an article's context, creates a structured summary, and resolves matching B2B tools.
@@ -35,7 +43,8 @@ export class AIContentParser {
         }
       `.trim();
 
-      const chatCompletion = await this.groq.chat.completions.create({
+      const client = this.getGroqClient();
+      const chatCompletion = await client.chat.completions.create({
         messages: [
           { role: "system", content: "You are an advanced B2B technology researcher. Return JSON output only." },
           { role: "user", content: prompt }

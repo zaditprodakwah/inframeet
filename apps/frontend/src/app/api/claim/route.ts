@@ -33,18 +33,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Absolute fallback for local worker/founder demo execution
     if (!activeUserId) {
-      // Look up first profile or default expert ID to allow graceful execution
-      const { data: profiles } = await supabaseAdmin!.from("profiles").select("id").limit(1);
-      if (profiles && profiles.length > 0) {
-        activeUserId = profiles[0].id;
-      } else {
-        return NextResponse.json(
-          { error: "Unauthorized. Please authenticate to claim directory profiles." },
-          { status: 401 }
-        );
-      }
+      return NextResponse.json(
+        { error: "Unauthorized. Authentication is mandatory to claim directory profiles." },
+        { status: 401 }
+      );
     }
 
     if (!supabaseAdmin) {

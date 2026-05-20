@@ -13,8 +13,13 @@ export async function GET(request: Request) {
     }
 
     const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get("limit") || "12", 10);
-    const offset = parseInt(searchParams.get("offset") || "0", 10);
+    // Boundary-limit pagination params to prevent unbounded full-table scans
+    const rawLimit = parseInt(searchParams.get("limit") || "12", 10);
+    const limit = Math.min(Math.max(isNaN(rawLimit) ? 12 : rawLimit, 1), 50);
+
+    const rawOffset = parseInt(searchParams.get("offset") || "0", 10);
+    const offset = Math.max(isNaN(rawOffset) ? 0 : rawOffset, 0);
+
     const search = searchParams.get("search")?.trim() || "";
     const category = searchParams.get("category")?.trim() || "";
 

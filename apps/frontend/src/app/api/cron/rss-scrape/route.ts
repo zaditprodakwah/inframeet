@@ -281,6 +281,7 @@ export async function GET(request: Request) {
         const imgTagRegex = /<img[\s\S]*?src=["']([\s\S]*?)["']/;
 
         let match;
+        const itemsToInsert: any[] = [];
 
         while ((match = itemRegex.exec(xmlText)) !== null) {
           const itemXml = match[1];
@@ -348,7 +349,7 @@ export async function GET(request: Request) {
           let shouldSkipArticle = false;
 
           // Call AI curation only for the 2 most recent articles of each feed to stay safe under rate-limits
-          if (insertedCount < 2) {
+          if (itemsToInsert.length < 2) {
             const aiCuration = await cleanAndSummarizeWithAI(title, contentSummary, feed.source_category);
             if (aiCuration) {
               finalTitle = aiCuration.title || title;
@@ -374,24 +375,31 @@ export async function GET(request: Request) {
             publishedAt = currentTimestamp;
           }
 
-          // Insert into rss_items (Supabase will ignore on duplicate hash)
-          const { error: insertError } = await adminClient
-            .from("rss_items")
-            .insert({
-              feed_id: feed.id,
-              title: finalTitle.substring(0, 200),
-              content_summary: finalSummary,
-              full_content: descriptionRaw || finalSummary,
-              source_url: link,
-              image_url: imageUrl,
-              published_at: publishedAt,
-              content_hash: contentHash,
-              relevance_score: parseFloat(finalRelevance.toFixed(3)),
-              categories: [feed.source_category, "Curated", "Industry Trends"],
-            });
+          itemsToInsert.push({
+            feed_id: feed.id,
+            title: finalTitle.substring(0, 200),
+            content_summary: finalSummary,
+            full_content: descriptionRaw || finalSummary,
+            source_url: link,
+            image_url: imageUrl,
+            published_at: publishedAt,
+            content_hash: contentHash,
+            relevance_score: parseFloat(finalRelevance.toFixed(3)),
+            categories: [feed.source_category, "Curated", "Industry Trends"],
+          });
+        }
 
-          if (!insertError) {
-            insertedCount++;
+        // Execute bulk batch insertion in a single database transaction query
+        if (itemsToInsert.length > 0) {
+          const { data: insertedData, error: insertError } = await adminClient
+            .from("rss_items")
+            .insert(itemsToInsert)
+            .select("id");
+
+          if (!insertError && insertedData) {
+            insertedCount = insertedData.length;
+          } else if (insertError) {
+            console.error(`[Scrape Batch Insert Error] Feed ${feed.feed_name}:`, insertError.message);
           }
         }
 

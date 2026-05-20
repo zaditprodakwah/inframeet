@@ -32,8 +32,12 @@ async function authorize(req: NextRequest): Promise<boolean> {
     }
   }
 
-  // 2. Fallback to Env variable or secure dev-only fallback token
-  const envToken = process.env.SCIM_SECURITY_TOKEN || "scim_token_zadit_2026";
+  // 2. Fallback strictly to configured environment variable only
+  const envToken = process.env.SCIM_SECURITY_TOKEN;
+  if (!envToken) {
+    console.error("[SECURITY WARNING] SCIM_SECURITY_TOKEN environment variable is not configured. Access denied.");
+    return false;
+  }
   return token === envToken;
 }
 
