@@ -59,13 +59,11 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // 2. Execute a database query to trigger keep-alive activity
-    // Querying the rss_feeds table triggers a real schema lookup and database execution.
+    // 2. Execute a lightweight DB heartbeat using Supabase RPC version check
+    // This avoids full table scans and is schema-agnostic
     const startTime = Date.now();
-    const { data, error } = await supabaseAdmin
-      .from("rss_feeds")
-      .select("id")
-      .limit(1);
+    const { error } = await supabaseAdmin
+      .rpc("version");
 
     if (error) {
       console.error("[Keep-Alive Cron Error]:", error);
@@ -103,10 +101,11 @@ export async function GET(request: NextRequest) {
       latency_ms: durationMs,
       timestamp: new Date().toISOString(),
     });
-  } catch (error: any) {
-    console.error("[Keep-Alive Global Exception]:", error);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[Keep-Alive Global Exception]:", err);
     return NextResponse.json(
-      { success: false, error: "Internal server exception.", details: error.message },
+      { success: false, error: "Internal server exception.", details: message },
       { status: 500 }
     );
   }

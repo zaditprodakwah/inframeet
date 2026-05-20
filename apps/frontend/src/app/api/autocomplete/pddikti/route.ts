@@ -1,6 +1,18 @@
+/**
+ * /api/autocomplete/pddikti/route.ts
+ * Proxies PDDikti Kemdikbud API with Zod validation and proper Cache-Control headers.
+ * Eliminates all 'any' types.
+ */
 import { NextRequest, NextResponse } from "next/server";
+import {
+  PddiktiResponseSchema,
+  PddiktiItem,
+  UniversityResult,
+} from "@/lib/schemas/tools";
 
-export async function GET(req: NextRequest) {
+export const dynamic = "force-dynamic";
+
+export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const { searchParams } = new URL(req.url);
     const keyword = searchParams.get("keyword");
@@ -12,55 +24,75 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    console.log(`[PDDIKTI] Fetching autocomplete matches for: "${keyword}"`);
-    
-    // Fetch directly from official Kemdikbud pangkalan data search index
     const res = await fetch(
-      `https://api-frontend.kemdikbud.go.id/hit/${encodeURIComponent(keyword)}`,
+      `https://api-frontend.kemdikbud.go.id/hit/${encodeURIComponent(keyword.trim())}`,
       {
         headers: {
           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-          "Accept": "application/json"
+          "Accept": "application/json",
         },
-        next: { revalidate: 3600 } // Cache for 1 hour inside Next.js data cache
+        next: { revalidate: 3600 }, // Next.js data cache: 1 hour
       }
     );
 
     if (!res.ok) {
       return NextResponse.json(
-        { error: "Failed to connect to Kemdikbud PDDikti API" },
-        { status: 502 }
+        { error: "Gagal terhubung ke database PDDikti Kemdikbud.", universities: [] },
+        {
+          status: 502,
+          headers: { "Cache-Control": "no-store" },
+        }
       );
     }
 
-    const rawData = await res.json();
-    
-    // Standardize university results
-    let universities: any[] = [];
-    if (rawData && rawData.pt && rawData.pt.length > 0) {
-      universities = rawData.pt.map((item: any) => {
-        const cleanName = item.nama.replace(/<[^>]*>/g, ""); // Strip any HTML tags returned by API
-        const id = item.id.trim();
+    const rawData: unknown = await res.json();
+
+    // Validate the response shape
+    const parsed = PddiktiResponseSchema.safeParse(rawData);
+    if (!parsed.success) {
+      console.warn("[PDDikti] Unexpected response shape:", parsed.error.message);
+      return NextResponse.json(
+        { universities: [] },
+        {
+          headers: {
+            "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+          },
+        }
+      );
+    }
+
+    const universities: UniversityResult[] = (parsed.data.pt ?? []).map(
+      (item: PddiktiItem): UniversityResult => {
+        const cleanName = item.nama.replace(/<[^>]*>/g, ""); // strip HTML tags
         return {
-          id: `pddikti-${id}`,
-          npsn: id,
+          id: `pddikti-${item.id.trim()}`,
+          npsn: item.id.trim(),
           name: cleanName,
           category: "Universitas",
           subcategory: "Perguruan Tinggi",
           sector: item.status === "N" ? "Negeri" : "Swasta",
-          location: item.singkatan || "Indonesia",
+          location: item.singkatan ?? "Indonesia",
           accreditation: "Terakreditasi",
           citation_style: "APA Style",
-          turnitin_limit: "15% Max"
+          turnitin_limit: "15% Max",
         };
-      });
-    }
+      }
+    );
 
-    return NextResponse.json({ universities });
-  } catch (error: any) {
-    console.error("[PDDIKTI ERROR] Autocomplete fetch failed:", error.message);
     return NextResponse.json(
-      { error: "Internal server error occurred during autocomplete search" },
+      { universities },
+      {
+        headers: {
+          // Aggressive caching: 1h fresh, 24h stale-while-revalidate
+          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+        },
+      }
+    );
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[PDDikti ERROR] Autocomplete fetch failed:", message);
+    return NextResponse.json(
+      { error: "Internal server error occurred during autocomplete search", universities: [] },
       { status: 500 }
     );
   }

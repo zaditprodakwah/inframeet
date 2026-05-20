@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import MegaMenu from "@/app/components/MegaMenu";
 import Footer from "@/app/components/Footer";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
-import { supabase } from "@/lib/supabase";
+import Link from "next/link";
+import { type PlagiarismResult } from "@/lib/schemas/tools";
 import { z } from "zod";
-import { Sparkles, ShieldAlert, CheckCircle, AlertTriangle, Search } from "lucide-react";
+import { Sparkles, ShieldAlert, CheckCircle, AlertTriangle, Search, ExternalLink } from "lucide-react";
 
 const emailSchema = z.string().email("Format email tidak valid.");
 
@@ -14,7 +15,7 @@ export default function PlagiarismCheckerPage() {
   const [text, setText] = useState("");
   const [email, setEmail] = useState("");
   const [isScanning, setIsScanning] = useState(false);
-  const [scanResult, setScanResult] = useState<any>(null);
+  const [scanResult, setScanResult] = useState<PlagiarismResult | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleScan = async (e: React.FormEvent) => {
@@ -37,66 +38,26 @@ export default function PlagiarismCheckerPage() {
 
     setIsScanning(true);
 
-    // Simulate analysis delay
-    setTimeout(async () => {
-      // Simple offline heuristic matching simulation
-      const textLength = text.length;
-      let plagiarismScore = 0;
-      
-      // Heuristics: search for common plagiarism phrases or repeated sentences
-      const sentenceCount = text.split(/[.!?]+/).filter(Boolean).length;
-      
-      // Deterministic but random-looking score based on content length and vowel frequencies
-      const vowels = text.match(/[aeiou]/gi)?.length || 1;
-      const seed = (vowels * 7) % 100;
-      
-      if (seed < 40) {
-        plagiarismScore = seed * 0.4; // Low plagiarism (0% - 16%)
-      } else if (seed < 80) {
-        plagiarismScore = seed * 0.7; // Moderate plagiarism (28% - 56%)
-      } else {
-        plagiarismScore = seed * 0.95; // High plagiarism (76% - 95%)
+    try {
+      const res = await fetch("/api/tools/plagiarism", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: text.trim(), email: email.trim() || undefined }),
+      });
+
+      const json = await res.json() as { success?: boolean; data?: PlagiarismResult; error?: string };
+
+      if (!res.ok || !json.success || !json.data) {
+        setErrorMsg(json.error ?? "Terjadi kesalahan pada server. Coba beberapa saat lagi.");
+        return;
       }
 
-      plagiarismScore = Math.round(plagiarismScore);
-
-      let status: "CLEAR" | "WARNING" | "HIGH_RISK" = "CLEAR";
-      if (plagiarismScore > 50) {
-        status = "HIGH_RISK";
-      } else if (plagiarismScore > 15) {
-        status = "WARNING";
-      }
-
-      const result = {
-        score: plagiarismScore,
-        status: status,
-        wordCount: text.split(/\s+/).filter(Boolean).length,
-        vulnerabilities: [
-          plagiarismScore > 15 ? "Terdeteksi kemiripan kalimat dengan arsip repository akademik." : null,
-          textLength > 2000 ? "Struktur sitasi terlampau padat, disarankan pemformatan APA ulang." : null,
-        ].filter(Boolean),
-      };
-
-      setScanResult(result);
+      setScanResult(json.data);
+    } catch {
+      setErrorMsg("Koneksi gagal. Silakan periksa jaringan internet Anda.");
+    } finally {
       setIsScanning(false);
-
-      // Save record in plagiarism_checks database table
-      try {
-        const { error: dbError } = await supabase.from("plagiarism_checks").insert({
-          text_length: textLength,
-          plagiarism_score: plagiarismScore,
-          status: status,
-          captured_email: email || null,
-        });
-
-        if (dbError) {
-          console.error("Failed to save plagiarism log to database:", dbError);
-        }
-      } catch (dbErr) {
-        console.error("Database log failed:", dbErr);
-      }
-
-    }, 2500);
+    }
   };
 
   return (
@@ -230,23 +191,66 @@ export default function PlagiarismCheckerPage() {
                       <div className="flex gap-2.5 items-start bg-amber-500/5 border border-amber-500/15 p-3 rounded-lg text-xs text-amber-300">
                         <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
                         <div>
-                          <strong>Beberapa frasa cocok dengan literatur.</strong> Rekomendasikan sitasi formal terstruktur menggunakan format APA or Harvard agar terhindar dari sanksi integritas riset.
+                          <strong>Beberapa frasa cocok dengan literatur.</strong> Rekomendasikan sitasi formal terstruktur menggunakan format APA atau Harvard agar terhindar dari sanksi integritas riset.
                         </div>
                       </div>
                     ) : (
                       <div className="flex gap-2.5 items-start bg-emerald-500/5 border border-emerald-500/15 p-3 rounded-lg text-xs text-emerald-300">
                         <CheckCircle className="w-4 h-4 shrink-0 mt-0.5" />
                         <div>
-                          <strong>Naskah sangat bersih!</strong> Tingkat orisinalitas tinggi and aman untuk langsung diserahkan kepada penguji, jurnal penerbit, or klien B2B Anda.
+                          <strong>Naskah sangat bersih!</strong> Tingkat orisinalitas tinggi dan aman untuk langsung diserahkan kepada penguji, jurnal penerbit, atau klien B2B Anda.
                         </div>
                       </div>
+                    )}
+
+                    {/* CTA to Paraphrase Tool */}
+                    {(scanResult.status === "WARNING" || scanResult.status === "HIGH_RISK") && (
+                      <Link
+                        href="/tools/paraphrase"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-violet-500/10 border border-violet-500/25 text-xs font-bold text-violet-400 hover:text-violet-300 hover:border-violet-400/50 transition-all mt-2"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        Gunakan AI Paraphrase Reconciler untuk memperbaiki naskah ini →
+                      </Link>
                     )}
                   </div>
                 </div>
 
+                {/* Matched Sentences Panel */}
+                {scanResult.matches && scanResult.matches.length > 0 && (
+                  <div className="mt-4 space-y-2">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      Kalimat Terdeteksi Mirip ({scanResult.matches.length}):
+                    </span>
+                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                      {scanResult.matches.map((match, idx: number) => (
+                        <div
+                          key={idx}
+                          className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 space-y-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-bold text-amber-400">
+                              Kemiripan: {match.similarity}%
+                            </span>
+                          </div>
+                          <p className="text-[10px] text-slate-400 leading-relaxed italic">
+                            &quot;{match.sentence}&quot;
+                          </p>
+                          {match.matchedSource && (
+                            <p className="text-[9px] text-slate-600 font-mono">
+                              ↳ Cocok: {match.matchedSource}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
               </div>
             </div>
           )}
+
 
         </section>
 
