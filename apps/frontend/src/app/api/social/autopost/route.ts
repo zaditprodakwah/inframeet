@@ -87,14 +87,14 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Log the successful automated event in audit_logs
+    // Log the successful automated event in audit_log
     if (supabaseAdmin && id) {
-      await supabaseAdmin.from("audit_logs").insert({
-        action_type: "INTEGRATION",
-        module: "OMNICHANNEL",
-        summary: `Social auto-blast disemburkan untuk konten: '${title}'`,
-        metadata: {
+      await supabaseAdmin.from("audit_log").insert({
+        actor: "SYSTEM",
+        action: "OMNICHANNEL_AUTOPOST",
+        details: {
           content_id: id,
+          title,
           webhook_status: webhookStatus,
           og_image_url: ogImageUrl
         }
